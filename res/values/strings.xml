@@ -13,4 +13,11 @@
 	<string name="menu_select">Select</string>
 	<string name="menu_back">Back</string>
 	<string name="menu">Menu</string>
+	
+	<string name="maps_prompt">Choose type of map</string> 
+	<string-array name="maps_array">
+  	<item>Kukkarta</item> 
+  	<item>Fittkarta</item> 
+  	<item>Annan karta</item> 
+  	</string-array>
 </resources>

@@ -8,6 +8,9 @@
 package com.openmap.grupp1;
 
 public final class R {
+    public static final class array {
+        public static final int maps_array=0x7f080000;
+    }
     public static final class attr {
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -196,6 +199,7 @@ containing a value of this type.
     public static final class id {
         public static final int Mapview=0x7f050005;
         public static final int action_search=0x7f050019;
+        public static final int btnSubmit=0x7f050015;
         public static final int btn_back=0x7f050016;
         public static final int btn_select=0x7f050017;
         public static final int btn_settings=0x7f050018;
@@ -204,7 +208,7 @@ containing a value of this type.
         public static final int buttonGroups=0x7f05000b;
         public static final int descriptionView1=0x7f050010;
         public static final int editText1=0x7f050006;
-        public static final int expandableListView1=0x7f050013;
+        public static final int expandableListView1=0x7f050014;
         public static final int hybrid=0x7f050004;
         public static final int map=0x7f050007;
         public static final int markerCategory=0x7f05000e;
@@ -213,10 +217,9 @@ containing a value of this type.
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
         public static final int satellite=0x7f050002;
+        public static final int spinner=0x7f050013;
         public static final int terrain=0x7f050003;
         public static final int textView1=0x7f050012;
-        public static final int textView2=0x7f050014;
-        public static final int textView3=0x7f050015;
         public static final int titleView1=0x7f05000f;
         public static final int txtDescription=0x7f05000d;
         public static final int txtTitle=0x7f050009;
@@ -230,8 +233,8 @@ containing a value of this type.
         public static final int settingsview=0x7f030005;
     }
     public static final class menu {
-        public static final int settings_menu=0x7f090000;
-        public static final int start_menu=0x7f090001;
+        public static final int settings_menu=0x7f0a0000;
+        public static final int start_menu=0x7f0a0001;
     }
     public static final class string {
         public static final int Title=0x7f060018;
@@ -315,6 +318,7 @@ containing a value of this type.
         public static final int location_client_ulr_inactive_age_under_13=0x7f060012;
         public static final int location_client_ulr_inactive_age_unknown=0x7f060013;
         public static final int location_client_ulr_inactive_unknown_restriction=0x7f060014;
+        public static final int maps_prompt=0x7f060021;
         public static final int menu=0x7f060020;
         public static final int menu_back=0x7f06001f;
         public static final int menu_search=0x7f06001d;
@@ -347,15 +351,15 @@ containing a value of this type.
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f080000;
+        public static final int AppBaseTheme=0x7f090000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f080001;
-        public static final int ButtonBar=0x7f080003;
-        public static final int ButtonBarButton=0x7f080004;
-        public static final int FullscreenActionBarStyle=0x7f080005;
-        public static final int FullscreenTheme=0x7f080002;
+        public static final int AppTheme=0x7f090001;
+        public static final int ButtonBar=0x7f090003;
+        public static final int ButtonBarButton=0x7f090004;
+        public static final int FullscreenActionBarStyle=0x7f090005;
+        public static final int FullscreenTheme=0x7f090002;
     }
     public static final class styleable {
         /** 
