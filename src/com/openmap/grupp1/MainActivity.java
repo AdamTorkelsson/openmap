@@ -31,6 +31,8 @@ public class MainActivity extends Activity
   setContentView(R.layout.activity_main);
 
   myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
+  
+ 
  }
 
  @Override
