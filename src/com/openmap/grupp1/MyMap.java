@@ -1,7 +1,5 @@
 package com.openmap.grupp1;
 
-import java.io.File;
-
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -15,19 +13,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
-import android.view.Menu;
-import android.view.View;
-import android.widget.PopupWindow;
 
 
 
@@ -80,9 +70,9 @@ implements OnMapClickListener, OnMapLongClickListener, OnMarkerClickListener{
 		  //move camera to your positon
 		  CameraUpdate update = CameraUpdateFactory.newLatLngZoom(MYLOCATION,10 );
 		  myMap.animateCamera(update);
-		 
 		  myMap.addMarker(new MarkerOptions().position(MYLOCATION).title("Your Position"));
-		}
+		  
+	 }
 
 
 	 @Override
