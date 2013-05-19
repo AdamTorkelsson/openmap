@@ -196,7 +196,7 @@ containing a value of this type.
     public static final class id {
         public static final int Mapview=0x7f050005;
         public static final int action_search=0x7f050019;
-        public static final int action_settings=0x7f050016;
+        public static final int btn_back=0x7f050016;
         public static final int btn_select=0x7f050017;
         public static final int btn_settings=0x7f050018;
         public static final int buttonCamera=0x7f05000a;
@@ -230,7 +230,7 @@ containing a value of this type.
         public static final int settingsview=0x7f030005;
     }
     public static final class menu {
-        public static final int main=0x7f090000;
+        public static final int settings_menu=0x7f090000;
         public static final int start_menu=0x7f090001;
     }
     public static final class string {
@@ -315,7 +315,8 @@ containing a value of this type.
         public static final int location_client_ulr_inactive_age_under_13=0x7f060012;
         public static final int location_client_ulr_inactive_age_unknown=0x7f060013;
         public static final int location_client_ulr_inactive_unknown_restriction=0x7f060014;
-        public static final int menu=0x7f06001f;
+        public static final int menu=0x7f060020;
+        public static final int menu_back=0x7f06001f;
         public static final int menu_search=0x7f06001d;
         public static final int menu_select=0x7f06001e;
         public static final int menu_settings=0x7f06001c;
