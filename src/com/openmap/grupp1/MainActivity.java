@@ -64,7 +64,9 @@ public class MainActivity extends Activity
       default:
           return super.onOptionsItemSelected(item);
           }
-        }
+ }
+ 
+ 
 
  public void buttonCamera(View v){
 	 Intent intent =new Intent(this, PhotoTaker.class);
