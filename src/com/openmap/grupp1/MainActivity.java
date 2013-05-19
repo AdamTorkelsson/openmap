@@ -1,15 +1,10 @@
 package com.openmap.grupp1;
 
-import java.io.File;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,7 +17,7 @@ public class MainActivity extends Activity
  {
 
  private MyMap myMap; 
- private int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+
 
  @Override
  protected void onCreate(Bundle savedInstanceState) {
