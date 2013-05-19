@@ -50,7 +50,7 @@ public class MainActivity extends Activity
         public boolean onOptionsItemSelected(MenuItem item) {
           switch (item.getItemId()) {
       case R.id.btn_select:
-          Log.d("textservices", "select");
+          Log.d("textservices", "bajs");
           return true;
       case R.id.btn_settings:
     	  Intent intent =new Intent(this, settings.class);
