@@ -1,4 +1,4 @@
-package com.openmap.grupp1;
+/*package com.openmap.grupp1;
 
 import android.app.IntentService;
 import android.app.Service;
@@ -23,3 +23,4 @@ public class LocationUpdate extends Service{
 	}
 
 }
+*/
