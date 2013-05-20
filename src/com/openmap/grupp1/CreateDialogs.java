@@ -56,8 +56,7 @@ public class CreateDialogs{
 		   popup.setWidth(600);
 		   popup.setHeight(popupHeight);
 		   Button buttonYES = (Button) layout.findViewById(R.id.buttonYes);
-		   
-		//   Button buttonYES = (Button) findViewById(R.id.buttonYes);
+	
 			  Button buttonNO = (Button) layout.findViewById(R.id.buttonNo);
 			  
 			  buttonYES.setClickable(true);
@@ -80,11 +79,7 @@ public class CreateDialogs{
 						popup.dismiss();
 						
 					}});
-				
-				
 		   popup.showAtLocation(layout, Gravity.BOTTOM, 0,  0);
-		   
-		  
 		   
 	}
 

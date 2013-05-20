@@ -49,7 +49,8 @@
 
         <activity android:name="PhotoTaker"></activity>
         <service android:name=".NotifyService"/>
-        <activity android:name="CreateEventActivity"></activity> 
+        <activity android:name="CreateEventActivity"></activity>
+        <activity android:name="SearchTagsActivity"></activity> 
 
         
         

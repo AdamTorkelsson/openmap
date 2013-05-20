@@ -13,7 +13,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.content.Intent;
-public class CreateEventActivity extends Activity{
+
+public class SearchTagsActivity extends Activity{
 	
 	 public void onCreate(Bundle savedInstanceState){
 		 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "INCREATEEVENT");
@@ -35,7 +36,7 @@ public class CreateEventActivity extends Activity{
 
 				@Override
 				public void onClick(View arg0) {
-					startSearchActivity();
+					stopThisActivity();
 					}
 
 				});
@@ -56,12 +57,9 @@ public class CreateEventActivity extends Activity{
 	 private void stopThisActivity(){
 		 	this.finish();
 	 }
-	 private void startSearchActivity() {
-		// Intent intent =new Intent(this, SearchTagsActivity.class);
-		startActivity(new Intent(this, SearchTagsActivity.class));	
-		this.finish();
+;
 			
-		}
+		
 	 private void startCameraActivity(){
 		 Intent intentCamera = new Intent( MediaStore.ACTION_IMAGE_CAPTURE);
          File image=new File(Environment.getExternalStorageDirectory(),"test.jpg");

@@ -198,32 +198,34 @@ containing a value of this type.
     }
     public static final class id {
         public static final int Mapview=0x7f050005;
-        public static final int action_search=0x7f05001b;
-        public static final int btnSubmit=0x7f050017;
-        public static final int btn_back=0x7f050018;
-        public static final int btn_select=0x7f050019;
-        public static final int btn_settings=0x7f05001a;
+        public static final int action_search=0x7f05001d;
+        public static final int btnSubmit=0x7f050019;
+        public static final int btn_back=0x7f05001a;
+        public static final int btn_select=0x7f05001b;
+        public static final int btn_settings=0x7f05001c;
         public static final int buttonCamera=0x7f05000d;
-        public static final int buttonEvent=0x7f05000f;
-        public static final int buttonGroups=0x7f05000e;
+        public static final int buttonCancel=0x7f05000f;
+        public static final int buttonEvent=0x7f050012;
+        public static final int buttonGroups=0x7f050011;
         public static final int buttonNo=0x7f050008;
+        public static final int buttonTag=0x7f050010;
         public static final int buttonYes=0x7f050009;
-        public static final int descriptionView1=0x7f050013;
+        public static final int descriptionView1=0x7f050015;
         public static final int editText1=0x7f050006;
-        public static final int expandableListView1=0x7f050016;
+        public static final int expandableListView1=0x7f050018;
         public static final int hybrid=0x7f050004;
         public static final int map=0x7f050007;
-        public static final int markerCategory=0x7f050011;
-        public static final int markerInfo=0x7f050014;
+        public static final int markerCategory=0x7f050013;
+        public static final int markerInfo=0x7f050016;
         public static final int markerTitle=0x7f05000b;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
         public static final int satellite=0x7f050002;
-        public static final int spinner=0x7f050015;
+        public static final int spinner=0x7f050017;
         public static final int terrain=0x7f050003;
         public static final int textView1=0x7f05000a;
-        public static final int titleView1=0x7f050012;
-        public static final int txtDescription=0x7f050010;
+        public static final int titleView1=0x7f050014;
+        public static final int txtDescription=0x7f05000e;
         public static final int txtTitle=0x7f05000c;
     }
     public static final class layout {

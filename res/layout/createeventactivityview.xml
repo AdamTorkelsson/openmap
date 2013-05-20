@@ -30,24 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
          
-            android:text="Camera" 
+            android:text="Addphoto" 
             android:onClick="buttonCamera"/>
-
-        <Button
-            android:id="@+id/buttonGroups"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Groups" 
-            android:onClick="buttonGroups"/>
-
-        <Button
-            android:id="@+id/buttonEvent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Event"
-             android:onClick="buttonEvent" />
         
     </LinearLayout>
 
@@ -57,5 +41,28 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.29"
         android:hint="Description"/>
+
+   <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel" />
+
+        <Button
+            android:id="@+id/buttonTag"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tag" />
+
+        
+    </LinearLayout>
+    
 
 </LinearLayout>

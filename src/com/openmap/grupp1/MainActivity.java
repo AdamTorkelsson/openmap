@@ -72,8 +72,7 @@ public class MainActivity extends Activity
           }}
 
  public void buttonCamera(View v){
-	 Intent intent =new Intent(this, PhotoTaker.class);
-		startActivity(intent);
+	
 }
 
  public void buttonGroups(View v){
