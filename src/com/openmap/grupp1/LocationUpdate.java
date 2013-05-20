@@ -1,9 +1,12 @@
 /*package com.openmap.grupp1;
+<<<<<<< HEAD
 
 import java.security.Provider;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+=======
+>>>>>>> 3f681e7290ce086383d268f5de010dab6fc99153
 
 import android.app.IntentService;
 import android.app.Service;
@@ -81,3 +84,8 @@ public class LocationUpdate extends Service implements LocationListener{
 		
 	}}*/
 
+<<<<<<< HEAD
+=======
+}
+*/
+>>>>>>> 3f681e7290ce086383d268f5de010dab6fc99153
