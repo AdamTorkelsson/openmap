@@ -11,7 +11,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.Uri;
 import android.os.IBinder;
 
 public class NotifyService extends Service {
@@ -25,7 +24,6 @@ NotifyServiceReceiver notifyServiceReceiver;
 private static final int MY_NOTIFICATION_ID=1;
 private NotificationManager notificationManager;
 private Notification myNotification;
-private final String myBlog = "http://android-er.blogspot.com/";
 
 @Override
 public void onCreate() {
@@ -49,8 +47,8 @@ notificationManager =
   "Notification!",
   System.currentTimeMillis());
 Context context = getApplicationContext();
-String notificationTitle = "Exercise of Notification!";
-String notificationText = "http://android-er.blogspot.com/";
+String notificationTitle = "Are you at";
+String notificationText = "Description";
 //Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(myBlog));
 
 Intent myIntent =new Intent(this, MainActivity.class);

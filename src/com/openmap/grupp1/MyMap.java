@@ -38,6 +38,7 @@ OnMarkerClickListener , LocationListener {
 	 private CameraUpdate update;
 	 private LocationManager locmanager;
 	 private LatLng point;
+	 private NearEventNotifier neEvNotifier;
 	 
 	 public MyMap(FragmentManager myFragmentManager, Object locmanager,Context context,Resources res) {
 		//Map creator
@@ -69,14 +70,23 @@ OnMarkerClickListener , LocationListener {
 		    
 		 // onLocationChanged(myMap.getMyLocation());
 		//  updateLocation(myMap.getMyLocation());
+
 		  
 
 		  LocationManager lm = (LocationManager) locmanager;
 		  criteria = new Criteria();
 		  provider = lm.getBestProvider(criteria, false);
-		  //onLocationChanged(((LocationManager) locmanager).getLastKnownLocation(provider));
-		  lm.requestLocationUpdates(provider, 3000, 1, this);
-		  this.onLocationChanged(((LocationManager) locmanager).getLastKnownLocation(provider));
+		  
+		  //Makes a NearEventNotifier thats check if you have been near an event more than 10 seconds
+		  neEvNotifier = new NearEventNotifier(((LocationManager) locmanager)
+				  .getLastKnownLocation(provider),((LocationManager) locmanager)
+				  .getLastKnownLocation(provider),context);
+		  
+		  //starting at your location
+		  onLocationChanged(((LocationManager) locmanager).getLastKnownLocation(provider));
+		  // request updates every 10 second
+		  lm.requestLocationUpdates(provider, 10000, 1, this);
+		 // 
 		  
 	 }
 
@@ -120,10 +130,12 @@ OnMarkerClickListener , LocationListener {
 	public void onLocationChanged(Location arg0) {
 		
 		MYLOCATION = new LatLng(arg0.getLatitude(), arg0.getLongitude());
+		
 		  //move camera to your positon
 		  CameraUpdate update = CameraUpdateFactory.newLatLngZoom(MYLOCATION,14 );
 		  myMap.animateCamera(update);
 		  myMap.addMarker(new MarkerOptions().position(MYLOCATION).title("Your Position2"));
+		  neEvNotifier.checkEvent(arg0);
 		
 	}
 

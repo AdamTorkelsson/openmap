@@ -83,9 +83,7 @@ public class MainActivity extends Activity
 
  public void buttonGroups(View v){
 	// myMap.createonemoreDialog();
-	 Intent intent = new Intent(this,
-			  com.openmap.grupp1.NotifyService.class);
-	  this.startService(intent);
+
 	 
 }
 
