@@ -16,10 +16,8 @@ import android.app.FragmentManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-<<<<<<< HEAD
 import android.content.SharedPreferences;
-=======
->>>>>>> e1e5e833789e47d88141c472ccfc8d36f368cc8d
+
 import android.content.res.Resources;
 import android.location.Criteria;
 import android.location.Location;
@@ -38,17 +36,12 @@ OnMarkerClickListener , LocationListener {
 	 private String provider;
 	 private Context context;
 	 private Resources res;
-<<<<<<< HEAD
 	 private String map;
-	 
-	 
-=======
 	 private LatLng MYLOCATION ;
 	 private CameraUpdate update;
 	 private LocationManager locmanager;
 	 private LatLng point;
 	 private NearEventNotifier neEvNotifier;
->>>>>>> e1e5e833789e47d88141c472ccfc8d36f368cc8d
 	 
 	
 	 public MyMap(FragmentManager myFragmentManager, Object locmanager,Context context,Resources res) {

@@ -9,13 +9,10 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-<<<<<<< HEAD
 import android.content.SharedPreferences;
-=======
 import android.content.ServiceConnection;
 import android.location.Location;
 import android.location.LocationListener;
->>>>>>> e1e5e833789e47d88141c472ccfc8d36f368cc8d
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -31,18 +28,11 @@ import android.widget.Toast;
 public class MainActivity extends Activity implements SearchView.OnQueryTextListener,
 SearchView.OnCloseListener
  {
-
-<<<<<<< HEAD
  private MyMap myMap;
  public static final String PREFS_NAME = "MySettings";
- 
-=======
- private CreateDialogs createDialog;
- private MyMap myMap; 
+ private CreateDialogs createDialog; 
  private SearchView searchView;
-
  boolean mBound = false;
->>>>>>> e1e5e833789e47d88141c472ccfc8d36f368cc8d
 
  @Override
  protected void onCreate(Bundle savedInstanceState) {
@@ -51,22 +41,15 @@ SearchView.OnCloseListener
   super.onCreate(savedInstanceState);
   //The Action Bar replaces the title bar and provides an alternate location for an on-screen menu button on some devices. 
   getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-  
-  
   //Creating content view
   setContentView(R.layout.activity_main);
-<<<<<<< HEAD
-
   myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
   myMap.setMap("Default");
- 
-=======
   
   createDialog = new CreateDialogs();
   
   myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
 
->>>>>>> e1e5e833789e47d88141c472ccfc8d36f368cc8d
  }
  @Override
  public void onResume(){
@@ -102,16 +85,16 @@ SearchView.OnCloseListener
  
  @Override
  public boolean onOptionsItemSelected(MenuItem item) {
-<<<<<<< HEAD
-	 switch (item.getItemId()) {
-=======
-          switch (item.getItemId()) {
->>>>>>> e1e5e833789e47d88141c472ccfc8d36f368cc8d
-      case R.id.btn_select:
+
+	 
+
+      switch (item.getItemId()) {
+
+          case R.id.btn_select:
           Log.d("textservices", "bajs");
           return true;
       case R.id.btn_settings:
-<<<<<<< HEAD
+
     	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step3.5");
     	  Intent intent =new Intent(this, settings.class);
     	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step4");
@@ -125,16 +108,8 @@ SearchView.OnCloseListener
      }
 	 
  }
- 
- 
-=======
-    	/*  Intent intent =new Intent(this, settings.class);
-    		startActivity(intent);*/
-          return true;
-      default:
-          return super.onOptionsItemSelected(item);
-          }}
->>>>>>> e1e5e833789e47d88141c472ccfc8d36f368cc8d
+
+    
 
 
          

@@ -1,4 +1,4 @@
-/*package com.openmap.grupp1;
+package com.openmap.grupp1;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,10 +24,7 @@ public class settings extends Activity{
 		//create lite osäkert men alltid här
 	  super.onCreate(savedInstanceState);
 	  //The Action Bar replaces the title bar and provides an alternate location for an on-screen menu button on some devices. 
-<<<<<<< HEAD
-=======
 
->>>>>>> e1e5e833789e47d88141c472ccfc8d36f368cc8d
 	  //Creating content view
 	  setContentView(R.layout.settingsview);
 	  
@@ -48,9 +45,6 @@ public class settings extends Activity{
 	// Apply the adapter to the spinner
 	spinner.setAdapter(adapter);
 	
-	
-	  
->>>>>>> 3f681e7290ce086383d268f5de010dab6fc99153
 	}
 	
 	 public void addListenerOnButton() {
@@ -87,4 +81,4 @@ public class settings extends Activity{
 	 }
 	
 	
-}*/
+}
