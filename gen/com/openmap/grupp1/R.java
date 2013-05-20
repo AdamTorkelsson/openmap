@@ -198,31 +198,11 @@ containing a value of this type.
     }
     public static final class id {
         public static final int Mapview=0x7f050005;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        public static final int action_search=0x7f05001d;
-        public static final int btnSubmit=0x7f050019;
-        public static final int btn_back=0x7f05001a;
-        public static final int btn_select=0x7f05001b;
-        public static final int btn_settings=0x7f05001c;
-=======
-=======
->>>>>>> 10507fab49f32a3481615008eb443b7ab96da65a
-=======
->>>>>>> 10507fab49f32a3481615008eb443b7ab96da65a
-        public static final int action_search=0x7f050026;
-        public static final int btnSubmit=0x7f050022;
-        public static final int btn_back=0x7f050023;
-        public static final int btn_select=0x7f050024;
-        public static final int btn_settings=0x7f050025;
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 10507fab49f32a3481615008eb443b7ab96da65a
-=======
->>>>>>> 10507fab49f32a3481615008eb443b7ab96da65a
-=======
->>>>>>> 10507fab49f32a3481615008eb443b7ab96da65a
+        public static final int action_search=0x7f050028;
+        public static final int btnSubmit=0x7f050024;
+        public static final int btn_back=0x7f050025;
+        public static final int btn_select=0x7f050026;
+        public static final int btn_settings=0x7f050027;
         public static final int buttonCamera=0x7f05000d;
         public static final int buttonCancel=0x7f05000f;
         public static final int buttonEvent=0x7f050012;
@@ -232,69 +212,31 @@ containing a value of this type.
         public static final int buttonYes=0x7f050009;
         public static final int descriptionView1=0x7f050015;
         public static final int editText1=0x7f050006;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        public static final int expandableListView1=0x7f050018;
-=======
-        public static final int expandableListView1=0x7f050021;
->>>>>>> 10507fab49f32a3481615008eb443b7ab96da65a
-=======
-        public static final int expandableListView1=0x7f050021;
->>>>>>> 10507fab49f32a3481615008eb443b7ab96da65a
-=======
-        public static final int expandableListView1=0x7f050021;
->>>>>>> 10507fab49f32a3481615008eb443b7ab96da65a
+        public static final int expandableListView1=0x7f050023;
         public static final int hybrid=0x7f050004;
-        public static final int leftLayout=0x7f050016;
-        public static final int linearLayout1=0x7f050015;
-        public static final int linearLayout2=0x7f050018;
-        public static final int linearLayout5=0x7f050019;
-        public static final int list=0x7f050017;
+        public static final int leftLayout=0x7f050018;
+        public static final int linearLayout1=0x7f050017;
+        public static final int linearLayout2=0x7f05001a;
+        public static final int linearLayout5=0x7f05001b;
+        public static final int list=0x7f050019;
         public static final int map=0x7f050007;
         public static final int markerCategory=0x7f050013;
         public static final int markerInfo=0x7f050016;
         public static final int markerTitle=0x7f05000b;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
-        public static final int relativeLayout1=0x7f05001d;
-        public static final int rightLayout=0x7f05001b;
+        public static final int relativeLayout1=0x7f05001f;
+        public static final int rightLayout=0x7f05001d;
         public static final int satellite=0x7f050002;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        public static final int spinner=0x7f050017;
+        public static final int spinner=0x7f050022;
+        public static final int stag=0x7f050021;
+        public static final int tag=0x7f050020;
+        public static final int tagLayout=0x7f05001e;
         public static final int terrain=0x7f050003;
         public static final int textView1=0x7f05000a;
+        public static final int textView6=0x7f05001c;
         public static final int titleView1=0x7f050014;
         public static final int txtDescription=0x7f05000e;
-=======
-        public static final int spinner=0x7f050020;
-        public static final int stag=0x7f05001f;
-        public static final int tag=0x7f05001e;
-        public static final int tagLayout=0x7f05001c;
-        public static final int terrain=0x7f050003;
-        public static final int textView1=0x7f05000a;
-=======
-        public static final int spinner=0x7f050020;
-        public static final int stag=0x7f05001f;
-        public static final int tag=0x7f05001e;
-        public static final int tagLayout=0x7f05001c;
-        public static final int terrain=0x7f050003;
-        public static final int textView1=0x7f05000a;
->>>>>>> 10507fab49f32a3481615008eb443b7ab96da65a
-=======
-        public static final int spinner=0x7f050020;
-        public static final int stag=0x7f05001f;
-        public static final int tag=0x7f05001e;
-        public static final int tagLayout=0x7f05001c;
-        public static final int terrain=0x7f050003;
-        public static final int textView1=0x7f05000a;
->>>>>>> 10507fab49f32a3481615008eb443b7ab96da65a
-        public static final int textView6=0x7f05001a;
-        public static final int titleView1=0x7f050012;
-        public static final int txtDescription=0x7f050010;
->>>>>>> 10507fab49f32a3481615008eb443b7ab96da65a
         public static final int txtTitle=0x7f05000c;
     }
     public static final class layout {
@@ -305,27 +247,11 @@ containing a value of this type.
         public static final int dialog1=0x7f030004;
         public static final int dialog2=0x7f030005;
         public static final int markerinfo=0x7f030006;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         public static final int searchtagsactivityview=0x7f030007;
-        public static final int settingsview=0x7f030008;
-=======
-=======
->>>>>>> 10507fab49f32a3481615008eb443b7ab96da65a
-=======
->>>>>>> 10507fab49f32a3481615008eb443b7ab96da65a
-        public static final int searchview=0x7f030007;
-        public static final int searchviewaddedtags=0x7f030008;
-        public static final int searchviewsearchresult=0x7f030009;
-        public static final int settingsview=0x7f03000a;
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 10507fab49f32a3481615008eb443b7ab96da65a
-=======
->>>>>>> 10507fab49f32a3481615008eb443b7ab96da65a
-=======
->>>>>>> 10507fab49f32a3481615008eb443b7ab96da65a
+        public static final int searchview=0x7f030008;
+        public static final int searchviewaddedtags=0x7f030009;
+        public static final int searchviewsearchresult=0x7f03000a;
+        public static final int settingsview=0x7f03000b;
     }
     public static final class menu {
         public static final int settings_menu=0x7f0a0000;
