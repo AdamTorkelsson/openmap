@@ -19,8 +19,6 @@ public class CreateEventActivity extends Activity{
 		 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "INCREATEEVENT");
 		 super.onCreate(savedInstanceState);
          setContentView(R.layout.createeventactivityview);
-	 
-	 
 		 
 		  Button buttonTag	  = (Button) findViewById(R.id.buttonTag);
 		  Button buttonCancel = (Button) findViewById(R.id.buttonCancel);

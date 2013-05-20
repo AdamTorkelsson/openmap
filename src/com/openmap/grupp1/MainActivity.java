@@ -20,13 +20,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 
-public class MainActivity extends Activity 
+public class MainActivity extends Activity implements SearchView.OnQueryTextListener,
+SearchView.OnCloseListener
  {
 
+ private CreateDialogs createDialog;
  private MyMap myMap; 
+ private SearchView searchView;
 
  boolean mBound = false;
 
@@ -38,8 +42,12 @@ public class MainActivity extends Activity
   //The Action Bar replaces the title bar and provides an alternate location for an on-screen menu button on some devices. 
   getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
   
+  
   //Creating content view
   setContentView(R.layout.activity_main);
+  
+  createDialog = new CreateDialogs();
+  
   myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
 
  }
@@ -52,6 +60,12 @@ public class MainActivity extends Activity
      ActionBar ab = getActionBar();
      ab.setDisplayShowTitleEnabled(false);
      ab.setDisplayShowHomeEnabled(false);
+     
+     searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+    //ta beslut här searchView.setIconifiedByDefault(false);
+     searchView.setOnQueryTextListener(this);
+     searchView.setOnCloseListener(this);
+     
      return true;
  
  }
@@ -95,9 +109,31 @@ public class MainActivity extends Activity
   super.onResume(); }
 
 
+
+
+ public boolean onQueryTextChange(String newText) {
+	 if (!createDialog.isShowingSearch())
+		 createDialog.createSearchPopup(this);
+	 else;
+	 // showResults(newText + "*");
+    return false;
+ }
+
+ public boolean onQueryTextSubmit(String query) {
+	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnQueryStep1");
+	 if (!createDialog.isShowingSearch())
+		 createDialog.createSearchPopup(this);
+	 else;
+   // showResults(query + "*");
+    return true;
+ }
+
+ public boolean onClose() {
+	createDialog.dismissSearch();
+    return false;
+ }
+
 }
-
-
 
 
 /*BRA för framtiden , krävs för att starta aktivitet på annat ställe , dock måste den göras som en aktivietet med denna som hierarisk

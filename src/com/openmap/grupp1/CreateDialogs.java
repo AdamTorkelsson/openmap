@@ -15,7 +15,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 
@@ -26,17 +28,83 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class CreateDialogs{
+public class CreateDialogs {
 	
-
 	private LatLng point;
 	private Resources res;
 	private GoogleMap myMap;
 	private Context context;
+	private PopupWindow searchPopup = new PopupWindow();
+    private ListView mListView;
+    private SearchView searchView;
+    private TagsDbAdapter mDbHelper;
+    private TextView tagText;
+
 	
 	public CreateDialogs(){
 		
 	}
+	
+	public boolean isShowingSearch() {
+		return searchPopup.isShowing();
+	}
+	
+	public void dismissSearch() {
+		searchPopup.dismiss();
+	}
+	
+	
+	
+	public void createSearchPopup(Context context){
+		Log.d("hej", "onquery2");
+		this.context = context;
+		//POPUP som fungerar
+		   int popupWidth = 700;
+		   int popupHeight = 1000;
+
+		   // Inflate the popup_layout.xml
+		   LinearLayout viewGroup = (LinearLayout) ((Activity) context).findViewById(R.layout.activity_main);
+		   LayoutInflater layoutInflater = (LayoutInflater) context
+		     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		  
+		   View layout = layoutInflater.inflate(R.layout.searchview, viewGroup);
+		   // Creating the PopupWindow
+		   searchPopup = new PopupWindow(context);
+		   searchPopup.setContentView(layout);
+		   searchPopup.setWidth(popupWidth);
+		   searchPopup.setHeight(popupHeight);
+		   /*
+		   Button buttonYES = (Button) layout.findViewById(R.id.buttonYes);
+		   Button buttonNO = (Button) layout.findViewById(R.id.buttonNo);
+			  
+			  buttonYES.setClickable(true);
+			  buttonNO.setClickable(true);
+				 
+				buttonYES.setOnClickListener(
+						new OnClickListener(){
+
+							@Override
+							public void onClick(View arg0) {
+								popup.dismiss();
+								startNewActivity();
+							}
+							
+						});
+				
+				buttonNO.setOnClickListener(new OnClickListener(){
+					@Override
+					public void onClick(View arg0) {
+						popup.dismiss();
+						
+					}});*/
+				
+				
+		   searchPopup.showAtLocation(layout, Gravity.CENTER, 0,  0);
+		   
+		  
+		   
+	}
+	
 	public void confirmLocationPopup(Context context,final LatLng point,final Resources res, final GoogleMap myMap){
 		this.context = context;
 		//POPUP som fungerar
@@ -49,10 +117,9 @@ public class CreateDialogs{
 		     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		  
 		   View layout = layoutInflater.inflate(R.layout.confirmview, viewGroup);
-			layout.setBackgroundColor(Color.WHITE);
 		   // Creating the PopupWindow
 		   final PopupWindow popup = new PopupWindow(context);
-		  popup.setContentView(layout);
+		   popup.setContentView(layout);
 		   popup.setWidth(600);
 		   popup.setHeight(popupHeight);
 		   Button buttonYES = (Button) layout.findViewById(R.id.buttonYes);
