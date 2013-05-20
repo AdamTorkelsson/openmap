@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -16,8 +17,9 @@ import android.view.Window;
 public class MainActivity extends Activity
  {
 
- private MyMap myMap; 
-
+ private MyMap myMap;
+ public static final String PREFS_NAME = "MySettings";
+ 
 
  @Override
  protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +33,20 @@ public class MainActivity extends Activity
   setContentView(R.layout.activity_main);
 
   myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
-  
+  myMap.setMap("Default");
  
+ }
+ @Override
+ public void onResume(){
+	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step4ny");
+	 super.onResume();
+	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step5ny");
+	 SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
+	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step6ny");
+	 String mapSetting = settings.getString("map", null);
+	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, mapSetting);
+	 myMap.setMap(mapSetting);
+	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step8ny");
  }
 
  @Override
@@ -49,19 +63,32 @@ public class MainActivity extends Activity
  
  
  @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-          switch (item.getItemId()) {
+ public boolean onOptionsItemSelected(MenuItem item) {
+	 switch (item.getItemId()) {
       case R.id.btn_select:
           Log.d("textservices", "bajs");
           return true;
       case R.id.btn_settings:
+    	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step3.5");
     	  Intent intent =new Intent(this, settings.class);
-    		startActivity(intent);
-          return true;
+    	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step4");
+    	  
+    	  startActivity(intent);
+    	  this.onPause();
+    	  return true;
+    	  
       default:
           return super.onOptionsItemSelected(item);
-          }
+     }
+	 
  }
+ 
+ 
+
+
+         
+
+
  
  
 
@@ -84,10 +111,6 @@ public class MainActivity extends Activity
  
  
  
- @Override
- protected void onResume() {
-  // TODO Auto-generated method stub
-  super.onResume(); }
 
 }
 /*BRA för framtiden , krävs för att starta aktivitet på annat ställe , dock måste den göras som en aktivietet med denna som hierarisk

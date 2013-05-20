@@ -13,6 +13,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.location.Criteria;
 import android.location.Location;
@@ -30,10 +32,11 @@ implements OnMapClickListener, OnMapLongClickListener, OnMarkerClickListener{
 	 private String provider;
 	 private Context context;
 	 private Resources res;
+	 private String map;
+	 
 	 
 	 
 	
-	 
 	 public MyMap(FragmentManager myFragmentManager, Object locmanager,Context context,Resources res) {
 		//Map creator
 		 this.context = context;
@@ -46,7 +49,10 @@ implements OnMapClickListener, OnMapLongClickListener, OnMarkerClickListener{
 		  myMap.setMyLocationEnabled(true);
 		  
 		  //different map types
-		  myMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+	
+		  
+		  
+		  //myMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 		  //myMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 		  //myMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 		  //myMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
@@ -96,6 +102,19 @@ implements OnMapClickListener, OnMapLongClickListener, OnMarkerClickListener{
 
 	 public void createonemoreDialog(){
 		 insertinfo.showsearchEvents(context); 
+	 }
+	 
+	 public void setMap(String map){
+		 
+   	  	 
+		 if (map.equals("Default"))
+			 myMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+		 if (map.equals("Kukkarta"))
+			 myMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+		 if (map.equals("Fittkarta"))
+			 myMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+		 if(map.equals("Runkkarta"))	 
+			 myMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 	 }
 	 
 	 
