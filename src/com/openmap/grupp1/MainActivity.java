@@ -59,14 +59,14 @@ public class MainActivity extends Activity
  
  
  @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
+ public boolean onOptionsItemSelected(MenuItem item) {
           switch (item.getItemId()) {
       case R.id.btn_select:
           Log.d("textservices", "bajs");
           return true;
       case R.id.btn_settings:
-    	  Intent intent =new Intent(this, settings.class);
-    		startActivity(intent);
+    	/*  Intent intent =new Intent(this, settings.class);
+    		startActivity(intent);*/
           return true;
       default:
           return super.onOptionsItemSelected(item);
@@ -88,8 +88,8 @@ public class MainActivity extends Activity
 }
 
  public void buttonEvent(View v){
-	 Intent settingsintent =new Intent(this, settings.class);
-		startActivity(settingsintent);
+	/* Intent settingsintent =new Intent(this, settings.class);
+		startActivity(settingsintent);*/
 }
  
  
