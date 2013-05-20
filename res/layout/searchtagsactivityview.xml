@@ -33,7 +33,6 @@
             android:onClick="buttonCamera"/>
         
     </LinearLayout>
-    
 
     <EditText
         android:id="@+id/txtDescription"

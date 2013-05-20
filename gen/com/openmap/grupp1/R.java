@@ -236,7 +236,8 @@ containing a value of this type.
         public static final int dialog1=0x7f030004;
         public static final int dialog2=0x7f030005;
         public static final int markerinfo=0x7f030006;
-        public static final int settingsview=0x7f030007;
+        public static final int searchtagsactivityview=0x7f030007;
+        public static final int settingsview=0x7f030008;
     }
     public static final class menu {
         public static final int settings_menu=0x7f0a0000;
