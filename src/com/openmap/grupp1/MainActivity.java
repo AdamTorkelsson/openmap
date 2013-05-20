@@ -53,6 +53,7 @@ public class MainActivity extends Activity
      ActionBar ab = getActionBar();
      ab.setDisplayShowTitleEnabled(false);
      ab.setDisplayShowHomeEnabled(false);
+     
      return true;
  
  }
@@ -67,6 +68,9 @@ public class MainActivity extends Activity
       case R.id.btn_settings:
     	/*  Intent intent =new Intent(this, settings.class);
     		startActivity(intent);*/
+          return true;
+      case R.id.action_search:
+          
           return true;
       default:
           return super.onOptionsItemSelected(item);
