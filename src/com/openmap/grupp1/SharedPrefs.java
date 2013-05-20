@@ -18,27 +18,34 @@ public class SharedPrefs {
         this.prefsEditor = appSharedPrefs.edit();
     }
     
-
+    public boolean setTitle(String Title) {
+        prefsEditor.putString(setValue(Title), Title);
+        prefsEditor.commit();
+        return true;
+    }
+    
+    public boolean setDescription(String Description) {
+        
+        prefsEditor.putString(setValue(Description), Description);
+        prefsEditor.commit();
+        return true;
+    }
+    
     public String getTitle() {
         return appSharedPrefs.getString("Title", "Error");
     }
-
-    public boolean setTitle(String Title) {
-        prefsEditor.putString("Title", Title);
-        prefsEditor.commit();
-        return true;
-    }
-    
     public String getDescription() {
-
         return appSharedPrefs.getString("Description", "Error");
     }
 
-    public boolean setDescription(String Description) {
-    
-        prefsEditor.putString("Description", Description);
-        prefsEditor.commit();
-        return true;
+  
+    private String setValue(String value){
+    	appSharedPrefs.getString("Description", "NotExisting");
+    	if ("NotExisting" != appSharedPrefs.getString("Description", "NotExisting")){
+    		return value;}
+    	else {
+    		return setValue(value + "1");
+    	}
+    	}
     }
 
-}

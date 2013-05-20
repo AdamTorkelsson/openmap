@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.openmap.grupp1"
     android:versionCode="1"
@@ -48,9 +48,12 @@
         <activity android:name="settings"></activity>
 
         <activity android:name="PhotoTaker"></activity>
-        
- 
-        
+        <service android:name=".NotifyService"/>
+        <activity android:name="CreateEventActivity"
+            android:windowSoftInputMode="adjustResize"></activity>
+        <activity android:name="SearchTagsActivity"
+            android:windowSoftInputMode="adjustResize"></activity> 
+
         
         
     </application>
