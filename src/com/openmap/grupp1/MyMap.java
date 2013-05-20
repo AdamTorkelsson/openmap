@@ -103,10 +103,15 @@ OnMarkerClickListener , LocationListener {
 	 @Override
 	 public void onMapLongClick(LatLng point) {
 		 this.point = point;
+
+			CameraUpdate update = CameraUpdateFactory.newLatLngZoom(point,14 );
+			myMap.animateCamera(update);
+			Marker m = myMap.addMarker(new MarkerOptions().position(point).title("This location?"));
+			m.showInfoWindow();
 		// create interactive dialog window
 		 	neEvNotifier.NearEventNotifier(point);
 		 	Log.d(TEXT_SERVICES_MANAGER_SERVICE, "hej1");
-		 	insertinfo.insertInfo(context, point, res, myMap); 
+		 	insertinfo.confirmLocationPopup(context, point, res, myMap); 
 		 	Log.d(TEXT_SERVICES_MANAGER_SERVICE, "hej2");
 		 	}
 
@@ -117,7 +122,6 @@ OnMarkerClickListener , LocationListener {
 	 
 	@Override
 	public boolean onMarkerClick(Marker marker) {
-		marker.setVisible(false);
 		CreateDialogs showinfo = new CreateDialogs();
 	 	Log.d(TEXT_SERVICES_MANAGER_SERVICE, "hej1");
 	 	showinfo.showInfo(context, marker.getPosition(), res, myMap);

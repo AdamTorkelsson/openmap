@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/markerCategory"
     android:layout_width="fill_parent"
+    android:layout_weight="1"
     android:layout_height="wrap_content"
     android:orientation="vertical" 
     android:background="#FFFFFF"
@@ -17,7 +18,8 @@
             android:id="@+id/titleView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge" 
+            android:text="hej"/>
 
     </LinearLayout>
 

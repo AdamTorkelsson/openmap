@@ -20,9 +20,9 @@ public class NearEventNotifier {
 		
 	public void checkEvent(Location loc){
 		if(loc.distanceTo(lastKnownLocation) < 30 && loc.distanceTo(event) < 15 ){
-			Log.d("CheckEvent","eventhandlerduärinärheten");	
-			Intent intent = new Intent(context,com.openmap.grupp1.NotifyService.class);
-			 context.startService(intent);}
+			Log.d("CheckEvent","eventhandlerduärinärheten");}	
+			//Intent intent = new Intent(context,com.openmap.grupp1.NotifyService.class);
+			// context.startService(intent);}
 		}
 		
 	public void setEvent(Location event){

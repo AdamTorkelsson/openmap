@@ -42,7 +42,6 @@ public class MainActivity extends Activity
   setContentView(R.layout.activity_main);
   myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
 
- 
  }
 
  @Override
@@ -56,7 +55,7 @@ public class MainActivity extends Activity
      return true;
  
  }
- 
+
  
  @Override
  public boolean onOptionsItemSelected(MenuItem item) {
@@ -71,19 +70,14 @@ public class MainActivity extends Activity
       default:
           return super.onOptionsItemSelected(item);
           }}
- 
-
- 
 
  public void buttonCamera(View v){
 	 Intent intent =new Intent(this, PhotoTaker.class);
 		startActivity(intent);
-    
 }
 
  public void buttonGroups(View v){
 	// myMap.createonemoreDialog();
-
 	 
 }
 

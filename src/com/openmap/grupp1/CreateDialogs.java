@@ -1,6 +1,5 @@
 package com.openmap.grupp1;
 
-import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -8,15 +7,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.net.Uri;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -29,80 +26,71 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class CreateDialogs extends Activity {
+public class CreateDialogs{
 	
-	private EditText txtTitle;
-	private EditText txtDescription;
+
 	private LatLng point;
 	private Resources res;
 	private GoogleMap myMap;
-	private Uri image;
-	Context context;
+	private Context context;
 	
 	public CreateDialogs(){
 		
 	}
+	public void confirmLocationPopup(Context context,final LatLng point,final Resources res, final GoogleMap myMap){
+		this.context = context;
+		//POPUP som fungerar
+		   int popupWidth = 700;
+		   int popupHeight = 100;
 
-	//Undersök varför det måste vara final här + styr upp denna koden 
-	public void insertInfo(Context context,final LatLng point,final Resources res, final GoogleMap myMap){
-			this.context = context;
-			this.point = point;
-			this.res = res;
-			this.myMap = myMap;
-			
-		final String TAG = "MyActivity";
-			  Log.d("Button", "take picture5");
-			LayoutInflater li = LayoutInflater.from(context);
-			View popupView = li.inflate(R.layout.dialog1, null);
-			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-	
-			
-		
+		   // Inflate the popup_layout.xml
+		LinearLayout viewGroup = (LinearLayout) ((Activity) context).findViewById(R.layout.activity_main);
+		   LayoutInflater layoutInflater = (LayoutInflater) context
+		     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		  
+		   View layout = layoutInflater.inflate(R.layout.confirmview, viewGroup);
+			layout.setBackgroundColor(Color.WHITE);
+		   // Creating the PopupWindow
+		   final PopupWindow popup = new PopupWindow(context);
+		  popup.setContentView(layout);
+		   popup.setWidth(600);
+		   popup.setHeight(popupHeight);
+		   Button buttonYES = (Button) layout.findViewById(R.id.buttonYes);
+		   
+		//   Button buttonYES = (Button) findViewById(R.id.buttonYes);
+			  Button buttonNO = (Button) layout.findViewById(R.id.buttonNo);
+			  
+			  buttonYES.setClickable(true);
+			  buttonNO.setClickable(true);
+				 
+				buttonYES.setOnClickListener(
+						new OnClickListener(){
 
-			// set prompts.xml to alertdialog builder
-			
-			
-			//the two strings
-			txtTitle = (EditText) popupView.findViewById(R.id.txtTitle);
-			txtDescription = (EditText) popupView.findViewById(R.id.txtDescription);
-			
-			
-			
-				alertDialogBuilder.setView(popupView);
-				Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär0");
-			// set dialog message
-			alertDialogBuilder
-			.setCancelable(false)
-			.setPositiveButton("OK",
-			new DialogInterface.OnClickListener() {
-						
-					  public void onClick(DialogInterface dialog,int id) {
-						
-					
-						  
-					    	  setValues(txtTitle.getText().toString(),txtDescription.getText().toString());
-					    	
-					    	}  })
-					    	
-					.setNegativeButton("Cancel",
-					  new DialogInterface.OnClickListener() {
-					    public void onClick(DialogInterface dialog,int id) {
-						dialog.cancel();
-						// marker.remove();
-					    }
-					  });
-	
-				// create alert dialog
-				AlertDialog alertDialog = alertDialogBuilder.create();
-				//cancelable(enable backkey)
+							@Override
+							public void onClick(View arg0) {
+								popup.dismiss();
+								startNewActivity();
+							}
+							
+						});
 				
-				alertDialog.setCancelable(true);
-				// show it
-			
-				alertDialog.show();
-			
-			 // 
-				  
+				buttonNO.setOnClickListener(new OnClickListener(){
+					@Override
+					public void onClick(View arg0) {
+						popup.dismiss();
+						
+					}});
+				
+				
+		   popup.showAtLocation(layout, Gravity.BOTTOM, 0,  0);
+		   
+		  
+		   
+	}
+
+	private void startNewActivity() {
+		Intent intent =new Intent(context, CreateEventActivity.class);
+		context.startActivity(intent);		
 	}
 
 private void setValues(String title, String description){
@@ -145,9 +133,6 @@ String description = SP.getDescription();
 
 titleView.setText(title);
 descriptionView.setText(description);
-
-
-
 
    // Creating the PopupWindow
    final PopupWindow popup = new PopupWindow(context);
@@ -211,7 +196,53 @@ public void showsearchEvents(Context context){
 		alertDialog.show();
 		Log.d(TAG, "hej8");
 
+}/*
+//Undersök varför det måste vara final här + styr upp denna koden 
+public void insertInfo(Context context,final LatLng point,final Resources res, final GoogleMap myMap){
+		this.context = context;
+		this.point = point;
+		this.res = res;
+		this.myMap = myMap;
+		
+	final String TAG = "MyActivity";
+		  Log.d("Button", "take picture5");
+		LayoutInflater li = LayoutInflater.from(context);
+		View popupView = li.inflate(R.layout.dialog1, null);
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+		// set prompts.xml to alertdialog builder
+		//the two strings
+		txtTitle = (EditText) popupView.findViewById(R.id.txtTitle);
+		txtDescription = (EditText) popupView.findViewById(R.id.txtDescription);
+			alertDialogBuilder.setView(popupView);
+			Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär0");
+		// set dialog message
+		alertDialogBuilder
+		.setCancelable(false)
+		.setPositiveButton("OK",
+		new DialogInterface.OnClickListener() {		
+				  public void onClick(DialogInterface dialog,int id) {
+					  	setValues(txtTitle.getText().toString(),txtDescription.getText().toString());
+					  	
+				  }  })
+				.setNegativeButton("Cancel",
+				  new DialogInterface.OnClickListener() {
+				    public void onClick(DialogInterface dialog,int id) {
+					dialog.cancel();
+					// marker.remove();
+				    }
+				  });
+
+			// create alert dialog
+			AlertDialog alertDialog = alertDialogBuilder.create();
+			//cancelable(enable backkey)
+			
+			alertDialog.setCancelable(true);
+			// show it
+		
+			alertDialog.show();
+		
+		 // */
+			  
 }
 
 
-}
