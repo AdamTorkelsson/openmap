@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.openmap.grupp1"
     android:versionCode="1"
@@ -49,11 +49,7 @@
 
         <activity android:name="PhotoTaker"></activity>
         <service android:name=".NotifyService"/>
- <service
-  android:name="LocationUpdate"
-  android:process=":locationupdate_process" 
-  >
-</service> 
+        <activity android:name="CreateEventActivity"></activity> 
 
         
         
