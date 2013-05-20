@@ -20,9 +20,11 @@ public class settings extends Activity{
 	private final String PREFS_NAME ="MySettings";
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
+	
 		//create lite osäkert men alltid här
-	  super.onCreate(savedInstanceState);
+	  
 	  //The Action Bar replaces the title bar and provides an alternate location for an on-screen menu button on some devices. 
 
 	  //Creating content view
@@ -31,6 +33,10 @@ public class settings extends Activity{
 
 	  addMapsSpinner();
 	  addListenerOnButton();
+	}
+	@Override
+	public void onResume(){
+		super.onResume();
 	}
 	  
 	  
@@ -58,16 +64,12 @@ public class settings extends Activity{
 			  @Override
 			  public void onClick(View v) {
 				  String text = spinner.getSelectedItem().toString();
-				  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step1");
-				 /*Intent intent = new Intent(getApplicationContext(), MyMap.class);
-				 intent.putExtra("Map", spinner.getSelectedItem().toString());*/
 				  SharedPreferences settings = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
 				  SharedPreferences.Editor editor = settings.edit();
 				  editor.putString("map", text);
 				  editor.commit();
 				  
-				 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step2");
-				 endactivity();
+				  endactivity();
 				 
 				  
 			  }

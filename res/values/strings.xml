@@ -16,8 +16,9 @@
 	
 	<string name="maps_prompt">Choose type of map</string> 
 	<string-array name="maps_array">
-  	<item>Kukkarta</item> 
-  	<item>Fittkarta</item> 
-  	<item>Annan karta</item> 
+	<item>Hybrid</item>    
+  	<item>Satellite</item> 
+  	<item>Normal</item> 
+  	<item>Terrain</item> 
   	</string-array>
 </resources>

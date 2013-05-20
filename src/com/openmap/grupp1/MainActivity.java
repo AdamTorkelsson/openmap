@@ -35,32 +35,36 @@ SearchView.OnCloseListener
  boolean mBound = false;
 
  @Override
- protected void onCreate(Bundle savedInstanceState) {
- 
+ public void onCreate(Bundle savedInstanceState) {
 	 //create lite osäkert men alltid här
-  super.onCreate(savedInstanceState);
-  //The Action Bar replaces the title bar and provides an alternate location for an on-screen menu button on some devices. 
-  getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-  //Creating content view
-  setContentView(R.layout.activity_main);
-  myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
-  myMap.setMap("Default");
+	 super.onCreate(savedInstanceState);
+ 
+ //The Action Bar replaces the title bar and provides an alternate location for an on-screen menu button on some devices. 
+	 getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+	 //Creating content view
+	 setContentView(R.layout.activity_main);
+	 createDialog = new CreateDialogs();
+	 myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
+	 myMap.setMap("Hybrid");
+ }	 
+	
+	 
   
-  createDialog = new CreateDialogs();
-  
+<<<<<<< HEAD
   
  }
+=======
+	 
+
+ 
+>>>>>>> Maps
  @Override
  public void onResume(){
-	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step4ny");
 	 super.onResume();
-	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step5ny");
 	 SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
-	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step6ny");
 	 String mapSetting = settings.getString("map", null);
-	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, mapSetting);
 	 myMap.setMap(mapSetting);
-	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step8ny");
+	
  }
 
  @Override
@@ -89,9 +93,13 @@ SearchView.OnCloseListener
           Log.d("textservices", "bajs");
           return true;
       case R.id.btn_settings:
+<<<<<<< HEAD
     	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step3.5");
     	  Intent intent =new Intent(this, settings.class);
     	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step4");
+=======
+    	  Intent intent =new Intent(this, settings.class);
+>>>>>>> Maps
     	  startActivity(intent);
     	  this.onPause();
     	  return true;

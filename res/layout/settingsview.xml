@@ -8,21 +8,25 @@
 	<LinearLayout android:layout_width="match_parent" 
 	    android:layout_height="wrap_content" 
 	    android:orientation="vertical">
+	    
+	<TextView android:id="@+id/mapTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose the map type you would like to use:" />    
   
   	<Spinner android:id="@+id/spinner" 
   	    android:layout_width="match_parent" 
   	    android:layout_height="wrap_content" 
   	    android:entries="@array/maps_array" 
   	    android:prompt="@string/maps_prompt" /> 
-  
-  	<ExpandableListView android:id="@+id/expandableListView1" 
-      android:layout_width="match_parent" 
-      android:layout_height="23dp" /> 
   	</LinearLayout>
  
 	<LinearLayout android:layout_width="match_parent" 
 	    android:layout_height="wrap_content">
   
-  	<Button android:id="@+id/btnSubmit" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Apply" /> 
+  	<Button android:id="@+id/btnSubmit" 
+  	    android:layout_width="wrap_content" 
+  	    android:layout_height="wrap_content" 
+  	    android:text="Apply" /> 
   </LinearLayout>
   </LinearLayout>
