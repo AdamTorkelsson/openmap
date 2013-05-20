@@ -85,7 +85,7 @@ OnMarkerClickListener , LocationListener {
 		  //starting at your location
 		  onLocationChanged(((LocationManager) locmanager).getLastKnownLocation(provider));
 		  // request updates every 100 second
-		  lm.requestLocationUpdates(provider, 100000, 1, this);
+		  lm.requestLocationUpdates(provider, 10000, 1, this);
 		 // 
 		  
 	 }
@@ -104,7 +104,7 @@ OnMarkerClickListener , LocationListener {
 	 public void onMapLongClick(LatLng point) {
 		 this.point = point;
 		// create interactive dialog window
-		 	
+		 	neEvNotifier.NearEventNotifier(point);
 		 	Log.d(TEXT_SERVICES_MANAGER_SERVICE, "hej1");
 		 	insertinfo.insertInfo(context, point, res, myMap); 
 		 	Log.d(TEXT_SERVICES_MANAGER_SERVICE, "hej2");

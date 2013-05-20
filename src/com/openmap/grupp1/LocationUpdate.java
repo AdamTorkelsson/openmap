@@ -84,8 +84,3 @@ public class LocationUpdate extends Service implements LocationListener{
 		
 	}}*/
 
-<<<<<<< HEAD
-=======
-}
-*/
->>>>>>> 3f681e7290ce086383d268f5de010dab6fc99153

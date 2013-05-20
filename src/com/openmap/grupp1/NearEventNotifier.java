@@ -1,5 +1,7 @@
 package com.openmap.grupp1;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -28,6 +30,12 @@ public class NearEventNotifier {
 	}
 	public void lastKnownLocation(Location lastKnownLocation){
 		this.lastKnownLocation = lastKnownLocation;
+	}
+
+	public void NearEventNotifier(LatLng point) {
+		event.setLatitude(point.latitude);
+		event.setLongitude(point.longitude);
+		
 	}
 	}
 

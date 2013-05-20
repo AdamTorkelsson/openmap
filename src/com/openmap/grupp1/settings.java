@@ -1,4 +1,4 @@
-package com.openmap.grupp1;
+/*package com.openmap.grupp1;
 
 import android.app.Activity;
 import android.content.Context;
@@ -25,9 +25,7 @@ public class settings extends Activity{
 	  //Creating content view
 	  setContentView(R.layout.settingsview);
 	  
-<<<<<<< HEAD
-	 
-=======
+
 	  addMapsSpinner();
 	}
 	  
@@ -64,4 +62,4 @@ public class settings extends Activity{
 		  }
 	
 	
-}
+}*/
