@@ -18,12 +18,10 @@ public class settings extends Activity{
 	  super.onCreate(savedInstanceState);
 	  //The Action Bar replaces the title bar and provides an alternate location for an on-screen menu button on some devices. 
 
-	  
 	  //Creating content view
 	  setContentView(R.layout.settingsview);
 	  
-	  
-	  
+	 
 	}
 	
 	 public boolean onCreateOptionsMenu(Menu menu) {

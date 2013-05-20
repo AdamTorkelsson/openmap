@@ -1,23 +1,34 @@
 package com.openmap.grupp1;
 
+
+import com.google.android.gms.maps.model.LatLng;
+
+
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.Toast;
 
 
-public class MainActivity extends Activity
+public class MainActivity extends Activity 
  {
 
  private MyMap myMap; 
 
+ boolean mBound = false;
 
  @Override
  protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +40,8 @@ public class MainActivity extends Activity
   
   //Creating content view
   setContentView(R.layout.activity_main);
-
   myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
-  
+
  
  }
 
@@ -60,9 +70,9 @@ public class MainActivity extends Activity
           return true;
       default:
           return super.onOptionsItemSelected(item);
-          }
- }
+          }}
  
+
  
 
  public void buttonCamera(View v){
@@ -72,7 +82,11 @@ public class MainActivity extends Activity
 }
 
  public void buttonGroups(View v){
-	 myMap.createonemoreDialog();
+	// myMap.createonemoreDialog();
+	 Intent intent = new Intent(this,
+			  com.openmap.grupp1.NotifyService.class);
+	  this.startService(intent);
+	 
 }
 
  public void buttonEvent(View v){
@@ -89,7 +103,12 @@ public class MainActivity extends Activity
   // TODO Auto-generated method stub
   super.onResume(); }
 
+
 }
+
+
+
+
 /*BRA för framtiden , krävs för att starta aktivitet på annat ställe , dock måste den göras som en aktivietet med denna som hierarisk
  * Intent intent =new Intent(this, SharedPrefs.class);
 	startActivity(intent);*/
