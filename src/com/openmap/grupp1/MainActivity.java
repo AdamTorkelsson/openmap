@@ -50,14 +50,10 @@ SearchView.OnCloseListener
 	
 	 
   
-<<<<<<< HEAD
-  
- }
-=======
-	 
 
+  
  
->>>>>>> Maps
+
  @Override
  public void onResume(){
 	 super.onResume();
@@ -93,13 +89,9 @@ SearchView.OnCloseListener
           Log.d("textservices", "bajs");
           return true;
       case R.id.btn_settings:
-<<<<<<< HEAD
     	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step3.5");
     	  Intent intent =new Intent(this, settings.class);
     	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step4");
-=======
-    	  Intent intent =new Intent(this, settings.class);
->>>>>>> Maps
     	  startActivity(intent);
     	  this.onPause();
     	  return true;
