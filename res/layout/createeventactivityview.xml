@@ -34,6 +34,10 @@
         
     </LinearLayout>
     
+<<<<<<< HEAD
+=======
+
+>>>>>>> 35af9a700a69267cfcaf8fcc88000a5bf4d0e1ff
 
     <ImageView
         android:id="@+id/imageView"

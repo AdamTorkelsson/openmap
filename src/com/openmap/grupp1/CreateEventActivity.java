@@ -4,6 +4,10 @@ import java.io.File;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 35af9a700a69267cfcaf8fcc88000a5bf4d0e1ff
 import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,7 +18,13 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+<<<<<<< HEAD
 import android.widget.CheckBox;
+=======
+
+import android.widget.CheckBox;
+
+>>>>>>> 35af9a700a69267cfcaf8fcc88000a5bf4d0e1ff
 import android.widget.ImageView;
 import android.content.Intent;
 import android.graphics.Bitmap;

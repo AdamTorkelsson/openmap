@@ -55,22 +55,9 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		 this.locmanager = (LocationManager) locmanager;
 		 this.context = context;
 		 this.res = res;
-		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "ListenerStep0");
 		  MapFragment myMapFragment  = (MapFragment)myFragmentManager.findFragmentById(R.id.map);
 		  myMap = myMapFragment.getMap();
 		  loadmarkers = new LoadMarkers(myMap);
-		 
-		  
-		 
-		  
-		  //different map types
-	
-		  
-		  
-		  //myMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-		  //myMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-		  //myMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-		  //myMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 
 		  //enables all click
 		  myMap.setOnMapClickListener(this);
@@ -80,29 +67,29 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		  myMap.setMyLocationEnabled(true);
 
 		  myMap.setOnCameraChangeListener(this);
-		  
-		  
+
 		  LocationManager lm = (LocationManager) locmanager;
-		  double latitude = ((LocationManager) locmanager).getLastKnownLocation(provider).getLatitude();
-		  double longitude =((LocationManager) locmanager).getLastKnownLocation(provider).getLongitude();
+
 		  criteria = new Criteria();
 		  provider = lm.getBestProvider(criteria, false);
 	
-		 		CameraUpdate update = CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude),14 );
-		 		myMap.animateCamera(update);
+		 	CameraUpdate update = CameraUpdateFactory.newLatLngZoom(
+		 			new LatLng(((LocationManager) locmanager).getLastKnownLocation(
+		 					provider).getLatitude(),((LocationManager) 
+		 			locmanager).getLastKnownLocation(provider).getLongitude()),14 );
+		 	myMap.animateCamera(update);
 		 	Location mylocation = new Location("temp");
-		 	mylocation.setLatitude(latitude);
-		 	mylocation.setLatitude(longitude);
+	
 		  
 		  //Makes a NearEventNotifier thats check if you have been near an event more than 10 seconds
-		  neEvNotifier = new NearEventNotifier(mylocation, myMap);
+		  neEvNotifier = new NearEventNotifier(((LocationManager) locmanager).getLastKnownLocation(provider), myMap);
 
 		  //starting at your location
-		  onLocationChanged(mylocation);
+		  onLocationChanged(((LocationManager) locmanager).getLastKnownLocation(provider));
 		  // request updates every 100 second, Change to every 5 minutes
 		  lm.requestLocationUpdates(provider, 10000, 1, this);
 		 // 
-		  
+		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "ListenerStep2");
 	 }
 
 
@@ -137,13 +124,13 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	 public void setMap(String map){
 		 
    	  	 
-		 if (map.equals("Hybrid"))
-			 myMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-		 if (map.equals("Satellite"))
+		 if (map.equals("Default"))
 			 myMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-		 if (map.equals("Normal"))
+		 if (map.equals("Kukkarta"))
+			 myMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+		 if (map.equals("Fittkarta"))
 			 myMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-		 if(map.equals("Terrain"))	 
+		 if(map.equals("Runkkarta"))	 
 			 myMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 	 }
 	 
