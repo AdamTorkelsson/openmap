@@ -8,7 +8,7 @@ import android.view.View;
 
 public class TutorialPopupDialog {
 	private Context context;
-	int i = 0;
+	int i = 1;
 	
 	public TutorialPopupDialog(Context context){
 		this.context = context;
@@ -17,18 +17,31 @@ public class TutorialPopupDialog {
 		
 	}
 	private void dialogHandler() {
-		if(i==0){
-			standardDialog(R.layout.tutorialdialogview1);
+		if(i==1){
+			standardDialog(R.layout.tutorialdialogview1,"Yes");
 		i++;}
-		else if(i==1){
-			standardDialog(R.layout.tutorialdialogview2);
-			i++;}
 		else if(i==2){
-			standardDialog(R.layout.tutorialdialogview3);
+			standardDialog(R.layout.tutorialdialogview2,"Next");
+			i++;}
+		else if(i==3){
+			standardDialog(R.layout.tutorialdialogview3,"Next");
 			i++;}	
+		else if(i==4){
+			standardDialog(R.layout.tutorialdialogview4,"Next");
+			i++;}	
+		else if(i==5){
+			standardDialog(R.layout.tutorialdialogview5,"Next");
+			i++;}	
+		else if(i==6){
+			standardDialog(R.layout.tutorialdialogview6,"Next");
+			i++;}	
+		else if(i==7){
+			standardDialog(R.layout.tutorialdialogview7,"Finish");
+			i++;}	
+
 	}
 	
-public void standardDialog(int view){
+public void standardDialog(int view, String rightButton){
 	LayoutInflater li = LayoutInflater.from(context);
 	View tutorialView= li.inflate(view, null);
 	AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
@@ -38,9 +51,10 @@ public void standardDialog(int view){
 	alertDialogBuilder.setView(tutorialView);
 	// set dialog message
 
+
 		alertDialogBuilder
-	.setCancelable(false)
-	.setPositiveButton("Next",
+	.setCancelable(true)
+	.setPositiveButton(rightButton,
 	new DialogInterface.OnClickListener() {		
 			  public void onClick(DialogInterface dialog,int id) {
 				  	dialogHandler();
@@ -55,7 +69,7 @@ public void standardDialog(int view){
 			    }
 			  });
 
-
+		
 		AlertDialog alertDialog = alertDialogBuilder.create();
 		alertDialog.setCancelable(true);
 		alertDialog.show();

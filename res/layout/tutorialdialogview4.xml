@@ -10,7 +10,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You pinpoint a location by pressing your finger at it for 3 seconds and transform it into an event by choosing a time for it in the next menu."
+        android:text="If you want to filter shown locations you can search and add hashtags in the top menu. The map will then only show those locations that are connected to these hashtags. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </LinearLayout>

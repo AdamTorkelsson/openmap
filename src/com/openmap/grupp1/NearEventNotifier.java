@@ -31,8 +31,6 @@ public class NearEventNotifier {
 		editor.putString("Notification", "(title)");
 		editor.putString("Notificationdetails", "(details)");
 		editor.commit();
-		
-		
 		if(loc.distanceTo(lastKnownLocation) < 30 && loc.distanceTo(event) < 15 ){
 			Log.d("CheckEvent","eventhandlerduärinärheten");	
 			// Send info to database that you have been near and add one person at location/event	

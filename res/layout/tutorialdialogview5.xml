@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     android:id="@+id/tutorialdialog1"
+    android:id="@+id/tutorialdialog3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
@@ -8,10 +8,9 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.16"
-        android:text="Hi do you want a tutorial to learn about some of the functions in this app?"
+        android:text="The star button in the top menu can filter which groups locations you want to see and if you only want to se event or locations."
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </LinearLayout>

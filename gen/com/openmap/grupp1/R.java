@@ -262,6 +262,10 @@ containing a value of this type.
         public static final int tutorialdialogview1=0x7f03000d;
         public static final int tutorialdialogview2=0x7f03000e;
         public static final int tutorialdialogview3=0x7f03000f;
+        public static final int tutorialdialogview4=0x7f030010;
+        public static final int tutorialdialogview5=0x7f030011;
+        public static final int tutorialdialogview6=0x7f030012;
+        public static final int tutorialdialogview7=0x7f030013;
     }
     public static final class menu {
         public static final int settings_menu=0x7f0a0000;
