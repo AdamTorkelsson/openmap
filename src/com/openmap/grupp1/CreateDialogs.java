@@ -115,8 +115,9 @@ private void setValues(String title, String description){
 public void showInfo(Context context,final LatLng point,final Resources res, final GoogleMap myMap){
 
    //POPUP som fungerar
-   int popupWidth = 400;
-   int popupHeight = 400;
+  
+	int popupWidth = 400;
+	int popupHeight = 400;
 
    // Inflate the popup_layout.xml
 LinearLayout viewGroup = (LinearLayout) ((Activity) context).findViewById(R.layout.activity_main);

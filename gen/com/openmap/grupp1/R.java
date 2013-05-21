@@ -256,8 +256,9 @@ containing a value of this type.
         public static final int searchviewsearchresult=0x7f030009;
         public static final int settingsview=0x7f03000a;
         public static final int showinfopopup=0x7f03000b;
-        public static final int splashscreen=0x7f03000c;
-        public static final int tutorialdialogview=0x7f03000d;
+        public static final int showinfopopuptest=0x7f03000c;
+        public static final int splashscreen=0x7f03000d;
+        public static final int tutorialdialogview=0x7f03000e;
     }
     public static final class menu {
         public static final int settings_menu=0x7f0a0000;
