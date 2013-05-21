@@ -53,6 +53,7 @@ public class settings extends Activity{
 	
 	}
 	
+	
 	 public void addListenerOnButton() {
 		
 			

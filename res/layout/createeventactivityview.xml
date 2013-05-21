@@ -34,15 +34,14 @@
         
     </LinearLayout>
     
-<<<<<<< HEAD
-=======
+
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="79dp"
         android:layout_height="115dp" />
 
->>>>>>> Maps
+
     <EditText
         android:id="@+id/txtDescription"
         android:layout_width="match_parent"

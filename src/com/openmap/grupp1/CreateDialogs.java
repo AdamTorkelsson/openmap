@@ -71,6 +71,7 @@ public class CreateDialogs {
 		   searchPopup.setContentView(layout);
 		   searchPopup.setWidth(popupWidth);
 		   searchPopup.setHeight(popupHeight);
+	
 		   /*
 		   Button buttonYES = (Button) layout.findViewById(R.id.buttonYes);
 		   Button buttonNO = (Button) layout.findViewById(R.id.buttonNo);
