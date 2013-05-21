@@ -3,11 +3,14 @@ package com.openmap.grupp1;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnCameraChangeListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationChangeListener;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.CameraPosition.Builder;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -30,7 +33,7 @@ import android.util.Log;
 
 public class MyMap extends Activity 
 implements OnMapClickListener, OnMapLongClickListener, 
-OnMarkerClickListener , LocationListener {
+OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	 private GoogleMap myMap;
 	 private Criteria criteria;
 	 private String provider;
@@ -42,6 +45,8 @@ OnMarkerClickListener , LocationListener {
 	 private LocationManager locmanager;
 	 private LatLng point;
 	 private NearEventNotifier neEvNotifier;
+	 private CameraPosition cameraposition;
+	 private LoadMarkers loadmarkers;
 	 
 	
 	 public MyMap(FragmentManager myFragmentManager, Object locmanager,Context context,Resources res) {
@@ -53,7 +58,8 @@ OnMarkerClickListener , LocationListener {
 		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "ListenerStep0");
 		  MapFragment myMapFragment  = (MapFragment)myFragmentManager.findFragmentById(R.id.map);
 		  myMap = myMapFragment.getMap();
-
+		  loadmarkers = new LoadMarkers(myMap);
+		 
 		  
 		 
 		  
@@ -72,23 +78,24 @@ OnMarkerClickListener , LocationListener {
 		  myMap.setOnMarkerClickListener(this);
 		  
 		  myMap.setMyLocationEnabled(true);
-		  
-		  //Creates an provider with the best criteria
-		    
-		 // onLocationChanged(myMap.getMyLocation());
-		//  updateLocation(myMap.getMyLocation());
 
-		  
+		  myMap.setOnCameraChangeListener(this);
 
 		  LocationManager lm = (LocationManager) locmanager;
 		  criteria = new Criteria();
 		  provider = lm.getBestProvider(criteria, false);
+		 LatLng loc = new LatLng(((LocationManager) locmanager)
+			  .getLastKnownLocation(provider).getLatitude(),
+				 ((LocationManager) locmanager).
+			  	getLastKnownLocation(provider).getLongitude());
+		 		CameraUpdate update = CameraUpdateFactory.newLatLngZoom(loc,14 );
+		 		myMap.animateCamera(update);
 		  
 		  //Makes a NearEventNotifier thats check if you have been near an event more than 10 seconds
 		  neEvNotifier = new NearEventNotifier(((LocationManager) locmanager)
 				  .getLastKnownLocation(provider),((LocationManager) locmanager)
 				  .getLastKnownLocation(provider),context);
-		  
+
 		  //starting at your location
 		  onLocationChanged(((LocationManager) locmanager).getLastKnownLocation(provider));
 		  // request updates every 100 second
@@ -142,6 +149,7 @@ OnMarkerClickListener , LocationListener {
 	 
 	@Override
 	public boolean onMarkerClick(Marker marker) {
+		//Flytta möjligtvis(lägg i konstrukorn, själva object skapandet)
 		CreateDialogs showinfo = new CreateDialogs();
 	 	Log.d(TEXT_SERVICES_MANAGER_SERVICE, "hej1");
 	 	showinfo.showInfo(context, marker.getPosition(), res, myMap);
@@ -151,18 +159,23 @@ OnMarkerClickListener , LocationListener {
 
 
 	@Override
+	public void onCameraChange(CameraPosition arg0) {
+		loadmarkers.addMarkersInCameraView(arg0);
+		
+	}
+	
+	@Override
 	public void onLocationChanged(Location arg0) {
 		
-		MYLOCATION = new LatLng(arg0.getLatitude(), arg0.getLongitude());
 		
+		MYLOCATION = new LatLng(arg0.getLatitude(), arg0.getLongitude());
 		  //move camera to your positon
-		  CameraUpdate update = CameraUpdateFactory.newLatLngZoom(MYLOCATION,14 );
-		  myMap.animateCamera(update);
 		  myMap.addMarker(new MarkerOptions().position(MYLOCATION).title("Your Position2"));
 		  neEvNotifier.checkEvent(arg0);
 		
 	}
-
+	
+	
 
 	@Override
 	public void onProviderDisabled(String arg0) {
@@ -186,6 +199,8 @@ OnMarkerClickListener , LocationListener {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 
 

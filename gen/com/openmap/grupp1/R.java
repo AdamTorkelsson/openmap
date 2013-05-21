@@ -198,11 +198,11 @@ containing a value of this type.
     }
     public static final class id {
         public static final int Mapview=0x7f050005;
-        public static final int action_search=0x7f050028;
+        public static final int action_search=0x7f050029;
         public static final int btnSubmit=0x7f050024;
-        public static final int btn_back=0x7f050025;
-        public static final int btn_select=0x7f050026;
-        public static final int btn_settings=0x7f050027;
+        public static final int btn_back=0x7f050026;
+        public static final int btn_select=0x7f050027;
+        public static final int btn_settings=0x7f050028;
         public static final int buttonCamera=0x7f05000d;
         public static final int buttonCancel=0x7f05000f;
         public static final int buttonEvent=0x7f050012;
@@ -225,6 +225,7 @@ containing a value of this type.
         public static final int markerTitle=0x7f05000b;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
+        public static final int progressBar1=0x7f050025;
         public static final int relativeLayout1=0x7f05001f;
         public static final int rightLayout=0x7f05001d;
         public static final int satellite=0x7f050002;
@@ -252,6 +253,7 @@ containing a value of this type.
         public static final int searchviewaddedtags=0x7f030009;
         public static final int searchviewsearchresult=0x7f03000a;
         public static final int settingsview=0x7f03000b;
+        public static final int splashscreen=0x7f03000c;
     }
     public static final class menu {
         public static final int settings_menu=0x7f0a0000;

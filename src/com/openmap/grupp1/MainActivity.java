@@ -48,8 +48,7 @@ SearchView.OnCloseListener
   
   createDialog = new CreateDialogs();
   
-  myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
-
+  
  }
  @Override
  public void onResume(){
@@ -85,20 +84,14 @@ SearchView.OnCloseListener
  
  @Override
  public boolean onOptionsItemSelected(MenuItem item) {
-
-	 
-
-      switch (item.getItemId()) {
-
+   switch (item.getItemId()) {
           case R.id.btn_select:
           Log.d("textservices", "bajs");
           return true;
       case R.id.btn_settings:
-
     	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step3.5");
     	  Intent intent =new Intent(this, settings.class);
     	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step4");
-    	  
     	  startActivity(intent);
     	  this.onPause();
     	  return true;
@@ -108,36 +101,6 @@ SearchView.OnCloseListener
      }
 	 
  }
-
-    
-
-
-         
-
-
- 
- 
-
- public void buttonCamera(View v){
-	
-}
-
- public void buttonGroups(View v){
-	// myMap.createonemoreDialog();
-	 
-}
-
- public void buttonEvent(View v){
-	/* Intent settingsintent =new Intent(this, settings.class);
-		startActivity(settingsintent);*/
-}
- 
- 
- 
- 
- 
-
-
 
 
  public boolean onQueryTextChange(String newText) {
