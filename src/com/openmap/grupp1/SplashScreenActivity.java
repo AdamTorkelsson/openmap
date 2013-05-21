@@ -7,7 +7,7 @@ import android.view.Window;
 
 public class SplashScreenActivity extends Activity {
     private long ms=0;
-    private long splashTime=2000;
+    private long splashTime=5000;
     private boolean splashActive = true;
     private boolean paused=false;
    

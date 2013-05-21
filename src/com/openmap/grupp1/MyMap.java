@@ -82,7 +82,8 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	
 		  
 		  //Makes a NearEventNotifier thats check if you have been near an event more than 10 seconds
-		  neEvNotifier = new NearEventNotifier(((LocationManager) locmanager).getLastKnownLocation(provider), myMap);
+		  neEvNotifier = new NearEventNotifier(((LocationManager) locmanager).
+				  getLastKnownLocation(provider), myMap,context);
 
 		  //starting at your location
 		  onLocationChanged(((LocationManager) locmanager).getLastKnownLocation(provider));
@@ -118,7 +119,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		 	}
 
 	 public void createonemoreDialog(){
-		 insertinfo.showsearchEvents(context); 
+		
 	 }
 	 
 	 public void setMap(String map){

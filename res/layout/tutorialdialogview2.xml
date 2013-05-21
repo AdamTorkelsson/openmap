@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:id="@+id/tutorialdialog2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+     android:background="#008B8B" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This is a map that is made interesting by you as a user. You can pinpoint interesting spots, funny spots, good deals, events, hangouts, good mushroom areas or whatever you want to pinpoint."
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</LinearLayout>

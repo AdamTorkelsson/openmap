@@ -25,8 +25,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 
-public class MainActivity extends Activity implements SearchView.OnQueryTextListener,
-SearchView.OnCloseListener
+public class MainActivity extends Activity 
  {
  private MyMap myMap;
  public static final String PREFS_NAME = "MySettings";
@@ -46,6 +45,7 @@ SearchView.OnCloseListener
 	 createDialog = new CreateDialogs();
 	 myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
 	 myMap.setMap("Hybrid");
+	 new TutorialPopupDialog(this);
  }	 
 	
 	 
@@ -68,10 +68,7 @@ SearchView.OnCloseListener
      ab.setDisplayShowTitleEnabled(false);
      ab.setDisplayShowHomeEnabled(false);
      
-     searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-    //ta beslut här searchView.setIconifiedByDefault(false);
-     searchView.setOnQueryTextListener(this);
-     searchView.setOnCloseListener(this);
+
      
      return true;
  
@@ -96,24 +93,6 @@ SearchView.OnCloseListener
           return super.onOptionsItemSelected(item);
      }
 	 
- }
-
-
- public boolean onQueryTextChange(String newText) {
-	 if (!createDialog.isShowingSearch())
-		 createDialog.createSearchPopup(this);
-	 else;
-	 // showResults(newText + "*");
-    return false;
- }
-
- public boolean onQueryTextSubmit(String query) {
-	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnQueryStep1");
-	 if (!createDialog.isShowingSearch())
-		 createDialog.createSearchPopup(this);
-	 else;
-   // showResults(query + "*");
-    return true;
  }
 
  public boolean onClose() {

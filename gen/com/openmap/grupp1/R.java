@@ -198,11 +198,11 @@ containing a value of this type.
     }
     public static final class id {
         public static final int Mapview=0x7f050005;
-        public static final int action_search=0x7f05002a;
+        public static final int action_search=0x7f05002e;
         public static final int btnSubmit=0x7f050025;
-        public static final int btn_back=0x7f050027;
-        public static final int btn_select=0x7f050028;
-        public static final int btn_settings=0x7f050029;
+        public static final int btn_back=0x7f05002b;
+        public static final int btn_select=0x7f05002c;
+        public static final int btn_settings=0x7f05002d;
         public static final int buttonCamera=0x7f05000d;
         public static final int buttonCancel=0x7f050010;
         public static final int buttonEvent=0x7f050013;
@@ -236,8 +236,12 @@ containing a value of this type.
         public static final int tagLayout=0x7f05001f;
         public static final int terrain=0x7f050003;
         public static final int textView1=0x7f05000a;
+        public static final int textView2=0x7f050027;
         public static final int textView6=0x7f05001d;
         public static final int titleView1=0x7f050015;
+        public static final int tutorialdialog1=0x7f050028;
+        public static final int tutorialdialog2=0x7f050029;
+        public static final int tutorialdialog3=0x7f05002a;
         public static final int txtDescription=0x7f05000f;
         public static final int txtTitle=0x7f05000c;
     }
@@ -255,6 +259,9 @@ containing a value of this type.
         public static final int searchviewsearchresult=0x7f03000a;
         public static final int settingsview=0x7f03000b;
         public static final int splashscreen=0x7f03000c;
+        public static final int tutorialdialogview1=0x7f03000d;
+        public static final int tutorialdialogview2=0x7f03000e;
+        public static final int tutorialdialogview3=0x7f03000f;
     }
     public static final class menu {
         public static final int settings_menu=0x7f0a0000;
