@@ -123,7 +123,7 @@ LinearLayout viewGroup = (LinearLayout) ((Activity) context).findViewById(R.layo
    LayoutInflater layoutInflater = (LayoutInflater) context
      .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-View layout = layoutInflater.inflate(R.layout.dialog2, viewGroup);
+View layout = layoutInflater.inflate(R.layout.showinfopopup, viewGroup);
 
 
 TextView titleView = (TextView) layout.findViewById(R.id.titleView1);
