@@ -52,9 +52,7 @@ public class CreateDialogs {
 	public void dismissSearch() {
 		searchPopup.dismiss();
 	}
-	
-	
-	
+
 	public void createSearchPopup(Context context){
 		Log.d("hej", "onquery2");
 		this.context = context;
@@ -122,9 +120,9 @@ public class CreateDialogs {
 		   popup.setContentView(layout);
 		   popup.setWidth(600);
 		   popup.setHeight(popupHeight);
+		   
 		   Button buttonYES = (Button) layout.findViewById(R.id.buttonYes);
-	
-			  Button buttonNO = (Button) layout.findViewById(R.id.buttonNo);
+		   Button buttonNO = (Button) layout.findViewById(R.id.buttonNo);
 			  
 			  buttonYES.setClickable(true);
 			  buttonNO.setClickable(true);

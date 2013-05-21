@@ -1,5 +1,6 @@
 package com.openmap.grupp1;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 
 import android.content.Context;
@@ -10,17 +11,19 @@ import android.util.Log;
 public class NearEventNotifier {
 	private Location lastKnownLocation;
 	private Location event;
-	private Context context;
+	private GoogleMap myMap;
 	
-	public NearEventNotifier(Location event,Location lastKnownLocation,Context context ){
+	public NearEventNotifier(Location lastKnownLocation,GoogleMap myMap ){
 		this.lastKnownLocation = lastKnownLocation;
-		this.event = event;
-		this.context = context;
+		this.event = lastKnownLocation;
+		this.myMap = myMap;
 	}	
 		
 	public void checkEvent(Location loc){
 		if(loc.distanceTo(lastKnownLocation) < 30 && loc.distanceTo(event) < 15 ){
-			Log.d("CheckEvent","eventhandlerduärinärheten");}	
+			Log.d("CheckEvent","eventhandlerduärinärheten");
+			}
+			// Send info to database that you have been near and add one person at location/event	
 			//Intent intent = new Intent(context,com.openmap.grupp1.NotifyService.class);
 			// context.startService(intent);}
 		}

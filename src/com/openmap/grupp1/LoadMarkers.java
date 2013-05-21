@@ -34,15 +34,9 @@ public class LoadMarkers {
 	
 	public LoadMarkers(GoogleMap myMap){
 		this.myMap = myMap;
-		
-		//TA BORT DETTA (FÖR TESTNING)
-		//getInCameraMarkers(arg0);
-		/*locationTemp.setLatitude(arg0.target.latitude);
-		locationTemp.setLongitude(arg0.target.longitude);
-		focusedposition = arg0.target;*/
 		}
 	
-	public void getInCameraMarkers(CameraPosition arg0){
+	private void getInCameraMarkers(CameraPosition arg0){
 		//gets all corners of the screen to prepare for loading markers from database
 		p = myMap.getProjection();
 		visibleregion = p.getVisibleRegion();
@@ -50,6 +44,7 @@ public class LoadMarkers {
 		farright =	visibleregion.farRight;
 		nearleft =	visibleregion.nearLeft;
 		nearright =	visibleregion.nearRight;
+		
 		/*
 		 * Connect to database
 		 * And then
@@ -60,21 +55,16 @@ public class LoadMarkers {
 		locationTemp.setLatitude(arg0.target.latitude);
 		locationTemp.setLongitude(arg0.target.longitude);
 		locationTemp.setTime(new Date().getTime()); //Set time as current Date
-		
 		madeupposition.add(locationTemp);
 				//locationTemp.toString();	
 	}
 	
 	public void addMarkersInCameraView(CameraPosition arg0){
-		locationTemp.setLatitude(arg0.target.latitude);
-		locationTemp.setLongitude(arg0.target.longitude);
-
-		for(Location l : madeupposition){
-			if( l.distanceTo(locationTemp) < 15 )
-				Log.d("TextService", "addMarker");
-			 	myMap.addMarker(new MarkerOptions().position(focusedposition).title("focusedposition"));
-
-			
+		/*	
+		 * 
+		 */
+		getInCameraMarkers(arg0);
+		
 	
 		}
 		
@@ -82,4 +72,4 @@ public class LoadMarkers {
 
 	
 	
-}
+

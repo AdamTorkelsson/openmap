@@ -80,25 +80,26 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		  myMap.setMyLocationEnabled(true);
 
 		  myMap.setOnCameraChangeListener(this);
-
+		  
+		  
 		  LocationManager lm = (LocationManager) locmanager;
+		  double latitude = ((LocationManager) locmanager).getLastKnownLocation(provider).getLatitude();
+		  double longitude =((LocationManager) locmanager).getLastKnownLocation(provider).getLongitude();
 		  criteria = new Criteria();
 		  provider = lm.getBestProvider(criteria, false);
-		 LatLng loc = new LatLng(((LocationManager) locmanager)
-			  .getLastKnownLocation(provider).getLatitude(),
-				 ((LocationManager) locmanager).
-			  	getLastKnownLocation(provider).getLongitude());
-		 		CameraUpdate update = CameraUpdateFactory.newLatLngZoom(loc,14 );
+	
+		 		CameraUpdate update = CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude),14 );
 		 		myMap.animateCamera(update);
+		 	Location mylocation = new Location("temp");
+		 	mylocation.setLatitude(latitude);
+		 	mylocation.setLatitude(longitude);
 		  
 		  //Makes a NearEventNotifier thats check if you have been near an event more than 10 seconds
-		  neEvNotifier = new NearEventNotifier(((LocationManager) locmanager)
-				  .getLastKnownLocation(provider),((LocationManager) locmanager)
-				  .getLastKnownLocation(provider),context);
+		  neEvNotifier = new NearEventNotifier(mylocation, myMap);
 
 		  //starting at your location
-		  onLocationChanged(((LocationManager) locmanager).getLastKnownLocation(provider));
-		  // request updates every 100 second
+		  onLocationChanged(mylocation);
+		  // request updates every 100 second, Change to every 5 minutes
 		  lm.requestLocationUpdates(provider, 10000, 1, this);
 		 // 
 		  
