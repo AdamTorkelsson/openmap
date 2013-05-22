@@ -116,8 +116,8 @@ public void showInfo(Context context,final LatLng point,final Resources res, fin
 
    //POPUP som fungerar
   
-	int popupWidth = 400;
-	int popupHeight = 400;
+	int popupWidth = 300;
+	int popupHeight = 300;
 
    // Inflate the popup_layout.xml
 LinearLayout viewGroup = (LinearLayout) ((Activity) context).findViewById(R.layout.activity_main);
@@ -142,6 +142,8 @@ descriptionView.setText(description);
    popup.setWidth(popupWidth);
    popup.setHeight(popupHeight);
    popup.setFocusable(true);
+   popup.setTouchable(true);
+  
    // Some offset to align the popup a bit to the right, and a bit down, relative to button's position.
 
    Projection projection =	myMap.getProjection();
