@@ -59,7 +59,6 @@ public class settings extends Activity{
 			
 		 	
 			btnSubmit = (Button) findViewById(R.id.btnSubmit);
-		 
 			btnSubmit.setOnClickListener(new OnClickListener(){
 		 
 			  @Override
@@ -71,8 +70,7 @@ public class settings extends Activity{
 				  editor.commit();
 				  
 				  endactivity();
-				 
-				  
+  
 			  }
 		 
 			});

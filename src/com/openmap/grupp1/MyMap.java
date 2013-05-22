@@ -82,12 +82,13 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	
 		  
 		  //Makes a NearEventNotifier thats check if you have been near an event more than 10 seconds
-		  neEvNotifier = new NearEventNotifier(((LocationManager) locmanager).getLastKnownLocation(provider), myMap);
+		  neEvNotifier = new NearEventNotifier(((LocationManager) locmanager).
+				  getLastKnownLocation(provider), myMap,context);
 
 		  //starting at your location
-		  onLocationChanged(((LocationManager) locmanager).getLastKnownLocation(provider));
+		//  onLocationChanged(((LocationManager) locmanager).getLastKnownLocation(provider));
 		  // request updates every 100 second, Change to every 5 minutes
-		  lm.requestLocationUpdates(provider, 10000, 1, this);
+		  lm.requestLocationUpdates(provider, 100000, 1, this);
 		 // 
 		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "ListenerStep2");
 	 }
@@ -118,7 +119,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		 	}
 
 	 public void createonemoreDialog(){
-		 insertinfo.showsearchEvents(context); 
+		
 	 }
 	 
 	 public void setMap(String map){

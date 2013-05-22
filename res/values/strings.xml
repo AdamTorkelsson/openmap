@@ -13,6 +13,10 @@
 	<string name="menu_select">Select</string>
 	<string name="menu_back">Back</string>
 	<string name="menu">Menu</string>
+	<string name="search_tags">Search tags</string>
+	<string name="search_label">Tags</string>
+	<string name="menu_add">Add</string>
+	
 	
 	<string name="maps_prompt">Choose type of map</string> 
 	<string-array name="maps_array">
@@ -21,4 +25,11 @@
   	<item>Normal</item> 
   	<item>Terrain</item> 
   	</string-array>
+	<string name="tutorialdialogview1">Hi do you want a tutorial to learn about some of the functions in this app?</string>
+	<string name="tutorialdialogview2">This is a map that is made interesting by you as a user. You can pinpoint interesting spots, funny spots, good deals, events, hangouts, good mushroom areas or whatever you want to pinpoint. Your imagination is the limit!</string>
+	<string name="tutorialdialogview3">You pinpoint a location by pressing your finger at it for 3 seconds and transform it into an event by choosing a time for it in the next menu.</string>
+	<string name="tutorialdialogview4">If you want to filter shown locations you can search and add hashtags in the top menu. The map will then only show those locations that are connected to these hashtags.</string>
+	<string name="tutorialdialogview5">The star button in the top menu can filter which groups locations you want to see and if you only want to se event or locations.</string>
+	<string name="tutorialdialogview6">If you want to see more information about a pinpoint you can press it and a popup will appear with all available information.</string>
+	<string name="tutorialdialogview7">Now you are ready to begin! Remember, this app is made great by you and your contribution!</string>
 </resources>

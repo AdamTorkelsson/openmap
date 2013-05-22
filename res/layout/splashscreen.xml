@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#008B8B"
+    android:columnCount="1"
     android:orientation="vertical" >
-
 
     <ProgressBar
         android:id="@+id/progressBar1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" >
-    </ProgressBar>
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="173dp"
+        android:layout_height="173dp"
+        android:layout_column="0"
+        android:layout_gravity="center"
+        android:layout_row="0" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_column="0"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_row="0"
+        android:text="Freedomap"
+        android:textSize="40dp" 
+        android:layout_marginTop="40dp"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_column="0"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_row="0"
+        android:text="A map made by you"
+        android:layout_marginTop="90dp" />
+
+</GridLayout>
