@@ -14,36 +14,36 @@ public class TutorialPopupDialog {
 	public TutorialPopupDialog(Context context){
 		this.context = context;
 		
-		dialogHandler();
+		
 		
 	}
 	
-	private void dialogHandler() {
+	public void dialogHandler() {
 		if(i==1){
-			standardDialog(R.string.tutorialdialogview1,"Yes");
+			standardDialog(R.string.tutorialdialogview1,"Yes",true);
 			i++;}
 		else if(i==2){
-			standardDialog(R.string.tutorialdialogview2,"Next");
+			standardDialog(R.string.tutorialdialogview2,"Next",true);
 			i++;}
 			else if(i==3){
-			standardDialog(R.string.tutorialdialogview3,"Next");
+			standardDialog(R.string.tutorialdialogview3,"Next",true);
 			i++;}
 		else if(i==4){
-			standardDialog(R.string.tutorialdialogview4,"Next");
+			standardDialog(R.string.tutorialdialogview4,"Next",true);
 			i++;}
 		else if(i==5){
-			standardDialog(R.string.tutorialdialogview5,"Next");
+			standardDialog(R.string.tutorialdialogview5,"Next",true);
 			i++;}
 		else if(i==6){
-			standardDialog(R.string.tutorialdialogview6,"Next");
+			standardDialog(R.string.tutorialdialogview6,"Next",true);
 			i++;}
 		else if(i==7){
-			standardDialog(R.string.tutorialdialogview7,"Finish");
+			standardDialog(R.string.tutorialdialogview7,"Finish",false);
 			i++;}
 
 	}
 	
-public void standardDialog(int dialog, String rightButton){
+public void standardDialog(int dialog, String rightButton,final Boolean createloop){
 	LayoutInflater li = LayoutInflater.from(context);
 	View tutorialView= li.inflate(R.layout.tutorialdialogview, null);
 	AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
@@ -61,7 +61,10 @@ public void standardDialog(int dialog, String rightButton){
 	.setPositiveButton(rightButton,
 	new DialogInterface.OnClickListener() {		
 			  public void onClick(DialogInterface dialog,int id) {
-				  	dialogHandler();
+				  if(createloop)	
+					  dialogHandler();
+				  else
+					  dialog.cancel();
 			  }
 
 			  })

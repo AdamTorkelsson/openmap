@@ -16,7 +16,6 @@ public class MarkerFactory {
 		
 	}
 	
-	public MarkerFactory(String stringTitle, Resources res  ){}
 
 public Bitmap createPic(String stringTitle, Resources res, String type){
 	int color;

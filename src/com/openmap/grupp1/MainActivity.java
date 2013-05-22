@@ -26,12 +26,10 @@ import android.view.Window;
 public class MainActivity extends Activity 
  {
 
-
-
  private MyMap myMap;
  public static final String PREFS_NAME = "MySettings";
  private CreateDialogs createDialog; 
-
+ 
  boolean mBound = false;
 
  @Override
@@ -46,8 +44,11 @@ public class MainActivity extends Activity
 	 setContentView(R.layout.activity_main);
 	 createDialog = new CreateDialogs();
 	 myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
-	 myMap.setMap("Hybrid");
-	 new TutorialPopupDialog(this);
+	 this.myMap = myMap;
+	 
+	 // myMap.setMap("Hybrid");
+	TutorialPopupDialog TPD = new TutorialPopupDialog(this);
+	TPD.dialogHandler();
  }	 
 	
 	 
@@ -55,7 +56,20 @@ public class MainActivity extends Activity
  @Override
  public void onResume(){
 	 super.onResume();
-	 SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
+	 
+	 SharedPreferences settings= getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
+	 //Är ett fel här , när createMarker sätter in sig som true ibland så cpar detta ut
+	/* if(settings.getBoolean("createMarker", false)){
+		 Log.d(TEXT_SERVICES_MANAGER_SERVICE, settings.getBoolean("createMarker", false));
+		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker");
+		myMap.addMarker();
+		SharedPreferences.Editor editor = settings.edit();
+		  editor.putBoolean("createMarker", false);
+		  editor.commit();
+		 //retrieve the string extra passed
+	 }*/
+	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker2");
+	 
 	 String mapSetting = settings.getString("map", null);
 	 myMap.setMap(mapSetting);
 	
@@ -69,9 +83,6 @@ public class MainActivity extends Activity
      ActionBar ab = getActionBar();
      ab.setDisplayShowTitleEnabled(false);
      ab.setDisplayShowHomeEnabled(false);
-     
-
-
      return true;
  
  }
