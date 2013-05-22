@@ -8,6 +8,7 @@ package com.google.android.gms;
 
 public final class R {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public static final class id {
 		public static final int terrain = 0x7f060003;
 		public static final int satellite = 0x7f060002;
@@ -69,6 +70,25 @@ public final class R {
 		public static final int zOrderOnTop = 0x7f01000d;
 	}
 	public static final class color {
+=======
+	public static final class attr {
+		public static final int cameraBearing = 0x7f010001;
+		public static final int cameraTargetLat = 0x7f010002;
+		public static final int cameraTargetLng = 0x7f010003;
+		public static final int cameraTilt = 0x7f010004;
+		public static final int cameraZoom = 0x7f010005;
+		public static final int mapType = 0x7f010000;
+		public static final int uiCompass = 0x7f010006;
+		public static final int uiRotateGestures = 0x7f010007;
+		public static final int uiScrollGestures = 0x7f010008;
+		public static final int uiTiltGestures = 0x7f010009;
+		public static final int uiZoomControls = 0x7f01000a;
+		public static final int uiZoomGestures = 0x7f01000b;
+		public static final int useViewLifecycle = 0x7f01000c;
+		public static final int zOrderOnTop = 0x7f01000d;
+	}
+	public static final class color {
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
 		public static final int common_action_bar_splitter = 0x7f040009;
 		public static final int common_signin_btn_dark_text_default = 0x7f040000;
 		public static final int common_signin_btn_dark_text_disabled = 0x7f040002;
@@ -137,6 +157,9 @@ public final class R {
 		public static final int location_client_ulr_inactive_age_under_13 = 0x7f060012;
 		public static final int location_client_ulr_inactive_age_unknown = 0x7f060013;
 		public static final int location_client_ulr_inactive_unknown_restriction = 0x7f060014;
+<<<<<<< HEAD
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
+=======
 >>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
 	}
 	public static final class styleable {

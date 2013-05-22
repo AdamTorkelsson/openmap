@@ -295,10 +295,13 @@ containing a value of this type.
         public static final int createeventactivityview=0x7f030003;
         public static final int dialog1=0x7f030004;
 <<<<<<< HEAD
+<<<<<<< HEAD
         public static final int dialog2=0x7f030005;
         public static final int markerinfo=0x7f030006;
         public static final int searchtagview=0x7f030007;
 =======
+=======
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
         public static final int markerinfo=0x7f030005;
         public static final int searchtagsactivityview=0x7f030006;
         public static final int searchview=0x7f030007;
@@ -428,6 +431,9 @@ containing a value of this type.
         public static final int tutorialdialogview5=0x7f060026;
         public static final int tutorialdialogview6=0x7f060027;
         public static final int tutorialdialogview7=0x7f060028;
+<<<<<<< HEAD
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
+=======
 >>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
     }
     public static final class style {

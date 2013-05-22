@@ -26,20 +26,27 @@ import android.view.Window;
 public class MainActivity extends Activity 
  {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
  private MyMap myMap; 
 
 =======
+=======
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
  private MyMap myMap;
  public static final String PREFS_NAME = "MySettings";
  private CreateDialogs createDialog; 
  private SearchView searchView;
+<<<<<<< HEAD
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
+=======
 >>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
  boolean mBound = false;
 
  @Override
  public void onCreate(Bundle savedInstanceState) {
 	 //create lite osäkert men alltid här
+<<<<<<< HEAD
 <<<<<<< HEAD
   super.onCreate(savedInstanceState);
   //The Action Bar replaces the title bar and provides an alternate location for an on-screen menu button on some devices. 
@@ -52,6 +59,8 @@ public class MainActivity extends Activity
   
   myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
 =======
+=======
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
 	 super.onCreate(savedInstanceState);
  
  //The Action Bar replaces the title bar and provides an alternate location for an on-screen menu button on some devices. 
@@ -65,6 +74,9 @@ public class MainActivity extends Activity
  }	 
 	
 	 
+<<<<<<< HEAD
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
+=======
 >>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
 
  @Override
@@ -87,7 +99,10 @@ public class MainActivity extends Activity
      
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
      
 >>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
      return true;
@@ -104,6 +119,7 @@ public class MainActivity extends Activity
           return true;
       case R.id.btn_settings:
 <<<<<<< HEAD
+<<<<<<< HEAD
     	/*  Intent intent =new Intent(this, settings.class);
     		startActivity(intent);*/
           return true;
@@ -111,6 +127,8 @@ public class MainActivity extends Activity
     	  Intent intent =new Intent(this, SearchTagActivity.class);
     		startActivity(intent);
 =======
+=======
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
     	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step3.5");
     	  Intent intent =new Intent(this, settings.class);
     	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step4");
@@ -118,11 +136,15 @@ public class MainActivity extends Activity
     	  this.onPause();
     	  return true;
     	  
+<<<<<<< HEAD
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
+=======
 >>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
       default:
           return super.onOptionsItemSelected(item);
      }
 	 
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -159,6 +181,8 @@ public class MainActivity extends Activity
 	 Log.d("testar", "före showresults");
 	 cSearchPopup.showResults(query + "*");
     return true;
+=======
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
 =======
 >>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
  }
