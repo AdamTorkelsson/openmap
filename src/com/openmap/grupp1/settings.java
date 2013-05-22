@@ -1,7 +1,9 @@
-/*package com.openmap.grupp1;
+package com.openmap.grupp1;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,11 +17,14 @@ import android.widget.Toast;
 public class settings extends Activity{
 	private Spinner spinner;
 	private Button btnSubmit;
+	private final String PREFS_NAME ="MySettings";
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
+	
 		//create lite osäkert men alltid här
-	  super.onCreate(savedInstanceState);
+	  
 	  //The Action Bar replaces the title bar and provides an alternate location for an on-screen menu button on some devices. 
 
 	  //Creating content view
@@ -27,6 +32,11 @@ public class settings extends Activity{
 	  
 
 	  addMapsSpinner();
+	  addListenerOnButton();
+	}
+	@Override
+	public void onResume(){
+		super.onResume();
 	}
 	  
 	  
@@ -40,26 +50,36 @@ public class settings extends Activity{
 	adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	// Apply the adapter to the spinner
 	spinner.setAdapter(adapter);
-	  
->>>>>>> 3f681e7290ce086383d268f5de010dab6fc99153
+	
 	}
 	
+	
 	 public void addListenerOnButton() {
-		 
-			spinner = (Spinner) findViewById(R.id.spinner);
+		
 			
+		 	
 			btnSubmit = (Button) findViewById(R.id.btnSubmit);
-		 
 			btnSubmit.setOnClickListener(new OnClickListener(){
 		 
 			  @Override
 			  public void onClick(View v) {
-		 
-				  Log.d("Test", "hej6");
+				  String text = spinner.getSelectedItem().toString();
+				  SharedPreferences settings = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
+				  SharedPreferences.Editor editor = settings.edit();
+				  editor.putString("map", text);
+				  editor.commit();
+				  
+				  endactivity();
+  
 			  }
 		 
 			});
+			
 		  }
+	 private void endactivity(){
+		 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step3");
+		 this.finish();
+	 }
 	
 	
-}*/
+}

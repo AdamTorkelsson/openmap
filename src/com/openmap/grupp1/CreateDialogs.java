@@ -41,8 +41,19 @@ public class CreateDialogs {
 		
 	}
 	
+<<<<<<< HEAD
 
 	
+=======
+	public boolean isShowingSearch() {
+		return searchPopup.isShowing();
+	}
+	
+	public void dismissSearch() {
+		searchPopup.dismiss();
+	}
+
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
 	public void confirmLocationPopup(Context context,final LatLng point,final Resources res, final GoogleMap myMap){
 		this.context = context;
 		//POPUP som fungerar
@@ -60,10 +71,9 @@ public class CreateDialogs {
 		   popup.setContentView(layout);
 		   popup.setWidth(popupWidth);
 		   popup.setHeight(popupHeight);
-		   Button buttonYES = (Button) layout.findViewById(R.id.buttonYes);
 		   
-		//   Button buttonYES = (Button) findViewById(R.id.buttonYes);
-			  Button buttonNO = (Button) layout.findViewById(R.id.buttonNo);
+		   Button buttonYES = (Button) layout.findViewById(R.id.buttonYes);
+		   Button buttonNO = (Button) layout.findViewById(R.id.buttonNo);
 			  
 			  buttonYES.setClickable(true);
 			  buttonNO.setClickable(true);
@@ -85,11 +95,7 @@ public class CreateDialogs {
 						popup.dismiss();
 						
 					}});
-				
-				
 		   popup.showAtLocation(layout, Gravity.BOTTOM, 0,  0);
-		   
-		  
 		   
 	}
 
@@ -99,42 +105,34 @@ public class CreateDialogs {
 	}
 
 private void setValues(String title, String description){
-	
-	
 	MarkerFactory markerFactory = new MarkerFactory();
 	Bitmap scr = markerFactory.createPic(title, res, "Location");
-	
 	Marker m = myMap.addMarker(new MarkerOptions().position(point).icon(BitmapDescriptorFactory.fromBitmap(scr)));
 	m.isVisible();
-
-	SharedPrefs SP = new SharedPrefs(context);
 	Log.d("Test", "Test" + title);
-	SP.setTitle(title);
-	SP.setDescription(description);
-	
-	
 }
 
 
 public void showInfo(Context context,final LatLng point,final Resources res, final GoogleMap myMap){
 
    //POPUP som fungerar
-   int popupWidth = 400;
-   int popupHeight = 400;
+  
+	int popupWidth = 300;
+	int popupHeight = 300;
 
    // Inflate the popup_layout.xml
 LinearLayout viewGroup = (LinearLayout) ((Activity) context).findViewById(R.layout.activity_main);
    LayoutInflater layoutInflater = (LayoutInflater) context
      .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-View layout = layoutInflater.inflate(R.layout.dialog2, viewGroup);
+View layout = layoutInflater.inflate(R.layout.showinfopopup, viewGroup);
 
-SharedPrefs SP = new SharedPrefs(context);
+
 TextView titleView = (TextView) layout.findViewById(R.id.titleView1);
 TextView descriptionView = (TextView) layout.findViewById(R.id.descriptionView1);
 
-String title = SP.getTitle();
-String description = SP.getDescription();
+String title = "title";
+String description = "Description";
 
 titleView.setText(title);
 descriptionView.setText(description);
@@ -145,13 +143,11 @@ descriptionView.setText(description);
    popup.setWidth(popupWidth);
    popup.setHeight(popupHeight);
    popup.setFocusable(true);
-
- 
+   popup.setTouchable(true);
+  
    // Some offset to align the popup a bit to the right, and a bit down, relative to button's position.
 
    Projection projection =	myMap.getProjection();
-
-   
    // Clear the default translucent background
  //  popup.setBackgroundDrawable(new BitmapDrawable());
  
@@ -160,48 +156,7 @@ descriptionView.setText(description);
 		   projection.toScreenLocation(point).x -popupWidth/2, 
 		   projection.toScreenLocation(point).y - popupHeight/2);
 }
-public void showsearchEvents(Context context){
-	final String TAG = "MyActivity";
-	  Log.d("Button", "take picture5");
-	LayoutInflater li = LayoutInflater.from(context);
-	View popupView = li.inflate(R.layout.choosegroups, null);
-	AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-	// set prompts.xml to alertdialog builder
-
-	this.point = point;
-	this.res = res;
-	this.myMap = myMap;
-
-		alertDialogBuilder.setView(popupView);
-	// set dialog message
-	alertDialogBuilder
-	.setCancelable(false)
-	.setPositiveButton("Hashtag",
-	new DialogInterface.OnClickListener() {
-				
-			  public void onClick(DialogInterface dialog,int id) {
-			    	}  })
-			    	
-			.setNegativeButton("Cancel",
-			  new DialogInterface.OnClickListener() {
-			    public void onClick(DialogInterface dialog,int id) {
-				dialog.cancel();
-				// marker.remove();
-			    }
-			  });
-	
-		// create alert dialog
-		AlertDialog alertDialog = alertDialogBuilder.create();
-		//cancelable(enable backkey)
-		
-		alertDialog.setCancelable(true);
-		// show it
-		Log.d(TAG, "hej6");
-		
-		alertDialog.show();
-		Log.d(TAG, "hej8");
-
-}/*
+/*
 //Undersök varför det måste vara final här + styr upp denna koden 
 public void insertInfo(Context context,final LatLng point,final Resources res, final GoogleMap myMap){
 		this.context = context;

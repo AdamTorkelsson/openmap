@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.ServiceConnection;
 import android.location.Location;
 import android.location.LocationListener;
@@ -24,15 +25,22 @@ import android.view.Window;
 
 public class MainActivity extends Activity 
  {
+<<<<<<< HEAD
 
  private MyMap myMap; 
 
+=======
+ private MyMap myMap;
+ public static final String PREFS_NAME = "MySettings";
+ private CreateDialogs createDialog; 
+ private SearchView searchView;
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
  boolean mBound = false;
 
  @Override
- protected void onCreate(Bundle savedInstanceState) {
- 
+ public void onCreate(Bundle savedInstanceState) {
 	 //create lite osäkert men alltid här
+<<<<<<< HEAD
   super.onCreate(savedInstanceState);
   //The Action Bar replaces the title bar and provides an alternate location for an on-screen menu button on some devices. 
   getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
@@ -43,7 +51,29 @@ public class MainActivity extends Activity
   
   
   myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
+=======
+	 super.onCreate(savedInstanceState);
+ 
+ //The Action Bar replaces the title bar and provides an alternate location for an on-screen menu button on some devices. 
+	 getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+	 //Creating content view
+	 setContentView(R.layout.activity_main);
+	 createDialog = new CreateDialogs();
+	 myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
+	 myMap.setMap("Hybrid");
+	 new TutorialPopupDialog(this);
+ }	 
+	
+	 
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
 
+ @Override
+ public void onResume(){
+	 super.onResume();
+	 SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
+	 String mapSetting = settings.getString("map", null);
+	 myMap.setMap(mapSetting);
+	
  }
 
  @Override
@@ -56,6 +86,10 @@ public class MainActivity extends Activity
      ab.setDisplayShowHomeEnabled(false);
      
 
+<<<<<<< HEAD
+=======
+     
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
      return true;
  
  }
@@ -64,29 +98,32 @@ public class MainActivity extends Activity
  @Override
  //lägg in denna i searchtagactivity när den är korrekt
  public boolean onOptionsItemSelected(MenuItem item) {
-          switch (item.getItemId()) {
-      case R.id.btn_select:
+   switch (item.getItemId()) {
+          case R.id.btn_select:
           Log.d("textservices", "bajs");
           return true;
       case R.id.btn_settings:
+<<<<<<< HEAD
     	/*  Intent intent =new Intent(this, settings.class);
     		startActivity(intent);*/
           return true;
       case R.id.btn_search:
     	  Intent intent =new Intent(this, SearchTagActivity.class);
     		startActivity(intent);
+=======
+    	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step3.5");
+    	  Intent intent =new Intent(this, settings.class);
+    	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step4");
+    	  startActivity(intent);
+    	  this.onPause();
+    	  return true;
+    	  
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
       default:
           return super.onOptionsItemSelected(item);
-          }}
-
- public void buttonCamera(View v){
-	 Intent intent =new Intent(this, PhotoTaker.class);
-		startActivity(intent);
-}
-
- public void buttonGroups(View v){
-	// myMap.createonemoreDialog();
+     }
 	 
+<<<<<<< HEAD
 }
 
  public void buttonEvent(View v){
@@ -122,6 +159,8 @@ public class MainActivity extends Activity
 	 Log.d("testar", "före showresults");
 	 cSearchPopup.showResults(query + "*");
     return true;
+=======
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
  }
 
  public boolean onClose() {

@@ -33,20 +33,13 @@
             android:onClick="buttonCamera"/>
         
     </LinearLayout>
-  
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="79dp"
-        android:layout_height="115dp" />
-
 
     <EditText
         android:id="@+id/txtDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.29"
-        android:hint="Description"
-       />
+        android:hint="Description"/>
 
    <LinearLayout
         android:layout_width="match_parent"

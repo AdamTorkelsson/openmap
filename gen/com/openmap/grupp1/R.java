@@ -197,6 +197,7 @@ containing a value of this type.
         public static final int markerpic=0x7f02001b;
     }
     public static final class id {
+<<<<<<< HEAD
         public static final int Mapview=0x7f060005;
         public static final int action_search=0x7f060023;
         public static final int btnSubmit=0x7f060022;
@@ -239,6 +240,53 @@ containing a value of this type.
         public static final int titleView1=0x7f060011;
         public static final int txtDescription=0x7f06000f;
         public static final int txtTitle=0x7f06000b;
+=======
+        public static final int Mapview=0x7f050005;
+        public static final int action_search=0x7f05002c;
+        public static final int btnSubmit=0x7f050022;
+        public static final int btn_back=0x7f050029;
+        public static final int btn_select=0x7f05002a;
+        public static final int btn_settings=0x7f05002b;
+        public static final int buttonCamera=0x7f05000d;
+        public static final int buttonCancel=0x7f050010;
+        public static final int buttonEvent=0x7f050013;
+        public static final int buttonGroups=0x7f050012;
+        public static final int buttonNo=0x7f050008;
+        public static final int buttonTag=0x7f050011;
+        public static final int buttonYes=0x7f050009;
+        public static final int descriptionView1=0x7f050025;
+        public static final int editText1=0x7f050006;
+        public static final int hybrid=0x7f050004;
+        public static final int imageView=0x7f05000e;
+        public static final int leftLayout=0x7f050016;
+        public static final int linearLayout1=0x7f050015;
+        public static final int linearLayout2=0x7f050018;
+        public static final int linearLayout5=0x7f050019;
+        public static final int list=0x7f050017;
+        public static final int map=0x7f050007;
+        public static final int mapTextView=0x7f050020;
+        public static final int markerCategory=0x7f050023;
+        public static final int markerInfo=0x7f050014;
+        public static final int markerTitle=0x7f05000b;
+        public static final int none=0x7f050000;
+        public static final int normal=0x7f050001;
+        public static final int progressBar1=0x7f050026;
+        public static final int relativeLayout1=0x7f05001d;
+        public static final int rightLayout=0x7f05001b;
+        public static final int satellite=0x7f050002;
+        public static final int spinner=0x7f050021;
+        public static final int stag=0x7f05001f;
+        public static final int tag=0x7f05001e;
+        public static final int tagLayout=0x7f05001c;
+        public static final int terrain=0x7f050003;
+        public static final int textView1=0x7f05000a;
+        public static final int textView2=0x7f050027;
+        public static final int textView6=0x7f05001a;
+        public static final int titleView1=0x7f050024;
+        public static final int tutorialdialog=0x7f050028;
+        public static final int txtDescription=0x7f05000f;
+        public static final int txtTitle=0x7f05000c;
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -246,12 +294,22 @@ containing a value of this type.
         public static final int confirmview=0x7f030002;
         public static final int createeventactivityview=0x7f030003;
         public static final int dialog1=0x7f030004;
+<<<<<<< HEAD
         public static final int dialog2=0x7f030005;
         public static final int markerinfo=0x7f030006;
         public static final int searchtagview=0x7f030007;
+=======
+        public static final int markerinfo=0x7f030005;
+        public static final int searchtagsactivityview=0x7f030006;
+        public static final int searchview=0x7f030007;
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
         public static final int searchviewaddedtags=0x7f030008;
         public static final int searchviewsearchresult=0x7f030009;
         public static final int settingsview=0x7f03000a;
+        public static final int showinfopopup=0x7f03000b;
+        public static final int showinfopopuptest=0x7f03000c;
+        public static final int splashscreen=0x7f03000d;
+        public static final int tutorialdialogview=0x7f03000e;
     }
     public static final class menu {
         public static final int createeventactivity_menu=0x7f0b0000;
@@ -338,6 +396,7 @@ containing a value of this type.
         Some InactiveReason names.  See more in OneUp/package/location/res/values/strings.xml
     
          */
+<<<<<<< HEAD
         public static final int location_client_ulr_inactive_age_under_13=0x7f070012;
         public static final int location_client_ulr_inactive_age_unknown=0x7f070013;
         public static final int location_client_ulr_inactive_unknown_restriction=0x7f070014;
@@ -351,6 +410,25 @@ containing a value of this type.
         public static final int search_label=0x7f070022;
         public static final int search_tags=0x7f070021;
         public static final int title_activity_camera=0x7f070019;
+=======
+        public static final int location_client_ulr_inactive_age_under_13=0x7f060012;
+        public static final int location_client_ulr_inactive_age_unknown=0x7f060013;
+        public static final int location_client_ulr_inactive_unknown_restriction=0x7f060014;
+        public static final int maps_prompt=0x7f060021;
+        public static final int menu=0x7f060020;
+        public static final int menu_back=0x7f06001f;
+        public static final int menu_search=0x7f06001d;
+        public static final int menu_select=0x7f06001e;
+        public static final int menu_settings=0x7f06001c;
+        public static final int title_activity_camera=0x7f060019;
+        public static final int tutorialdialogview1=0x7f060022;
+        public static final int tutorialdialogview2=0x7f060023;
+        public static final int tutorialdialogview3=0x7f060024;
+        public static final int tutorialdialogview4=0x7f060025;
+        public static final int tutorialdialogview5=0x7f060026;
+        public static final int tutorialdialogview6=0x7f060027;
+        public static final int tutorialdialogview7=0x7f060028;
+>>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
     }
     public static final class style {
         /** 

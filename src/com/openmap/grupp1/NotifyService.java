@@ -1,5 +1,9 @@
 package com.openmap.grupp1;
-
+/*
+ * Notifycenter
+ * Used the old version due to the need of high level of api for the new one
+ * Is called on from NearEventNotifier, 
+ */
 
 
 import android.R;
@@ -11,6 +15,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -25,6 +30,7 @@ NotifyServiceReceiver notifyServiceReceiver;
 private static final int MY_NOTIFICATION_ID=1;
 private NotificationManager notificationManager;
 private Notification myNotification;
+private final String PREFS_NAME = "My Notifications";
 
 @Override
 public void onCreate() {
@@ -33,9 +39,14 @@ notifyServiceReceiver = new NotifyServiceReceiver();
 super.onCreate();
 }
 
+@SuppressWarnings("deprecation")
 @Override
 public int onStartCommand(Intent intent, int flags, int startId) {
 // TODO Auto-generated method stub
+	SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
+	String notificationTitle = settings.getString("Notification", "Error in receiving");
+	String notificationText = settings.getString("Notificationdetails", "Error in receiving");
+
 
 IntentFilter intentFilter = new IntentFilter();
 intentFilter.addAction(ACTION);
@@ -44,18 +55,19 @@ registerReceiver(notifyServiceReceiver, intentFilter);
 // Send Notification
 notificationManager =
  (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+//CHANGE THIS PICTURE
 	myNotification = new Notification(R.drawable.arrow_up_float,
-  "Notification!",
+  "You are logged in at " + notificationTitle,
   System.currentTimeMillis());
 Context context = getApplicationContext();
-String notificationTitle = "Are you at";
-String notificationText = "Description";
-//Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(myBlog));
+
 
 Intent myIntent =new Intent(this, MainActivity.class);
 intent.setAction(Intent.ACTION_MAIN);
 intent.addCategory(Intent.CATEGORY_LAUNCHER);
 
+myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP 
+		| Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
 PendingIntent pendingIntent
   = PendingIntent.getActivity(getBaseContext(),
