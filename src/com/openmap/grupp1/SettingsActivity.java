@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class settings extends Activity{
+public class SettingsActivity extends Activity{
 	private Spinner spinner;
 	private Button btnSubmit;
 	private final String PREFS_NAME ="MySettings";
