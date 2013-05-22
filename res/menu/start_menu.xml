@@ -11,9 +11,9 @@ android:icon="@android:drawable/ic_menu_preferences"
 android:showAsAction="ifRoom|withText"
 android:title="@string/menu_settings"/>
 
-<item android:id="@+id/action_search"
-android:title="@string/menu_search"
+<item android:id="@+id/btn_search"
 android:icon="@android:drawable/ic_menu_search"
-android:showAsAction="always"
-android:actionViewClass="android.widget.SearchView" />
+android:showAsAction="ifRoom|withText"
+android:title="@string/menu_search"/>
+
 </menu>

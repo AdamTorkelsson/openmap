@@ -13,6 +13,10 @@
 	<string name="menu_select">Select</string>
 	<string name="menu_back">Back</string>
 	<string name="menu">Menu</string>
+	<string name="search_tags">Search tags</string>
+	<string name="search_label">Tags</string>
+	<string name="menu_add">Add</string>
+	
 	
 	<string name="maps_prompt">Choose type of map</string> 
 	<string-array name="maps_array">

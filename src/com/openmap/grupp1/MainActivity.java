@@ -20,17 +20,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.SearchView;
-import android.widget.Toast;
 
 
-public class MainActivity extends Activity implements SearchView.OnQueryTextListener,
-SearchView.OnCloseListener
+public class MainActivity extends Activity 
  {
 
- private CreateDialogs createDialog;
  private MyMap myMap; 
- private SearchView searchView;
 
  boolean mBound = false;
 
@@ -46,7 +41,6 @@ SearchView.OnCloseListener
   //Creating content view
   setContentView(R.layout.activity_main);
   
-  createDialog = new CreateDialogs();
   
   myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
 
@@ -61,17 +55,14 @@ SearchView.OnCloseListener
      ab.setDisplayShowTitleEnabled(false);
      ab.setDisplayShowHomeEnabled(false);
      
-     searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-    //ta beslut här searchView.setIconifiedByDefault(false);
-     searchView.setOnQueryTextListener(this);
-     searchView.setOnCloseListener(this);
-     
+
      return true;
  
  }
 
  
  @Override
+ //lägg in denna i searchtagactivity när den är korrekt
  public boolean onOptionsItemSelected(MenuItem item) {
           switch (item.getItemId()) {
       case R.id.btn_select:
@@ -81,6 +72,9 @@ SearchView.OnCloseListener
     	/*  Intent intent =new Intent(this, settings.class);
     		startActivity(intent);*/
           return true;
+      case R.id.btn_search:
+    	  Intent intent =new Intent(this, SearchTagActivity.class);
+    		startActivity(intent);
       default:
           return super.onOptionsItemSelected(item);
           }}
@@ -112,31 +106,32 @@ SearchView.OnCloseListener
 
 
 
- public boolean onQueryTextChange(String newText) {
-	 if (!createDialog.isShowingSearch())
-		 createDialog.createSearchPopup(this);
+ /*public boolean onQueryTextChange(String newText) {
+	 if (!cSearchPopup.isShowingPopup())
+		 cSearchPopup.createPopup();
 	 else;
-	 // showResults(newText + "*");
-    return false;
+	 cSearchPopup.showResults(newText + "*");
+	//kanske bra searchView.clearFocus();
+    return true;
  }
 
  public boolean onQueryTextSubmit(String query) {
-	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnQueryStep1");
-	 if (!createDialog.isShowingSearch())
-		 createDialog.createSearchPopup(this);
+	 if (!cSearchPopup.isShowingPopup())
+		 cSearchPopup.createPopup();
 	 else;
-   // showResults(query + "*");
+	 Log.d("testar", "före showresults");
+	 cSearchPopup.showResults(query + "*");
     return true;
  }
 
  public boolean onClose() {
-	createDialog.dismissSearch();
+	cSearchPopup.dismissPopup();
     return false;
- }
+ }*/
 
 }
 
 
-/*BRA för framtiden , krävs för att starta aktivitet på annat ställe , dock måste den göras som en aktivietet med denna som hierarisk
+/*BRA för framtiden , krävs för att starta aktivitet på annat ställe , dock måste den göras som en aktivitet med denna som hierarisk
  * Intent intent =new Intent(this, SharedPrefs.class);
 	startActivity(intent);*/
