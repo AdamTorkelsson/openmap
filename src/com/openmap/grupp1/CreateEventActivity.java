@@ -81,15 +81,12 @@ public class CreateEventActivity extends Activity{
 		 	this.finish();
 		 	
 	 }
-	 private final String PREFS_NAME = "MySettings";
+
 	
 	 private void startSearchActivity() {
 		startActivity(new Intent(this, AddTagActivity.class));	
 		//MOVE THIS TO THE NEXT ACTIVITY(CHECKS SO YOU DONT PRESS CANCEL
-		SharedPreferences latlng = this.getSharedPreferences(PREFS_NAME,this.MODE_PRIVATE);
-		SharedPreferences.Editor editor = latlng.edit();
-		editor.putBoolean("createMarker", true);
-		editor.commit();
+
 		
 		this.finish();
 		}
