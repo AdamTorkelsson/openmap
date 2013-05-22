@@ -15,7 +15,8 @@ public class NearEventNotifier {
 	private Location event;
 	private GoogleMap myMap;
 	private Context context;
-	private final String PREFS_NAME = "My Notifications";
+	private final String PREFS_NAME = "My Settings";
+	
 	
 	public NearEventNotifier(Location lastKnownLocation,GoogleMap myMap,Context context ){
 		this.lastKnownLocation = lastKnownLocation;
@@ -25,15 +26,16 @@ public class NearEventNotifier {
 	}	
 	
 	public void checkEvent(Location loc){
-	
+		
 		SharedPreferences notificationmessenger = context.getSharedPreferences(PREFS_NAME,context.MODE_PRIVATE);
+		Boolean wantsNotifications = notificationmessenger.getBoolean("notifications", true);
 		SharedPreferences.Editor editor = notificationmessenger.edit();
 		editor.putString("Notification", "(title)");
 		editor.putString("Notificationdetails", "(details)");
 		editor.commit();
 		//Lägg till: någon check i för max ett event och för att inte checka in på samma igen
 		
-		if(loc.distanceTo(lastKnownLocation) < 30 && loc.distanceTo(event) < 15 ){
+		if(loc.distanceTo(lastKnownLocation) < 30 && loc.distanceTo(event) < 15 && wantsNotifications){
 			Log.d("CheckEvent","eventhandlerduärinärheten");	
 			// Send info to database that you have been near and add one person at location/event	
 			Intent intent = new Intent(context,com.openmap.grupp1.NotifyService.class);

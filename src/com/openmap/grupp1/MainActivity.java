@@ -84,8 +84,11 @@ public class MainActivity extends Activity
           case R.id.btn_select:
           return true;
       case R.id.btn_settings:
+    	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step3");
     	  Intent settingsIntent =new Intent(this, SettingsActivity.class);
+    	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step4");
     	  startActivity(settingsIntent);
+    	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step5");
     	  this.onPause();
           return true;
       case R.id.btn_search:

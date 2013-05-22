@@ -42,11 +42,11 @@
 		    android:textAppearance="?android:attr/textAppearanceLarge"/>
 
 	    <ToggleButton
-	        android:id="@+id/toggleButton1"
+	        android:id="@+id/btnNotifications"
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="0.5"
-        	android:checked="true"/>
+        	/>
 		    
 	</LinearLayout>
 
@@ -55,9 +55,15 @@
   	    android:layout_height="wrap_content"
   	    android:gravity="right"
   	    android:orientation="horizontal" >
-
+		
   	    <Button
-  	        android:id="@+id/btnSubmit"
+  	        android:id="@+id/btnCancel"
+  	        android:layout_width="wrap_content"
+  	        android:layout_height="wrap_content"
+  	        android:text="Cancel" />
+  	    
+  	    <Button
+  	        android:id="@+id/btnApply"
   	        android:layout_width="wrap_content"
   	        android:layout_height="wrap_content"
   	        android:text="Apply" />

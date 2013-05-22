@@ -88,7 +88,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		  //starting at your location
 		//  onLocationChanged(((LocationManager) locmanager).getLastKnownLocation(provider));
 		  // request updates every 100 second, Change to every 5 minutes
-		  lm.requestLocationUpdates(provider, 100000, 1, this);
+		  lm.requestLocationUpdates(provider, 1000, 1, this);
 		 // 
 		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "ListenerStep2");
 	 }
