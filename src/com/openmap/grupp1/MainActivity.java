@@ -84,7 +84,7 @@ public class MainActivity extends Activity
           case R.id.btn_select:
           return true;
       case R.id.btn_settings:
-    	  Intent settingsIntent =new Intent(this, settings.class);
+    	  Intent settingsIntent =new Intent(this, SettingsActivity.class);
     	  startActivity(settingsIntent);
     	  this.onPause();
           return true;
