@@ -40,17 +40,13 @@ public class CreateDialogs {
 	public CreateDialogs(){
 		
 	}
-	
 
-
-
-
-	public void confirmLocationPopup(Context context,final LatLng point,final Resources res, final GoogleMap myMap){
+	public void confirmLocationPopup(Context context,final Marker m, final GoogleMap myMap){
 		this.context = context;
 		//POPUP som fungerar
 		   int popupWidth = 600;
 		   int popupHeight = 100;
-
+		  
 		   // Inflate the popup_layout.xml
 		LinearLayout viewGroup = (LinearLayout) ((Activity) context).findViewById(R.layout.activity_main);
 		   LayoutInflater layoutInflater = (LayoutInflater) context
@@ -76,6 +72,7 @@ public class CreateDialogs {
 							public void onClick(View arg0) {
 								popup.dismiss();
 								startNewActivity();
+								 m.remove();
 							}
 							
 						});
@@ -84,6 +81,7 @@ public class CreateDialogs {
 					@Override
 					public void onClick(View arg0) {
 						popup.dismiss();
+						 m.remove();
 						
 					}});
 		   popup.showAtLocation(layout, Gravity.BOTTOM, 0,  0);

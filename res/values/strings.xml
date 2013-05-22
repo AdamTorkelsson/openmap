@@ -35,4 +35,9 @@
 	<string name="tutorialdialogview5">The star button in the top menu can filter which groups locations you want to see and if you only want to se event or locations.</string>
 	<string name="tutorialdialogview6">If you want to see more information about a pinpoint you can press it and a popup will appear with all available information.</string>
 	<string name="tutorialdialogview7">Now you are ready to begin! Remember, this app is made great by you and your contribution!</string>
+	<string name="setintitle">You have to set a title to continue</string>
+	<string name="yes">Yes</string>
+	<string name="next">Next</string>
+	<string name="finish">Finish</string>
+	<string name="ok">Ok</string>
 </resources>

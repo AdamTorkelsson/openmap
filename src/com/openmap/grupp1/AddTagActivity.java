@@ -5,7 +5,9 @@ import java.util.ArrayList;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -37,6 +39,7 @@ SearchView.OnCloseListener{
     private ArrayList<String> addedTags = new ArrayList<String>();
     private ArrayAdapter<String> addedTagsAdapter;
     private ArrayList<String> newTags = new ArrayList<String>();
+    private Context mCtx = this;
 
 	
 	 public void onCreate(Bundle savedInstanceState){
@@ -123,6 +126,11 @@ SearchView.OnCloseListener{
 				public void onClick(View arg0) {
 					//skicka till databasen
 					//lägg till newTags till databasen om det behövs
+					final String PREFS_NAME = "MySettings";
+					SharedPreferences latlng = mCtx.getSharedPreferences(PREFS_NAME,mCtx.MODE_PRIVATE);
+					SharedPreferences.Editor editor = latlng.edit();
+					editor.putBoolean("createMarker", true);
+					editor.commit();
 					stopThisActivity();
 					}
 

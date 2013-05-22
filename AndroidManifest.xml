@@ -39,7 +39,7 @@
             android:name="com.openmap.grupp1.MainActivity"
             android:label="@string/app_name" >
         </activity>
-        <activity android:name="settings"></activity>
+        <activity android:name="SettingsActivity"></activity>
         <activity android:name=".SearchTagActivity"
             android:windowSoftInputMode="stateVisible">
             <intent-filter>

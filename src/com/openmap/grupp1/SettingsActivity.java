@@ -13,10 +13,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
-public class settings extends Activity{
+public class SettingsActivity extends Activity{
 	private Spinner spinner;
-	private Button btnSubmit;
+	private Button btnApply;
+	private Button btnCancel;
+	private ToggleButton btnNotifications;
 	private final String PREFS_NAME ="MySettings";
 
 	@Override
@@ -29,11 +32,16 @@ public class settings extends Activity{
 
 	  //Creating content view
 	  setContentView(R.layout.settingsview);
-	  
-
+	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "ogge1");
 	  addMapsSpinner();
-	  addListenerOnButton();
+	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "ogge2");
+	  addNotificationsToggle();
+	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "ogge3");
+	  addListenerOnApplyButton();
+	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "ogge4");
+	  addListenerOnCancelButton();
 	}
+	
 	@Override
 	public void onResume(){
 		super.onResume();
@@ -53,20 +61,23 @@ public class settings extends Activity{
 	
 	}
 	
+	public void addNotificationsToggle(){
+		btnNotifications = (ToggleButton) findViewById(R.id.btnNotifications);
+	}
 	
-	 public void addListenerOnButton() {
-		
-			
+	
+	 public void addListenerOnApplyButton() {
 		 	
-			btnSubmit = (Button) findViewById(R.id.btnSubmit);
-			btnSubmit.setOnClickListener(new OnClickListener(){
+			btnApply = (Button) findViewById(R.id.btnApply);
+			btnApply.setOnClickListener(new OnClickListener(){
 		 
 			  @Override
 			  public void onClick(View v) {
-				  String text = spinner.getSelectedItem().toString();
+				  String maptype = spinner.getSelectedItem().toString();
 				  SharedPreferences settings = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
 				  SharedPreferences.Editor editor = settings.edit();
-				  editor.putString("map", text);
+				  editor.putString("map", maptype);
+				  editor.putBoolean("notifications", btnNotifications.isChecked());
 				  editor.commit();
 				  
 				  endactivity();
@@ -75,7 +86,22 @@ public class settings extends Activity{
 		 
 			});
 			
-		  }
+	 }
+	 
+	 public void addListenerOnCancelButton() {
+		 	
+			btnCancel = (Button) findViewById(R.id.btnCancel);
+			btnCancel.setOnClickListener(new OnClickListener(){
+		 
+			  @Override
+			  public void onClick(View v) {
+				  endactivity();
+
+			  }
+		 
+			});
+			
+	 }
 	 private void endactivity(){
 		 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step3");
 		 this.finish();
