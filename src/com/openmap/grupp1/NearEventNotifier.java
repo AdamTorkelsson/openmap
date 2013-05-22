@@ -33,19 +33,8 @@ public class NearEventNotifier {
 		
 	}	
 	
-<<<<<<< HEAD
-	public void checkEvent(Location loc){
-		
-		SharedPreferences notificationmessenger = context.getSharedPreferences(PREFS_NAME,context.MODE_PRIVATE);
-		Boolean wantsNotifications = notificationmessenger.getBoolean("notifications", true);
-		SharedPreferences.Editor editor = notificationmessenger.edit();
-		editor.putString("Notification", "(title)");
-		editor.putString("Notificationdetails", "(details)");
-		editor.commit();
-		//Lägg till: någon check i för max ett event och för att inte checka in på samma igen
-		
-		if(loc.distanceTo(lastKnownLocation) < 30 && loc.distanceTo(event) < 15 && wantsNotifications){
-=======
+	
+
 	public void checklocationandevent(Location loc){
 		
 		
@@ -106,25 +95,30 @@ public class NearEventNotifier {
 		/*event.setLatitude(latitude);
 		event.setLongitude(longitude);*/
 		
+		SharedPreferences notificationmessenger = context.getSharedPreferences(PREFS_NAME,context.MODE_PRIVATE);
+		Boolean wantsNotifications = notificationmessenger.getBoolean("notifications", true);
+		
+		
+		
 		if(loc.distanceTo(lastKnownLocation) < 30 
 				&& loc.distanceTo(event) < 15 
 				&& checkedIn.latitude == 0 
 				&& checkedIn.longitude == 0
 				&& presentevent.getLongitude() == event.getLongitude()
-				&& presentevent.getLatitude() == event.getLatitude()){
+				&& presentevent.getLatitude() == event.getLatitude()
+				//Add wantsNotifications
+				){
 			/*
 			 * Lägg till en Shared som gör så att onResume 
 			 * fixar en popup med fråga om man är där 
 			 * så man kan checka in
 			 */
 			
-			SharedPreferences notificationmessenger = context.getSharedPreferences(PREFS_NAME,context.MODE_PRIVATE);
 			SharedPreferences.Editor editor = notificationmessenger.edit();
 			editor.putString("Notification", "Are you at" + "Title?");
 			editor.putString("Notificationdetails", "(details)");
 			editor.commit();
 			checkedIn = new LatLng(event.getLatitude(),event.getLongitude());
->>>>>>> a3034f2bae470ad5b51c45ec99a18926760e3120
 			Log.d("CheckEvent","eventhandlerduärinärheten");	
 			// Send info to database that you have been near and add one person at location/event	
 			Intent intent = new Intent(context,com.openmap.grupp1.NotifyService.class);
