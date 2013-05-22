@@ -11,9 +11,12 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.CameraPosition.Builder;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.plus.model.people.Person.Image;
+
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.PendingIntent;
@@ -22,6 +25,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -47,6 +51,8 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	 private NearEventNotifier neEvNotifier;
 	 private CameraPosition cameraposition;
 	 private LoadMarkers loadmarkers;
+	 private LatLng onMapLongPoint;
+
 	 
 	
 	 public MyMap(FragmentManager myFragmentManager, Object locmanager,Context context,Resources res) {
@@ -57,12 +63,13 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		 this.res = res;
 		  MapFragment myMapFragment  = (MapFragment)myFragmentManager.findFragmentById(R.id.map);
 		  myMap = myMapFragment.getMap();
-		  loadmarkers = new LoadMarkers(myMap);
+		  loadmarkers = new LoadMarkers(myMap,res);
 
 		  //enables all click
 		  myMap.setOnMapClickListener(this);
 		  myMap.setOnMapLongClickListener(this);
 		  myMap.setOnMarkerClickListener(this);
+		  
 		  
 		  myMap.setMyLocationEnabled(true);
 
@@ -105,16 +112,19 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 
 	 @Override
 	 public void onMapLongClick(LatLng point) {
-		 this.point = point;
-
+		 //Error if they are exactly the same point, but due to the many decimals this is very unusual
+		 	Log.d("Hejhej", "LatLnguniqe" + point.toString());
+		 	this.onMapLongPoint = point;
 			CameraUpdate update = CameraUpdateFactory.newLatLngZoom(point,14 );
 			myMap.animateCamera(update);
-			Marker m = myMap.addMarker(new MarkerOptions().position(point).title("This location?"));
-			m.showInfoWindow();
+			Marker marker = myMap.addMarker(new MarkerOptions().position(point).title("This location?"));
+			
+			marker.showInfoWindow();
 		// create interactive dialog window
-		 	neEvNotifier.NearEventNotifier(point);
+			//varför ligger neEv här?
+		 	
 		 	Log.d(TEXT_SERVICES_MANAGER_SERVICE, "hej1");
-		 	insertinfo.confirmLocationPopup(context, point, res, myMap); 
+		 	insertinfo.confirmLocationPopup(context, marker, myMap); 
 		 	Log.d(TEXT_SERVICES_MANAGER_SERVICE, "hej2");
 		 	}
 
@@ -155,12 +165,10 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	
 	@Override
 	public void onLocationChanged(Location arg0) {
-		
-		
 		MYLOCATION = new LatLng(arg0.getLatitude(), arg0.getLongitude());
-		  //move camera to your positon
-		  myMap.addMarker(new MarkerOptions().position(MYLOCATION).title("Your Position2"));
-		  neEvNotifier.checkEvent(arg0);
+		 //move camera to your positon
+		myMap.addMarker(new MarkerOptions().position(MYLOCATION).title("Your Position2"));
+		neEvNotifier.checklocationandevent(arg0);
 		
 	}
 	
@@ -190,7 +198,39 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	}
 
 
+	public void addMarker() {
+		// ADD title and type here in markerfactory to create different markers
+		MarkerFactory markerFactory = new MarkerFactory();
+		Bitmap scr = markerFactory.createPic("title", res, "Location");
+		Marker m = myMap.addMarker(new MarkerOptions().position(onMapLongPoint).icon(BitmapDescriptorFactory.fromBitmap(scr)));
+		m.isVisible();
+		/*myMap.addMarker(new MarkerOptions()
+		.position(onMapLongPoint)*/
+		
+		}
+	
+	/*.icon(BitmapDescriptorFactory
+		.fromBitmap(markerfactory.createPic("Title",res,"Event"))*/
 
+	
+	public void addMarker(LatLng location , String Title) {
+		
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	public void addMarker(LatLng location , String Title, String Description) {
+		
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void addMarker(LatLng location , String Title ,String Description , Image img) {
+		
+		// TODO Auto-generated method stub
+		
+	}
 
 
 

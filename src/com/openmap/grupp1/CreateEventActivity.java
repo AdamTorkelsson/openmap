@@ -16,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -32,7 +33,9 @@ public class CreateEventActivity extends Activity{
 		 Button buttonTag	  = (Button) findViewById(R.id.buttonTag);
 		 Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
 		 Button buttonCamera = (Button) findViewById(R.id.buttonCamera);
-		  
+		 final EditText txtTitle = (EditText) findViewById(R.id.txtTitle);
+		 final EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
+			
 		
 		  buttonTag.setClickable(true);
 		  buttonCancel.setClickable(true);
@@ -42,8 +45,15 @@ public class CreateEventActivity extends Activity{
 
 				@Override
 				public void onClick(View arg0) {
-					startSearchActivity();
+					String temp1 = txtTitle.getText().toString();
+					String temp2 = txtDescription.getText().toString();
+					if(temp1.length() < 2){
+						createhelppopup();
 					}
+					else{ 
+						startSearchActivity();}
+
+				}
 
 				});
 			
@@ -60,14 +70,26 @@ public class CreateEventActivity extends Activity{
 				}});	
 	 }
 
- 
+	 private void createhelppopup() {
+			TutorialPopupDialog TPD = new TutorialPopupDialog(this);
+			TPD.standardDialog(R.string.setintitle,"Ok",false);
+			
+		}
 
 	 
 	 private void stopThisActivity(){
 		 	this.finish();
+		 	
 	 }
+	 private final String PREFS_NAME = "MySettings";
+	
 	 private void startSearchActivity() {
-		// Intent intent =new Intent(this, SearchTagsActivity.class);
+		//MOVE THIS TO THE NEXT ACTIVITY(CHECKS SO YOU DONT PRESS CANCEL
+		SharedPreferences latlng = this.getSharedPreferences(PREFS_NAME,this.MODE_PRIVATE);
+		SharedPreferences.Editor editor = latlng.edit();
+		editor.putBoolean("createMarker", true);
+		editor.commit();
+		
 		startActivity(new Intent(this, SearchTagsActivity.class));	
 		this.finish();
 		}

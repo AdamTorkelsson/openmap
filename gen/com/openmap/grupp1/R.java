@@ -341,6 +341,7 @@ containing a value of this type.
         public static final int common_signin_button_text_long=0x7f07000e;
         public static final int dummy_button=0x7f07001a;
         public static final int dummy_content=0x7f07001b;
+        public static final int finish=0x7f07002f;
         public static final int hello_world=0x7f070017;
         /**  Location client code resources (prefix with location_client) 
 
@@ -360,8 +361,11 @@ containing a value of this type.
         public static final int menu_search=0x7f07001d;
         public static final int menu_select=0x7f07001e;
         public static final int menu_settings=0x7f07001c;
+        public static final int next=0x7f07002e;
+        public static final int ok=0x7f070030;
         public static final int search_label=0x7f070022;
         public static final int search_tags=0x7f070021;
+        public static final int setintitle=0x7f07002c;
         public static final int title_activity_camera=0x7f070019;
         public static final int tutorialdialogview1=0x7f070025;
         public static final int tutorialdialogview2=0x7f070026;
@@ -370,6 +374,7 @@ containing a value of this type.
         public static final int tutorialdialogview5=0x7f070029;
         public static final int tutorialdialogview6=0x7f07002a;
         public static final int tutorialdialogview7=0x7f07002b;
+        public static final int yes=0x7f07002d;
     }
     public static final class style {
         /** 
