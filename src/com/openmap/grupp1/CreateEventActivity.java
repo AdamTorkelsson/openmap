@@ -68,7 +68,7 @@ public class CreateEventActivity extends Activity{
 	 }
 	 private void startSearchActivity() {
 		// Intent intent =new Intent(this, SearchTagsActivity.class);
-		startActivity(new Intent(this, SearchTagsActivity.class));	
+		startActivity(new Intent(this, AddTagActivity.class));	
 		this.finish();
 		}
 	 private void startCameraActivity(){

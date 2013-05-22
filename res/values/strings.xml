@@ -16,6 +16,9 @@
 	<string name="search_tags">Search tags</string>
 	<string name="search_label">Tags</string>
 	<string name="menu_add">Add</string>
+	<string name="menu_filter">Filter</string>
+	<string name="cancel">Cancel</string>
+	<string name="tag">Tag</string>
 	
 	
 	<string name="maps_prompt">Choose type of map</string> 

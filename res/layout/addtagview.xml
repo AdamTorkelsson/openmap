@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <RelativeLayout android:id="@+id/relativeLayout1"
+android:layout_width="fill_parent" android:layout_height="fill_parent"
+
+xmlns:android="http://schemas.android.com/apk/res/android">
+
+<LinearLayout android:layout_height="wrap_content" android:layout_alignParentBottom="true"
+    android:background="#555555"
+    android:id="@+id/linearLayout2" android:layout_width="fill_parent">
+            <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cancel" />
+
+        <Button
+            android:id="@+id/buttonTag"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tag" />
+</LinearLayout>
+
+<LinearLayout android:layout_height="fill_parent" android:layout_width="fill_parent" android:layout_above="@+id/linearLayout2">
+    <LinearLayout android:layout_width="0dp" android:id="@+id/linearLayout1"
+        android:layout_height="match_parent" android:layout_weight="30"
+        android:orientation="vertical">
+                <LinearLayout android:id="@+id/linearLayout5"
+            android:layout_height="wrap_content" android:orientation="horizontal"
+            android:paddingBottom="10dp" android:layout_gravity="right"
+            android:layout_width="match_parent">
+            <TextView android:text="Searched tags" android:textStyle="bold"
+                android:layout_height="wrap_content" android:id="@+id/textView6"
+                android:textSize="20sp" android:layout_width="wrap_content"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+        
+        <LinearLayout android:id="@+id/leftLayout"
+            android:layout_width="match_parent" android:orientation="vertical"
+            android:layout_height="wrap_content" android:paddingBottom="50dp">
+            <ListView android:layout_width="fill_parent" android:id="@+id/addtag_list_searched"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:id="@+id/linearLayout2"
+        android:layout_height="match_parent" android:orientation="vertical"
+        android:layout_weight="30" android:layout_width="0dp">
+        <LinearLayout android:id="@+id/linearLayout5"
+            android:layout_height="wrap_content" android:orientation="horizontal"
+            android:paddingBottom="10dp" android:layout_gravity="right"
+            android:layout_width="match_parent">
+            <TextView android:text="Added tags" android:textStyle="bold"
+                android:layout_height="wrap_content" android:id="@+id/textView6"
+                android:textSize="20sp" android:layout_width="wrap_content"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+        <LinearLayout android:id="@+id/rightLayout"
+            android:layout_width="match_parent" android:orientation="vertical"
+            android:layout_height="wrap_content" android:paddingBottom="50dp">
+            <ListView android:layout_width="fill_parent" android:id="@+id/addtag_list_added"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+
+
+
+  </RelativeLayout>

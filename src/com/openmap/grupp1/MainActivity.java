@@ -65,7 +65,7 @@ public class MainActivity extends Activity
  public boolean onCreateOptionsMenu(Menu menu) {
      super.onCreateOptionsMenu(menu);
      MenuInflater inflater = getMenuInflater();
-     inflater.inflate(R.menu.start_menu, menu);
+     inflater.inflate(R.menu.startmenu, menu);
      ActionBar ab = getActionBar();
      ab.setDisplayShowTitleEnabled(false);
      ab.setDisplayShowHomeEnabled(false);

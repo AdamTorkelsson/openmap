@@ -27,9 +27,11 @@ SearchView.OnCloseListener {
     private ListView listViewAdded;
     private SearchView searchView;
     private TagsDbAdapter mDbHelper;
-  //  private TextView tagText;
     private ArrayList<String> addedTags = new ArrayList<String>();
-    private ArrayAdapter<String> arrayAdapter;
+    private ArrayAdapter<String> addedTagsAdapter;
+
+
+
 
  
     @Override
@@ -60,6 +62,45 @@ SearchView.OnCloseListener {
         mDbHelper.createTag("Fotboll");
         mDbHelper.createTag("Hockey-VM");
         
+    	addedTagsAdapter =      
+      	         new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, addedTags);
+      	         listViewAdded.setAdapter(addedTagsAdapter);
+        // Define the on-click listener for listViewSearched
+        listViewSearched.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Get the cursor, positioned to the corresponding row in the result set
+                Cursor cursor = (Cursor) listViewSearched.getItemAtPosition(position);
+                
+                // Get the tag from this row in the database.
+                String tag = cursor.getString(cursor.getColumnIndexOrThrow("tag"));
+
+                //Check if the Layout already exists
+                LinearLayout tagLayout = (LinearLayout)findViewById(R.id.tagLayout);
+                if(tagLayout == null){
+                    //Inflate the Tag Information View 
+                    LinearLayout rightLayout = (LinearLayout)findViewById(R.id.rightLayout);
+                    View tagInfo = getLayoutInflater().inflate(R.layout.searchviewaddedtags, rightLayout, false);
+                    rightLayout.addView(tagInfo);
+                }
+
+                //Adds the tag to addedListview to the right if it doesn't exist
+                if(!addedTags.contains(tag)) {
+                	addedTags.add(tag);
+                	addedTagsAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+        
+        // Define the on-click listener for listViewAdded
+        listViewAdded.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            	String removeItem = (String) listViewAdded.getItemAtPosition(position);
+            	addedTags.remove(removeItem);
+            	addedTagsAdapter.notifyDataSetChanged();
+            }
+        });
+        
+        
         
  
     }
@@ -67,7 +108,7 @@ SearchView.OnCloseListener {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.searchtagactivity_menu, menu);
+        inflater.inflate(R.menu.searchtagmenu, menu);
         ActionBar ab = getActionBar();
         ab.setDisplayShowTitleEnabled(false);
         ab.setDisplayShowHomeEnabled(false);
@@ -77,6 +118,7 @@ SearchView.OnCloseListener {
         searchView.setOnQueryTextListener(this);
         searchView.setOnCloseListener(this);
         searchView.setQueryHint("Search tags");
+        searchView.requestFocus();
 
 
         return true;
@@ -84,9 +126,10 @@ SearchView.OnCloseListener {
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-    case R.id.btn_back_search:
-    	//lägg in en back funktion här
-        return true;
+    case R.id.btn_add_search:
+    	//lägg in filter funktion här, kalla på loadMarkers på ett eller annat sätt
+    	//skicka iväg addedTags här, arraylist
+    	return true;
     default:
         return super.onOptionsItemSelected(item);
         }}
@@ -100,7 +143,7 @@ SearchView.OnCloseListener {
     }
  
     public boolean onQueryTextChange(String newText) {
-        showResults(newText + "*");
+    	showResults(newText + "*");
         return false;
     }
  
@@ -135,46 +178,7 @@ SearchView.OnCloseListener {
             // Create a simple cursor adapter for the definitions and apply them to the ListView
             SimpleCursorAdapter searchResult = new SimpleCursorAdapter(this,R.layout.searchviewsearchresult, cursor, from, to, 0);
             listViewSearched.setAdapter(searchResult);
-            Log.d("testar", "showresults3.7");
-        	arrayAdapter =      
-       	         new ArrayAdapter<String>(this,R.layout.searchviewaddedtags, addedTags);
-       	         listViewAdded.setAdapter(arrayAdapter);
 
- 
-            // Define the on-click listener for the list items
-            listViewSearched.setOnItemClickListener(new OnItemClickListener() {
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    // Get the cursor, positioned to the corresponding row in the result set
-                    Cursor cursor = (Cursor) listViewSearched.getItemAtPosition(position);
-                    Log.d("testar", "showresults3.8");
-
- 
-                    // Get the tag from this row in the database.
-                    String tag = cursor.getString(cursor.getColumnIndexOrThrow("tag"));
-
-                
-                    //Check if the Layout already exists
-                    LinearLayout tagLayout = (LinearLayout)findViewById(R.id.tagLayout);
-                    if(tagLayout == null){
-                        //Inflate the Tag Information View 
-                        LinearLayout rightLayout = (LinearLayout)findViewById(R.id.rightLayout);
-                        View tagInfo = getLayoutInflater().inflate(R.layout.searchviewaddedtags, rightLayout, false);
-                        rightLayout.addView(tagInfo);
-                    }
- 
-                    //Get References to the TextViews
-                    //tagText = (TextView) findViewById(R.id.tag);
-
-                
-                    // Update the parent class's TextView
-                    //tagText.setText(tag);
-                	addedTags.add(tag);
-                	arrayAdapter.notifyDataSetChanged();
-
-            
-                    searchView.setQuery("",true);
-                }
-            });
         }
     }
  

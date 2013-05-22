@@ -53,8 +53,11 @@
         <service android:name=".NotifyService"/>
         <activity android:name="CreateEventActivity"
             android:windowSoftInputMode="adjustResize"></activity>
-        <activity android:name="SearchTagsActivity"
-            android:windowSoftInputMode="adjustResize"></activity> 
+        <activity android:name="AddTagActivity"
+            android:windowSoftInputMode="adjustResize">
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity> 
 	<activity
             android:name=".SplashScreenActivity"
             android:noHistory="true"
