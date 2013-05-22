@@ -41,22 +41,10 @@ public class CreateDialogs {
 		
 	}
 	
-<<<<<<< HEAD
 
-	
-=======
-	public boolean isShowingSearch() {
-		return searchPopup.isShowing();
-	}
-	
-	public void dismissSearch() {
-		searchPopup.dismiss();
-	}
 
-<<<<<<< HEAD
->>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
-=======
->>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
+
+
 	public void confirmLocationPopup(Context context,final LatLng point,final Resources res, final GoogleMap myMap){
 		this.context = context;
 		//POPUP som fungerar
