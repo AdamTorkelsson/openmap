@@ -198,11 +198,11 @@ containing a value of this type.
     }
     public static final class id {
         public static final int Mapview=0x7f050005;
-        public static final int action_search=0x7f05002a;
-        public static final int btnSubmit=0x7f050025;
-        public static final int btn_back=0x7f050027;
-        public static final int btn_select=0x7f050028;
-        public static final int btn_settings=0x7f050029;
+        public static final int action_search=0x7f05002c;
+        public static final int btnSubmit=0x7f050027;
+        public static final int btn_back=0x7f050029;
+        public static final int btn_select=0x7f05002a;
+        public static final int btn_settings=0x7f05002b;
         public static final int buttonCamera=0x7f05000d;
         public static final int buttonCancel=0x7f050010;
         public static final int buttonEvent=0x7f050013;
@@ -226,10 +226,11 @@ containing a value of this type.
         public static final int markerTitle=0x7f05000b;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
-        public static final int progressBar1=0x7f050026;
+        public static final int progressBar1=0x7f050028;
         public static final int relativeLayout1=0x7f050020;
         public static final int rightLayout=0x7f05001e;
         public static final int satellite=0x7f050002;
+        public static final int setNotificationsTextView=0x7f050025;
         public static final int spinner=0x7f050024;
         public static final int stag=0x7f050022;
         public static final int tag=0x7f050021;
@@ -238,6 +239,7 @@ containing a value of this type.
         public static final int textView1=0x7f05000a;
         public static final int textView6=0x7f05001d;
         public static final int titleView1=0x7f050015;
+        public static final int toggleButton1=0x7f050026;
         public static final int txtDescription=0x7f05000f;
         public static final int txtTitle=0x7f05000c;
     }
