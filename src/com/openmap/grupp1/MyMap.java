@@ -78,7 +78,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		 					provider).getLatitude(),((LocationManager) 
 		 			locmanager).getLastKnownLocation(provider).getLongitude()),14 );
 		 	myMap.animateCamera(update);
-		 	Location mylocation = new Location("temp");
+		 
 	
 		  
 		  //Makes a NearEventNotifier thats check if you have been near an event more than 10 seconds
@@ -125,13 +125,13 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	 public void setMap(String map){
 		 
    	  	 
-		 if (map.equals("Default"))
-			 myMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-		 if (map.equals("Kukkarta"))
+		 if (map.equals("Hybrid"))
 			 myMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-		 if (map.equals("Fittkarta"))
+		 if (map.equals("Satellite"))
+			 myMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+		 if (map.equals("Normal"))
 			 myMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-		 if(map.equals("Runkkarta"))	 
+		 if(map.equals("Terrain"))	 
 			 myMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 	 }
 	 

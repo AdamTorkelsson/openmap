@@ -7,32 +7,62 @@
  
 	<LinearLayout android:layout_width="match_parent" 
 	    android:layout_height="wrap_content" 
-	    android:orientation="vertical">
-	    
-	<TextView
-	    android:id="@+id/mapTextView"
-	    android:layout_width="match_parent"
-	    android:layout_height="59dp"
-	    android:text="Choose the map type you would like to use:"
-	 />
-  
-  	<Spinner
-  	    android:id="@+id/spinner"
-  	    android:layout_width="match_parent"
-  	    android:layout_height="64dp"
-  	    android:entries="@array/maps_array"
-  	    android:prompt="@string/maps_prompt" />
+	    android:orientation="horizontal">
+
+		<TextView
+		    android:id="@+id/mapTextView"
+		    android:layout_width="0dp"
+		    android:layout_height="40dp"
+		    android:layout_weight="0.5"
+		    android:text="Map type  "
+		    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+		<Spinner
+		    android:id="@+id/spinner"
+		    style="@style/AppBaseTheme"
+		    android:layout_width="0dp"
+		    android:layout_height="40dp"
+		    android:layout_weight="0.5"
+		    android:entries="@array/maps_array"
+		    android:prompt="@string/maps_prompt" />
  
   	</LinearLayout>
- 
-	<LinearLayout
+  	
+	<LinearLayout 
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:orientation="horizontal" >
-  
-  	<Button android:id="@+id/btnSubmit" 
-  	    android:layout_width="wrap_content" 
-  	    android:layout_height="wrap_content" 
-  	    android:text="Apply" /> 
-  </LinearLayout>
+	    android:orientation="horizontal">
+	    
+	    <TextView 
+	        android:id="@+id/setNotificationsTextView"
+		    android:layout_width="0dp"
+		    android:layout_height="40dp"
+		    android:layout_weight="0.5"
+		    android:text="Notifications  "  
+		    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+	    <ToggleButton
+	        android:id="@+id/toggleButton1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.5"
+        	android:checked="true"/>
+		    
+	</LinearLayout>
+
+  	<LinearLayout
+  	    android:layout_width="match_parent"
+  	    android:layout_height="wrap_content"
+  	    android:gravity="right"
+  	    android:orientation="horizontal" >
+
+  	    <Button
+  	        android:id="@+id/btnSubmit"
+  	        android:layout_width="wrap_content"
+  	        android:layout_height="wrap_content"
+  	        android:text="Apply" />
+  	</LinearLayout>
+
+  	
+
   </LinearLayout>
