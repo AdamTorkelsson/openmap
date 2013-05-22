@@ -25,42 +25,19 @@ import android.view.Window;
 
 public class MainActivity extends Activity 
  {
-<<<<<<< HEAD
-<<<<<<< HEAD
 
- private MyMap myMap; 
 
-=======
-=======
->>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
+
  private MyMap myMap;
  public static final String PREFS_NAME = "MySettings";
  private CreateDialogs createDialog; 
- private SearchView searchView;
-<<<<<<< HEAD
->>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
-=======
->>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
+
  boolean mBound = false;
 
  @Override
  public void onCreate(Bundle savedInstanceState) {
 	 //create lite osäkert men alltid här
-<<<<<<< HEAD
-<<<<<<< HEAD
-  super.onCreate(savedInstanceState);
-  //The Action Bar replaces the title bar and provides an alternate location for an on-screen menu button on some devices. 
-  getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-  
-  
-  //Creating content view
-  setContentView(R.layout.activity_main);
-  
-  
-  myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
-=======
-=======
->>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
+
 	 super.onCreate(savedInstanceState);
  
  //The Action Bar replaces the title bar and provides an alternate location for an on-screen menu button on some devices. 
@@ -74,10 +51,6 @@ public class MainActivity extends Activity
  }	 
 	
 	 
-<<<<<<< HEAD
->>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
-=======
->>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
 
  @Override
  public void onResume(){
@@ -98,13 +71,7 @@ public class MainActivity extends Activity
      ab.setDisplayShowHomeEnabled(false);
      
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
-     
->>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
+
      return true;
  
  }
@@ -115,37 +82,24 @@ public class MainActivity extends Activity
  public boolean onOptionsItemSelected(MenuItem item) {
    switch (item.getItemId()) {
           case R.id.btn_select:
-          Log.d("textservices", "bajs");
           return true;
       case R.id.btn_settings:
-<<<<<<< HEAD
-<<<<<<< HEAD
-    	/*  Intent intent =new Intent(this, settings.class);
-    		startActivity(intent);*/
+    	  Intent settingsIntent =new Intent(this, settings.class);
+    	  startActivity(settingsIntent);
+    	  this.onPause();
           return true;
       case R.id.btn_search:
-    	  Intent intent =new Intent(this, SearchTagActivity.class);
-    		startActivity(intent);
-=======
-=======
->>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
-    	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step3.5");
-    	  Intent intent =new Intent(this, settings.class);
-    	  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step4");
-    	  startActivity(intent);
-    	  this.onPause();
+    	  Intent searchIntent =new Intent(this, SearchTagActivity.class);
+    		startActivity(searchIntent);
+
     	  return true;
     	  
-<<<<<<< HEAD
->>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
-=======
->>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
+
       default:
           return super.onOptionsItemSelected(item);
      }
 	 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 }
 
  public void buttonEvent(View v){
@@ -157,10 +111,7 @@ public class MainActivity extends Activity
  
  
  
- @Override
- protected void onResume() {
-  // TODO Auto-generated method stub
-  super.onResume(); }
+
 
 
 
