@@ -66,8 +66,8 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		 this.res = res;
 		  MapFragment myMapFragment  = (MapFragment)myFragmentManager.findFragmentById(R.id.map);
 		  myMap = myMapFragment.getMap();
-		  loadmarkers = new LoadMarkers(myMap,res);
-	
+		 loadmarkers = new LoadMarkers(myMap,res);
+		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär");
 		  //enables all click
 		  myMap.setOnMapClickListener(this);
 		  myMap.setOnMapLongClickListener(this);
@@ -76,10 +76,9 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		  //
 		  myMap.setMyLocationEnabled(true);
 		  myMap.setOnCameraChangeListener(this);
-
 		  
 		  LocationManager lm = (LocationManager) locmanager;
-
+		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär2");
 		  criteria = new Criteria();
 		  provider = lm.getBestProvider(criteria, false);
 	
@@ -88,13 +87,11 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		 					provider).getLatitude(),((LocationManager) 
 		 			locmanager).getLastKnownLocation(provider).getLongitude()),14 );
 		 	myMap.animateCamera(update);
-		 
+		 	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär3");
 		  //Makes a NearEventNotifier thats check if you have been near an event more than 10 seconds
-		  neEvNotifier = new NearEventNotifier(((LocationManager) locmanager).
-				  getLastKnownLocation(provider), myMap,context);
-
-		  //starting at your location
-		//  onLocationChanged(((LocationManager) locmanager).getLastKnownLocation(provider));
+	/*	neEvNotifier = new NearEventNotifier(((LocationManager) locmanager).
+				  getLastKnownLocation(provider), myMap,context);*/
+		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär4");
 		  // request updates every 100 second, Change to every 5 minutes
 		  lm.requestLocationUpdates(provider, 1000, 1, this);
 		 
@@ -113,8 +110,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 
 	 @Override
 	 public void onMapClick(LatLng point) {
-		 i = 0;
-		 testNrOfPoints(point);
+		
 		 	 
 	 }
 	
@@ -129,8 +125,6 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 			
 			marker.showInfoWindow();
 			// create interactive dialog window
-			//varför ligger neEv här?
-		 	
 		 	Log.d(TEXT_SERVICES_MANAGER_SERVICE, "hej1");
 		 	insertinfo.confirmLocationPopup(context, marker, myMap); 
 		 	Log.d(TEXT_SERVICES_MANAGER_SERVICE, "hej2");
@@ -165,7 +159,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 
 	@Override
 	public void onCameraChange(CameraPosition arg0) {
-		loadmarkers.addMarkersInCameraView(arg0);
+		//loadmarkers.addMarkersInCameraView(arg0);
 		
 	}
 	
@@ -174,7 +168,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		MYLOCATION = new LatLng(arg0.getLatitude(), arg0.getLongitude());
 		 //move camera to your positon
 		//myMap.addMarker(new MarkerOptions().position(MYLOCATION).title("Your Position2"));
-		neEvNotifier.checklocationandevent(arg0);
+	//	neEvNotifier.checklocationandevent(arg0);
 		
 	}
 	

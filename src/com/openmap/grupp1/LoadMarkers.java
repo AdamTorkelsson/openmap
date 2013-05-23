@@ -81,7 +81,7 @@ public class LoadMarkers {
 		/*	
 		 * 
 		 */
-		getInCameraMarkers(arg0);
+//		getInCameraMarkers(arg0);
 		
 	
 		}
