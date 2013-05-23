@@ -191,7 +191,55 @@ public void insertInfo(Context context,final LatLng point,final Resources res, f
 			alertDialog.show();
 		
 		 // */
+
+public void checkInDialog(Context context, final GoogleMap myMap) {
+		
+		this.context = context;
+		//POPUP som fungerar
+		   int popupWidth = 600;
+		   int popupHeight = 300;
+		  
+		   // Inflate the popup_layout.xml
+		LinearLayout viewGroup = (LinearLayout) ((Activity) context).findViewById(R.layout.activity_main);
+		   LayoutInflater layoutInflater = (LayoutInflater) context
+		     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		  
+		   View layout = layoutInflater.inflate(R.layout.confirmview, viewGroup);
+		   // Creating the PopupWindow
+		   final PopupWindow popup = new PopupWindow(context);
+		   popup.setContentView(layout);
+		   popup.setWidth(popupWidth);
+		   popup.setHeight(popupHeight);
+		   
+		   Button buttonYES = (Button) layout.findViewById(R.id.buttonYes);
+		   Button buttonNO = (Button) layout.findViewById(R.id.buttonNo);
 			  
+			  buttonYES.setClickable(true);
+			  buttonNO.setClickable(true);
+				 
+				buttonYES.setOnClickListener(
+						new OnClickListener(){
+
+							@Override
+							public void onClick(View arg0) {
+								popup.dismiss();
+								//*Connect to database and add the person to the event
+							}
+							
+						});
+				
+				buttonNO.setOnClickListener(new OnClickListener(){
+					@Override
+					public void onClick(View arg0) {
+						popup.dismiss();
+						
+					}});
+		   popup.showAtLocation(layout, Gravity.BOTTOM, 0,  0);
+		   
+	}
+	
 }
+			  
+
 
 
