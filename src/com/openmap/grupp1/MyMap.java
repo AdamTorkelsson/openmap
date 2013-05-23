@@ -33,7 +33,10 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 
-
+/*
+ * add button to get directions
+ * 
+ */
 
 public class MyMap extends Activity 
 implements OnMapClickListener, OnMapLongClickListener, 
@@ -52,7 +55,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	 private CameraPosition cameraposition;
 	 private LoadMarkers loadmarkers;
 	 private LatLng onMapLongPoint;
-
+	 private CreateDialogs insertinfo = new CreateDialogs();
 	 
 	
 	 public MyMap(FragmentManager myFragmentManager, Object locmanager,Context context,Resources res) {
@@ -63,20 +66,19 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		 this.res = res;
 		  MapFragment myMapFragment  = (MapFragment)myFragmentManager.findFragmentById(R.id.map);
 		  myMap = myMapFragment.getMap();
-		  loadmarkers = new LoadMarkers(myMap,res);
-
+		 loadmarkers = new LoadMarkers(myMap,res);
+		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär");
 		  //enables all click
 		  myMap.setOnMapClickListener(this);
 		  myMap.setOnMapLongClickListener(this);
-		  myMap.setOnMarkerClickListener(this);
+		  myMap.setOnMarkerClickListener(this); 
 		  
-		  
+		  //
 		  myMap.setMyLocationEnabled(true);
-
 		  myMap.setOnCameraChangeListener(this);
-
+		  
 		  LocationManager lm = (LocationManager) locmanager;
-
+		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär2");
 		  criteria = new Criteria();
 		  provider = lm.getBestProvider(criteria, false);
 	
@@ -85,44 +87,52 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		 					provider).getLatitude(),((LocationManager) 
 		 			locmanager).getLastKnownLocation(provider).getLongitude()),14 );
 		 	myMap.animateCamera(update);
-		 
-	
-		  
+		 	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär3");
 		  //Makes a NearEventNotifier thats check if you have been near an event more than 10 seconds
+<<<<<<< HEAD
 		  //neEvNotifier = new NearEventNotifier(((LocationManager) locmanager).
 			//	  getLastKnownLocation(provider), myMap,context);
 
 		  //starting at your location
 		//  onLocationChanged(((LocationManager) locmanager).getLastKnownLocation(provider));
+=======
+	/*	neEvNotifier = new NearEventNotifier(((LocationManager) locmanager).
+				  getLastKnownLocation(provider), myMap,context);*/
+		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär4");
+>>>>>>> db0aeefa9fc21cfb9ccdf5429c806d4a7d71a4b5
 		  // request updates every 100 second, Change to every 5 minutes
 		  lm.requestLocationUpdates(provider, 1000, 1, this);
-		 // 
+		 
 		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "ListenerStep2");
+		  
 	 }
-
+	 int i = 0;
+	 private void testNrOfPoints(LatLng point){
+		 i++;
+		 myMap.addMarker(new MarkerOptions().position(point));
+		 if(i ==200){
+		 				}
+		 else {
+			 testNrOfPoints(new LatLng(point.latitude - 0.5, point.longitude));}
+	 }
 
 	 @Override
 	 public void onMapClick(LatLng point) {
-		 
-		 
+		
+		 	 
 	 }
 	
-	 CreateDialogs insertinfo = new CreateDialogs();
-	 
-
 	 @Override
 	 public void onMapLongClick(LatLng point) {
 		 //Error if they are exactly the same point, but due to the many decimals this is very unusual
 		 	Log.d("Hejhej", "LatLnguniqe" + point.toString());
 		 	this.onMapLongPoint = point;
-			CameraUpdate update = CameraUpdateFactory.newLatLngZoom(point,14 );
+			CameraUpdate update = CameraUpdateFactory.newLatLngZoom(point,myMap.getMaxZoomLevel()-2);/*ADD MAX ZOOM HERE INSTEAD, GOOGLE*/ 
 			myMap.animateCamera(update);
 			Marker marker = myMap.addMarker(new MarkerOptions().position(point).title("This location?"));
 			
 			marker.showInfoWindow();
-		// create interactive dialog window
-			//varför ligger neEv här?
-		 	
+			// create interactive dialog window
 		 	Log.d(TEXT_SERVICES_MANAGER_SERVICE, "hej1");
 		 	insertinfo.confirmLocationPopup(context, marker, myMap); 
 		 	Log.d(TEXT_SERVICES_MANAGER_SERVICE, "hej2");
@@ -133,15 +143,13 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	 }
 	 
 	 public void setMap(String map){
-		 
-   	  	 
 		 if (map.equals("Hybrid"))
 			 myMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-		 if (map.equals("Satellite"))
+		 else if (map.equals("Satellite"))
 			 myMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-		 if (map.equals("Normal"))
+		 else if (map.equals("Normal"))
 			 myMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-		 if(map.equals("Terrain"))	 
+		 else if(map.equals("Terrain"))	 
 			 myMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 	 }
 	 
@@ -159,7 +167,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 
 	@Override
 	public void onCameraChange(CameraPosition arg0) {
-		loadmarkers.addMarkersInCameraView(arg0);
+		//loadmarkers.addMarkersInCameraView(arg0);
 		
 	}
 	
@@ -167,8 +175,13 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	public void onLocationChanged(Location arg0) {
 		MYLOCATION = new LatLng(arg0.getLatitude(), arg0.getLongitude());
 		 //move camera to your positon
+<<<<<<< HEAD
 		myMap.addMarker(new MarkerOptions().position(MYLOCATION).title("Your Position2"));
 		//neEvNotifier.checklocationandevent(arg0);
+=======
+		//myMap.addMarker(new MarkerOptions().position(MYLOCATION).title("Your Position2"));
+	//	neEvNotifier.checklocationandevent(arg0);
+>>>>>>> db0aeefa9fc21cfb9ccdf5429c806d4a7d71a4b5
 		
 	}
 	

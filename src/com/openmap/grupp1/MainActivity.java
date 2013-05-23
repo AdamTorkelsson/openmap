@@ -46,7 +46,11 @@ public class MainActivity extends Activity
 	 myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
 	 this.myMap = myMap;
 	 
+<<<<<<< HEAD
 	myMap.setMap("Hybrid");
+=======
+	 myMap.setMap("Hybrid");
+>>>>>>> db0aeefa9fc21cfb9ccdf5429c806d4a7d71a4b5
 	TutorialPopupDialog TPD = new TutorialPopupDialog(this);
 	TPD.dialogHandler();
  }	 
@@ -77,12 +81,14 @@ public class MainActivity extends Activity
 
  @Override
  public boolean onCreateOptionsMenu(Menu menu) {
+	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker3");
      super.onCreateOptionsMenu(menu);
      MenuInflater inflater = getMenuInflater();
      inflater.inflate(R.menu.startmenu, menu);
      ActionBar ab = getActionBar();
      ab.setDisplayShowTitleEnabled(false);
      ab.setDisplayShowHomeEnabled(false);
+     Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker4");
      return true;
  
  }
@@ -115,20 +121,6 @@ public class MainActivity extends Activity
 	 
 
 }
-
- public void buttonEvent(View v){
-	/* Intent settingsintent =new Intent(this, settings.class);
-		startActivity(settingsintent);*/
-}
- 
- 
- 
- 
- 
-
-
-
-
 
  /*public boolean onQueryTextChange(String newText) {
 	 if (!cSearchPopup.isShowingPopup())

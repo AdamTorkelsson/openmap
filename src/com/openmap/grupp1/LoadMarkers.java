@@ -58,6 +58,8 @@ public class LoadMarkers {
 		 * And then
 		 * myMap.addMarker(new MarkerOptions().position(______).title("focusedposition"));
 			and put all markerslocation in position
+	
+			
 		 */
 		for(LatLng ll : inviewmarkers){
 			/*
@@ -79,7 +81,7 @@ public class LoadMarkers {
 		/*	
 		 * 
 		 */
-		getInCameraMarkers(arg0);
+//		getInCameraMarkers(arg0);
 		
 	
 		}
