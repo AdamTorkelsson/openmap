@@ -33,7 +33,10 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 
-
+/*
+ * add button to get directions
+ * 
+ */
 
 public class MyMap extends Activity 
 implements OnMapClickListener, OnMapLongClickListener, 
@@ -51,32 +54,30 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	 private NearEventNotifier neEvNotifier;
 	 private CameraPosition cameraposition;
 	 private LoadMarkers loadmarkers;
-	 private LatLng onMapLongPoint;
-
+	 private LatLng onMapLongPoint; // holds the location temporary for the user while creating the event
+	 private CreateDialogs insertinfo = new CreateDialogs();
 	 
 	
-	 public MyMap(FragmentManager myFragmentManager, Object locmanager,Context context,Resources res) {
+	 public MyMap(Context context) {
 		//Map creator
-		 
-		 this.locmanager = (LocationManager) locmanager;
+		 this.locmanager =  (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 		 this.context = context;
-		 this.res = res;
-		  MapFragment myMapFragment  = (MapFragment)myFragmentManager.findFragmentById(R.id.map);
-		  myMap = myMapFragment.getMap();
-		  loadmarkers = new LoadMarkers(myMap,res);
-
+		 this.res = context.getResources();
+		 
+		  myMap = ((MapFragment) ((Activity) context).getFragmentManager().findFragmentById(R.id.map)).getMap();
+		 loadmarkers = new LoadMarkers(myMap,res);
+		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär");
 		  //enables all click
 		  myMap.setOnMapClickListener(this);
 		  myMap.setOnMapLongClickListener(this);
-		  myMap.setOnMarkerClickListener(this);
+		  myMap.setOnMarkerClickListener(this); 
 		  
-		  
+		  //
 		  myMap.setMyLocationEnabled(true);
-
 		  myMap.setOnCameraChangeListener(this);
-
+		  
 		  LocationManager lm = (LocationManager) locmanager;
-
+		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär2");
 		  criteria = new Criteria();
 		  provider = lm.getBestProvider(criteria, false);
 	
@@ -85,56 +86,56 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		 					provider).getLatitude(),((LocationManager) 
 		 			locmanager).getLastKnownLocation(provider).getLongitude()),14 );
 		 	myMap.animateCamera(update);
-		 
-	
-		  
+		 	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär3");
 		  //Makes a NearEventNotifier thats check if you have been near an event more than 10 seconds
-		  neEvNotifier = new NearEventNotifier(((LocationManager) locmanager).
-				  getLastKnownLocation(provider), myMap,context);
 
 		  //starting at your location
 		//  onLocationChanged(((LocationManager) locmanager).getLastKnownLocation(provider));
-		  // request updates every 100 second, Change to every 5 minutes
-		  lm.requestLocationUpdates(provider, 1000, 1, this);
-		 // 
-		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "ListenerStep2");
-	 }
 
+	/*	neEvNotifier = new NearEventNotifier(((LocationManager) locmanager).
+				  getLastKnownLocation(provider), myMap,context);*/
+		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär4");
+		  // request updates every 100 second, Change to every 5 minutes
+		  lm.requestLocationUpdates(provider, 10000, 1, this);
+		 
+		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "ListenerStep2");
+		  
+	 }
+	 int i = 0;
+	 
+	 private void testNrOfPoints(LatLng point){
+		 i++;
+		 myMap.addMarker(new MarkerOptions().position(point));
+		 if(i ==200){
+		 				}
+		 else {
+			 testNrOfPoints(new LatLng(point.latitude - 0.5, point.longitude));}
+	 }
 
 	 @Override
 	 public void onMapClick(LatLng point) {
-		 
-		 
+		//checkIn(point);// For testing
+		 //testNrOfPoints(point) // For testing
+		 	 
+	 }
+	 public void checkIn(LatLng point){
+		 insertinfo.checkInDialog(context, myMap);
 	 }
 	
-	 CreateDialogs insertinfo = new CreateDialogs();
-	 
-
 	 @Override
 	 public void onMapLongClick(LatLng point) {
 		 //Error if they are exactly the same point, but due to the many decimals this is very unusual
 		 	Log.d("Hejhej", "LatLnguniqe" + point.toString());
 		 	this.onMapLongPoint = point;
-			CameraUpdate update = CameraUpdateFactory.newLatLngZoom(point,14 );
+			CameraUpdate update = CameraUpdateFactory.newLatLngZoom(point,myMap.getMaxZoomLevel()-3); 
 			myMap.animateCamera(update);
 			Marker marker = myMap.addMarker(new MarkerOptions().position(point).title("This location?"));
-			
 			marker.showInfoWindow();
-		// create interactive dialog window
-			//varför ligger neEv här?
-		 	
-		 	Log.d(TEXT_SERVICES_MANAGER_SERVICE, "hej1");
+			// create interactive dialog window
 		 	insertinfo.confirmLocationPopup(context, marker, myMap); 
-		 	Log.d(TEXT_SERVICES_MANAGER_SERVICE, "hej2");
 		 	}
 
-	 public void createonemoreDialog(){
-		
-	 }
-	 
 	 public void setMap(String map){
-		 
-   	  	 
 		 if (map.equals("Hybrid"))
 			 myMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 		 if (map.equals("Satellite"))
@@ -149,9 +150,17 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	@Override
 	public boolean onMarkerClick(Marker marker) {
 		//Flytta möjligtvis(lägg i konstrukorn, själva object skapandet)
+		/*
+		 * Database Get Title and description
+		 * 
+		 * Tip!
+		 * can get the location identifier by using marker.getPosition();
+		 * change it to LatLng by " new LatLng(marker.getPosition().latitude,...)
+		 */
+
 		CreateDialogs showinfo = new CreateDialogs();
 	 	Log.d(TEXT_SERVICES_MANAGER_SERVICE, "hej1");
-	 	showinfo.showInfo(context, marker.getPosition(), res, myMap);
+	 	showinfo.showInfo(context, marker.getPosition(), res, myMap,"Title test","Description test" );
 	 	marker.setVisible(true);
 		return true; 
 	}
@@ -159,7 +168,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 
 	@Override
 	public void onCameraChange(CameraPosition arg0) {
-		loadmarkers.addMarkersInCameraView(arg0);
+		//loadmarkers.addMarkersInCameraView(arg0);
 		
 	}
 	
@@ -167,8 +176,10 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	public void onLocationChanged(Location arg0) {
 		MYLOCATION = new LatLng(arg0.getLatitude(), arg0.getLongitude());
 		 //move camera to your positon
-		myMap.addMarker(new MarkerOptions().position(MYLOCATION).title("Your Position2"));
-		neEvNotifier.checklocationandevent(arg0);
+
+
+		//myMap.addMarker(new MarkerOptions().position(MYLOCATION).title("Your Position2"));
+	//	neEvNotifier.checklocationandevent(arg0);
 		
 	}
 	
@@ -197,7 +208,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		
 	}
 
-
+/*
 	public void addMarker() {
 		// ADD title and type here in markerfactory to create different markers
 		MarkerFactory markerFactory = new MarkerFactory();
@@ -205,9 +216,9 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		Marker m = myMap.addMarker(new MarkerOptions().position(onMapLongPoint).icon(BitmapDescriptorFactory.fromBitmap(scr)));
 		m.isVisible();
 		/*myMap.addMarker(new MarkerOptions()
-		.position(onMapLongPoint)*/
+		.position(onMapLongPoint)
 		
-		}
+		}*/
 	
 	/*.icon(BitmapDescriptorFactory
 		.fromBitmap(markerfactory.createPic("Title",res,"Event"))*/
@@ -218,16 +229,15 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		// TODO Auto-generated method stub
 		
 	}
-
 	
-	public void addMarker(LatLng location , String Title, String Description) {
-		
-		// TODO Auto-generated method stub
-		
+	public void addMarker(String Title) {
+		MarkerFactory markerFactory = new MarkerFactory();
+		Bitmap scr = markerFactory.createPic(Title, res, "Location");
+		Marker m = myMap.addMarker(new MarkerOptions().position(onMapLongPoint).icon(BitmapDescriptorFactory.fromBitmap(scr)));
+		m.isVisible();
 	}
 	
 	public void addMarker(LatLng location , String Title ,String Description , Image img) {
-		
 		// TODO Auto-generated method stub
 		
 	}

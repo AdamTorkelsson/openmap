@@ -30,7 +30,7 @@ NotifyServiceReceiver notifyServiceReceiver;
 private static final int MY_NOTIFICATION_ID=1;
 private NotificationManager notificationManager;
 private Notification myNotification;
-private final String PREFS_NAME = "My Settings";
+private final String PREFS_NAME = "MySharedPrefs";
 
 @Override
 public void onCreate() {

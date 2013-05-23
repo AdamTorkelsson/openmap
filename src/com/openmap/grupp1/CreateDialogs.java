@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -102,7 +103,11 @@ private void setValues(String title, String description){
 }
 
 
-public void showInfo(Context context,final LatLng point,final Resources res, final GoogleMap myMap){
+public void showInfo(Context context,final LatLng point,
+		final Resources res, 
+		final GoogleMap myMap,
+		String title,
+		String description ){
 
    //POPUP som fungerar
   
@@ -119,9 +124,6 @@ View layout = layoutInflater.inflate(R.layout.showinfopopup, viewGroup);
 
 TextView titleView = (TextView) layout.findViewById(R.id.titleView1);
 TextView descriptionView = (TextView) layout.findViewById(R.id.descriptionView1);
-
-String title = "title";
-String description = "Description";
 
 titleView.setText(title);
 descriptionView.setText(description);
@@ -145,53 +147,59 @@ descriptionView.setText(description);
 		   projection.toScreenLocation(point).x -popupWidth/2, 
 		   projection.toScreenLocation(point).y - popupHeight/2);
 }
-/*
-//Undersök varför det måste vara final här + styr upp denna koden 
-public void insertInfo(Context context,final LatLng point,final Resources res, final GoogleMap myMap){
-		this.context = context;
-		this.point = point;
-		this.res = res;
-		this.myMap = myMap;
-		
-	final String TAG = "MyActivity";
-		  Log.d("Button", "take picture5");
-		LayoutInflater li = LayoutInflater.from(context);
-		View popupView = li.inflate(R.layout.dialog1, null);
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-		// set prompts.xml to alertdialog builder
-		//the two strings
-		txtTitle = (EditText) popupView.findViewById(R.id.txtTitle);
-		txtDescription = (EditText) popupView.findViewById(R.id.txtDescription);
-			alertDialogBuilder.setView(popupView);
-			Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär0");
-		// set dialog message
-		alertDialogBuilder
-		.setCancelable(false)
-		.setPositiveButton("OK",
-		new DialogInterface.OnClickListener() {		
-				  public void onClick(DialogInterface dialog,int id) {
-					  	setValues(txtTitle.getText().toString(),txtDescription.getText().toString());
-					  	
-				  }  })
-				.setNegativeButton("Cancel",
-				  new DialogInterface.OnClickListener() {
-				    public void onClick(DialogInterface dialog,int id) {
-					dialog.cancel();
-					// marker.remove();
-				    }
-				  });
 
-			// create alert dialog
-			AlertDialog alertDialog = alertDialogBuilder.create();
-			//cancelable(enable backkey)
-			
-			alertDialog.setCancelable(true);
-			// show it
+public void checkInDialog(Context context, final GoogleMap myMap) {
 		
-			alertDialog.show();
+		this.context = context;
+		//POPUP som fungerar
+		   int popupWidth = 600;
+		   int popupHeight = 200;
+		  
+		   // Inflate the popup_layout.xml
+		LinearLayout viewGroup = (LinearLayout) ((Activity) context).findViewById(R.layout.activity_main);
+		   LayoutInflater layoutInflater = (LayoutInflater) context
+		     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		  
+		   View layout = layoutInflater.inflate(R.layout.confirmcheckinview, viewGroup);
 		
-		 // */
+		   // Creating the PopupWindow
+		   final PopupWindow popup = new PopupWindow(context);
+	
+		   popup.setContentView(layout);
+		  // popup.setWindowLayoutMode(layout.getWidth(), layout.getHeight());
+		 popup.setWidth(popupWidth);	   
+		 popup.setHeight(popupHeight);
+		 
+		   
+		   Button buttonYES = (Button) layout.findViewById(R.id.buttonYes);
+		   Button buttonNO = (Button) layout.findViewById(R.id.buttonNo);
 			  
+			  buttonYES.setClickable(true);
+			  buttonNO.setClickable(true);
+				 
+				buttonYES.setOnClickListener(
+						new OnClickListener(){
+
+							@Override
+							public void onClick(View arg0) {
+								popup.dismiss();
+								//*Connect to database and add the person to the event
+							}
+							
+						});
+				
+				buttonNO.setOnClickListener(new OnClickListener(){
+					@Override
+					public void onClick(View arg0) {
+						popup.dismiss();
+						
+					}});
+		   popup.showAtLocation(layout, Gravity.BOTTOM, 0,  0);
+		   
+	}
+	
 }
+			  
+
 
 

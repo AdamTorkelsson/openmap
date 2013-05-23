@@ -27,28 +27,37 @@ public class MainActivity extends Activity
  {
 
  private MyMap myMap;
- public static final String PREFS_NAME = "MySettings";
+ public static final String PREFS_NAME = "MySharedPrefs";
  private CreateDialogs createDialog; 
- 
- boolean mBound = false;
+private  boolean mBound = false;
+private SharedPreferences settings;
+
 
  @Override
  public void onCreate(Bundle savedInstanceState) {
 	 //create lite osäkert men alltid här
 
 	 super.onCreate(savedInstanceState);
- 
+	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker-5");
  //The Action Bar replaces the title bar and provides an alternate location for an on-screen menu button on some devices. 
 	 getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 	 //Creating content view
 	 setContentView(R.layout.activity_main);
 	 createDialog = new CreateDialogs();
-	 myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
+	 myMap = new MyMap(this);
 	 this.myMap = myMap;
-	 
-	 // myMap.setMap("Hybrid");
+	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker-3");
+
+	 myMap.setMap("Hybrid");
 	TutorialPopupDialog TPD = new TutorialPopupDialog(this);
 	TPD.dialogHandler();
+	Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker-1");
+	SharedPreferences settings= getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
+	this.settings = settings;
+	SharedPreferences.Editor editor = settings.edit();
+	editor.putBoolean("createMarker", false);
+	editor.commit();
+	Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker-2");
  }	 
 	
 	 
@@ -57,17 +66,19 @@ public class MainActivity extends Activity
  public void onResume(){
 	 super.onResume();
 	 
-	 SharedPreferences settings= getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
+	 
 	 //Är ett fel här , när createMarker sätter in sig som true ibland så cpar detta ut
-	/* if(settings.getBoolean("createMarker", false)){
-		 Log.d(TEXT_SERVICES_MANAGER_SERVICE, settings.getBoolean("createMarker", false));
-		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker");
-		myMap.addMarker();
-		SharedPreferences.Editor editor = settings.edit();
+	 if(settings.getBoolean("createMarker", false)){
+		 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker");
+		 
+		 SharedPreferences.Editor editor = settings.edit();
 		  editor.putBoolean("createMarker", false);
+		  myMap.addMarker(
+		  settings.getString("markerTitle","Error Loading Title"));
 		  editor.commit();
+		  
 		 //retrieve the string extra passed
-	 }*/
+	 }
 	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker2");
 	 
 	 String mapSetting = settings.getString("map", null);
@@ -77,12 +88,14 @@ public class MainActivity extends Activity
 
  @Override
  public boolean onCreateOptionsMenu(Menu menu) {
+	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker3");
      super.onCreateOptionsMenu(menu);
      MenuInflater inflater = getMenuInflater();
      inflater.inflate(R.menu.startmenu, menu);
      ActionBar ab = getActionBar();
      ab.setDisplayShowTitleEnabled(false);
      ab.setDisplayShowHomeEnabled(false);
+     Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker4");
      return true;
  
  }
@@ -115,20 +128,6 @@ public class MainActivity extends Activity
 	 
 
 }
-
- public void buttonEvent(View v){
-	/* Intent settingsintent =new Intent(this, settings.class);
-		startActivity(settingsintent);*/
-}
- 
- 
- 
- 
- 
-
-
-
-
 
  /*public boolean onQueryTextChange(String newText) {
 	 if (!cSearchPopup.isShowingPopup())
