@@ -25,7 +25,8 @@ public class NearEventNotifier {
 	private Location presentlocation = new Location("test");  // Holds the location that you are at
 	private GoogleMap myMap; 
 	private Context context;
-	private final String PREFS_NAME = "My Settings"; // SharedPreferences
+	private final String PREFS_NAME = "MySharedPrefs";
+	
 	private double shortest = 20; // minimum length to be at an event or an location
 	private double lengthtoevent = 0; //Temporary , holds the closest event while going throw the array from the database
 	private Location closestevent = new Location("Holds the closest event"); // Temporary holds the closest event

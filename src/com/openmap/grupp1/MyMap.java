@@ -89,11 +89,15 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		 	myMap.animateCamera(update);
 		 	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär3");
 		  //Makes a NearEventNotifier thats check if you have been near an event more than 10 seconds
+
+		  //starting at your location
+		//  onLocationChanged(((LocationManager) locmanager).getLastKnownLocation(provider));
+
 	/*	neEvNotifier = new NearEventNotifier(((LocationManager) locmanager).
 				  getLastKnownLocation(provider), myMap,context);*/
 		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär4");
 		  // request updates every 100 second, Change to every 5 minutes
-		  lm.requestLocationUpdates(provider, 1000, 1, this);
+		  lm.requestLocationUpdates(provider, 10000, 1, this);
 		 
 		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "ListenerStep2");
 		  
@@ -137,11 +141,11 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	 public void setMap(String map){
 		 if (map.equals("Hybrid"))
 			 myMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-		 else if (map.equals("Satellite"))
+		 if (map.equals("Satellite"))
 			 myMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-		 else if (map.equals("Normal"))
+		 if (map.equals("Normal"))
 			 myMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-		 else if(map.equals("Terrain"))	 
+		 if(map.equals("Terrain"))	 
 			 myMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 	 }
 	 
@@ -167,6 +171,8 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	public void onLocationChanged(Location arg0) {
 		MYLOCATION = new LatLng(arg0.getLatitude(), arg0.getLongitude());
 		 //move camera to your positon
+
+
 		//myMap.addMarker(new MarkerOptions().position(MYLOCATION).title("Your Position2"));
 	//	neEvNotifier.checklocationandevent(arg0);
 		
