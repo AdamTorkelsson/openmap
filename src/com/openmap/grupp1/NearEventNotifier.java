@@ -13,11 +13,11 @@ import android.location.Location;
 import android.util.Log;
 /*
  * Checks if there is any locations or events near. 
- * If an event is near it checks with the user if they want to 
+ * If an event is near it asks the user if they want to 
  * check in. 
  * 
- * Should be modified with something that adds the closest 
- * location instead of those rules thats now created
+ * Add so the user don't have to choose no two times
+ * 
  */
 public class NearEventNotifier {
 	private Location lastKnownLocation; // Holds last known location
@@ -27,7 +27,7 @@ public class NearEventNotifier {
 	private Context context;
 	private final String PREFS_NAME = "MySharedPrefs";
 	
-	private double shortest = 20; // minimum length to be at an event or an location
+	private double shortest = 15; // minimum length to be at an event or an location
 	private double lengthtoevent = 0; //Temporary , holds the closest event while going throw the array from the database
 	private Location closestevent = new Location("Holds the closest event"); // Temporary holds the closest event
 	private ArrayList<LatLng> databaselatlng = new ArrayList<LatLng>(); // the latlng from the database
@@ -121,33 +121,38 @@ public class NearEventNotifier {
 						 * fixar en popup med fråga om man är där 
 						 * så man kan checka in. 
 						 */
-						/*	if(wantsNotifications){*/
+						
 						Boolean wantsNotifications = notificationmessenger.getBoolean("notifications", true);
 						Log.d(A, "NearEventstep4");
-						
-						Log.d(A, "NearEventstep9");
-						editor.putBoolean("CheckInPopup", true);
-						//Skicka med title och describe( kanske förkorta describe)
-						//editor.putDouble("CheckInPopup", 5);
-						Log.d(A, "NearEventstep9.5");
-						editor.putString("Notification", "Are you at" + "Title?");
-						editor.putString("Notificationdetails", "(details)");
-						editor.commit();
-						Log.d(A, "NearEventstep10");
-						checkedIn = new LatLng(event.getLatitude(),event.getLongitude());
-						Log.d("CheckEvent","eventhandlerduärinärheten");	
-						// Send info to database that you have been near and add one person at location/event	
-						Log.d(A, "NearEventstep11");
-						Intent intent = new Intent(context,com.openmap.grupp1.NotifyService.class);
-						context.startService(intent);
-						Log.d(A, "NearEventstep12");
-						/*Move This to main? 
-						 * CreateDialogs checkinDialog = new CreateDialogs();
-						checkinDialog.checkInDialog(context, myMap);*/
+						/*	if(wantsNotifications){*/
+							Log.d(A, "NearEventstep9");
+							editor.putBoolean("CheckInPopup", true);
+							//Skicka med title och describe( kanske förkorta describe)
+							//editor.putDouble("CheckInPopup", 5);
+							Log.d(A, "NearEventstep9.5");
+							createNotification();
+							/*Move This to main? 
+							 * CreateDialogs checkinDialog = new CreateDialogs();
+							checkinDialog.checkInDialog(context, myMap);*/
 			 
 			 }}
 		
 		}
+	
+	private void createNotification(){
+		editor.putString("Notification", "Are you at" + "Title?");
+		editor.putString("Notificationdetails", "(details)");
+		editor.commit();
+		Log.d(A, "NearEventstep10");
+		checkedIn = new LatLng(event.getLatitude(),event.getLongitude());
+		Log.d("CheckEvent","eventhandlerduärinärheten");	
+		// Send info to database that you have been near and add one person at location/event	
+		Log.d(A, "NearEventstep11");
+		Intent intent = new Intent(context,com.openmap.grupp1.NotifyService.class);
+		context.startService(intent);
+		Log.d(A, "NearEventstep12");
+		
+	}
 	
 	
 	

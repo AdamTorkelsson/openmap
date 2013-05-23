@@ -24,7 +24,7 @@
 	<string name="maps_prompt">Choose type of map</string> 
 	<string-array name="maps_array">
 	<item>Hybrid</item>    
-  	<item>Satellite</item> 
+  	<item>Satellitolongdescriptiontolongdescriptiontolongdescriptiontolongdescriptionte</item> 
   	<item>Normal</item> 
   	<item>Terrain</item> 
   	</string-array>
@@ -40,4 +40,7 @@
 	<string name="next">Next</string>
 	<string name="finish">Finish</string>
 	<string name="ok">Ok</string>
+	<string name="tolongtitle">Your title may only contain 40 characters!</string>
+	<string name="toshorttitle">Your title have to consist of at least two characters!</string>
+	<string name="tolongdescription">Your description may only contain 400 characters!</string>
 </resources>
