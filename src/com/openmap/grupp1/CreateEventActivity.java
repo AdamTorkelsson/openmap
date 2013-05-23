@@ -31,107 +31,107 @@ public class CreateEventActivity extends Activity{
 	final static int TAKE_PICTURE_REQUEST_CODE = 1;
 	private ImageView image; 
 	private Context context = this;
-	 private final String PREFS_NAME = "MySharedPrefs";
-	 
-	 public void onCreate(Bundle savedInstanceState){
-		 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "INCREATEEVENT");
-		 super.onCreate(savedInstanceState);
-         setContentView(R.layout.createeventactivityview);
-         this.image = (ImageView) findViewById(R.id.imageView);
-         
-		 Button buttonTag	  = (Button) findViewById(R.id.buttonTag);
-		 Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
-		 Button buttonCamera = (Button) findViewById(R.id.buttonCamera);
-		 final EditText txtTitle = (EditText) findViewById(R.id.txtTitle);
-		 final EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
-			
-		
-		  buttonTag.setClickable(true);
-		  buttonCancel.setClickable(true);
-		  buttonCamera.setClickable(true);
-		  
-		  buttonTag.setOnClickListener(new OnClickListener(){
+	private final String PREFS_NAME = "MySharedPrefs";
 
-				@Override
-				public void onClick(View arg0) {
-					String temp1 = txtTitle.getText().toString();
-					String temp2 = txtDescription.getText().toString();
-					
-					if(temp1.length() < 1){
-						createhelppopup(R.string.setintitle);
-					}
-					else if(temp1.length() == 1){
-						createhelppopup(R.string.toshorttitle);
-					}
-					else if(temp1.length() > 30){
-						createhelppopup(R.string.tolongtitle);
-					}
-					else if(temp2.length() > 400){
-						createhelppopup(R.string.tolongdescription);
-					}
-					else{ 
-						SharedPreferences sharedprefs = context.getSharedPreferences(PREFS_NAME,context.MODE_PRIVATE);
-						SharedPreferences.Editor editor = sharedprefs.edit();
-						editor.putString("markerTitle", temp1);
-						editor.putString("markerDescription", temp2);
-						editor.commit();
-						startActivity(new Intent(context, AddTagActivity.class));
-						finish();}
+	public void onCreate(Bundle savedInstanceState){
+		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "INCREATEEVENT");
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.createeventactivityview);
+		overridePendingTransition(R.anim.map_out,R.anim.other_in);
+		this.image = (ImageView) findViewById(R.id.imageView);
 
+		Button buttonTag	  = (Button) findViewById(R.id.buttonTag);
+		Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
+		Button buttonCamera = (Button) findViewById(R.id.buttonCamera);
+		final EditText txtTitle = (EditText) findViewById(R.id.txtTitle);
+		final EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
+
+
+		buttonTag.setClickable(true);
+		buttonCancel.setClickable(true);
+		buttonCamera.setClickable(true);
+
+		buttonTag.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				String temp1 = txtTitle.getText().toString();
+				String temp2 = txtDescription.getText().toString();
+
+				if(temp1.length() < 1){
+					createhelppopup(R.string.setintitle);
 				}
+				else if(temp1.length() == 1){
+					createhelppopup(R.string.toshorttitle);
+				}
+				else if(temp1.length() > 30){
+					createhelppopup(R.string.tolongtitle);
+				}
+				else if(temp2.length() > 400){
+					createhelppopup(R.string.tolongdescription);
+				}
+				else{ 
+					SharedPreferences sharedprefs = context.getSharedPreferences(PREFS_NAME,context.MODE_PRIVATE);
+					SharedPreferences.Editor editor = sharedprefs.edit();
+					editor.putString("markerTitle", temp1);
+					editor.putString("markerDescription", temp2);
+					editor.commit();
+					startActivity(new Intent(context, AddTagActivity.class));
+					finish();}
 
-				});
-			
-		  buttonCancel.setOnClickListener(new OnClickListener(){
-				@Override
-				public void onClick(View arg0) {
-					stopThisActivity();
-					}});
-		  
-		  buttonCamera.setOnClickListener(new OnClickListener(){
-				@Override
-				public void onClick(View arg0) {
-					startCameraActivity();	
-				}});	
-	 }
+			}
 
-	 private void createhelppopup(int text) {
-			TutorialPopupDialog TPD = new TutorialPopupDialog(this);
-			TPD.standardDialog(text,"Ok",false);
-			
-		}
+		});
 
-	 
-	 private void stopThisActivity(){
-		 	this.finish();
-		 	
-	 }
+		buttonCancel.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				stopThisActivity();
+			}});
 
-	
-	
-	 private void startCameraActivity(){
-		 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "Step1camera");
-		 Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-         /*File image=new File(Environment.getExternalStorageDirectory(),"test.jpg");
+		buttonCamera.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				startCameraActivity();	
+			}});	
+	}
+
+	private void createhelppopup(int text) {
+		TutorialPopupDialog TPD = new TutorialPopupDialog(this);
+		TPD.standardDialog(text,"Ok",false);
+
+	}
+
+
+	private void stopThisActivity(){
+		this.finish();
+
+	}
+
+
+
+	private void startCameraActivity(){
+		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "Step1camera");
+		Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		/*File image=new File(Environment.getExternalStorageDirectory(),"test.jpg");
          intentCamera.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(image));
          Uri photoUri=Uri.fromFile(image);*/
-         startActivityForResult(intentCamera,TAKE_PICTURE_REQUEST_CODE);}
-	 protected void onActivityResult(int requestCode, int resultCode, Intent intent){
-		 if (requestCode == TAKE_PICTURE_REQUEST_CODE){
-			 if (resultCode == RESULT_OK){
-				 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "Step2camera");
-				 Bitmap thumbnail = (Bitmap) intent.getExtras().get("data");
-				 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "Step3camera");
-		         image.setImageBitmap(thumbnail);
-		         
-			 }
-		 }
-	 }
-	 
-	 
-	
+		startActivityForResult(intentCamera,TAKE_PICTURE_REQUEST_CODE);}
+	protected void onActivityResult(int requestCode, int resultCode, Intent intent){
+		if (requestCode == TAKE_PICTURE_REQUEST_CODE){
+			if (resultCode == RESULT_OK){
+				Log.d(TEXT_SERVICES_MANAGER_SERVICE, "Step2camera");
+				Bitmap thumbnail = (Bitmap) intent.getExtras().get("data");
+				Log.d(TEXT_SERVICES_MANAGER_SERVICE, "Step3camera");
+				image.setImageBitmap(thumbnail);
+
+			}
+		}
+	}
+
+
+
 }
 
-	
 
-      
+

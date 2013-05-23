@@ -25,6 +25,8 @@ public class SettingsActivity extends Activity{
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+		overridePendingTransition(R.anim.map_out,R.anim.other_in);
+
 	
 		//create lite osäkert men alltid här
 	  
