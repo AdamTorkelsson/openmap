@@ -34,7 +34,13 @@ import android.os.Bundle;
 import android.util.Log;
 
 /*
- * add button to get directions
+ * This class is the heart of this application
+ * It creates the map, 
+ * handles the fragment manager,
+ * listen on different user interactions on the screen. 
+ * It is also the class that changes what the user is 
+ * going to see due to having the GoogleMap object.
+ * 
  * 
  */
 
