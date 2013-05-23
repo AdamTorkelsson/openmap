@@ -25,19 +25,14 @@ public class NearEventNotifier {
 	private Location presentlocation = new Location("test");  // Holds the location that you are at
 	private GoogleMap myMap; 
 	private Context context;
-<<<<<<< HEAD
 	private final String PREFS_NAME = "MySharedPrefs";
 	
-	
-=======
-	private final String PREFS_NAME = "My Settings"; // SharedPreferences
 	private double shortest = 20; // minimum length to be at an event or an location
 	private double lengthtoevent = 0; //Temporary , holds the closest event while going throw the array from the database
 	private Location closestevent = new Location("Holds the closest event"); // Temporary holds the closest event
 	private ArrayList<LatLng> databaselatlng = new ArrayList<LatLng>(); // the latlng from the database
 	private Location event = new Location("Temporary holds events to check which closest");
 	private Location questionlocation = new Location("Holds the closest location until checked in");
->>>>>>> db0aeefa9fc21cfb9ccdf5429c806d4a7d71a4b5
 	//easy way to see if it works
 	private LatLng	checkedIn = new LatLng(0, 0);
 	private LatLng atlocation = new LatLng(0, 0);

@@ -46,11 +46,8 @@ public class MainActivity extends Activity
 	 myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
 	 this.myMap = myMap;
 	 
-<<<<<<< HEAD
-	myMap.setMap("Hybrid");
-=======
+
 	 myMap.setMap("Hybrid");
->>>>>>> db0aeefa9fc21cfb9ccdf5429c806d4a7d71a4b5
 	TutorialPopupDialog TPD = new TutorialPopupDialog(this);
 	TPD.dialogHandler();
  }	 

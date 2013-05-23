@@ -20,7 +20,7 @@ public class SettingsActivity extends Activity{
 	private Button btnApply;
 	private Button btnCancel;
 	private ToggleButton btnNotifications;
-	private final String PREFS_NAME ="MySharedPrefs";
+	private final String PREFS_NAME ="MySharedPrefs"; 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState){
