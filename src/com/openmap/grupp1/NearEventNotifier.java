@@ -19,7 +19,7 @@ public class NearEventNotifier {
 	private Location presentlocation = new Location("test");
 	private GoogleMap myMap;
 	private Context context;
-	private final String PREFS_NAME = "My Settings";
+	private final String PREFS_NAME = "MySharedPrefs";
 	
 	
 	//easy way to see if it works

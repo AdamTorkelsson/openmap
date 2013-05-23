@@ -27,7 +27,7 @@ public class MainActivity extends Activity
  {
 
  private MyMap myMap;
- public static final String PREFS_NAME = "MySettings";
+ public static final String PREFS_NAME = "MySharedPrefs";
  private CreateDialogs createDialog; 
  
  boolean mBound = false;
@@ -46,7 +46,7 @@ public class MainActivity extends Activity
 	 myMap = new MyMap(getFragmentManager(), getSystemService(Context.LOCATION_SERVICE),this,getResources());
 	 this.myMap = myMap;
 	 
-	 // myMap.setMap("Hybrid");
+	myMap.setMap("Hybrid");
 	TutorialPopupDialog TPD = new TutorialPopupDialog(this);
 	TPD.dialogHandler();
  }	 

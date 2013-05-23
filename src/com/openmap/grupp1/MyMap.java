@@ -89,8 +89,8 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	
 		  
 		  //Makes a NearEventNotifier thats check if you have been near an event more than 10 seconds
-		  neEvNotifier = new NearEventNotifier(((LocationManager) locmanager).
-				  getLastKnownLocation(provider), myMap,context);
+		  //neEvNotifier = new NearEventNotifier(((LocationManager) locmanager).
+			//	  getLastKnownLocation(provider), myMap,context);
 
 		  //starting at your location
 		//  onLocationChanged(((LocationManager) locmanager).getLastKnownLocation(provider));
@@ -168,7 +168,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		MYLOCATION = new LatLng(arg0.getLatitude(), arg0.getLongitude());
 		 //move camera to your positon
 		myMap.addMarker(new MarkerOptions().position(MYLOCATION).title("Your Position2"));
-		neEvNotifier.checklocationandevent(arg0);
+		//neEvNotifier.checklocationandevent(arg0);
 		
 	}
 	
