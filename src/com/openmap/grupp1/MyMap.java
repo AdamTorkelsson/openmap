@@ -94,12 +94,9 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		 	myMap.animateCamera(update);
 		 	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär3");
 		  //Makes a NearEventNotifier thats check if you have been near an event more than 10 seconds
-
-		  //starting at your location
-		//  onLocationChanged(((LocationManager) locmanager).getLastKnownLocation(provider));
-
-	/*	neEvNotifier = new NearEventNotifier(((LocationManager) locmanager).
-				  getLastKnownLocation(provider), myMap,context);*/
+		 	/*	neEvNotifier = new NearEventNotifier(((LocationManager) locmanager).
+			  getLastKnownLocation(provider), myMap,context);*/
+	
 		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär4");
 		  // request updates every 100 second, Change to every 5 minutes
 		  lm.requestLocationUpdates(provider, 10000, 1, this);

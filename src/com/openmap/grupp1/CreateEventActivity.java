@@ -19,6 +19,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CheckBox;
@@ -43,9 +44,9 @@ public class CreateEventActivity extends Activity{
 		Button buttonTag	  = (Button) findViewById(R.id.buttonTag);
 		Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
 		Button buttonCamera = (Button) findViewById(R.id.buttonCamera);
+
 		final EditText txtTitle = (EditText) findViewById(R.id.txtTitle);
 		final EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
-
 
 		buttonTag.setClickable(true);
 		buttonCancel.setClickable(true);
@@ -86,7 +87,10 @@ public class CreateEventActivity extends Activity{
 		buttonCancel.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
-				stopThisActivity();
+				InputMethodManager imm = (InputMethodManager)context.getSystemService( Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(((Activity) context).getCurrentFocus().getWindowToken(),      
+					    InputMethodManager.HIDE_NOT_ALWAYS);
+				finish();
 			}});
 
 		buttonCamera.setOnClickListener(new OnClickListener(){
@@ -103,10 +107,6 @@ public class CreateEventActivity extends Activity{
 	}
 
 
-	private void stopThisActivity(){
-		this.finish();
-
-	}
 
 
 
@@ -117,6 +117,7 @@ public class CreateEventActivity extends Activity{
          intentCamera.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(image));
          Uri photoUri=Uri.fromFile(image);*/
 		startActivityForResult(intentCamera,TAKE_PICTURE_REQUEST_CODE);}
+	
 	protected void onActivityResult(int requestCode, int resultCode, Intent intent){
 		if (requestCode == TAKE_PICTURE_REQUEST_CODE){
 			if (resultCode == RESULT_OK){
