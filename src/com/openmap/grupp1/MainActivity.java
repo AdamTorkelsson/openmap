@@ -116,20 +116,6 @@ public class MainActivity extends Activity
 
 }
 
- public void buttonEvent(View v){
-	/* Intent settingsintent =new Intent(this, settings.class);
-		startActivity(settingsintent);*/
-}
- 
- 
- 
- 
- 
-
-
-
-
-
  /*public boolean onQueryTextChange(String newText) {
 	 if (!cSearchPopup.isShowingPopup())
 		 cSearchPopup.createPopup();
