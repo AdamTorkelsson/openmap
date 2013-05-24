@@ -1,5 +1,7 @@
 package com.openmap.grupp1;
 
+import java.util.Random;
+
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -81,7 +83,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		  //
 		  myMap.setMyLocationEnabled(true);
 		  myMap.setOnCameraChangeListener(this);
-		  
+	
 		  LocationManager lm = (LocationManager) locmanager;
 		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär2");
 		  criteria = new Criteria();
@@ -105,20 +107,22 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		  
 	 }
 	 int i = 0;
-	 
+	 double j;
+	 Random random = new Random();
 	 private void testNrOfPoints(LatLng point){
+		 j =  random.nextDouble();
 		 i++;
-		 myMap.addMarker(new MarkerOptions().position(point));
-		 if(i ==200){
-		 				}
+		 if(i ==50){
+		 		i = 0;		}
 		 else {
-			 testNrOfPoints(new LatLng(point.latitude - 0.5, point.longitude));}
+			 addMarker(point,"Title");
+			 testNrOfPoints(new LatLng(point.latitude + j, point.longitude + j));}
 	 }
 
 	 @Override
 	 public void onMapClick(LatLng point) {
 		//checkIn(point);// For testing
-		 //testNrOfPoints(point) // For testing
+		// testNrOfPoints(point); // For testing
 		 	 
 	 }
 	 public void checkIn(LatLng point){
@@ -127,6 +131,8 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	
 	 @Override
 	 public void onMapLongClick(LatLng point) {
+	
+		
 		 //Error if they are exactly the same point, but due to the many decimals this is very unusual
 		 	Log.d("Hejhej", "LatLnguniqe" + point.toString());
 		 	this.onMapLongPoint = point;
@@ -228,7 +234,8 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 
 	
 	public void addMarker(LatLng location , String Title) {
-		
+	onMapLongPoint = location;
+		addMarker(Title);
 		// TODO Auto-generated method stub
 		
 	}
@@ -240,10 +247,6 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		m.isVisible();
 	}
 	
-	public void addMarker(LatLng location , String Title ,String Description , Image img) {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 
