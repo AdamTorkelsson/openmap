@@ -5,11 +5,14 @@ import java.util.concurrent.ExecutionException;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -22,11 +25,12 @@ SearchView.OnCloseListener {
 	private ListView listViewSearched;
 	private ListView listViewAdded;
 	private SearchView searchView;
-	private TagDbRequestTask mDbHelper;
+	private RequestTagDbTask mDbHelper;
 	private ArrayList<String> addedTags = new ArrayList<String>();
 	private ArrayAdapter<String> addedTagsAdapter;
 	private ArrayList<String> searchedTags = new ArrayList<String>();
 	private ArrayAdapter<String> searchedTagsAdapter;
+	private Context context = this;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -76,7 +80,6 @@ SearchView.OnCloseListener {
 
 
 
-
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -94,15 +97,18 @@ SearchView.OnCloseListener {
 		searchView.setQueryHint("Search tags");
 		searchView.requestFocus();
 
-
 		return true;
 
 	}
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.btn_add_search:
+		case R.id.btn_filter_search:
 			//add filter function here, call loadMarkers in some way
 			//send the arraylist addedTags here 
+			InputMethodManager imm = (InputMethodManager)context.getSystemService( Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(((Activity) context).getCurrentFocus().getWindowToken(),      
+				    InputMethodManager.HIDE_NOT_ALWAYS);
+			finish();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -135,7 +141,7 @@ SearchView.OnCloseListener {
 	private void showResults(String query) {
 
 		try {
-			mDbHelper = new TagDbRequestTask();
+			mDbHelper = new RequestTagDbTask();
 			searchedTags = mDbHelper.getTagArray(query);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

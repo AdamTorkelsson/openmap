@@ -60,16 +60,16 @@ public class CreateEventActivity extends Activity{
 				String temp2 = txtDescription.getText().toString();
 
 				if(temp1.length() < 1){
-					createhelppopup(R.string.setintitle);
+					createHelpPopup(R.string.setintitle);
 				}
 				else if(temp1.length() == 1){
-					createhelppopup(R.string.toshorttitle);
+					createHelpPopup(R.string.toshorttitle);
 				}
 				else if(temp1.length() > 30){
-					createhelppopup(R.string.tolongtitle);
+					createHelpPopup(R.string.tolongtitle);
 				}
 				else if(temp2.length() > 400){
-					createhelppopup(R.string.tolongdescription);
+					createHelpPopup(R.string.tolongdescription);
 				}
 				else{ 
 					SharedPreferences sharedprefs = context.getSharedPreferences(PREFS_NAME,context.MODE_PRIVATE);
@@ -100,7 +100,7 @@ public class CreateEventActivity extends Activity{
 			}});	
 	}
 
-	private void createhelppopup(int text) {
+	private void createHelpPopup(int text) {
 		TutorialPopupDialog TPD = new TutorialPopupDialog(this);
 		TPD.standardDialog(text,"Ok",false);
 

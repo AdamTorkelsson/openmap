@@ -18,11 +18,11 @@ import org.json.JSONObject;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class TagDbRequestTask extends AsyncTask<Void, Void, ArrayList<String>>{
-	private final String url = "http://129.16.205.204/php_mysql/tagRequest.php";
+public class RequestTagDbTask extends AsyncTask<Void, Void, ArrayList<String>>{
+	private final String url = "http://129.16.205.115/php_mysql/tagRequest.php";
 	private List<NameValuePair> parameters;
 
-	public TagDbRequestTask(){
+	public RequestTagDbTask(){
 		parameters = new ArrayList<NameValuePair>();
 
 	}
@@ -33,10 +33,14 @@ public class TagDbRequestTask extends AsyncTask<Void, Void, ArrayList<String>>{
 		this.execute();
 		return this.get();
 	}
-	
-	public void addTag(String tagString){
+
+	public void addTags(ArrayList<String> addedTags){
 		parameters.add(new BasicNameValuePair("tag", "add"));
-		parameters.add(new BasicNameValuePair("tagName", tagString));
+		int i =1;
+		for (String s:addedTags) {
+			parameters.add(new BasicNameValuePair("tagName" +i, s));
+			i++;
+		}
 		this.execute();
 	}
 
@@ -47,12 +51,12 @@ public class TagDbRequestTask extends AsyncTask<Void, Void, ArrayList<String>>{
 
 		ResponseHandler<String> responseHandler = new BasicResponseHandler();
 		String responseBody = httpClient.execute(httpPost, responseHandler);
-		
+
 		JSONArray jArray = new JSONArray(responseBody);
 		JSONObject json_data = new JSONObject();
 		ArrayList<String> tagArray = new ArrayList<String>();
 		String tagName;
-		
+
 		for (int i=0; i<jArray.length(); i++){
 			json_data = jArray.getJSONObject(i);
 			tagName = json_data.getString("tagName");
@@ -61,8 +65,8 @@ public class TagDbRequestTask extends AsyncTask<Void, Void, ArrayList<String>>{
 
 
 		return tagArray;
-		
-		
+
+
 	}
 
 	@Override
@@ -76,7 +80,7 @@ public class TagDbRequestTask extends AsyncTask<Void, Void, ArrayList<String>>{
 	// onPostExecute displays the results of the AsyncTask.
 	@Override
 	protected void onPostExecute(ArrayList<String> result) {
-		
+
 	}
-	
+
 }
