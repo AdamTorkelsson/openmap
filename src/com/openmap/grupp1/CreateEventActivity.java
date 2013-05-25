@@ -104,12 +104,23 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 				else if(temp2.length() > 400){
 					createHelpPopup(R.string.tolongdescription);
 				}
+				/*else if() {
+					
+				}*/
 				else{ 
+					
+					//Saves the markerTitle, markerDescription, Start- and end dates/times in the shared preferences to use in AddTagActivity
 					SharedPreferences sharedprefs = context.getSharedPreferences(PREFS_NAME,context.MODE_PRIVATE);
 					SharedPreferences.Editor editor = sharedprefs.edit();
 					editor.putString("markerTitle", temp1);
 					editor.putString("markerDescription", temp2);
+					editor.putString("markerStartDate", setStartDate.getText().toString());
+					editor.putString("markerStartTime", setStartTime.getText().toString());
+					editor.putString("markerEndDate", setEndDate.getText().toString());
+					editor.putString("markerEndTime", setEndTime.getText().toString());
 					editor.commit();
+					
+					//Start the next step, AddTagActivity
 					startActivity(new Intent(context, AddTagActivity.class));
 					finish();}
 			}});

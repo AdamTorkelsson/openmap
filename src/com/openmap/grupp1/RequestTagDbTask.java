@@ -34,15 +34,7 @@ public class RequestTagDbTask extends AsyncTask<Void, Void, ArrayList<String>>{
 		return this.get();
 	}
 
-	public void addTags(ArrayList<String> addedTags){
-		parameters.add(new BasicNameValuePair("tag", "add"));
-		int i =1;
-		for (String s:addedTags) {
-			parameters.add(new BasicNameValuePair("tagName" +i, s));
-			i++;
-		}
-		this.execute();
-	}
+
 
 	public ArrayList<String> requestTagArray() throws Exception{
 		HttpClient httpClient = new DefaultHttpClient();//used to execute post

@@ -46,6 +46,7 @@ SearchView.OnCloseListener{
 	private Context context = this;
 	private final String PREFS_NAME = "MySharedPrefs";
 	private SharedPreferences settings;
+	private LocationPair newMarker;
 
 
 	public void onCreate(Bundle savedInstanceState){
@@ -127,17 +128,29 @@ SearchView.OnCloseListener{
 					TPD.standardDialog(R.string.noAddedTags,"Ok",false);
 				}
 				else {
-					if (!newTags.isEmpty()) {
-						mDbHelper = new RequestTagDbTask();
-						mDbHelper.addTags(newTags);
-					}
-					settings = context.getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
-					String tempLat = settings.getString("tempLat","Error Loading latitude");
-					String tempLng = settings.getString("tempLng","Error Loading latitude");
-					Log.d("addtagactivity", "onmaplong fast inte " + tempLat + " , " + tempLng);
 
-					SharedPreferences createmarker = context.getSharedPreferences(PREFS_NAME,context.MODE_PRIVATE);
-					SharedPreferences.Editor editor = createmarker.edit();
+					settings = context.getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
+					Log.d("asd","asd");
+					String[] addedTagsArray = addedTags.toArray(new String[addedTags.size()]);
+
+					newMarker = new LocationPair(settings.getString("markerTitle","System Failure"),
+							Double.valueOf(settings.getString("markerLat","System failure lat")),
+							Double.valueOf(settings.getString("markerLng","System Failure lng")),
+							settings.getString("markerDescription","System failure desc"),
+							addedTagsArray);
+
+
+
+
+					try {
+						AddLocationTask addLocationTask = new AddLocationTask();
+						addLocationTask.execute(newMarker.getPairsList());
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					SharedPreferences.Editor editor = settings.edit();
 
 					editor.putBoolean("createMarker", true);
 					editor.commit();
@@ -160,13 +173,6 @@ SearchView.OnCloseListener{
 
 
 }
-
-
-
-
-
-
-
 
 
 @Override
@@ -249,7 +255,10 @@ private void showResults(String query) {
 		listViewSearched.setAdapter(searchedTagsAdapter);
 	} 
 	else {
-		//
+		searchedTags = new ArrayList<String>();
+		searchedTagsAdapter =      
+				new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, searchedTags);
+		listViewSearched.setAdapter(searchedTagsAdapter);		
 	}
 }
 
