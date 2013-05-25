@@ -113,7 +113,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "ListenerStep2");
 
 	}
-	int i = 0;
+	/*int i = 0;
 	double j;
 	Random random = new Random();
 	private void testNrOfPoints(LatLng point){
@@ -124,7 +124,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		else {
 			addMarker(point,"Title");
 			testNrOfPoints(new LatLng(point.latitude + j, point.longitude + j));}
-	}
+	}*/
 
 
 
@@ -139,21 +139,32 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		insertinfo.checkInDialog(context, myMap);
 	}
 
-	@Override
-	public void onMapLongClick(LatLng point) {
-		//Error if they are exactly the same point, but due to the many decimals this is very unusual
-		Log.d("Hejhej", "LatLnguniqe" + point.toString());
-		this.onMapLongPoint = point;
+		@Override
+		public void onMapLongClick(LatLng point) {
+			//Error if they are exactly the same point, but due to the many decimals this is very unusual
+			//Log.d("Hejhej", "LatLnguniqe" + point.toString());
+			this.onMapLongPoint = point;
+			//String tempLat = String.valueOf(point.latitude);
+			//String tempLng = String.valueOf(point.longitude);
+			
+			//Saves the latitude and longitude in the shared preferences to use in AddTagActivity
+			SharedPreferences settings = context.getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
+			SharedPreferences.Editor editor = settings.edit();
+			editor.putString("markerLat", String.valueOf(point.latitude));
+			editor.putString("markerLng", String.valueOf(point.longitude));
+			editor.commit();
+			
+			
+			CameraUpdate update = CameraUpdateFactory.newLatLngZoom(point,myMap.getMaxZoomLevel()-3); 
+			myMap.animateCamera(update);
+			Marker marker = myMap.addMarker(new MarkerOptions().position(point).title("This location?"));
+			marker.showInfoWindow();
+			// create interactive dialog window
+			insertinfo.confirmLocationPopup(context, marker, myMap); 
+		}
 
-		CameraUpdate update = CameraUpdateFactory.newLatLngZoom(point,myMap.getMaxZoomLevel()-3); 
-		myMap.animateCamera(update);
-		Marker marker = myMap.addMarker(new MarkerOptions().position(point).title("This location?"));
-		marker.showInfoWindow();
-		// create interactive dialog window
-		insertinfo.confirmLocationPopup(context, marker, myMap); 
+	
 
-
-	}
 
 	public void setMap(String map){
 		if (map.equals("Hybrid"))
@@ -228,12 +239,12 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 
 
 
-	public void addMarker(LatLng location , String Title) {
+	/*public void addMarker(LatLng location , String Title) {
 
 		onMapLongPoint = location;
 		addMarker(Title);
 
-	}
+	}*/
 
 	public GoogleMap getMap() {
 
@@ -242,12 +253,12 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 
 
 
-	public void addMarker(String Title) {
+	/*public void addMarker(String Title) {
 		MarkerFactory markerFactory = new MarkerFactory();
 		Bitmap scr = markerFactory.createPic(Title, res, "Location");
 		Marker m = myMap.addMarker(new MarkerOptions().position(onMapLongPoint).icon(BitmapDescriptorFactory.fromBitmap(scr)));
 		m.isVisible();
-	}
+	}*/
 
 
 

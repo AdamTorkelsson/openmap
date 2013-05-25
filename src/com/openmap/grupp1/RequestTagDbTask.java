@@ -19,7 +19,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 public class RequestTagDbTask extends AsyncTask<Void, Void, ArrayList<String>>{
-	private final String url = "http://129.16.205.115/php_mysql/tagRequest.php";
+	private final String url = "http://129.16.232.157/php_mysql/tagRequest.php";
 	private List<NameValuePair> parameters;
 
 	public RequestTagDbTask(){
@@ -34,15 +34,7 @@ public class RequestTagDbTask extends AsyncTask<Void, Void, ArrayList<String>>{
 		return this.get();
 	}
 
-	public void addTags(ArrayList<String> addedTags){
-		parameters.add(new BasicNameValuePair("tag", "add"));
-		int i =1;
-		for (String s:addedTags) {
-			parameters.add(new BasicNameValuePair("tagName" +i, s));
-			i++;
-		}
-		this.execute();
-	}
+
 
 	public ArrayList<String> requestTagArray() throws Exception{
 		HttpClient httpClient = new DefaultHttpClient();//used to execute post

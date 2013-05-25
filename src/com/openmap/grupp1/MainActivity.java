@@ -68,21 +68,6 @@ public class MainActivity extends Activity
 	public void onResume(){
 		super.onResume();
 		overridePendingTransition(R.anim.map_in,R.anim.other_out);
-
-
-
-		//Är ett fel här , när createMarker sätter in sig som true ibland så cpar detta ut
-		if(settings.getBoolean("createMarker", false)){
-			Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker");
-
-			SharedPreferences.Editor editor = settings.edit();
-			editor.putBoolean("createMarker", false);
-			myMap.addMarker(
-					settings.getString("markerTitle","Error Loading Title"));
-			editor.commit();
-
-			//retrieve the string extra passed
-		}
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker2");
 
 		String mapSetting = settings.getString("map", null);
