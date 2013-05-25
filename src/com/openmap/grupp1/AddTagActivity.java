@@ -45,6 +45,8 @@ SearchView.OnCloseListener{
 	private ArrayAdapter<String> searchedTagsAdapter;
 	private Context context = this;
 	private final String PREFS_NAME = "MySharedPrefs";
+	private SharedPreferences settings;
+
 
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -82,8 +84,7 @@ SearchView.OnCloseListener{
 
 				//Get the tag at the clicked position
 				String removeItem = (String) listViewAdded.getItemAtPosition(position);
-				addedTags.remove(removeItem);
-				addedTagsAdapter.notifyDataSetChanged();
+
 				//Adds the tag to listViewSearched to the left if it doesn't exist in it and removes it from listViewAdded
 				if(searchedTags != null && !searchedTags.contains(removeItem)) {
 
@@ -94,7 +95,10 @@ SearchView.OnCloseListener{
 					else {
 						newTags.remove(removeItem);
 					}
+					addedTags.remove(removeItem);
+					addedTagsAdapter.notifyDataSetChanged();
 				}
+				
 				else{
 					//
 				}
@@ -127,6 +131,11 @@ SearchView.OnCloseListener{
 						mDbHelper = new RequestTagDbTask();
 						mDbHelper.addTags(newTags);
 					}
+					settings = context.getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
+					String tempLat = settings.getString("tempLat","Error Loading latitude");
+					String tempLng = settings.getString("tempLng","Error Loading latitude");
+					Log.d("addtagactivity", "onmaplong fast inte " + tempLat + " , " + tempLng);
+
 					SharedPreferences createmarker = context.getSharedPreferences(PREFS_NAME,context.MODE_PRIVATE);
 					SharedPreferences.Editor editor = createmarker.edit();
 					editor.putBoolean("createMarker", true);
