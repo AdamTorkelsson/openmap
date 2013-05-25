@@ -39,7 +39,7 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationPair,Integer>{
 	private double s = 0.00001;
 	private double p = 10;
 	private CameraPosition cp;
-	Boolean userstopped = true;
+	private Boolean userstopped = true;
 	private ArrayList<LocationPair> databaselocationpair;
 	private ArrayList<LocationPair> createdLatLng = new ArrayList<LocationPair>();
 	private ArrayList<Marker> createdMarkers = new ArrayList<Marker>();
