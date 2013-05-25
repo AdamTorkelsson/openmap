@@ -47,6 +47,7 @@ public class CreateEventActivity extends Activity{
 
 		final EditText txtTitle = (EditText) findViewById(R.id.txtTitle);
 		final EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
+		
 
 		buttonTag.setClickable(true);
 		buttonCancel.setClickable(true);

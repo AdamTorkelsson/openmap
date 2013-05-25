@@ -58,6 +58,8 @@ public class MainActivity extends Activity
 		editor.putBoolean("createMarker", false);
 		editor.commit();
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker-2");
+		
+		 	
 	}	 
 
 
