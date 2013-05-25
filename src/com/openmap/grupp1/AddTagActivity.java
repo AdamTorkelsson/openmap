@@ -40,6 +40,7 @@ SearchView.OnCloseListener{
     private ArrayAdapter<String> addedTagsAdapter;
     private ArrayList<String> newTags = new ArrayList<String>();
     private Context mCtx = this;
+    private final String PREFS_NAME = "MySharedPrefs";
 
 	
 	 public void onCreate(Bundle savedInstanceState){
@@ -126,7 +127,7 @@ SearchView.OnCloseListener{
 				public void onClick(View arg0) {
 					//skicka till databasen
 					//lägg till newTags till databasen om det behövs
-					final String PREFS_NAME = "MySettings";
+					
 					SharedPreferences latlng = mCtx.getSharedPreferences(PREFS_NAME,mCtx.MODE_PRIVATE);
 					SharedPreferences.Editor editor = latlng.edit();
 					editor.putBoolean("createMarker", true);
