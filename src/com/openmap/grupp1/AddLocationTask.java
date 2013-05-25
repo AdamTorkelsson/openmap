@@ -16,7 +16,7 @@ import android.util.Log;
 
 
 public class AddLocationTask extends AsyncTask<ArrayList<NameValuePair>, Void, ArrayList<String>>{
-	private final String url = "http://129.16.205.115/php_mysql/addLocation.php";
+	private final String url = "http://129.16.232.157/php_mysql/addLocation.php";
 	public AddLocationTask(){
 		
 	}

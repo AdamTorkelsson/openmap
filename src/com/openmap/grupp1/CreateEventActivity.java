@@ -44,7 +44,8 @@ import android.widget.TimePicker;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-public class CreateEventActivity extends FragmentActivity implements DatePickerDialogListener, TimePickerDialogListener{
+public class CreateEventActivity extends FragmentActivity 
+implements DatePickerDialogListener, TimePickerDialogListener{
 	final static int TAKE_PICTURE_REQUEST_CODE = 1;
 	private ImageView image;
 	private TextView setStartDate;

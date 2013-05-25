@@ -19,6 +19,7 @@ import android.util.Log;
 
 
 public class GetLocationTask extends AsyncTask<Void, Void, ArrayList<LocationPair>>{
+	private ArrayList<NameValuePair> al = new ArrayList<NameValuePair>();
 	private final String url = "http://129.16.232.157/php_mysql/getLocation.php";
 	public GetLocationTask(){
 		
@@ -29,7 +30,7 @@ public class GetLocationTask extends AsyncTask<Void, Void, ArrayList<LocationPai
 		
 		HttpClient httpClient = new DefaultHttpClient();//used to execute post
 		HttpPost httpPost = new HttpPost(url);
-		ArrayList<NameValuePair> al = new ArrayList<NameValuePair>();
+		
 		al.add(new BasicNameValuePair("tag", "add"));
 		httpPost.setEntity(new UrlEncodedFormEntity(al));
 		
@@ -90,6 +91,14 @@ public class GetLocationTask extends AsyncTask<Void, Void, ArrayList<LocationPai
 	
 	@Override
 	protected void onPostExecute(ArrayList<LocationPair> result){
+		
+	}
+	public void setMinMaxLatLng(double minLat, double minLng, double maxLat, double maxLng ){
+		al.add(new BasicNameValuePair("restraint", "square"));
+		al.add(new BasicNameValuePair("minLat", ""+minLat));
+		al.add(new BasicNameValuePair("minLng", ""+minLng));
+		al.add(new BasicNameValuePair("maxLat", ""+maxLat));
+		al.add(new BasicNameValuePair("maxLng", ""+maxLng));
 		
 	}
 	

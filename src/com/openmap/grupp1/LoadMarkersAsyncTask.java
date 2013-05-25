@@ -30,41 +30,28 @@ import android.util.Log;
 
 public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationPair,Integer>{
 	private GoogleMap myMap;
-	private LatLng loc;
-	private String title;
 	private Resources res;
-	private MarkerFactory markerfactory;
 	private Bitmap scr;
-	private int i = 0;
-	private double s = 0.00001;
-	private double p = 10;
-	private CameraPosition cp;
-	private Boolean userstopped = true;
+	private double p = 0.1;
+	private Boolean over100markers = false;
 	private ArrayList<LocationPair> databaselocationpair;
 	private ArrayList<LocationPair> createdLatLng = new ArrayList<LocationPair>();
 	private ArrayList<Marker> createdMarkers = new ArrayList<Marker>();
-	private int j = 0;
-	private LocationPair locationpair;
-	private AddLocationTask addlocationtask;
-	private LatLng farleft;
 	private LatLng farright;
 	private LatLng nearleft;
-	private LatLng nearright;
 	private LatLng databasenearleft;
 	private LatLng databasefarright;
-	private Projection projection;
 	private LatLngBounds llb;
 	private LatLngBounds database;
 	private VisibleRegion visibleregion;
 	private GetLocationTask glt;
-
-	public LoadMarkersAsyncTask(GoogleMap myMap,String title, Resources res, LatLng loc){
+	private int deletenumber = 0;
+	public LoadMarkersAsyncTask(GoogleMap myMap, Resources res){
 
 		this.myMap = myMap;
-		this.title = title;
 		this.res = res;
-		markerfactory = new MarkerFactory();
 		Log.d("Step1", "AsyncTaskStep2");
+		
 		glt = new GetLocationTask();
 		glt.execute();
 
@@ -83,6 +70,9 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationPair,Integer>{
 		visibleregion = myMap.getProjection().getVisibleRegion();
 		farright =	visibleregion.farRight;
 		nearleft =	visibleregion.nearLeft;
+		databasenearleft = visibleregion.nearLeft;
+		databasefarright = visibleregion.farRight;
+		llb = new LatLngBounds(this.nearleft,this.farright);
 		Log.d("Text","LoadMarkersAsyncTask1" + farright.toString());
 		Log.d("Text","LoadMarkersAsyncTask1" + nearleft.toString());
 		Log.d("Text","LoadMarkersAsyncTask12" + databaselocationpair.get(0).getLatitute());
@@ -90,20 +80,6 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationPair,Integer>{
 		Log.d("Text","LoadMarkersAsyncTask1" + database.toString());
 		//database = new LatLngBounds(nearleft,farright);
 		checkAndSetNewBounds();
-
-		/*// Add to database
-		while( j <200){
-			cp = myMap.getCameraPosition();
-			this.loc =cp.target;
-			Log.d("Step1", "AsyncTaskStep2.3");
-			locationpair = new LocationPair("Title",new LatLng(loc.latitude,loc.longitude + s),"description",new String[]{"Fotboll","Fotbollsmatch","BobSaget"});
-			Log.d("Step1", "AsyncTaskStep2.1");
-			new AddLocationTask().execute(locationpair.getPairsList());
-			Log.d("Step1", "AsyncTaskStep2.2");
-			s = s + p;
-			j++;}
-		j = 0;*/
-
 
 	}
 	/*
@@ -124,13 +100,14 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationPair,Integer>{
 	 * Maybe add so after 200 markers it starts to remove the first one added
 	 * removes all markers from the oldarray and 
 	 * 
-	 * 
+	 * Is one problem , i still deletes those within the screen because the 
+	 * farright and nearleft is used double and is an logical problem
 	 */
 	@Override
 	protected Integer doInBackground(Void... params) {
 
 		Log.d("Text","LoadMarkersAsyncTask2" + databaselocationpair.size());
-		while(createdLatLng.size() < 200){
+		while(createdLatLng.size() < 100){
 			Log.d("Text","LoadMarkersAsyncTask2.1");
 			int i = 0;
 			for(LocationPair ll : databaselocationpair){
@@ -149,75 +126,119 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationPair,Integer>{
 					}
 					Log.d("Text","LoadMarkersAsyncTask3" + databaselocationpair.get(2).getLatLng().toString());
 					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					//}
+				}}
+			if(i == 6){
+				Log.d("Text","LoadMarkersAsyncTask2.7.1" );
+				checkAndSetNewBounds();	
+				Log.d("Text","LoadMarkersAsyncTask2.7.14" );
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					
+				}
+				Log.d("Text","LoadMarkersAsyncTask2.7.13");}
+			else{
+				Log.d("Text","LoadMarkersAsyncTask2.7.12" );
+				farright = new LatLng(farright.latitude + p,farright.longitude + p);
+				nearleft = new LatLng(nearleft.latitude - p, nearleft.latitude - p);
+				llb = new LatLngBounds(nearleft,farright);}
+			//checkAndSetNewBounds();
+			}
+		Log.d("Text","LoadMarkersAsyncTask2.7YOU" );
+		over100markers();
+			//over100markers();
+			return 1;
+	}
+	public void choosedeletion(){
+		Log.d("Text","LoadMarkersAsyncTask2.7YOU0" );
+		checkAndSetNewBounds();
+		for(int j = 0;j < createdLatLng.size();j++){
+			if(!llb.contains(createdLatLng.get(j).getLatLng())){
+				deletenumber = j;
+				break;
+			}
+			else if(j == createdLatLng.size() - 1){
+				Log.d("Text","LoadMarkersAsyncTask2.7YOU1" );
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				deletenumber = 0;
+				
+			}
+		}
+	}
+	
+	
+	public void over100markers(){
+		over100markers = true;
+		Log.d("Text","LoadMarkersAsyncTask4" + databaselocationpair.size());
+		while(true){
+			Log.d("Text","LoadMarkersAsyncTask4.1");
+			int i = 0;
+			for(LocationPair ll : databaselocationpair){
+				Log.d("Text","LoadMarkersAsyncTask4.2");
+				if(llb.contains(ll.getLatLng())
+						//AKTA UTROPSTECKNET HÄR
+						&& !createdLatLng.contains(ll)){
+					scr = createPic(ll.getTitle(), "Location");
+					Log.d("Text","LoadMarkersAsyncTask4.3");
+					choosedeletion();
+					publishProgress(ll);
+					createdLatLng.add(ll);	
+					i++;		
+					if(i == 6){
+						break;
+					}
+					Log.d("Text","LoadMarkersAsyncTask4" + databaselocationpair.get(2).getLatLng().toString());
+					try {
 						Thread.sleep(100);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					//}
-
-					
-
 				}}
 			if(i == 6){
-				checkAndSetNewBounds();	}
+				Log.d("Text","LoadMarkersAsyncTask4.7.1" );
+				checkAndSetNewBounds();	
+				Log.d("Text","LoadMarkersAsyncTask4.7.14" );
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					
+				}
+				Log.d("Text","LoadMarkersAsyncTask4.7.13");}
 			else{
+				Log.d("Text","LoadMarkersAsyncTask4.7.12");
 				farright = new LatLng(farright.latitude + p,farright.longitude + p);
 				nearleft = new LatLng(nearleft.latitude - p, nearleft.latitude - p);
 				llb = new LatLngBounds(nearleft,farright);}
 			//checkAndSetNewBounds();
 			}
 
-			//over100markers();
-			return 1;
+
 	}
-
-
-	public void over100markers(){
-		while(true){
-			int i = 0;
-			for(LocationPair ll : databaselocationpair){
-				if(llb.contains(ll.getLatLng())
-						//AKTA UTROPSTECKNET HÄR
-						&& !createdLatLng.contains(ll.getLatLng())){
-					scr = createPic(ll.getTitle(), "Location");
-					publishProgress(ll);
-					/*i++;
-							if(i == 6){
-								break;
-							}*/
-
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}}
-				createdMarkers.get(0).remove();
-				createdMarkers.remove(0);
-				createdLatLng.remove(0);
-				createdLatLng.add(ll);	
-
-			}
-			if(i == 6){
-				checkAndSetNewBounds();	}
-			else{
-				farright = new LatLng(farright.latitude + p,farright.longitude + p);
-				nearleft = new LatLng(nearleft.latitude - p, nearleft.latitude - p);
-				llb = new LatLngBounds(nearleft,farright);}}
-		//checkAndSetNewBounds();
-	}
-
-
-
+		
 	private void checkAndSetNewBounds() {
-		visibleregion = myMap.getProjection().getVisibleRegion();
 		Log.d("Text","LoadMarkersAsyncTask2.8" + visibleregion.toString());
 		Log.d("Text","LoadMarkersAsyncTask2.81" + farright.toString());
 		Log.d("Text","LoadMarkersAsyncTask2.82" + visibleregion.farRight.toString());
 		if(farright != visibleregion.farRight ){
-			farright =	visibleregion.farRight;
-			nearleft =	visibleregion.nearLeft;
+			this.farright =	visibleregion.farRight;
+			this.nearleft =	visibleregion.nearLeft;
 			Log.d("Text","LoadMarkersAsyncTask2.83" + database.contains(farright));
 			Log.d("Text","LoadMarkersAsyncTask2.84" + database.contains(nearleft));
 			if(!database.contains(farright) || !database.contains(nearleft)){
@@ -226,20 +247,27 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationPair,Integer>{
 						new LatLng(databasenearleft.latitude - p,databasenearleft.longitude - p),
 						new LatLng(databasefarright.latitude + p,databasefarright.longitude + p));
 			}
-			llb = new LatLngBounds(nearleft,farright);}
+			Log.d("Text","LoadMarkersAsyncTask2.8411" + llb.toString());
+			llb = new LatLngBounds(this.nearleft,this.farright);}
+		Log.d("Text","LoadMarkersAsyncTask2.841" + llb.toString());
 
 	}
 
 
 	protected void onProgressUpdate(LocationPair... params){
-		Log.d("Text","LoadMarkersAsyncTask2.7" + params[0].getLatLng().toString());
+		if(over100markers){
+			createdMarkers.get(deletenumber).remove();
+			createdMarkers.remove(deletenumber);
+			createdLatLng.remove(deletenumber);
+		}
+		visibleregion = myMap.getProjection().getVisibleRegion();
+		Log.d("Text","LoadMarkersAsyncTask2.7cr" + params[0].getLatLng().toString());
 		Marker m = myMap.addMarker(new MarkerOptions()
 		.position(params[0].getLatLng())
 		.icon(BitmapDescriptorFactory
 				.fromBitmap(scr)));
 		createdMarkers.add(m);
 	}
-
 
 
 	private Bitmap createPic(String stringTitle,  String type){
@@ -280,7 +308,5 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationPair,Integer>{
 		cs.drawText(stringTitle, x_coord, height-3f, tPaint); 
 		return dest;}
 
-
-
-
 }
+

@@ -64,11 +64,11 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	private CameraUpdate update;
 	private LocationManager locmanager;
 	private LatLng point;
-	private NearEventNotifier neEvNotifier;
 	private CameraPosition cameraposition;
 	private LatLng onMapLongPoint; // holds the location temporary for the user while creating the event
 	private CreateDialogs insertinfo = new CreateDialogs();
 	private final String PREFS_NAME ="MySharedPrefs"; 
+	private NearEventNotifier nen;
 
 
 
@@ -89,8 +89,18 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		//
 		myMap.setMyLocationEnabled(true);
 		myMap.setOnCameraChangeListener(this);
-
-
+		/*LoadMarkersAsyncTask lmat = new LoadMarkersAsyncTask(myMap, res);
+		 lmat.execute();*/
+		 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "Neareventnotifier1");
+		 
+		 
+		 Location ss = new Location("nein");
+		 ss.setLatitude(0);
+		 ss.setLongitude(0);
+		 nen= new NearEventNotifier(ss,myMap,context );
+		
+		 
+		 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "Neareventnotifier2");
 		LocationManager lm = (LocationManager) locmanager;
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär2");
 		criteria = new Criteria();
@@ -102,13 +112,10 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 								locmanager).getLastKnownLocation(provider).getLongitude()),14 );
 		myMap.animateCamera(update);
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär3");
-		//Makes a NearEventNotifier thats check if you have been near an event more than 10 seconds
-		/*	neEvNotifier = new NearEventNotifier(((LocationManager) locmanager).
-			  getLastKnownLocation(provider), myMap,context);*/
 
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär4");
 		// request updates every 100 second, Change to every 5 minutes
-		lm.requestLocationUpdates(provider, 10000, 1, this);
+		lm.requestLocationUpdates(provider, 50000, 1, this);
 
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "ListenerStep2");
 
@@ -131,8 +138,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 
 	@Override
 	public void onMapClick(LatLng point) {
-		/* LoadMarkersAsyncTask lmat = new LoadMarkersAsyncTask(myMap, "map", res, point);
-		 lmat.execute();*/
+		
 
 	}
 	public void checkIn(LatLng point){
@@ -196,7 +202,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	public void onLocationChanged(Location arg0) {
 		MYLOCATION = new LatLng(arg0.getLatitude(), arg0.getLongitude());
 		//move camera to your positon
-
+		nen.checklocationandevent(arg0);
 
 		//myMap.addMarker(new MarkerOptions().position(MYLOCATION).title("Your Position2"));
 		//	neEvNotifier.checklocationandevent(arg0);
