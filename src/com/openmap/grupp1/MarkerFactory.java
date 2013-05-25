@@ -30,28 +30,29 @@ public Bitmap createPic(String stringTitle, Resources res, String type){
 		Log.d("TEST", "wrong type");
 		color = Color.RED;
 	}
-
+color = Color.BLACK;
 	
-	Bitmap srv = BitmapFactory.decodeResource(res, R.drawable.markerpic); 
-	Bitmap src = Bitmap.createScaledBitmap(srv, srv.getWidth()/2, srv.getHeight()/2, false);
+	Bitmap srv = BitmapFactory.decodeResource(res, R.drawable.markerpick); 
+	Bitmap src = Bitmap.createScaledBitmap(srv, srv.getWidth()+ srv.getWidth(), 
+								srv.getHeight() + srv.getHeight(), false);
 	Bitmap dest = Bitmap.createBitmap(src.getWidth(), src.getHeight(), Bitmap.Config.ARGB_8888);
 
 	
 	if(stringTitle.length() > 7){
-		stringTitle = (String) stringTitle.subSequence(0, 5);
+		stringTitle = (String) stringTitle.subSequence(0, 6);
 		stringTitle = stringTitle + "...";
 	}
 	
 		Canvas cs = new Canvas(dest);
         Paint tPaint = new Paint();
-        tPaint.setTextSize(30);
+        tPaint.setTextSize(35);
         tPaint.setColor(color);
         tPaint.setStyle(Style.FILL);
         cs.drawBitmap(src, 0f, 0f, null);
         float height = tPaint.measureText("yY");
         float width = tPaint.measureText(stringTitle);
         float x_coord = (src.getWidth() - width)/2;
-        cs.drawText(stringTitle, x_coord, height-2f, tPaint); 
+        cs.drawText(stringTitle, x_coord, height-3f, tPaint); 
         return dest;}
 	
 }
