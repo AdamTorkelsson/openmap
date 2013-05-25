@@ -87,7 +87,19 @@ public class LoadMarkers {
 		}
 		
 	}
-
+/*
+ * To get random if number is over >400
+ *  public Item anyItem()
+    {
+        int index = randomGenerator.nextInt(catalogue.size());
+        Item item = catalogue.get(index);
+        System.out.println("Managers choice this week" + item + "our recommendation to you");
+        return item;
+    }
+ * 
+ * 
+ * 
+ */
 	
 	
 

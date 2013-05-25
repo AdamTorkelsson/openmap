@@ -1,6 +1,7 @@
 package com.openmap.grupp1;
 
 import java.text.DecimalFormat;
+import java.util.Random;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -70,97 +71,95 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 
 	public MyMap(Context context) {
 		//Map creator
-		this.locmanager =  (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-		this.context = context;
-		this.res = context.getResources();
 
-		myMap = ((MapFragment) ((Activity) context).getFragmentManager().findFragmentById(R.id.map)).getMap();
-		loadmarkers = new LoadMarkers(myMap,res);
-		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär");
-		//enables all click
-		myMap.setOnMapClickListener(this);
-		myMap.setOnMapLongClickListener(this);
-		myMap.setOnMarkerClickListener(this); 
-
-		//
-		myMap.setMyLocationEnabled(true);
-		myMap.setOnCameraChangeListener(this);
-
-		LocationManager lm = (LocationManager) locmanager;
-		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär2");
-		criteria = new Criteria();
-		provider = lm.getBestProvider(criteria, false);
-
-		CameraUpdate update = CameraUpdateFactory.newLatLngZoom(
-				new LatLng(((LocationManager) locmanager).getLastKnownLocation(
-						provider).getLatitude(),((LocationManager) 
-								locmanager).getLastKnownLocation(provider).getLongitude()),14 );
-		myMap.animateCamera(update);
-		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär3");
-		//Makes a NearEventNotifier thats check if you have been near an event more than 10 seconds
-		/*	neEvNotifier = new NearEventNotifier(((LocationManager) locmanager).
+		 this.locmanager =  (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+		 this.context = context;
+		 this.res = context.getResources();
+		 
+		  myMap = ((MapFragment) ((Activity) context).getFragmentManager().findFragmentById(R.id.map)).getMap();
+		 loadmarkers = new LoadMarkers(myMap,res);
+		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär");
+		  //enables all click
+		  myMap.setOnMapClickListener(this);
+		  myMap.setOnMapLongClickListener(this);
+		  myMap.setOnMarkerClickListener(this); 
+		  
+		  //
+		  myMap.setMyLocationEnabled(true);
+		  myMap.setOnCameraChangeListener(this);
+	
+		  LocationManager lm = (LocationManager) locmanager;
+		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär2");
+		  criteria = new Criteria();
+		  provider = lm.getBestProvider(criteria, false);
+	
+		 	CameraUpdate update = CameraUpdateFactory.newLatLngZoom(
+		 			new LatLng(((LocationManager) locmanager).getLastKnownLocation(
+		 					provider).getLatitude(),((LocationManager) 
+		 			locmanager).getLastKnownLocation(provider).getLongitude()),14 );
+		 	myMap.animateCamera(update);
+		 	 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär3");
+		  //Makes a NearEventNotifier thats check if you have been near an event more than 10 seconds
+		 	/*	neEvNotifier = new NearEventNotifier(((LocationManager) locmanager).
 			  getLastKnownLocation(provider), myMap,context);*/
+	
+		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär4");
+		  // request updates every 100 second, Change to every 5 minutes
+		  lm.requestLocationUpdates(provider, 10000, 1, this);
+		 
+		  Log.d(TEXT_SERVICES_MANAGER_SERVICE, "ListenerStep2");
+		  
+	 }
+	 int i = 0;
+	 double j;
+	 Random random = new Random();
+	 private void testNrOfPoints(LatLng point){
+		 j =  random.nextDouble();
+		 i++;
+		 if(i ==50){
+		 		i = 0;		}
+		 else {
+			 addMarker(point,"Title");
+			 testNrOfPoints(new LatLng(point.latitude + j, point.longitude + j));}
+	 }
 
-		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär4");
-		// request updates every 100 second, Change to every 5 minutes
-		lm.requestLocationUpdates(provider, 10000, 1, this);
-
-		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "ListenerStep2");
-
-	}
-	int i = 0;
-
-	private void testNrOfPoints(LatLng point){
-		i++;
-		myMap.addMarker(new MarkerOptions().position(point));
-		if(i ==200){
-		}
-		else {
-			testNrOfPoints(new LatLng(point.latitude - 0.5, point.longitude));}
-	}
-
-	@Override
-	public void onMapClick(LatLng point) {
+	 @Override
+	 public void onMapClick(LatLng point) {
 		//checkIn(point);// For testing
-		//testNrOfPoints(point) // For testing
+		// testNrOfPoints(point); // For testing
+		 	 
+	 }
+	 public void checkIn(LatLng point){
+		 insertinfo.checkInDialog(context, myMap);
+	 }
+	
+	 @Override
+	 public void onMapLongClick(LatLng point) {
+	
+		
+		 //Error if they are exactly the same point, but due to the many decimals this is very unusual
+		 	Log.d("Hejhej", "LatLnguniqe" + point.toString());
+		 	this.onMapLongPoint = point;
+			CameraUpdate update = CameraUpdateFactory.newLatLngZoom(point,myMap.getMaxZoomLevel()-3); 
+			myMap.animateCamera(update);
+			Marker marker = myMap.addMarker(new MarkerOptions().position(point).title("This location?"));
+			marker.showInfoWindow();
+			// create interactive dialog window
+		 	insertinfo.confirmLocationPopup(context, marker, myMap); 
+		 	}
 
-	}
-	public void checkIn(LatLng point){
-		insertinfo.checkInDialog(context, myMap);
-	}
-
-	@Override
-	public void onMapLongClick(LatLng point) {
-		//Error if they are exactly the same point, but due to the many decimals this is very unusual
-		Log.d("Hejhej", "LatLnguniqe" + point.toString());
-		this.onMapLongPoint = point;
-		String tempLat = String.valueOf(point.latitude);
-		String tempLng = String.valueOf(point.longitude);
-		SharedPreferences settings = context.getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
-		SharedPreferences.Editor editor = settings.edit();
-		editor.putString("tempLat", tempLat);
-		editor.putString("tempLng", tempLng);
-		editor.commit();
-		CameraUpdate update = CameraUpdateFactory.newLatLngZoom(point,myMap.getMaxZoomLevel()-3); 
-		myMap.animateCamera(update);
-		Marker marker = myMap.addMarker(new MarkerOptions().position(point).title("This location?"));
-		marker.showInfoWindow();
-		// create interactive dialog window
-		insertinfo.confirmLocationPopup(context, marker, myMap); 
-	}
-
-	public void setMap(String map){
-		if (map.equals("Hybrid"))
-			myMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-		if (map.equals("Satellite"))
-			myMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-		if (map.equals("Normal"))
-			myMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-		if(map.equals("Terrain"))	 
-			myMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-	}
-
-
+	 public void setMap(String map){
+		 if (map.equals("Hybrid"))
+			 myMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+		 if (map.equals("Satellite"))
+			 myMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+		 if (map.equals("Normal"))
+			 myMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+		 if(map.equals("Terrain"))	 
+			 myMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+	 }
+	 
+	 
 	@Override
 	public boolean onMarkerClick(Marker marker) {
 		//Flytta möjligtvis(lägg i konstrukorn, själva object skapandet)
@@ -222,25 +221,12 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 
 	}
 
-	/*
-	public void addMarker() {
-		// ADD title and type here in markerfactory to create different markers
-		MarkerFactory markerFactory = new MarkerFactory();
-		Bitmap scr = markerFactory.createPic("title", res, "Location");
-		Marker m = myMap.addMarker(new MarkerOptions().position(onMapLongPoint).icon(BitmapDescriptorFactory.fromBitmap(scr)));
-		m.isVisible();
-		/*myMap.addMarker(new MarkerOptions()
-		.position(onMapLongPoint)
-
-		}*/
-
-	/*.icon(BitmapDescriptorFactory
-		.fromBitmap(markerfactory.createPic("Title",res,"Event"))*/
 
 
 	public void addMarker(LatLng location , String Title) {
 
-		// TODO Auto-generated method stub
+	onMapLongPoint = location;
+		addMarker(Title);
 
 	}
 
@@ -251,10 +237,6 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		m.isVisible();
 	}
 
-	public void addMarker(LatLng location , String Title ,String Description , Image img) {
-		// TODO Auto-generated method stub
-
-	}
 
 
 
