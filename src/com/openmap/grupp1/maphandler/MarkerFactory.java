@@ -1,4 +1,7 @@
-package com.openmap.grupp1;
+package com.openmap.grupp1.maphandler;
+
+import com.openmap.grupp1.R;
+import com.openmap.grupp1.R.drawable;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;

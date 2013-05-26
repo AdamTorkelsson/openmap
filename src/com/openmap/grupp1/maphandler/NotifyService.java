@@ -1,10 +1,12 @@
-package com.openmap.grupp1;
+package com.openmap.grupp1.maphandler;
 /*
  * Notifycenter
  * Used the old version due to the need of high level of api for the new one
  * Is called on from NearEventNotifier, 
  */
 
+
+import com.openmap.grupp1.MainActivity;
 
 import android.R;
 import android.app.Notification;

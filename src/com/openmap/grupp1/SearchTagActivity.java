@@ -3,6 +3,8 @@ package com.openmap.grupp1;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import com.openmap.grupp1.database.RequestTagDbTask;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;

@@ -1,8 +1,8 @@
-package com.openmap.grupp1;
+package com.openmap.grupp1.helpfunctions;
+
 
 import java.util.Calendar;
 
-import com.openmap.grupp1.DatePickerFragment.DatePickerDialogListener;
 
 import android.app.Dialog;
 import android.app.DialogFragment;

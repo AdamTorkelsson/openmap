@@ -1,11 +1,15 @@
-package com.openmap.grupp1;
+package com.openmap.grupp1.maphandler;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+
+
 import com.google.android.gms.maps.GoogleMap;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.openmap.grupp1.database.GetLocationTask;
+import com.openmap.grupp1.database.LocationPair;
 
 import android.content.Context;
 import android.content.Intent;
@@ -152,7 +156,7 @@ public class NearEventNotifier {
 		Log.d("CheckEvent","eventhandlerduärinärheten");	
 		// Send info to database that you have been near and add one person at location/event	
 		Log.d(A, "NearEventstep11");
-		Intent intent = new Intent(context,com.openmap.grupp1.NotifyService.class);
+		Intent intent = new Intent(context,com.openmap.grupp1.maphandler.NotifyService.class);
 		context.startService(intent);
 		Log.d(A, "NearEventstep12");
 

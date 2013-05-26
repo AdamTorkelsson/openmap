@@ -1,4 +1,4 @@
-package com.openmap.grupp1;
+package com.openmap.grupp1.database;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 public class RequestTagDbTask extends AsyncTask<Void, Void, ArrayList<String>>{
-	private final String url = "http://129.16.232.157/php_mysql/tagRequest.php";
+	private final String url = "http://129.16.205.115/php_mysql/tagRequest.php";
 	private List<NameValuePair> parameters;
 
 	public RequestTagDbTask(){

@@ -1,0 +1,22 @@
+README
+
+This application is made by Oscar Rydén, Adam Torkelsson, Erik Gidlund and Pär Linder.
+
+The idea behind this application is to create a map where you make the 
+user responsible to make it interesting. We wanted to make it easy 
+for users to share different locations and events with other people. 
+
+The requirements to use this application is:
+SDK 11; (Target SDK 17)
+Internet Connection 
+GPS
+
+The application uses these permissions:
+permission.MAPS_RECEIVE
+permission.INTERNET
+permission.ACCESS_NETWORK_STATE
+permission.WRITE_EXTERNAL_STORAGE
+permission.READ_GSERVICES
+permission.ACCESS_COARSE_LOCATION
+permission.ACCESS_FINE_LOCATION
+permission.CAMERA

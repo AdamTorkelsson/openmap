@@ -1,7 +1,13 @@
 package com.openmap.grupp1;
 
 
+
+import java.util.concurrent.ExecutionException;
+
 import com.google.android.gms.maps.model.LatLng;
+import com.openmap.grupp1.database.UserLoginAndRegistrationTask;
+import com.openmap.grupp1.helpfunctions.SettingsActivity;
+import com.openmap.grupp1.maphandler.MyMap;
 
 
 import android.app.ActionBar;
@@ -49,8 +55,7 @@ public class MainActivity extends Activity
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker-3");
 
 		myMap.setMap("Hybrid");
-		TutorialPopupDialog TPD = new TutorialPopupDialog(this);
-		TPD.dialogHandler();
+	
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker-1");
 		SharedPreferences settings= getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
 		this.settings = settings;
@@ -58,6 +63,28 @@ public class MainActivity extends Activity
 		editor.putBoolean("createMarker", false);
 		editor.commit();
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker-2");
+		Log.d("CHECKIN", settings.getString("LoginUsername", "Error"));
+		UserLoginAndRegistrationTask ular = 
+				new UserLoginAndRegistrationTask(
+						settings.getString("LoginUsername", "Error"),
+						settings.getString("LoginPassword", "Error"));
+		ular.loginUser();
+
+		try {
+			if(!ular.get()){
+				Intent login = new Intent(this,LoginRegisterActivity.class);
+				startActivity(login);
+				TutorialPopupDialog TPD = new TutorialPopupDialog(this);
+				TPD.dialogHandler();
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		
 		 	
 	}	 

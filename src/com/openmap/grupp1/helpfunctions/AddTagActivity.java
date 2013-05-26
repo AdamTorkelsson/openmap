@@ -1,8 +1,19 @@
-package com.openmap.grupp1;
+package com.openmap.grupp1.helpfunctions;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+
+import com.openmap.grupp1.R;
+import com.openmap.grupp1.TutorialPopupDialog;
+import com.openmap.grupp1.R.anim;
+import com.openmap.grupp1.R.id;
+import com.openmap.grupp1.R.layout;
+import com.openmap.grupp1.R.menu;
+import com.openmap.grupp1.R.string;
+import com.openmap.grupp1.database.AddLocationTask;
+import com.openmap.grupp1.database.LocationPair;
+import com.openmap.grupp1.database.RequestTagDbTask;
 
 import android.app.ActionBar;
 import android.app.Activity;

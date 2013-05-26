@@ -1,4 +1,4 @@
-package com.openmap.grupp1;
+package com.openmap.grupp1.maphandler;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -15,6 +15,10 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.VisibleRegion;
 import com.google.android.gms.maps.model.VisibleRegionCreator;
+import com.openmap.grupp1.R;
+import com.openmap.grupp1.R.drawable;
+import com.openmap.grupp1.database.GetLocationTask;
+import com.openmap.grupp1.database.LocationPair;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -46,6 +50,7 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationPair,Integer>{
 	private VisibleRegion visibleregion;
 	private GetLocationTask glt;
 	private int deletenumber = 0;
+	private int k = 0;
 	public LoadMarkersAsyncTask(GoogleMap myMap, Resources res){
 
 		this.myMap = myMap;
@@ -184,6 +189,12 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationPair,Integer>{
 		over100markers = true;
 		Log.d("Text","LoadMarkersAsyncTask4" + databaselocationpair.size());
 		while(true){
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			Log.d("Text","LoadMarkersAsyncTask4.1");
 			int i = 0;
 			for(LocationPair ll : databaselocationpair){
@@ -193,7 +204,7 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationPair,Integer>{
 						&& !createdLatLng.contains(ll)){
 					scr = createPic(ll.getTitle(), "Location");
 					Log.d("Text","LoadMarkersAsyncTask4.3");
-					choosedeletion();
+					//choosedeletion();
 					publishProgress(ll);
 					createdLatLng.add(ll);	
 					i++;		
@@ -260,7 +271,10 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationPair,Integer>{
 			createdMarkers.remove(deletenumber);
 			createdLatLng.remove(deletenumber);
 		}
+		if(k == 5){
+		k = 0;
 		visibleregion = myMap.getProjection().getVisibleRegion();
+		k++;}
 		Log.d("Text","LoadMarkersAsyncTask2.7cr" + params[0].getLatLng().toString());
 		Marker m = myMap.addMarker(new MarkerOptions()
 		.position(params[0].getLatLng())
