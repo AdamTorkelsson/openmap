@@ -15,12 +15,15 @@ import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationChangeListener;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
+import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.CameraPosition.Builder;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.VisibleRegion;
 import com.google.android.gms.plus.model.people.Person.Image;
 import com.openmap.grupp1.CreateDialogs;
 import com.openmap.grupp1.R;
@@ -74,7 +77,9 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	private CreateDialogs insertinfo = new CreateDialogs();
 	private final String PREFS_NAME ="MySharedPrefs"; 
 	private NearEventNotifier nen;
-
+	private Boolean notifications = true;
+	private LoadMarkersTempAsyncTask lmtat;
+	private LatLngBounds database;
 
 
 	public MyMap(Context context) {
@@ -94,10 +99,12 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		//
 		myMap.setMyLocationEnabled(true);
 		myMap.setOnCameraChangeListener(this);
-		/*LoadMarkersAsyncTask lmat = new LoadMarkersAsyncTask(myMap, res);
+	/*	LoadMarkersAsyncTask lmat = new LoadMarkersAsyncTask(myMap, res);
 		 lmat.execute();*/
+		
+		
 		 Log.d(TEXT_SERVICES_MANAGER_SERVICE, "Neareventnotifier1");
-		 
+		
 		 
 		 Location ss = new Location("nein");
 		 ss.setLatitude(0);
@@ -110,7 +117,9 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär2");
 		criteria = new Criteria();
 		provider = lm.getBestProvider(criteria, false);
-
+		
+		 
+		 
 		CameraUpdate update = CameraUpdateFactory.newLatLngZoom(
 				new LatLng(((LocationManager) locmanager).getLastKnownLocation(
 						provider).getLatitude(),((LocationManager) 
@@ -123,23 +132,32 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		lm.requestLocationUpdates(provider, 5000, 1, this);
 
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "ListenerStep2");
+	/*	mylocation = new LatLng(((LocationManager) locmanager).getLastKnownLocation(
+				provider).getLatitude(),((LocationManager) 
+						locmanager).getLastKnownLocation(provider).getLongitude());*/
 
 	}
-	/*int i = 0;
-	double j;
-	Random random = new Random();
-	private void testNrOfPoints(LatLng point){
-		j =  random.nextDouble();
-		i++;
-		if(i ==50){
-			i = 0;		}
-		else {
-			addMarker(point,"Title");
-			testNrOfPoints(new LatLng(point.latitude + j, point.longitude + j));}
-	}*/
-
-
-
+	int i = 0;
+	public LatLngBounds setandgetBounds(){
+		if(i == 0){
+			LatLng mylocation = new LatLng(((LocationManager) locmanager).getLastKnownLocation(
+					provider).getLatitude(),((LocationManager) 
+							locmanager).getLastKnownLocation(provider).getLongitude());
+			database = new LatLngBounds(new LatLng(mylocation.latitude - 1, mylocation.longitude-1),new LatLng(
+					 mylocation.latitude+1,mylocation.longitude+1));
+			i++;
+			return database;
+		}
+		
+		else{
+			Projection p = myMap.getProjection();
+			LatLng nearLeft = p.getVisibleRegion().nearLeft;
+			LatLng farRight = p.getVisibleRegion().farRight;
+			database = new LatLngBounds(new LatLng(nearLeft.latitude - 1, nearLeft.longitude-1),new LatLng(
+				 farRight.latitude+1,farRight.longitude+1));
+			return database;}
+	
+	}
 
 	@Override
 	public void onMapClick(LatLng point) {
@@ -157,14 +175,13 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 			this.onMapLongPoint = point;
 			//String tempLat = String.valueOf(point.latitude);
 			//String tempLng = String.valueOf(point.longitude);
-			
+			Log.d("Text", "LatLngpoint " + point);
 			//Saves the latitude and longitude in the shared preferences to use in AddTagActivity
 			SharedPreferences settings = context.getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
 			SharedPreferences.Editor editor = settings.edit();
 			editor.putString("markerLat", String.valueOf(point.latitude));
 			editor.putString("markerLng", String.valueOf(point.longitude));
 			editor.commit();
-			
 			
 			CameraUpdate update = CameraUpdateFactory.newLatLngZoom(point,myMap.getMaxZoomLevel()-4); 
 			myMap.animateCamera(update);
@@ -175,8 +192,6 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		}
 
 	
-
-
 	public void setMap(String map){
 		if (map.equals("Hybrid"))
 			myMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
@@ -200,27 +215,43 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		 * change it to LatLng by " new LatLng(marker.getPosition().latitude,...)
 		 */
 
-		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "hej1");
-		infowindow.showInfo(context, marker.getPosition(), res, myMap,"Title test","Description test" );
-
+		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "onMarkerClick" + marker.getPosition());
+		infowindow.showInfo(context, marker.getPosition(), res, myMap);
 		return true; 
 	}
 
-
+	
 	@Override
-	public void onCameraChange(CameraPosition arg0) {	}
+	public void onCameraChange(CameraPosition arg0) {
+		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnCameraChange");
+		Projection p = myMap.getProjection();
+		LatLng nearLeft = p.getVisibleRegion().nearLeft;
+		LatLng farRight = p.getVisibleRegion().farRight;
+		if(arg0.zoom > 6 && !database.contains(farRight) &&
+				!database.contains(nearLeft)){
+			Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnCameraChange2");
+			myMap.clear();
+			database = new LatLngBounds(
+					new LatLng(nearLeft.latitude-1,nearLeft.longitude-1),
+					new LatLng(farRight.latitude+1,farRight.longitude +1));
+			
+			LoadMarkersTempAsyncTask lmtat = new LoadMarkersTempAsyncTask(myMap,res,database);
+			lmtat.execute();
+	
+		}
+		
+		
+		
+	}
 
 
 
 
 	@Override
 	public void onLocationChanged(Location arg0) {
-		MYLOCATION = new LatLng(arg0.getLatitude(), arg0.getLongitude());
-		//move camera to your positon
-	//nen.checklocationandevent(arg0);
+		if(notifications){
+		nen.checklocationandevent(arg0);}
 
-		//myMap.addMarker(new MarkerOptions().position(MYLOCATION).title("Your Position2"));
-		//	neEvNotifier.checklocationandevent(arg0);
 
 	}
 
@@ -249,15 +280,20 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 
 
 
-	/*public void addMarker(LatLng location , String Title) {
-
-		onMapLongPoint = location;
-		addMarker(Title);
-
-	}*/
-
 	public GoogleMap getMap() {
 		return myMap;
+	}
+
+
+	public void startNotification() {
+		notifications = true;
+		
+	}
+
+
+	public void stopNotification() {
+		notifications = false;
+		
 	}
 
 

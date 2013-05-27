@@ -28,7 +28,7 @@
         <TextView
             android:id="@+id/descriptionView1"
             android:layout_width="match_parent"
-            android:layout_height="94dp" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <LinearLayout
@@ -37,6 +37,7 @@
         android:orientation="horizontal" >
 
         <Button
+             style="?android:attr/buttonStyleSmall"
             android:id="@+id/CancelB"
             android:text="Cancel"
             android:layout_width="0dp"
@@ -44,6 +45,7 @@
             android:layout_weight="0.5" />
 
         <Button
+             style="?android:attr/buttonStyleSmall"
             android:id="@+id/OkB"
             android:text="I'm here"
             android:layout_width="0dp"

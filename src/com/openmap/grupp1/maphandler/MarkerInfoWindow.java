@@ -1,9 +1,12 @@
 package com.openmap.grupp1.maphandler;
 
+import java.util.concurrent.ExecutionException;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.location.Location;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +21,8 @@ import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.model.LatLng;
 import com.openmap.grupp1.R;
 import com.openmap.grupp1.TutorialPopupDialog;
+import com.openmap.grupp1.database.GetLocationTask;
+import com.openmap.grupp1.database.LocationPair;
 
 public class MarkerInfoWindow {
 double s = 0;
@@ -27,9 +32,8 @@ double s = 0;
 	
 	public void showInfo(final Context context,final LatLng point,
 			final Resources res, 
-			final GoogleMap myMap,
-			String title,
-			String description ){
+			final GoogleMap myMap){
+		
 		final NearEventNotifier nen = new NearEventNotifier(new Location("test"), myMap, context);
 	   //POPUP som fungerar
 	  
@@ -42,13 +46,47 @@ double s = 0;
 	     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 	View layout = layoutInflater.inflate(R.layout.showinfopopup, viewGroup);
+	Log.d("Text", "Hejbjornen");
 
+	GetLocationTask glt = new GetLocationTask();
+	try {
+		glt.getLocationPairFromLatLng(point);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (ExecutionException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	glt.execute();
 
 	TextView titleView = (TextView) layout.findViewById(R.id.titleView1);
 	TextView descriptionView = (TextView) layout.findViewById(R.id.descriptionView1);
+	double l = point.latitude;
+	double ln = point.longitude;
+	Log.d("LatLngpoint", "LatLngpoint" + l);
+	Log.d("LatLngpoint", "LatLngpoint" + ln);
+	try {
+		Log.d("Text", "Hejbjornen1.2");
+		
+		Log.d("Text", "LatLngpoint" + point);
 
-	titleView.setText(title);
-	descriptionView.setText(description);
+		LocationPair lp = glt.get().get(0);
+	
+		Log.d("Text", "Hejbjornen1.4");
+		titleView.setText(lp.getTitle());
+		Log.d("Text", "Hejbjornen1.5");
+		descriptionView.setText(lp.getDescription());
+		Log.d("Text", "Hejbjornen1.6");
+	} catch (InterruptedException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	} catch (ExecutionException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+	Log.d("Text", "Hejbjornen2");
+	
 
 	   // Creating the PopupWindow
 	   final PopupWindow popup = new PopupWindow(context);
@@ -95,6 +133,6 @@ double s = 0;
 	   popup.showAtLocation(layout, Gravity.NO_GRAVITY, 
 			   projection.toScreenLocation(point).x -popupWidth/2, 
 			   projection.toScreenLocation(point).y - popupHeight/2);
-	}
+	}}
 
-}
+

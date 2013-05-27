@@ -7,6 +7,8 @@ import java.util.concurrent.ExecutionException;
 import com.google.android.gms.maps.model.LatLng;
 import com.openmap.grupp1.database.UserLoginAndRegistrationTask;
 import com.openmap.grupp1.helpfunctions.SettingsActivity;
+import com.openmap.grupp1.maphandler.LoadMarkersAsyncTask;
+import com.openmap.grupp1.maphandler.LoadMarkersTempAsyncTask;
 import com.openmap.grupp1.maphandler.MyMap;
 
 
@@ -37,6 +39,7 @@ public class MainActivity extends Activity
 	private CreateDialogs createDialog; 
 	private  boolean mBound = false;
 	private SharedPreferences settings;
+	private LoadMarkersAsyncTask lmat;
 
 
 	@Override
@@ -82,23 +85,25 @@ public class MainActivity extends Activity
 			e.printStackTrace();
 		}
 
-		
+		super.onStart();
 		 	
 	}	 
 
 
-	public void onStart(){
-		super.onStart();
-		Log.d("Adamärbäst", "onStart1");
-	}
+	
+	
 	@Override
 	public void onResume(){
-		super.onResume();
+
 		//overridePendingTransition(R.anim.map_in,R.anim.other_out);
 		//Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker2");
-
+		myMap.getMap().clear();
+		LoadMarkersTempAsyncTask lmtat = new LoadMarkersTempAsyncTask(myMap.getMap(),getResources(),myMap.setandgetBounds());
+		lmtat.execute();
+		
 		String mapSetting = settings.getString("map", "Error");
 		myMap.setMap(mapSetting);
+		super.onResume();
 
 	}
 
@@ -141,10 +146,12 @@ public class MainActivity extends Activity
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+		
+	
 
 
 	}
-
+	
 	/*public boolean onQueryTextChange(String newText) {
 	 if (!cSearchPopup.isShowingPopup())
 		 cSearchPopup.createPopup();

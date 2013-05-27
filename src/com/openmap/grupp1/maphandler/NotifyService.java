@@ -46,7 +46,7 @@ super.onCreate();
 public int onStartCommand(Intent intent, int flags, int startId) {
 // TODO Auto-generated method stub
 	SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
-	String notificationTitle = settings.getString("Notification", "Error in receiving");
+	String notificationTitle = " " + settings.getString("Notification", "Error in receiving");
 	String notificationText = settings.getString("Notificationdetails", "Error in receiving");
 
 
@@ -59,7 +59,7 @@ notificationManager =
  (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
 //CHANGE THIS PICTURE
 	myNotification = new Notification(R.drawable.alert_dark_frame,
-  "You are logged in at " + notificationTitle,
+  "You are near " + notificationTitle,
   System.currentTimeMillis());
 Context context = getApplicationContext();
 

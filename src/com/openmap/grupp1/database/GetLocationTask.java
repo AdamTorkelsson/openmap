@@ -1,6 +1,8 @@
 package com.openmap.grupp1.database;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -12,6 +14,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.google.android.gms.maps.model.LatLng;
 
 
 
@@ -25,6 +29,7 @@ public class GetLocationTask extends AsyncTask<Void, Void, ArrayList<LocationPai
 	public GetLocationTask(){
 		
 	}
+	
 	
 	public ArrayList<LocationPair> getLocation() throws Exception{
 		ArrayList<LocationPair> lpArray = new ArrayList<LocationPair>();
@@ -102,6 +107,13 @@ public class GetLocationTask extends AsyncTask<Void, Void, ArrayList<LocationPai
 		al.add(new BasicNameValuePair("maxLng", ""+maxLng));
 		
 	}
-	
+	public void getLocationPairFromLatLng(LatLng ll) throws InterruptedException, ExecutionException{
+		DecimalFormat df = new DecimalFormat("###.#################");
+		Log.d("FUNKAR DF ELLER?!",""+df.format(ll.latitude)+""+df.format(ll.longitude));
+		al.add(new BasicNameValuePair("restraint", "fromLatLng"));
+		al.add(new BasicNameValuePair("lat",""+df.format(ll.latitude)));
+		al.add(new BasicNameValuePair("lng",""+df.format(ll.longitude)));
+
+		}
 }
 
