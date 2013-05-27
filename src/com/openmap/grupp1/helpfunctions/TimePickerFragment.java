@@ -28,7 +28,19 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 		 
 		
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-			time = Integer.toString(hourOfDay)+":"+Integer.toString(minute);
+
+			if (hourOfDay<10 && hourOfDay > 0) {
+				time = "0" + Integer.toString(hourOfDay);
+			}
+			else {
+				time = Integer.toString(hourOfDay);
+			}
+			if (minute<10) {
+			time += ":0"+Integer.toString(minute);
+			}
+			else {
+				time += ":"+Integer.toString(minute);
+			}
 			TimePickerDialogListener activity = (TimePickerDialogListener) getActivity();
 			activity.onFinishTimePickerDialog(time);
 			this.dismiss();

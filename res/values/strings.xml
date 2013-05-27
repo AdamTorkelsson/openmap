@@ -4,7 +4,7 @@
     <string name="app_name">freedomap</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="Title">test</string>
+    <string name="title">Title</string>
     <string name="title_activity_camera">CameraActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
@@ -33,7 +33,7 @@
 
     <string-array name="maps_array">
         <item>Hybrid</item>
-        <item>Satellitolongdescriptiontolongdescriptiontolongdescriptiontolongdescriptionte</item>
+        <item>Satellite</item>
         <item>Normal</item>
         <item>Terrain</item>
     </string-array>
@@ -49,16 +49,31 @@
     <string name="yes">Yes</string>
     <string name="next">Next</string>
     <string name="finish">Finish</string>
-    <string name="ok">Ok</string>
-    <string name="tolongtitle">Your title may only contain 40 characters!</string>
-    <string name="toshorttitle">Your title have to consist of at least two characters!</string>
-    <string name="tolongdescription">Your description may only contain 400 characters!</string>
+    <string name="ok">OK</string>
+    <string name="toolongtitle">Your title may only contain 40 characters!</string>
+    <string name="tooshorttitle">Your title have to consist of at least two characters!</string>
+    <string name="toolongdescription">Your description may only contain 400 characters!</string>
+    <string name="invalidDate">Your end date is before your start date!</string>
+    <string name="invalidTime">Your end time is before your start time!</string>
+    <string name="dateTimeWrong">Please finish filling in the start/end times/dates.</string>
+    <string name="wrongStartDate">You can not set a starting date before the current day!</string>
+    <string name="wrongStartTime">You can not set a starting time before the current time!</string>
+    <string name="noDuration">Your event has no duration!</string>
     <string name="noAddedTags">You need to add at least one tag!</string>
     <string name="searched_tags">Searched Tags</string>
     <string name="added_tags">Added tags</string>
+    <string name="description">Description</string>
+    <string name="set_end_time">Set end time</string>
+    <string name="set_end_date">Set end date</string>
+    <string name="set_start_time">Set start time</string>
+    <string name="set_start_date">Set start date</string>
+    <string name="add_photo">Add photo</string>
+    <string name="added_photo">Added photo</string>
+
     <string name="registerfailed">You have failed to register, please try again</string>
     <string name="loginfailed">You have failed to login, please try again</string>
     <string name="youhavetologin">You have to login or register to continue!</string>
     <string name="tofaraway">You are to far away from this event to check in</string>
+    <string name="wrongAddedTag">You may not add this tag!</string>
 
 </resources>

@@ -32,7 +32,18 @@ return new DatePickerDialog(getActivity(), this, year, month, day);
 }
 
 public void onDateSet(DatePicker view, int year, int month, int day) {
-	date = Integer.toString(year)+"-"+Integer.toString(month+1)+"-"+Integer.toString(day);
+	if (month+1 < 10) {
+	date = Integer.toString(year)+"-0"+Integer.toString(month+1);
+	}
+	else{
+	date = Integer.toString(year)+"-"+Integer.toString(month+1);
+	}
+	if (day < 10) {
+		date += "-0"+Integer.toString(day);
+	}
+	else {
+		date += "-"+Integer.toString(day);
+	}
 	DatePickerDialogListener activity = (DatePickerDialogListener) getActivity();
 	activity.onFinishDatePickerDialog(date);
 	this.dismiss();

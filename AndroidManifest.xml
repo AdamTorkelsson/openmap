@@ -53,7 +53,7 @@
         <service android:name="com.openmap.grupp1.maphandler.NotifyService"/>
         <activity android:name="com.openmap.grupp1.helpfunctions.CreateEventActivity"
             android:windowSoftInputMode="adjustResize"></activity>
-        <activity android:name="com.openmap.grupp1.helpfunctions.AddTagActivity"
+        <activity android:name="com.openmap.grupp1.helpfunctions.AddEventActivity"
             android:windowSoftInputMode="adjustResize">
             <meta-data android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
