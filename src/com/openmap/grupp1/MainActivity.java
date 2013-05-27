@@ -59,15 +59,12 @@ public class MainActivity extends Activity
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker-1");
 		SharedPreferences settings= getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
 		this.settings = settings;
-		SharedPreferences.Editor editor = settings.edit();
-		editor.putBoolean("createMarker", false);
-		editor.commit();
-		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker-2");
-		Log.d("CHECKIN", settings.getString("LoginUsername", "Error"));
+	//	Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker-2");
+
 		UserLoginAndRegistrationTask ular = 
 				new UserLoginAndRegistrationTask(
-						settings.getString("LoginUsername", "Error"),
-						settings.getString("LoginPassword", "Error"));
+						settings.getString("LoginUsername", "Adam"),
+						settings.getString("LoginPassword", "1234"));
 		ular.loginUser();
 
 		try {
@@ -90,14 +87,17 @@ public class MainActivity extends Activity
 	}	 
 
 
-
+	public void onStart(){
+		super.onStart();
+		Log.d("Adamärbäst", "onStart1");
+	}
 	@Override
 	public void onResume(){
 		super.onResume();
-		overridePendingTransition(R.anim.map_in,R.anim.other_out);
-		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker2");
+		//overridePendingTransition(R.anim.map_in,R.anim.other_out);
+		//Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker2");
 
-		String mapSetting = settings.getString("map", null);
+		String mapSetting = settings.getString("map", "Error");
 		myMap.setMap(mapSetting);
 
 	}

@@ -204,22 +204,24 @@ containing a value of this type.
         public static final int roundedcorner=0x7f02001c;
     }
     public static final class id {
+        public static final int CancelB=0x7f070032;
         public static final int Mapview=0x7f070005;
-        public static final int action_search=0x7f070036;
+        public static final int OkB=0x7f070033;
+        public static final int action_search=0x7f070038;
         public static final int addtag_list_added=0x7f070010;
         public static final int addtag_list_searched=0x7f07000f;
-        public static final int addtagmenu_add=0x7f070034;
-        public static final int addtagmenu_search=0x7f070035;
+        public static final int addtagmenu_add=0x7f070036;
+        public static final int addtagmenu_search=0x7f070037;
         public static final int btnApply=0x7f07002e;
         public static final int btnCancel=0x7f07002d;
         public static final int btnNotifications=0x7f07002c;
-        public static final int btn_add_search=0x7f070037;
-        public static final int btn_back=0x7f07003a;
-        public static final int btn_back_search=0x7f070038;
-        public static final int btn_filter_search=0x7f070039;
-        public static final int btn_search=0x7f07003d;
-        public static final int btn_select=0x7f07003b;
-        public static final int btn_settings=0x7f07003c;
+        public static final int btn_add_search=0x7f070039;
+        public static final int btn_back=0x7f07003c;
+        public static final int btn_back_search=0x7f07003a;
+        public static final int btn_filter_search=0x7f07003b;
+        public static final int btn_search=0x7f07003f;
+        public static final int btn_select=0x7f07003d;
+        public static final int btn_settings=0x7f07003e;
         public static final int buttonCamera=0x7f070018;
         public static final int buttonCancel=0x7f070009;
         public static final int buttonEvent=0x7f070020;
@@ -246,7 +248,7 @@ containing a value of this type.
         public static final int normal=0x7f070001;
         public static final int notUserString=0x7f070024;
         public static final int passwordField=0x7f070022;
-        public static final int progressBar1=0x7f070032;
+        public static final int progressBar1=0x7f070034;
         public static final int relativeLayout1=0x7f070007;
         public static final int satellite=0x7f070002;
         public static final int setEndDate=0x7f07001b;
@@ -262,7 +264,7 @@ containing a value of this type.
         public static final int textView6=0x7f07000c;
         public static final int textView7=0x7f07000d;
         public static final int titleView1=0x7f070030;
-        public static final int tutorialdialog=0x7f070033;
+        public static final int tutorialdialog=0x7f070035;
         public static final int txtDescription=0x7f07001e;
         public static final int txtTitle=0x7f070017;
         public static final int usernameField=0x7f070021;
@@ -402,6 +404,7 @@ containing a value of this type.
         public static final int setintitle=0x7f080038;
         public static final int tag=0x7f080026;
         public static final int title_activity_camera=0x7f080019;
+        public static final int tofaraway=0x7f080046;
         public static final int tolongdescription=0x7f08003f;
         public static final int tolongtitle=0x7f08003d;
         public static final int toshorttitle=0x7f08003e;

@@ -8,6 +8,8 @@ import java.util.concurrent.ExecutionException;
 import com.google.android.gms.maps.GoogleMap;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.openmap.grupp1.R;
+import com.openmap.grupp1.TutorialPopupDialog;
 import com.openmap.grupp1.database.GetLocationTask;
 import com.openmap.grupp1.database.LocationPair;
 
@@ -34,10 +36,10 @@ public class NearEventNotifier {
 
 	private double shortest = 15; // minimum length to be at an event or an location
 	private double lengthtoevent = 0; //Temporary , holds the closest event while going throw the array from the database
-	private Location closestevent = new Location("Holds the closest event"); // Temporary holds the closest event
+	private LocationPair closestevent; // Temporary holds the closest event
 	private ArrayList<LatLng> databaselatlng = new ArrayList<LatLng>(); // the latlng from the database
 	private Location event = new Location("Temporary holds events to check which closest");
-	private Location questionlocation = new Location("Holds the closest location until checked in");
+	private LocationPair questionlocation;
 	//easy way to see if it works
 	private LatLng	checkedIn = new LatLng(0, 0);
 	private LatLng atlocation = new LatLng(0, 0);
@@ -65,8 +67,8 @@ public class NearEventNotifier {
 		//EVENT PART
 		//Lägg till checka ut om du gått därifrån
 		Log.d(A, "NearEventstep2");
-		if(loc.distanceTo(lastKnownLocation) > 50 
-				&& loc.distanceTo(presentevent) > 30
+		if(loc.distanceTo(lastKnownLocation) > 200
+				&& loc.distanceTo(presentevent) > 200
 				&& checkedIn.latitude != 0 
 				&& checkedIn.longitude != 0){
 			checkedIn = new LatLng(0,0);
@@ -75,7 +77,7 @@ public class NearEventNotifier {
 		
 
 		//	for(LatLng ll : Arraylist<LatLng> database)
-		if(loc.distanceTo(lastKnownLocation) < 30 
+		if(loc.distanceTo(lastKnownLocation) < 200
 				//maybe not working due to that the checkedIn.latitude shows in longer numbers
 				&& checkedIn.latitude == 0 
 				&& checkedIn.longitude == 0
@@ -84,7 +86,7 @@ public class NearEventNotifier {
 
 
 
-			shortest = 15;
+			shortest = 200;
 			
 			
 			GetLocationTask glt = new GetLocationTask();
@@ -114,13 +116,16 @@ public class NearEventNotifier {
 				
 				if(lengthtoevent < shortest){
 					Log.d(A, "NearEventstep7");
-					closestevent = event;
+					closestevent = ll;
 					shortest = lengthtoevent;
 				}}
 			//checks so this event is closer than 15 meters 
-			if(shortest < 15){
+			if(shortest < 200){
 				Log.d(A, "NearEventstep8");
 				questionlocation = closestevent;
+				TutorialPopupDialog tpd = new TutorialPopupDialog(context);
+				tpd.standardDialog(R.string.not_user_string, "rightButton", false);
+				
 				/*
 				 * Lägg till en Shared som gör så att onResume 
 				 * fixar en popup med fråga om man är där 
@@ -148,8 +153,8 @@ public class NearEventNotifier {
 	private void createNotification(){
 		SharedPreferences notificationmessenger = context.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = notificationmessenger.edit();
-		editor.putString("Notification", "Are you at" + "Title?");
-		editor.putString("Notificationdetails", "(details)");
+		editor.putString("Notification", "Are you at" + closestevent.getTitle());
+		editor.putString("Notificationdetails", closestevent.getDescription());
 		editor.commit();
 		Log.d(A, "NearEventstep10");
 		checkedIn = new LatLng(event.getLatitude(),event.getLongitude());
@@ -199,6 +204,16 @@ public class NearEventNotifier {
 			this.presentlocation = location;
 			//add to database;		
 		}
+	}
+
+	public boolean checkin(LatLng point) {
+		Location eventlocation = new Location("temp");
+		eventlocation.setLatitude(point.latitude);
+		eventlocation.setLongitude(point.longitude);
+		if(eventlocation.distanceTo(lastKnownLocation) < 100){
+			return true;}
+		else{
+			return false;}
 	}
 
 }

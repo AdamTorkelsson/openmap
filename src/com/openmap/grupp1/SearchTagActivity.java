@@ -80,8 +80,6 @@ SearchView.OnCloseListener {
 			}
 		});
 
-
-
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

@@ -60,5 +60,6 @@
     <string name="registerfailed">You have failed to register, please try again</string>
     <string name="loginfailed">You have failed to login, please try again</string>
     <string name="youhavetologin">You have to login or register to continue!</string>
+    <string name="tofaraway">You are to far away from this event to check in</string>
 
 </resources>

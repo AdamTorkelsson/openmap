@@ -120,7 +120,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär4");
 		// request updates every 100 second, Change to every 5 minutes
-		lm.requestLocationUpdates(provider, 50000, 1, this);
+		lm.requestLocationUpdates(provider, 5000, 1, this);
 
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "ListenerStep2");
 
@@ -187,7 +187,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		if(map.equals("Terrain"))	 
 			myMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 	}
-
+	MarkerInfoWindow infowindow = new MarkerInfoWindow();
 
 	@Override
 	public boolean onMarkerClick(Marker marker) {
@@ -200,10 +200,9 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		 * change it to LatLng by " new LatLng(marker.getPosition().latitude,...)
 		 */
 
-		CreateDialogs showinfo = new CreateDialogs();
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "hej1");
-		showinfo.showInfo(context, marker.getPosition(), res, myMap,"Title test","Description test" );
-		marker.setVisible(true);
+		infowindow.showInfo(context, marker.getPosition(), res, myMap,"Title test","Description test" );
+
 		return true; 
 	}
 

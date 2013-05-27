@@ -58,7 +58,7 @@ registerReceiver(notifyServiceReceiver, intentFilter);
 notificationManager =
  (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
 //CHANGE THIS PICTURE
-	myNotification = new Notification(R.drawable.arrow_up_float,
+	myNotification = new Notification(R.drawable.alert_dark_frame,
   "You are logged in at " + notificationTitle,
   System.currentTimeMillis());
 Context context = getApplicationContext();
