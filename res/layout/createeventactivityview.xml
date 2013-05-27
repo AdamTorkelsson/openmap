@@ -1,14 +1,15 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/markerTitle"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:alpha="0.5"
-    android:background="#FFFFFF"
-    android:orientation="vertical" >
+    android:background="#FFFFFF" >
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:orientation="horizontal" >
 
         <LinearLayout
@@ -23,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#FFFFFF"
-                android:hint="Title"
+                android:hint="@string/title"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </LinearLayout>
 
@@ -32,18 +33,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="buttonCamera"
-            android:text="Add photo" />
+            android:text="@string/add_photo" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearlayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_below="@+id/linearLayout1"
+        android:orientation="horizontal"
+        android:paddingTop="10dp" >
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
+            android:layout_weight="0.8"
             android:orientation="vertical" >
 
             <LinearLayout
@@ -57,18 +61,20 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
+                    android:onClick="showDatePickerDialog"
                     android:paddingLeft="15dp"
-                    android:text="Set start date"
-                    android:onClick="showDatePickerDialog" />
+                    android:text="@string/set_start_date"
+                    android:textSize="17sp" />
 
                 <TextView
-                    android:id="@+id/setStartTime" 
-    				android:layout_width="0dp" 
-    				android:layout_height="wrap_content"
-    				android:layout_weight="0.5"
-    				android:paddingLeft="15dp"
-    				android:text="Set start time" 
-    				android:onClick="showTimePickerDialog" />
+                    android:id="@+id/setStartTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:onClick="showTimePickerDialog"
+                    android:paddingLeft="15dp"
+                    android:text="@string/set_start_time"
+                    android:textSize="17sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -82,42 +88,48 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
+                    android:onClick="showDatePickerDialog"
                     android:paddingLeft="15dp"
-                    android:text="Set end date"
-                    android:onClick="showDatePickerDialog" />
+                    android:text="@string/set_end_date"
+                    android:textSize="17sp" />
 
                 <TextView
                     android:id="@+id/setEndTime"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
+                    android:onClick="showTimePickerDialog"
                     android:paddingLeft="15dp"
-                    android:text="Set end time"
-                    android:onClick="showTimePickerDialog"/>
+                    android:text="@string/set_end_time"
+                    android:textSize="17sp" />
             </LinearLayout>
         </LinearLayout>
 
         <ImageView
             android:id="@+id/imageView"
+            android:contentDescription="@string/added_photo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            
-            android:layout_weight="0.3"
+            android:layout_weight="0.2"
             android:src="@drawable/arrow" />
-
     </LinearLayout>
 
-  	<EditText
-  	    android:id="@+id/txtDescription"
-  	    android:layout_width="match_parent"
-  	    android:layout_height="wrap_content"
-  	    android:layout_weight="0.91"
-  	    android:ems="10"
-  	    android:hint="Description" />
+    <EditText
+        android:id="@+id/txtDescription"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/buttons"
+        android:layout_below="@+id/linearlayout2"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="@string/description"
+        android:paddingTop="10dp" />
 
-   <LinearLayout
+    <LinearLayout
+        android:id="@+id/buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal" >
 
         <Button
@@ -125,17 +137,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cancel" />
+            android:text="@string/cancel" />
 
         <Button
             android:id="@+id/buttonTag"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Tag" />
-
-        
+            android:text="@string/tag" />
     </LinearLayout>
-    
 
-</LinearLayout>
+</RelativeLayout>

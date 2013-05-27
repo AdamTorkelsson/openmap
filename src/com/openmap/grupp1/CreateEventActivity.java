@@ -58,6 +58,10 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 	private boolean typeOfTime;
 	private Context context = this;
 	private final String PREFS_NAME = "MySharedPrefs";
+	final Calendar c = Calendar.getInstance();
+    int currentDate = c.get(Calendar.YEAR)*10000 + c.get(Calendar.MONTH)*100+100 + c.get(Calendar.DAY_OF_MONTH);
+	int currentTime = c.get(Calendar.HOUR_OF_DAY)*100 + c.get(Calendar.MINUTE);
+
 
 	public void onCreate(Bundle savedInstanceState){
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "INCREATEEVENT");
@@ -75,7 +79,7 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 		Button buttonCamera = (Button) findViewById(R.id.buttonCamera);
 		final EditText txtTitle = (EditText) findViewById(R.id.txtTitle);
 		final EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
-
+		
 		buttonTag.setClickable(true);
 		buttonCancel.setClickable(true);
 		buttonCamera.setClickable(true);
@@ -87,30 +91,70 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 
 		buttonTag.setOnClickListener(new OnClickListener(){
 
+
 			@Override
 			public void onClick(View arg0) {
 				String temp1 = txtTitle.getText().toString();
 				String temp2 = txtDescription.getText().toString();
 
+
 				if(temp1.length() < 1){
 					createHelpPopup(R.string.setintitle);
 				}
 				else if(temp1.length() == 1){
-					createHelpPopup(R.string.toshorttitle);
+					createHelpPopup(R.string.tooshorttitle);
 				}
 				else if(temp1.length() > 30){
-					createHelpPopup(R.string.tolongtitle);
+					createHelpPopup(R.string.toolongtitle);
 				}
 				else if(temp2.length() > 400){
-					createHelpPopup(R.string.tolongdescription);
+					createHelpPopup(R.string.toolongdescription);
 				}
-				/*else if() {
-					
-				}*/
+				else if (setStartDate.getText().toString().compareTo("Set start date") == 0 || setEndDate.getText().toString().compareTo("Set end date") == 0  ||
+						setStartTime.getText().toString().compareTo("Set start time") == 0 || setEndTime.getText().toString().compareTo("Set end time") == 0){
+					if (setStartDate.getText().toString().compareTo("Set start date") == 0 && setEndDate.getText().toString().compareTo("Set end date") == 0  &&
+							setStartTime.getText().toString().compareTo("Set start time") == 0 && setEndTime.getText().toString().compareTo("Set end time") == 0) {
+						//Saves the markerTitle, markerDescription, Start- and end dates/times in the shared preferences to use in AddTagActivity
+						SharedPreferences sharedprefs = context.getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
+						SharedPreferences.Editor editor = sharedprefs.edit();
+						editor.putString("markerTitle", temp1);
+						editor.putString("markerDescription", temp2);
+						editor.putString("markerStartDate", setStartDate.getText().toString());
+						editor.putString("markerStartTime", setStartTime.getText().toString());
+						editor.putString("markerEndDate", setEndDate.getText().toString());
+						editor.putString("markerEndTime", setEndTime.getText().toString());
+						editor.commit();
+						
+						//Start the next step, AddTagActivity
+						startActivity(new Intent(context, AddTagActivity.class));
+						finish();
+					}
+					else {
+					createHelpPopup(R.string.dateTimeWrong);
+					}
+				}
+				else if(currentDate > Integer.valueOf(setStartDate.getText().toString().replaceAll("-", ""))) {
+					createHelpPopup(R.string.wrongStartDate);
+				}
+				else if(currentDate == Integer.valueOf(setStartDate.getText().toString().replaceAll("-", "")).intValue() &&
+						currentTime > Integer.valueOf(setStartTime.getText().toString().replaceAll(":", ""))) {
+					createHelpPopup(R.string.wrongStartTime);
+				}
+				else if(Integer.valueOf(setStartDate.getText().toString().replaceAll("-", "")) > Integer.valueOf(setEndDate.getText().toString().replaceAll("-", ""))) {
+					createHelpPopup(R.string.invalidDate);
+				}
+				else if(Integer.valueOf(setStartDate.getText().toString().replaceAll("-", "")).intValue() == Integer.valueOf(setEndDate.getText().toString().replaceAll("-", "")).intValue() &&
+						Integer.valueOf(setStartTime.getText().toString().replaceAll(":", "")) > Integer.valueOf(setEndTime.getText().toString().replaceAll(":", ""))) {
+					createHelpPopup(R.string.invalidTime);
+				}
+				else if(Integer.valueOf(setStartDate.getText().toString().replaceAll("-", "")).intValue() == Integer.valueOf(setEndDate.getText().toString().replaceAll("-", "")).intValue() &&
+						Integer.valueOf(setStartTime.getText().toString().replaceAll(":", "")).intValue() == Integer.valueOf(setEndTime.getText().toString().replaceAll(":", "")).intValue()) {
+					createHelpPopup(R.string.noDuration);
+				}
 				else{ 
-					
+
 					//Saves the markerTitle, markerDescription, Start- and end dates/times in the shared preferences to use in AddTagActivity
-					SharedPreferences sharedprefs = context.getSharedPreferences(PREFS_NAME,context.MODE_PRIVATE);
+					SharedPreferences sharedprefs = context.getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
 					SharedPreferences.Editor editor = sharedprefs.edit();
 					editor.putString("markerTitle", temp1);
 					editor.putString("markerDescription", temp2);
@@ -122,7 +166,8 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 					
 					//Start the next step, AddTagActivity
 					startActivity(new Intent(context, AddTagActivity.class));
-					finish();}
+					finish();
+					}
 			}});
 
 		buttonCancel.setOnClickListener(new OnClickListener(){
@@ -137,7 +182,11 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 		buttonCamera.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
-				startCameraActivity();	
+				Log.d("hej", "kurwa " + String.valueOf(currentDate));
+				Log.d("hej", "kurwa " + String.valueOf(Integer.valueOf(setStartDate.getText().toString().replaceAll("-", ""))));
+				Log.d("hej", "kurwa " + String.valueOf(currentTime));
+				Log.d("hej", "kurwa " + String.valueOf(Integer.valueOf(setStartTime.getText().toString().replaceAll(":", ""))));
+				//startCameraActivity();	
 			}});
 
 		setStartDate.setOnClickListener(new OnClickListener(){
