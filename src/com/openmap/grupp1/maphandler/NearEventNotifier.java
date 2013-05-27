@@ -86,7 +86,7 @@ public class NearEventNotifier {
 
 
 
-			shortest = 200;
+			shortest = 400;
 			
 			
 			GetLocationTask glt = new GetLocationTask();
@@ -120,11 +120,10 @@ public class NearEventNotifier {
 					shortest = lengthtoevent;
 				}}
 			//checks so this event is closer than 15 meters 
-			if(shortest < 200){
+			if(shortest < 400){
 				Log.d(A, "NearEventstep8");
 				questionlocation = closestevent;
-				TutorialPopupDialog tpd = new TutorialPopupDialog(context);
-				tpd.standardDialog(R.string.not_user_string, "rightButton", false);
+			
 				
 				/*
 				 * Lägg till en Shared som gör så att onResume 
@@ -133,7 +132,7 @@ public class NearEventNotifier {
 				 */
 				/*editor.putBoolean("CheckInPopup", true);
 				editor.commit();*/
-				//Boolean wantsNotifications = notificationmessenger.getBoolean("notifications", true);
+				//
 				Log.d(A, "NearEventstep4");
 				/*	if(wantsNotifications){*/
 				Log.d(A, "NearEventstep9");
@@ -141,6 +140,7 @@ public class NearEventNotifier {
 				//Skicka med title och describe( kanske förkorta describe)
 				//editor.putDouble("CheckInPopup", 5);
 				Log.d(A, "NearEventstep9.5");
+				
 				createNotification();
 				/*Move This to main? 
 				 * CreateDialogs checkinDialog = new CreateDialogs();
@@ -152,6 +152,7 @@ public class NearEventNotifier {
 
 	private void createNotification(){
 		SharedPreferences notificationmessenger = context.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
+		if( notificationmessenger.getBoolean("notifications", true)){
 		SharedPreferences.Editor editor = notificationmessenger.edit();
 		editor.putString("Notification", "Are you at" + closestevent.getTitle());
 		editor.putString("Notificationdetails", closestevent.getDescription());
@@ -163,7 +164,7 @@ public class NearEventNotifier {
 		Log.d(A, "NearEventstep11");
 		Intent intent = new Intent(context,com.openmap.grupp1.maphandler.NotifyService.class);
 		context.startService(intent);
-		Log.d(A, "NearEventstep12");
+		Log.d(A, "NearEventstep12");}
 
 	}
 
@@ -190,7 +191,6 @@ public class NearEventNotifier {
 			event.setLongitude(longitude);*/
 
 		/*
-		 * start with within 2 meter(0.00001) and then continue to add 0.1 
 		 * get all markers within LatLng 0.00015 + lastKnownLocation
 		 * https://code.google.com/p/ense/wiki/LatitudOchLongitudIDecimalgrader
 		 * this will be good enough , can doublecheck with a locationlength

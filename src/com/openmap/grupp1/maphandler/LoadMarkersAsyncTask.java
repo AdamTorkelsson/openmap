@@ -111,25 +111,29 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationMarker,Integer>
 	@Override
 	protected Integer doInBackground(Void... params) {
 
-		Log.d("Text","LoadMarkersAsyncTask2" + databaselocationpair.size());
+		//Log.d("Text","LoadMarkersAsyncTask2" + databaselocationpair.size());
 		while(createdLatLng.size() < 100){
+			if(isCancelled()){ 
+				cancel(true);
+			}
 			Log.d("Text","LoadMarkersAsyncTask2.1");
 			int i = 0;
 			for(LocationMarker ll : databaselocationpair){
-				Log.d("Text","LoadMarkersAsyncTask2.2");
+			//	Log.d("Text","LoadMarkersAsyncTask2.2");
 				if(llb.contains(ll.getLatLng())
 						//AKTA UTROPSTECKNET HÄR
 						&& !createdLatLng.contains(ll)){
 					scr = createPic(ll.getTitle(), "Location");
-					Log.d("Text","LoadMarkersAsyncTask2.3");
-					publishProgress(ll);
+				//	Log.d("Text","LoadMarkersAsyncTask2.3");
+					if(!isCancelled()){
+					publishProgress(ll);}
 					createdLatLng.add(ll);	
 					i++;
 					
 					if(i == 6){
 						break;
 					}
-					Log.d("Text","LoadMarkersAsyncTask3" + databaselocationpair.get(2).getLatLng().toString());
+				//	Log.d("Text","LoadMarkersAsyncTask3" + databaselocationpair.get(2).getLatLng().toString());
 					try {
 						Thread.sleep(10);
 					} catch (InterruptedException e) {
@@ -139,19 +143,19 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationMarker,Integer>
 					//}
 				}}
 			if(i == 6){
-				Log.d("Text","LoadMarkersAsyncTask2.7.1" );
+				//Log.d("Text","LoadMarkersAsyncTask2.7.1" );
 				checkAndSetNewBounds();	
-				Log.d("Text","LoadMarkersAsyncTask2.7.14" );
+			//	Log.d("Text","LoadMarkersAsyncTask2.7.14" );
 				try {
 					Thread.sleep(10);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 					
-				}
-				Log.d("Text","LoadMarkersAsyncTask2.7.13");}
+				}}
+			//	Log.d("Text","LoadMarkersAsyncTask2.7.13");}
 			else{
-				Log.d("Text","LoadMarkersAsyncTask2.7.12" );
+			//	Log.d("Text","LoadMarkersAsyncTask2.7.12" );
 				farright = new LatLng(farright.latitude + p,farright.longitude + p);
 				nearleft = new LatLng(nearleft.latitude - p, nearleft.latitude - p);
 				llb = new LatLngBounds(nearleft,farright);}
@@ -163,7 +167,7 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationMarker,Integer>
 			return 1;
 	}
 	public void choosedeletion(){
-		Log.d("Text","LoadMarkersAsyncTask2.7YOU0" );
+		//Log.d("Text","LoadMarkersAsyncTask2.7YOU0" );
 		checkAndSetNewBounds();
 		for(int j = 0;j < createdLatLng.size();j++){
 			if(!llb.contains(createdLatLng.get(j).getLatLng())){
@@ -171,7 +175,7 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationMarker,Integer>
 				break;
 			}
 			else if(j == createdLatLng.size() - 1){
-				Log.d("Text","LoadMarkersAsyncTask2.7YOU1" );
+			//	Log.d("Text","LoadMarkersAsyncTask2.7YOU1" );
 				try {
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
@@ -186,32 +190,38 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationMarker,Integer>
 	
 	
 	public void over100markers(){
+		Boolean	iscancelled = true;
 		over100markers = true;
 		Log.d("Text","LoadMarkersAsyncTask4" + databaselocationpair.size());
-		while(true){
+		while(iscancelled){
+			if(isCancelled()){
+				iscancelled = true;
+				cancel(true);
+			}
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Log.d("Text","LoadMarkersAsyncTask4.1");
+		//	Log.d("Text","LoadMarkersAsyncTask4.1");
 			int i = 0;
 			for(LocationMarker ll : databaselocationpair){
-				Log.d("Text","LoadMarkersAsyncTask4.2");
+			//	Log.d("Text","LoadMarkersAsyncTask4.2");
 				if(llb.contains(ll.getLatLng())
 						//AKTA UTROPSTECKNET HÄR
 						&& !createdLatLng.contains(ll)){
 					scr = createPic(ll.getTitle(), "Location");
-					Log.d("Text","LoadMarkersAsyncTask4.3");
+			//		Log.d("Text","LoadMarkersAsyncTask4.3");
 					//choosedeletion();
-					publishProgress(ll);
+					if(!isCancelled()){
+					publishProgress(ll);}
 					createdLatLng.add(ll);	
 					i++;		
 					if(i == 6){
 						break;
 					}
-					Log.d("Text","LoadMarkersAsyncTask4" + databaselocationpair.get(2).getLatLng().toString());
+				//	Log.d("Text","LoadMarkersAsyncTask4" + databaselocationpair.get(2).getLatLng().toString());
 					try {
 						Thread.sleep(100);
 					} catch (InterruptedException e) {
@@ -221,19 +231,19 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationMarker,Integer>
 					//}
 				}}
 			if(i == 6){
-				Log.d("Text","LoadMarkersAsyncTask4.7.1" );
+				//Log.d("Text","LoadMarkersAsyncTask4.7.1" );
 				checkAndSetNewBounds();	
-				Log.d("Text","LoadMarkersAsyncTask4.7.14" );
+			//	Log.d("Text","LoadMarkersAsyncTask4.7.14" );
 				try {
 					Thread.sleep(100);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 					
-				}
-				Log.d("Text","LoadMarkersAsyncTask4.7.13");}
+				}}
+				//Log.d("Text","LoadMarkersAsyncTask4.7.13");}
 			else{
-				Log.d("Text","LoadMarkersAsyncTask4.7.12");
+			//	Log.d("Text","LoadMarkersAsyncTask4.7.12");
 				farright = new LatLng(farright.latitude + p,farright.longitude + p);
 				nearleft = new LatLng(nearleft.latitude - p, nearleft.latitude - p);
 				llb = new LatLngBounds(nearleft,farright);}
