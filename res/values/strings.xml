@@ -70,6 +70,7 @@
     <string name="set_start_date">Set start date</string>
     <string name="add_photo">Add photo</string>
     <string name="added_photo">Added photo</string>
+
     <string name="registerfailed">You have failed to register, please try again</string>
     <string name="loginfailed">You have failed to login, please try again</string>
     <string name="youhavetologin">You have to login or register to continue!</string>
