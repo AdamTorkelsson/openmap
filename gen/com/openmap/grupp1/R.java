@@ -430,6 +430,7 @@ containing a value of this type.
         public static final int url_contains=0x7f080029;
         public static final int url_string=0x7f080028;
         public static final int username_string=0x7f08002c;
+        public static final int wrongAddedTag=0x7f080054;
         public static final int wrongStartDate=0x7f080043;
         public static final int wrongStartTime=0x7f080044;
         public static final int yes=0x7f080039;

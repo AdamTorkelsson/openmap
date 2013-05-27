@@ -2,6 +2,8 @@ package com.openmap.grupp1.helpfunctions;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 import com.openmap.grupp1.R;
@@ -13,6 +15,7 @@ import com.openmap.grupp1.R.menu;
 import com.openmap.grupp1.R.string;
 import com.openmap.grupp1.database.AddLocationTask;
 import com.openmap.grupp1.database.LocationPair;
+import com.openmap.grupp1.database.EventPair;
 import com.openmap.grupp1.database.RequestTagDbTask;
 
 import android.app.ActionBar;
@@ -42,7 +45,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.content.Intent;
 import android.database.Cursor;
 
-public class AddTagActivity extends Activity implements SearchView.OnQueryTextListener,
+public class AddEventActivity extends Activity implements SearchView.OnQueryTextListener,
 SearchView.OnCloseListener{
 
 	private ListView listViewSearched;
@@ -107,13 +110,13 @@ SearchView.OnCloseListener{
 					else {
 						newTags.remove(removeItem);
 					}
-					addedTags.remove(removeItem);
-					addedTagsAdapter.notifyDataSetChanged();
 				}
 				
 				else{
 					//
 				}
+				addedTags.remove(removeItem);
+				addedTagsAdapter.notifyDataSetChanged();
 
 			}
 		}
@@ -133,22 +136,34 @@ SearchView.OnCloseListener{
 			@Override
 			public void onClick(View arg0) {
 				//skicka till databasen
-				//lägg till newTags till databasen om det behövs
 				if (addedTags.isEmpty()) {
 					TutorialPopupDialog TPD = new TutorialPopupDialog(context);
 					TPD.standardDialog(R.string.noAddedTags,"Ok",false);
 				}
 				else {
 
+					
 					settings = context.getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
-					Log.d("asd","asd");
 					String[] addedTagsArray = addedTags.toArray(new String[addedTags.size()]);
 
-					newMarker = new LocationPair(settings.getString("markerTitle","System Failure"),
+					if (!settings.getBoolean("isEvent", false)) {
+						newMarker = new LocationPair(settings.getString("markerTitle","System Failure"),
 							Double.valueOf(settings.getString("markerLat","System failure lat")),
 							Double.valueOf(settings.getString("markerLng","System Failure lng")),
 							settings.getString("markerDescription","System failure desc"),
 							addedTagsArray);
+					}
+					else if (settings.getBoolean("isEvent", false)) {
+						newMarker = new EventPair(settings.getString("markerTitle","System Failure"),
+								Double.valueOf(settings.getString("markerLat","System failure lat")),
+								Double.valueOf(settings.getString("markerLng","System Failure lng")),
+								settings.getString("markerDescription","System failure desc"),
+								addedTagsArray,
+								settings.getString("markerStartDate","System Failure startDate"),
+								settings.getString("markerEndDate","System Failure endDate"),
+								settings.getString("markerStartTime","System Failure startTime"),
+								settings.getString("markerEndTime","System Failure endTime"));
+					}
 
 
 
@@ -163,6 +178,9 @@ SearchView.OnCloseListener{
 
 					SharedPreferences.Editor editor = settings.edit();
 
+			        Set<String> set = new HashSet<String>(addedTags);
+
+					editor.putStringSet("tagSet", set);
 					editor.putBoolean("createMarker", true);
 					editor.commit();
 					InputMethodManager imm = (InputMethodManager)context.getSystemService( Context.INPUT_METHOD_SERVICE);
@@ -211,10 +229,14 @@ public boolean onOptionsItemSelected(MenuItem item) {
 	switch (item.getItemId()) {
 	case R.id.addtagmenu_add:
 		String newTag = searchView.getQuery().toString();
-		newTags.add(newTag);
-		if(!addedTags.contains(newTag)) {
+		if(newTag != null && !addedTags.contains(newTag) && !newTag.isEmpty() && !newTag.startsWith(" ")) {
+			newTags.add(newTag);
 			addedTags.add(newTag);
 			addedTagsAdapter.notifyDataSetChanged();
+		}
+		else {
+			TutorialPopupDialog TPD = new TutorialPopupDialog(this);
+			TPD.standardDialog(R.string.wrongAddedTag,"Ok",false);
 		}
 		return true;
 	default:

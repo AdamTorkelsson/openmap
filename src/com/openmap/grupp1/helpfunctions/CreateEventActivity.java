@@ -126,14 +126,11 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 						SharedPreferences.Editor editor = sharedprefs.edit();
 						editor.putString("markerTitle", temp1);
 						editor.putString("markerDescription", temp2);
-						editor.putString("markerStartDate", setStartDate.getText().toString());
-						editor.putString("markerStartTime", setStartTime.getText().toString());
-						editor.putString("markerEndDate", setEndDate.getText().toString());
-						editor.putString("markerEndTime", setEndTime.getText().toString());
+						editor.putBoolean("isEvent", false);
 						editor.commit();
 						
 						//Start the next step, AddTagActivity
-						startActivity(new Intent(context, AddTagActivity.class));
+						startActivity(new Intent(context, AddEventActivity.class));
 						finish();
 					}
 					else {
@@ -165,14 +162,16 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 					SharedPreferences.Editor editor = sharedprefs.edit();
 					editor.putString("markerTitle", temp1);
 					editor.putString("markerDescription", temp2);
-					editor.putString("markerStartDate", setStartDate.getText().toString());
-					editor.putString("markerStartTime", setStartTime.getText().toString());
-					editor.putString("markerEndDate", setEndDate.getText().toString());
-					editor.putString("markerEndTime", setEndTime.getText().toString());
+					editor.putString("markerStartDate", setStartDate.getText().toString().replaceAll("-", ""));
+					editor.putString("markerStartTime", setStartTime.getText().toString().replaceAll(":", ""));
+					editor.putString("markerEndDate", setEndDate.getText().toString().replaceAll("-", ""));
+					editor.putString("markerEndTime", setEndTime.getText().toString().replaceAll(":", ""));
+					editor.putBoolean("isEvent", true);
+
 					editor.commit();
 					
 					//Start the next step, AddTagActivity
-					startActivity(new Intent(context, AddTagActivity.class));
+					startActivity(new Intent(context, AddEventActivity.class));
 					finish();
 					}
 			}});
