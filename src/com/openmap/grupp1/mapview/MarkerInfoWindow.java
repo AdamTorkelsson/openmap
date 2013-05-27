@@ -22,12 +22,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.openmap.grupp1.R;
 import com.openmap.grupp1.TutorialPopupDialog;
 import com.openmap.grupp1.database.GetLocationTask;
-<<<<<<< HEAD:src/com/openmap/grupp1/mapview/MarkerInfoWindow.java
-import com.openmap.grupp1.database.LocationPair;
+
 import com.openmap.grupp1.maphandler.NearEventNotifier;
-=======
+
 import com.openmap.grupp1.database.LocationMarker;
->>>>>>> 882d9aa039d775475357c89cb33a9aea9ef5cdfc:src/com/openmap/grupp1/maphandler/MarkerInfoWindow.java
+
 
 public class MarkerInfoWindow {
 double s = 0;

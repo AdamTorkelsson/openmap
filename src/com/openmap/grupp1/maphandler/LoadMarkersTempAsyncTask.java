@@ -19,12 +19,9 @@ import com.google.android.gms.maps.model.VisibleRegionCreator;
 import com.openmap.grupp1.R;
 import com.openmap.grupp1.R.drawable;
 import com.openmap.grupp1.database.GetLocationTask;
-<<<<<<< HEAD
-import com.openmap.grupp1.database.LocationPair;
+
 import com.openmap.grupp1.mapview.MarkerFactory;
-=======
 import com.openmap.grupp1.database.LocationMarker;
->>>>>>> 882d9aa039d775475357c89cb33a9aea9ef5cdfc
 
 import android.content.Context;
 import android.content.res.Resources;
