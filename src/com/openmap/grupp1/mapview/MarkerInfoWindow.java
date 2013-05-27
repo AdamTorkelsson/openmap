@@ -22,8 +22,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.openmap.grupp1.R;
 import com.openmap.grupp1.TutorialPopupDialog;
 import com.openmap.grupp1.database.GetLocationTask;
+<<<<<<< HEAD:src/com/openmap/grupp1/mapview/MarkerInfoWindow.java
 import com.openmap.grupp1.database.LocationPair;
 import com.openmap.grupp1.maphandler.NearEventNotifier;
+=======
+import com.openmap.grupp1.database.LocationMarker;
+>>>>>>> 882d9aa039d775475357c89cb33a9aea9ef5cdfc:src/com/openmap/grupp1/maphandler/MarkerInfoWindow.java
 
 public class MarkerInfoWindow {
 double s = 0;
@@ -72,7 +76,7 @@ double s = 0;
 		
 		Log.d("Text", "LatLngpoint" + point);
 
-		LocationPair lp = glt.get().get(0);
+		LocationMarker lp = glt.get().get(0);
 	
 		Log.d("Text", "Hejbjornen1.4");
 		titleView.setText(lp.getTitle());

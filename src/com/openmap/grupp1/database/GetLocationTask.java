@@ -23,16 +23,16 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 
-public class GetLocationTask extends AsyncTask<Void, Void, ArrayList<LocationPair>>{
+public class GetLocationTask extends AsyncTask<Void, Void, ArrayList<LocationMarker>>{
 	private ArrayList<NameValuePair> al = new ArrayList<NameValuePair>();
 	private final String url = "http://129.16.237.71/php_mysql/getLocation.php";
 	public GetLocationTask(){
 		
 	}
 	
-	
-	public ArrayList<LocationPair> getLocation() throws Exception{
-		ArrayList<LocationPair> lpArray = new ArrayList<LocationPair>();
+	public ArrayList<LocationMarker> getLocation() throws Exception{
+		ArrayList<LocationMarker> lpArray = new ArrayList<LocationMarker>();
+
 		
 		HttpClient httpClient = new DefaultHttpClient();//used to execute post
 		HttpPost httpPost = new HttpPost(url);
@@ -47,7 +47,7 @@ public class GetLocationTask extends AsyncTask<Void, Void, ArrayList<LocationPai
 		JSONObject json_data = new JSONObject();		
 		Log.d("HEJ",""+jArray.length());
 		for (int i=0; i<jArray.length(); i++){
-		LocationPair lp = new LocationPair();
+		LocationMarker lp = new LocationMarker();
 			json_data = jArray.getJSONObject(i);
 			//JSONArray tags = new JSONArray(json_data.getString("tags"));
 			//JSONArray locations = new JSONArray(json_data.getString("locations"));
@@ -85,7 +85,7 @@ public class GetLocationTask extends AsyncTask<Void, Void, ArrayList<LocationPai
 						
 	}
 	@Override
-	protected ArrayList<LocationPair> doInBackground(Void... params) {
+	protected ArrayList<LocationMarker> doInBackground(Void... params) {
 	try {
 		return getLocation();
 	} catch (Exception e) {
@@ -96,7 +96,7 @@ public class GetLocationTask extends AsyncTask<Void, Void, ArrayList<LocationPai
 	}
 	
 	@Override
-	protected void onPostExecute(ArrayList<LocationPair> result){
+	protected void onPostExecute(ArrayList<LocationMarker> result){
 		
 	}
 	public void setMinMaxLatLng(double minLat, double minLng, double maxLat, double maxLng ){

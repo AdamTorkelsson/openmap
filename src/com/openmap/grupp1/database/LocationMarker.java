@@ -7,7 +7,7 @@ import org.apache.http.message.BasicNameValuePair;
 
 import com.google.android.gms.maps.model.LatLng;
 
-public class LocationPair {
+public class LocationMarker {
 	
 	String title;
 	double lat;
@@ -15,10 +15,10 @@ public class LocationPair {
 	LatLng loc;
 	String desc = "No description";
 	String[] tags;
-	public LocationPair(){
+	public LocationMarker(){
 		
 	}
-	public LocationPair(String title, double lat, double lng, String desc, String[] tags){
+	public LocationMarker(String title, double lat, double lng, String desc, String[] tags){
 		this.title	=	title;
 		this.lat	=	lat;
 		this.lng	=	lng;
@@ -28,7 +28,7 @@ public class LocationPair {
 		
 	}
 
-	public LocationPair(String title, LatLng loc, String desc, String[] tags){
+	public LocationMarker(String title, LatLng loc, String desc, String[] tags){
 		this.title	=	title;
 		this.loc	=	loc;
 		this.lat	=	loc.latitude;
@@ -37,7 +37,7 @@ public class LocationPair {
 		this.tags	=	tags;
 	}
 	
-	public LocationPair(String title, double lat, double lng, String[] tags){
+	public LocationMarker(String title, double lat, double lng, String[] tags){
 		this.title	=	title;
 		this.lat	=	lat;
 		this.lng	=	lng;
@@ -45,7 +45,7 @@ public class LocationPair {
 		this.tags	=	tags;
 	}
 
-	public LocationPair(String title, LatLng loc, String[] tags){
+	public LocationMarker(String title, LatLng loc, String[] tags){
 		this.title	=	title;
 		this.loc	=	loc;
 		this.lat	=	loc.latitude;

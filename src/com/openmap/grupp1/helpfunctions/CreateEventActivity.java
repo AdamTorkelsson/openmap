@@ -73,7 +73,7 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 	public void onCreate(Bundle savedInstanceState){
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "INCREATEEVENT");
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.createeventactivityview);
+		setContentView(R.layout.createeventview);
 		this.image = (ImageView) findViewById(R.id.imageView);
 
 		setStartDate = (TextView)findViewById(R.id.setStartDate);

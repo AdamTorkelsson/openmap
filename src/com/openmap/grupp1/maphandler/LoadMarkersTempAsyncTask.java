@@ -19,8 +19,12 @@ import com.google.android.gms.maps.model.VisibleRegionCreator;
 import com.openmap.grupp1.R;
 import com.openmap.grupp1.R.drawable;
 import com.openmap.grupp1.database.GetLocationTask;
+<<<<<<< HEAD
 import com.openmap.grupp1.database.LocationPair;
 import com.openmap.grupp1.mapview.MarkerFactory;
+=======
+import com.openmap.grupp1.database.LocationMarker;
+>>>>>>> 882d9aa039d775475357c89cb33a9aea9ef5cdfc
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -34,14 +38,14 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class LoadMarkersTempAsyncTask extends AsyncTask<Void,LocationPair,Integer>{
+public class LoadMarkersTempAsyncTask extends AsyncTask<Void,LocationMarker,Integer>{
 	private GoogleMap myMap;
 	private Resources res;
 	private Bitmap scr;
 	private double p = 0.1;
 	private Boolean over100markers = false;
-	private ArrayList<LocationPair> databaselocationpair;
-	private ArrayList<LocationPair> createdLatLng = new ArrayList<LocationPair>();
+	private ArrayList<LocationMarker> databaselocationpair;
+	private ArrayList<LocationMarker> createdLatLng = new ArrayList<LocationMarker>();
 	private ArrayList<Marker> createdMarkers = new ArrayList<Marker>();
 	private LatLng farright;
 	private LatLng nearleft;
@@ -86,7 +90,7 @@ public class LoadMarkersTempAsyncTask extends AsyncTask<Void,LocationPair,Intege
 	@Override
 	protected Integer doInBackground(Void... params) {
 		
-			for(LocationPair ll : databaselocationpair){
+			for(LocationMarker ll : databaselocationpair){
 			//	Log.d("Text","LoadMarkersAsyncTask2.2");
 				if(!createdLatLng.contains(ll)){
 					//scr = createPic(ll.getTitle(), "Location");
@@ -107,7 +111,7 @@ public class LoadMarkersTempAsyncTask extends AsyncTask<Void,LocationPair,Intege
 			
 			return 1;
 	}
-	protected void onProgressUpdate(LocationPair... params){
+	protected void onProgressUpdate(LocationMarker... params){
 		Marker m = myMap.addMarker(new MarkerOptions()
 		.position(params[0].getLatLng())
 		.icon(BitmapDescriptorFactory
