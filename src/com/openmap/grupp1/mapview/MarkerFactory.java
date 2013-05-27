@@ -1,4 +1,4 @@
-package com.openmap.grupp1.maphandler;
+package com.openmap.grupp1.mapview;
 
 import com.openmap.grupp1.R;
 import com.openmap.grupp1.R.drawable;

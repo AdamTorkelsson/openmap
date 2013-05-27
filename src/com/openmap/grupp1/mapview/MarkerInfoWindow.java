@@ -1,4 +1,4 @@
-package com.openmap.grupp1.maphandler;
+package com.openmap.grupp1.mapview;
 
 import java.util.concurrent.ExecutionException;
 
@@ -23,6 +23,7 @@ import com.openmap.grupp1.R;
 import com.openmap.grupp1.TutorialPopupDialog;
 import com.openmap.grupp1.database.GetLocationTask;
 import com.openmap.grupp1.database.LocationPair;
+import com.openmap.grupp1.maphandler.NearEventNotifier;
 
 public class MarkerInfoWindow {
 double s = 0;

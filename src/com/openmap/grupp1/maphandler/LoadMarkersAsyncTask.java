@@ -51,6 +51,7 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationPair,Integer>{
 	private GetLocationTask glt;
 	private int deletenumber = 0;
 	private int k = 0;
+	
 	public LoadMarkersAsyncTask(GoogleMap myMap, Resources res){
 
 		this.myMap = myMap;
@@ -83,7 +84,6 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationPair,Integer>{
 		Log.d("Text","LoadMarkersAsyncTask12" + databaselocationpair.get(0).getLatitute());
 		Log.d("Text","LoadMarkersAsyncTask12" + databaselocationpair.get(0).getLongitude());
 		Log.d("Text","LoadMarkersAsyncTask1" + database.toString());
-		//database = new LatLngBounds(nearleft,farright);
 		checkAndSetNewBounds();
 
 	}

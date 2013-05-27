@@ -108,11 +108,11 @@ public class GetLocationTask extends AsyncTask<Void, Void, ArrayList<LocationPai
 		
 	}
 	public void getLocationPairFromLatLng(LatLng ll) throws InterruptedException, ExecutionException{
-		DecimalFormat df = new DecimalFormat("###.#################");
-		Log.d("FUNKAR DF ELLER?!",""+df.format(ll.latitude)+""+df.format(ll.longitude));
+		
+	
 		al.add(new BasicNameValuePair("restraint", "fromLatLng"));
-		al.add(new BasicNameValuePair("lat",""+df.format(ll.latitude)));
-		al.add(new BasicNameValuePair("lng",""+df.format(ll.longitude)));
+		al.add(new BasicNameValuePair("lat",""+ll.latitude));
+		al.add(new BasicNameValuePair("lng",""+ll.longitude));
 
 		}
 }
