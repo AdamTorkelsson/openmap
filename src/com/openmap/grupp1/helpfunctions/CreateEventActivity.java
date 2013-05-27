@@ -1,4 +1,4 @@
-package com.openmap.grupp1;
+package com.openmap.grupp1.helpfunctions;
 /*
  * Create event activity where the user sets title and description and maybe adds an photo.
  * Needs to be added an event time chooser
@@ -8,8 +8,13 @@ package com.openmap.grupp1;
 import java.io.File;
 import java.util.Calendar;
 
-import com.openmap.grupp1.DatePickerFragment.DatePickerDialogListener;
-import com.openmap.grupp1.TimePickerFragment.TimePickerDialogListener;
+import com.openmap.grupp1.R;
+import com.openmap.grupp1.TutorialPopupDialog;
+import com.openmap.grupp1.R.id;
+import com.openmap.grupp1.R.layout;
+import com.openmap.grupp1.R.string;
+import com.openmap.grupp1.helpfunctions.DatePickerFragment.DatePickerDialogListener;
+import com.openmap.grupp1.helpfunctions.TimePickerFragment.TimePickerDialogListener;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;

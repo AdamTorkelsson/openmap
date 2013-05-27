@@ -1,4 +1,10 @@
-package com.openmap.grupp1;
+package com.openmap.grupp1.helpfunctions;
+
+import com.openmap.grupp1.R;
+import com.openmap.grupp1.R.anim;
+import com.openmap.grupp1.R.array;
+import com.openmap.grupp1.R.id;
+import com.openmap.grupp1.R.layout;
 
 import android.app.Activity;
 import android.content.Context;

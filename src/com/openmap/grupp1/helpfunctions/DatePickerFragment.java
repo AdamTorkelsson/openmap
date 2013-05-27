@@ -1,4 +1,4 @@
-package com.openmap.grupp1;
+package com.openmap.grupp1.helpfunctions;
 
 import java.util.Calendar;
 

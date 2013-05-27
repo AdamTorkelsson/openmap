@@ -1,7 +1,13 @@
 package com.openmap.grupp1;
 
 
+
+import java.util.concurrent.ExecutionException;
+
 import com.google.android.gms.maps.model.LatLng;
+import com.openmap.grupp1.database.UserLoginAndRegistrationTask;
+import com.openmap.grupp1.helpfunctions.SettingsActivity;
+import com.openmap.grupp1.maphandler.MyMap;
 
 
 import android.app.ActionBar;
@@ -49,28 +55,49 @@ public class MainActivity extends Activity
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker-3");
 
 		myMap.setMap("Hybrid");
-		TutorialPopupDialog TPD = new TutorialPopupDialog(this);
-		TPD.dialogHandler();
+	
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker-1");
 		SharedPreferences settings= getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
 		this.settings = settings;
-		SharedPreferences.Editor editor = settings.edit();
-		editor.putBoolean("createMarker", false);
-		editor.commit();
-		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker-2");
+	//	Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker-2");
+
+		UserLoginAndRegistrationTask ular = 
+				new UserLoginAndRegistrationTask(
+						settings.getString("LoginUsername", "Adam"),
+						settings.getString("LoginPassword", "1234"));
+		ular.loginUser();
+
+		try {
+			if(!ular.get()){
+				Intent login = new Intent(this,LoginRegisterActivity.class);
+				startActivity(login);
+				TutorialPopupDialog TPD = new TutorialPopupDialog(this);
+				TPD.dialogHandler();
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		
 		 	
 	}	 
 
 
-
+	public void onStart(){
+		super.onStart();
+		Log.d("Adamärbäst", "onStart1");
+	}
 	@Override
 	public void onResume(){
 		super.onResume();
-		overridePendingTransition(R.anim.map_in,R.anim.other_out);
-		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker2");
+		//overridePendingTransition(R.anim.map_in,R.anim.other_out);
+		//Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker2");
 
-		String mapSetting = settings.getString("map", null);
+		String mapSetting = settings.getString("map", "Error");
 		myMap.setMap(mapSetting);
 
 	}

@@ -1,4 +1,4 @@
-package com.openmap.grupp1;
+package com.openmap.grupp1.database;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,10 @@
-package com.openmap.grupp1;
+package com.openmap.grupp1.maphandler;
+
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.Random;
+
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -20,6 +22,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.plus.model.people.Person.Image;
+import com.openmap.grupp1.CreateDialogs;
+import com.openmap.grupp1.R;
+import com.openmap.grupp1.R.id;
 
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -115,7 +120,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär4");
 		// request updates every 100 second, Change to every 5 minutes
-		lm.requestLocationUpdates(provider, 50000, 1, this);
+		lm.requestLocationUpdates(provider, 5000, 1, this);
 
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "ListenerStep2");
 
@@ -161,7 +166,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 			editor.commit();
 			
 			
-			CameraUpdate update = CameraUpdateFactory.newLatLngZoom(point,myMap.getMaxZoomLevel()-3); 
+			CameraUpdate update = CameraUpdateFactory.newLatLngZoom(point,myMap.getMaxZoomLevel()-4); 
 			myMap.animateCamera(update);
 			Marker marker = myMap.addMarker(new MarkerOptions().position(point).title("This location?"));
 			marker.showInfoWindow();
@@ -182,7 +187,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		if(map.equals("Terrain"))	 
 			myMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 	}
-
+	MarkerInfoWindow infowindow = new MarkerInfoWindow();
 
 	@Override
 	public boolean onMarkerClick(Marker marker) {
@@ -195,10 +200,9 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 		 * change it to LatLng by " new LatLng(marker.getPosition().latitude,...)
 		 */
 
-		CreateDialogs showinfo = new CreateDialogs();
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "hej1");
-		showinfo.showInfo(context, marker.getPosition(), res, myMap,"Title test","Description test" );
-		marker.setVisible(true);
+		infowindow.showInfo(context, marker.getPosition(), res, myMap,"Title test","Description test" );
+
 		return true; 
 	}
 
@@ -213,7 +217,7 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	public void onLocationChanged(Location arg0) {
 		MYLOCATION = new LatLng(arg0.getLatitude(), arg0.getLongitude());
 		//move camera to your positon
-		nen.checklocationandevent(arg0);
+	//nen.checklocationandevent(arg0);
 
 		//myMap.addMarker(new MarkerOptions().position(MYLOCATION).title("Your Position2"));
 		//	neEvNotifier.checklocationandevent(arg0);
@@ -253,7 +257,6 @@ OnMarkerClickListener , LocationListener , OnCameraChangeListener{
 	}*/
 
 	public GoogleMap getMap() {
-
 		return myMap;
 	}
 

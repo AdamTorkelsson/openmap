@@ -1,10 +1,12 @@
-package com.openmap.grupp1;
+package com.openmap.grupp1.maphandler;
 /*
  * Notifycenter
  * Used the old version due to the need of high level of api for the new one
  * Is called on from NearEventNotifier, 
  */
 
+
+import com.openmap.grupp1.MainActivity;
 
 import android.R;
 import android.app.Notification;
@@ -56,7 +58,7 @@ registerReceiver(notifyServiceReceiver, intentFilter);
 notificationManager =
  (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
 //CHANGE THIS PICTURE
-	myNotification = new Notification(R.drawable.arrow_up_float,
+	myNotification = new Notification(R.drawable.alert_dark_frame,
   "You are logged in at " + notificationTitle,
   System.currentTimeMillis());
 Context context = getApplicationContext();

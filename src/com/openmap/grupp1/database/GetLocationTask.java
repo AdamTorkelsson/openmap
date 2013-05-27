@@ -1,4 +1,4 @@
-package com.openmap.grupp1;
+package com.openmap.grupp1.database;
 
 import java.util.ArrayList;
 
@@ -14,13 +14,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 
+
 import android.os.AsyncTask;
 import android.util.Log;
 
 
 public class GetLocationTask extends AsyncTask<Void, Void, ArrayList<LocationPair>>{
 	private ArrayList<NameValuePair> al = new ArrayList<NameValuePair>();
-	private final String url = "http://129.16.232.157/php_mysql/getLocation.php";
+	private final String url = "http://129.16.237.71/php_mysql/getLocation.php";
 	public GetLocationTask(){
 		
 	}

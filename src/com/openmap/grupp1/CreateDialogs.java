@@ -28,6 +28,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.openmap.grupp1.helpfunctions.CreateEventActivity;
+import com.openmap.grupp1.maphandler.MarkerFactory;
 
 public class CreateDialogs {
 	
