@@ -11,7 +11,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.openmap.grupp1.R;
 import com.openmap.grupp1.TutorialPopupDialog;
 import com.openmap.grupp1.database.GetLocationTask;
-import com.openmap.grupp1.database.LocationPair;
+import com.openmap.grupp1.database.LocationMarker;
 
 import android.content.Context;
 import android.content.Intent;
@@ -36,18 +36,18 @@ public class NearEventNotifier {
 
 	private double shortest = 15; // minimum length to be at an event or an location
 	private double lengthtoevent = 0; //Temporary , holds the closest event while going throw the array from the database
-	private LocationPair closestevent; // Temporary holds the closest event
+	private LocationMarker closestevent; // Temporary holds the closest event
 	private ArrayList<LatLng> databaselatlng = new ArrayList<LatLng>(); // the latlng from the database
 	private Location event = new Location("Temporary holds events to check which closest");
-	private LocationPair questionlocation;
+	private LocationMarker questionlocation;
 	//easy way to see if it works
 	private LatLng	checkedIn = new LatLng(0, 0);
 	private LatLng atlocation = new LatLng(0, 0);
 
 	private final String A = "NearEventNotifier";
 	private double area =  0.00015;
-	private LocationPair locationpair;
-	private ArrayList<LocationPair> databasearray;
+	private LocationMarker locationpair;
+	private ArrayList<LocationMarker> databasearray;
 	
 	public NearEventNotifier(Location lastKnownLocation,GoogleMap myMap,Context context ){
 		Log.d(A, "NearEventstep0");
@@ -108,7 +108,7 @@ public class NearEventNotifier {
 		
 
 			//Finds the closest event
-			for(LocationPair ll : databasearray){
+			for(LocationMarker ll : databasearray){
 			
 				event.setLatitude(ll.getLatitute());
 				event.setLongitude(ll.getLongitude());

@@ -14,8 +14,8 @@ import com.openmap.grupp1.R.layout;
 import com.openmap.grupp1.R.menu;
 import com.openmap.grupp1.R.string;
 import com.openmap.grupp1.database.AddLocationTask;
-import com.openmap.grupp1.database.LocationPair;
-import com.openmap.grupp1.database.EventPair;
+import com.openmap.grupp1.database.LocationMarker;
+import com.openmap.grupp1.database.EventMarker;
 import com.openmap.grupp1.database.RequestTagDbTask;
 
 import android.app.ActionBar;
@@ -60,22 +60,27 @@ SearchView.OnCloseListener{
 	private Context context = this;
 	private final String PREFS_NAME = "MySharedPrefs";
 	private SharedPreferences settings;
-	private LocationPair newMarker;
+	private LocationMarker newMarker;
 
 
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.addtagview);
+
+		//Sets the view for the activity
+		setContentView(R.layout.addeventview);
+
+		//Sets the animation for changing to this activity
 		overridePendingTransition(R.anim.map_out,R.anim.other_in);
 
+		//Declares the listviews for the view 
 		listViewSearched = (ListView) findViewById(R.id.addtag_list_searched);
 		listViewAdded = (ListView) findViewById(R.id.addtag_list_added);
 
-
-
+		//Sets the adapter between the arraylist and the listview to be able to load content from the list
 		addedTagsAdapter =      
 				new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, addedTags);
 		listViewAdded.setAdapter(addedTagsAdapter);
+
 		// Define the on-click listener for listViewSearched
 		listViewSearched.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -103,58 +108,62 @@ SearchView.OnCloseListener{
 				//Adds the tag to listViewSearched to the left if it doesn't exist in it and removes it from listViewAdded
 				if(searchedTags != null && !searchedTags.contains(removeItem)) {
 
+					//If the tag isnt new it will put it back in to the searchedtags listview
 					if(!newTags.contains(removeItem)) {
 						searchedTags.add(removeItem);
 						searchedTagsAdapter.notifyDataSetChanged();
 					}
+
+					//If the tag is new and removed it will be removed from the newTags list
 					else {
 						newTags.remove(removeItem);
 					}
 				}
-				
+
 				else{
 					//
 				}
+				//Removes the tag from the listview to the right
 				addedTags.remove(removeItem);
 				addedTagsAdapter.notifyDataSetChanged();
 
 			}
 		}
-	);
+				);
 
-
+		//Declares the buttons in the bottom and sets them clickable
 		Button buttonTag	  = (Button) findViewById(R.id.buttonTag);
 		Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
-
-
 		buttonTag.setClickable(true);
 		buttonCancel.setClickable(true);
 
 
+		//Define the onClickListener
 		buttonTag.setOnClickListener(new OnClickListener(){
-
 			@Override
 			public void onClick(View arg0) {
-				//skicka till databasen
+				//Creates a dialog if there are no added tags and tells you no tags have been added
 				if (addedTags.isEmpty()) {
 					TutorialPopupDialog TPD = new TutorialPopupDialog(context);
 					TPD.standardDialog(R.string.noAddedTags,"Ok",false);
 				}
-				else {
 
-					
+				//Sends the new marker and its information to the database
+				else {
 					settings = context.getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
 					String[] addedTagsArray = addedTags.toArray(new String[addedTags.size()]);
 
+					//Sends a marker of type LocationMarker if it is a location
 					if (!settings.getBoolean("isEvent", false)) {
-						newMarker = new LocationPair(settings.getString("markerTitle","System Failure"),
-							Double.valueOf(settings.getString("markerLat","System failure lat")),
-							Double.valueOf(settings.getString("markerLng","System Failure lng")),
-							settings.getString("markerDescription","System failure desc"),
-							addedTagsArray);
+						newMarker = new LocationMarker(settings.getString("markerTitle","System Failure"),
+								Double.valueOf(settings.getString("markerLat","System failure lat")),
+								Double.valueOf(settings.getString("markerLng","System Failure lng")),
+								settings.getString("markerDescription","System failure desc"),
+								addedTagsArray);
 					}
+					//Creates a marker of type EventMarker if it is an event
 					else if (settings.getBoolean("isEvent", false)) {
-						newMarker = new EventPair(settings.getString("markerTitle","System Failure"),
+						newMarker = new EventMarker(settings.getString("markerTitle","System Failure"),
 								Double.valueOf(settings.getString("markerLat","System failure lat")),
 								Double.valueOf(settings.getString("markerLng","System Failure lng")),
 								settings.getString("markerDescription","System failure desc"),
@@ -165,9 +174,12 @@ SearchView.OnCloseListener{
 								settings.getString("markerEndTime","System Failure endTime"));
 					}
 
+					else {
+						//
+					}
 
 
-
+					//Sends the new marker to the database
 					try {
 						AddLocationTask addLocationTask = new AddLocationTask();
 						addLocationTask.execute(newMarker.getPairsList());
@@ -176,124 +188,136 @@ SearchView.OnCloseListener{
 						e.printStackTrace();
 					}
 
-					SharedPreferences.Editor editor = settings.edit();
-
-			        Set<String> set = new HashSet<String>(addedTags);
-
-					editor.putStringSet("tagSet", set);
-					editor.putBoolean("createMarker", true);
-					editor.commit();
+					//Hides the keyboard to get a smoother transition from this activity to the map
 					InputMethodManager imm = (InputMethodManager)context.getSystemService( Context.INPUT_METHOD_SERVICE);
 					imm.hideSoftInputFromWindow(((Activity) context).getCurrentFocus().getWindowToken(),      
 							InputMethodManager.HIDE_NOT_ALWAYS);
+
+					//Closes this activity
 					finish();
 				}
 			}
 
 		});
 
+		//Sets the clicklistener for the cancel button which exits this activity and goes to the map
 		buttonCancel.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
+
+				//Hides the keyboard to get a smoother transition from this activity to the map
 				InputMethodManager imm = (InputMethodManager)context.getSystemService( Context.INPUT_METHOD_SERVICE);
 				imm.hideSoftInputFromWindow(((Activity) context).getCurrentFocus().getWindowToken(),      
 						InputMethodManager.HIDE_NOT_ALWAYS);
-				finish();			}});
 
+				//Closes this activity
+				finish();
+			}
+		});
+	}
 
-}
+	//Creates the option menu
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.addtagmenu, menu);
+		ActionBar ab = getActionBar();
+		ab.setDisplayShowTitleEnabled(false);
+		ab.setDisplayShowHomeEnabled(false);
 
-
-@Override
-public boolean onCreateOptionsMenu(Menu menu) {
-	super.onCreateOptionsMenu(menu);
-	MenuInflater inflater = getMenuInflater();
-	inflater.inflate(R.menu.addtagmenu, menu);
-	ActionBar ab = getActionBar();
-	ab.setDisplayShowTitleEnabled(false);
-	ab.setDisplayShowHomeEnabled(false);
-
-
-	searchView = (SearchView) menu.findItem(R.id.addtagmenu_search).getActionView();
-	searchView.setIconifiedByDefault(false);
-	searchView.setOnQueryTextListener(this);
-	searchView.setOnCloseListener(this);
-	searchView.setQueryHint("Search tags");
-	searchView.requestFocus();
-
-
-	return true;
-
-}
-public boolean onOptionsItemSelected(MenuItem item) {
-	switch (item.getItemId()) {
-	case R.id.addtagmenu_add:
-		String newTag = searchView.getQuery().toString();
-		if(newTag != null && !addedTags.contains(newTag) && !newTag.isEmpty() && !newTag.startsWith(" ")) {
-			newTags.add(newTag);
-			addedTags.add(newTag);
-			addedTagsAdapter.notifyDataSetChanged();
-		}
-		else {
-			TutorialPopupDialog TPD = new TutorialPopupDialog(this);
-			TPD.standardDialog(R.string.wrongAddedTag,"Ok",false);
-		}
+		//Defines the searchview and its properties
+		searchView = (SearchView) menu.findItem(R.id.addtagmenu_search).getActionView();
+		searchView.setIconifiedByDefault(false);
+		searchView.setOnQueryTextListener(this);
+		searchView.setOnCloseListener(this);
+		searchView.setQueryHint("Search tags");
+		searchView.requestFocus();
 		return true;
-	default:
-		return super.onOptionsItemSelected(item);
+
 	}
-}
-
-@Override
-protected void onDestroy() {
-	super.onDestroy();
-	//
-}
-
-public boolean onQueryTextChange(String newText) {
-	showResults(newText);
-	return false;
-}
-
-public boolean onQueryTextSubmit(String query) {
-	showResults(query);
-	return false;
-}
-
-public boolean onClose() {
-	showResults("");
-	return false;
-}
-
-
-
-
-
-private void showResults(String query) {
-
-	try {
-		mDbHelper = new RequestTagDbTask();
-		searchedTags = mDbHelper.getTagArray(query);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (ExecutionException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+	
+	//Adds the functionality for when clicking the buttons in the options menu
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		
+		//Adds the new tag to the added tags listview to the right in the view
+		case R.id.addtagmenu_add:
+			String newTag = searchView.getQuery().toString();
+			if(newTag != null && !addedTags.contains(newTag) && !newTag.isEmpty() && !newTag.startsWith(" ")) {
+				newTags.add(newTag);
+				addedTags.add(newTag);
+				addedTagsAdapter.notifyDataSetChanged();
+			}
+			//Show a dialog if the newTag is null, empty, starts with a blank character or is already in the added tags listview
+			else {
+				TutorialPopupDialog TPD = new TutorialPopupDialog(this);
+				TPD.standardDialog(R.string.wrongAddedTag,"Ok",false);
+			}
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
-	if (searchedTags != null && !searchedTags.isEmpty() && searchedTags.get(0) != null) {
-		searchedTagsAdapter =      
-				new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, searchedTags);
-		listViewSearched.setAdapter(searchedTagsAdapter);
-	} 
-	else {
-		searchedTags = new ArrayList<String>();
-		searchedTagsAdapter =      
-				new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, searchedTags);
-		listViewSearched.setAdapter(searchedTagsAdapter);		
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		//
 	}
-}
+
+	//Calls the showResults method which shows the results when text is inserted into the searchview in the menu
+	public boolean onQueryTextChange(String newText) {
+		showResults(newText);
+		return false;
+	}
+
+	//Calls the showResults method which shows the results when the searchbutton is pressed
+	public boolean onQueryTextSubmit(String query) {
+		showResults(query);
+		return false;
+	}
+
+	//Empties the searched tags listview to the left if you close the searchview 
+	public boolean onClose() {
+		showResults("");
+		return false;
+	}
+
+
+
+
+	//Shows the results in the searched tags listview to the left
+	private void showResults(String query) {
+
+		try {
+			//Creates the object which talks to the database and sends the query to the database
+			mDbHelper = new RequestTagDbTask();
+			searchedTags = mDbHelper.getTagArray(query);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		/*If the searchedTags array is non-null, non-empty and doesnt start with a null object 
+		it sets the searched tags listview content to the gotten array */
+		if (searchedTags != null && !searchedTags.isEmpty() && searchedTags.get(0) != null) {
+			searchedTagsAdapter =      
+					new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, searchedTags);
+			listViewSearched.setAdapter(searchedTagsAdapter);
+		} 
+		
+		//If it doesnt go into the if statement it will set the searched tags listview to an empty list
+		else {
+			searchedTags = new ArrayList<String>();
+			searchedTagsAdapter =      
+					new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, searchedTags);
+			listViewSearched.setAdapter(searchedTagsAdapter);		
+		}
+	}
 
 }
 

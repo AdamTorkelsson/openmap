@@ -7,13 +7,13 @@ import org.apache.http.message.BasicNameValuePair;
 
 import com.google.android.gms.maps.model.LatLng;
 
-public class EventPair extends LocationPair {
+public class EventMarker extends LocationMarker {
 	String startDay;
 	String stopDay;
 	String startTime;
 	String stopTime;
 	
-	public EventPair(String title, double lat, double lng, String desc, String[] tags, String startDay, String stopDay, String startTime, String stopTime ){
+	public EventMarker(String title, double lat, double lng, String desc, String[] tags, String startDay, String stopDay, String startTime, String stopTime ){
 		this.title	=	title;
 		this.lat	=	lat;
 		this.lng	=	lng;
@@ -27,7 +27,7 @@ public class EventPair extends LocationPair {
 		
 	}
 
-	public EventPair(String title, LatLng loc, String desc, String[] tags, String startDay, String stopDay, String startTime, String stopTime){
+	public EventMarker(String title, LatLng loc, String desc, String[] tags, String startDay, String stopDay, String startTime, String stopTime){
 		this.title	=	title;
 		this.loc	=	loc;
 		this.lat	=	loc.latitude;
@@ -40,7 +40,7 @@ public class EventPair extends LocationPair {
 		this.stopTime = stopTime;
 	}
 	
-	public EventPair(String title, double lat, double lng, String[] tags, String startDay, String stopDay, String startTime, String stopTime){
+	public EventMarker(String title, double lat, double lng, String[] tags, String startDay, String stopDay, String startTime, String stopTime){
 		this.title	=	title;
 		this.lat	=	lat;
 		this.lng	=	lng;
@@ -52,7 +52,7 @@ public class EventPair extends LocationPair {
 		this.stopTime = stopTime;
 	}
 
-	public EventPair(String title, LatLng loc, String[] tags, String startDay, String stopDay, String startTime, String stopTime){
+	public EventMarker(String title, LatLng loc, String[] tags, String startDay, String stopDay, String startTime, String stopTime){
 		this.title	=	title;
 		this.loc	=	loc;
 		this.lat	=	loc.latitude;

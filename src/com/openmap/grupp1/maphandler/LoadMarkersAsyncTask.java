@@ -18,7 +18,7 @@ import com.google.android.gms.maps.model.VisibleRegionCreator;
 import com.openmap.grupp1.R;
 import com.openmap.grupp1.R.drawable;
 import com.openmap.grupp1.database.GetLocationTask;
-import com.openmap.grupp1.database.LocationPair;
+import com.openmap.grupp1.database.LocationMarker;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -32,14 +32,14 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationPair,Integer>{
+public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationMarker,Integer>{
 	private GoogleMap myMap;
 	private Resources res;
 	private Bitmap scr;
 	private double p = 0.1;
 	private Boolean over100markers = false;
-	private ArrayList<LocationPair> databaselocationpair;
-	private ArrayList<LocationPair> createdLatLng = new ArrayList<LocationPair>();
+	private ArrayList<LocationMarker> databaselocationpair;
+	private ArrayList<LocationMarker> createdLatLng = new ArrayList<LocationMarker>();
 	private ArrayList<Marker> createdMarkers = new ArrayList<Marker>();
 	private LatLng farright;
 	private LatLng nearleft;
@@ -115,7 +115,7 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationPair,Integer>{
 		while(createdLatLng.size() < 100){
 			Log.d("Text","LoadMarkersAsyncTask2.1");
 			int i = 0;
-			for(LocationPair ll : databaselocationpair){
+			for(LocationMarker ll : databaselocationpair){
 				Log.d("Text","LoadMarkersAsyncTask2.2");
 				if(llb.contains(ll.getLatLng())
 						//AKTA UTROPSTECKNET HÄR
@@ -197,7 +197,7 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationPair,Integer>{
 			}
 			Log.d("Text","LoadMarkersAsyncTask4.1");
 			int i = 0;
-			for(LocationPair ll : databaselocationpair){
+			for(LocationMarker ll : databaselocationpair){
 				Log.d("Text","LoadMarkersAsyncTask4.2");
 				if(llb.contains(ll.getLatLng())
 						//AKTA UTROPSTECKNET HÄR
@@ -265,7 +265,7 @@ public class LoadMarkersAsyncTask extends AsyncTask<Void,LocationPair,Integer>{
 	}
 
 
-	protected void onProgressUpdate(LocationPair... params){
+	protected void onProgressUpdate(LocationMarker... params){
 		if(over100markers){
 			createdMarkers.get(deletenumber).remove();
 			createdMarkers.remove(deletenumber);

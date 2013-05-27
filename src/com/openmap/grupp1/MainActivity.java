@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutionException;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.openmap.grupp1.database.UserLoginAndRegistrationTask;
+import com.openmap.grupp1.helpfunctions.SearchTagActivity;
 import com.openmap.grupp1.helpfunctions.SettingsActivity;
 import com.openmap.grupp1.maphandler.MyMap;
 
