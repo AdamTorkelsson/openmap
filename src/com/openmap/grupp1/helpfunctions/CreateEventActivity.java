@@ -5,6 +5,8 @@ package com.openmap.grupp1.helpfunctions;
  * Connect title and description to database IF he clicks create in next step
  * 
  */
+
+
 import java.io.File;
 import java.util.Calendar;
 
