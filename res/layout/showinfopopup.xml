@@ -1,55 +1,111 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/markerCategory"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/markerTitle"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:alpha="1"
-    android:background="#FFFF7E"
-    android:orientation="vertical" >
+    android:layout_height="fill_parent"
+    android:alpha="0.5"
+    android:background="#FFFFFF" >
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/txtTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:id="@+id/titleView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="hej"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-    </LinearLayout>
+        android:layout_alignParentTop="true"
+        android:background="#FFFFFF"
+        android:text="@string/title"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/linearlayout2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_below="@+id/txtTitle"
+        android:orientation="vertical"
+        android:paddingTop="5dp" >
 
-        <TextView
-            android:id="@+id/descriptionView1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:orientation="horizontal" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/startText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:onClick="showDatePickerDialog"
+                android:paddingLeft="15dp"
+                android:text="@string/starts"
+                android:textSize="14sp" />
 
-        <Button
-             style="?android:attr/buttonStyleSmall"
-            android:id="@+id/CancelB"
-            android:text="Cancel"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.5" />
+            <TextView
+                android:id="@+id/startDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:onClick="showTimePickerDialog"
+                android:paddingLeft="15dp"
+                android:textSize="14sp" />
+        </LinearLayout>
 
-        <Button
-             style="?android:attr/buttonStyleSmall"
-            android:id="@+id/OkB"
-            android:text="I'm here"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.5" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/endText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:onClick="showDatePickerDialog"
+                android:paddingLeft="15dp"
+                android:text="@string/ends"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/endDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:onClick="showTimePickerDialog"
+                android:paddingLeft="15dp"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtDescription"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/buttons"
+        android:layout_below="@+id/linearlayout2"
+        android:ems="10"
+        android:gravity="top"
+        android:text="@string/description"
+        android:paddingTop="10dp" />
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/CancelB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cancel" />
+
+        <Button
+            android:id="@+id/OkB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/imHere" />
+    </LinearLayout>
+
+</RelativeLayout>
