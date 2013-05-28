@@ -1,9 +1,6 @@
 package com.openmap.grupp1.maphandler;
 
 import android.content.Context;
-import android.location.LocationManager;
-import android.util.Log;
-
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.GoogleMap.OnCameraChangeListener;
@@ -16,6 +13,7 @@ private GoogleMap myMap;
 private Context context;
 private LatLng mylocation;
 private LatLngBounds database;
+private int i = 0;
 
 	public OnCameraChanges(GoogleMap myMap,Context context,LatLng mylocation){
 		myMap.setOnCameraChangeListener(this);
@@ -23,7 +21,12 @@ private LatLngBounds database;
 		this.myMap = myMap;
 		this.mylocation = mylocation;
 	}
-
+/*
+ * If you moves your camera it tells LoadMarkersAsynctask to load markers in the
+ * new area if the zoom level is higher than 6( this is because we want to prevent
+ *  to much markers on the screen. 
+ * */
+	
 	@Override
 	public void onCameraChange(CameraPosition arg0) {
 		Projection p = myMap.getProjection();
@@ -42,8 +45,12 @@ private LatLngBounds database;
 	
 		}}
 		
-		int i = 0;
+		
+	/*setandget bounds, first time it sets your location + some area around it. 
+	 * The rest of the times it sets it around the location were you have the camera.
+	*/
 		public LatLngBounds setandgetBounds(){
+			
 			if(i == 0){
 				database = new LatLngBounds(new LatLng(mylocation.latitude - 1, mylocation.longitude-1),new LatLng(
 						 mylocation.latitude+1,mylocation.longitude+1));

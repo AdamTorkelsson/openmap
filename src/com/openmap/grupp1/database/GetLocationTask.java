@@ -25,7 +25,7 @@ import android.util.Log;
 
 public class GetLocationTask extends AsyncTask<Void, Void, ArrayList<LocationMarker>>{
 	private ArrayList<NameValuePair> al = new ArrayList<NameValuePair>();
-	private final String url = "http://129.16.237.71/php_mysql/getLocation.php";
+	private final String url = "http://129.16.234.200/php_mysql/getLocation.php";
 	public GetLocationTask(){
 		
 	}

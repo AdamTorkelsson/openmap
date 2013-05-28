@@ -2,8 +2,6 @@ package com.openmap.grupp1.mapview;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
-
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -25,8 +23,7 @@ public OnMapLongClickLis(GoogleMap myMap,Context context){
 		this.myMap = myMap;
 	}
 	@Override
-	public void onMapLongClick(LatLng point) {
-		
+	public void onMapLongClick(LatLng point) {	
 		//Saves the latitude and longitude in the shared preferences to use in AddTagActivity
 		SharedPreferences settings = context.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = settings.edit();
