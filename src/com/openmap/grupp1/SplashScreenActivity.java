@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
-
+/*
+ * A splashscreen for when the user starts the program. 
+ */
 public class SplashScreenActivity extends Activity {
     private long ms=0;
     private long splashTime=3000;

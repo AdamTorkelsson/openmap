@@ -14,12 +14,14 @@ private Context context;
 private LatLng mylocation;
 private LatLngBounds database;
 private int i = 0;
+private MarkerHandler markerhandler;
 
 	public CameraChangeHandler(GoogleMap myMap,Context context,LatLng mylocation){
 		myMap.setOnCameraChangeListener(this);
 		this.context = context;
 		this.myMap = myMap;
 		this.mylocation = mylocation;
+		markerhandler = new MarkerHandler();
 	}
 /*
  * If you moves your camera it tells LoadMarkersAsynctask to load markers in the
@@ -32,41 +34,19 @@ private int i = 0;
 		Projection p = myMap.getProjection();
 		LatLng nearLeft = p.getVisibleRegion().nearLeft;
 		LatLng farRight = p.getVisibleRegion().farRight;
-		if(arg0.zoom > 6 && !database.contains(farRight) &&
-				!database.contains(nearLeft)){
-			myMap.clear();
+		if(arg0.zoom > 6 /*&& (!database.contains(farRight) &&
+				!database.contains(nearLeft)) || 
+				markerhandler.IfFull()*/){
 			
 			database = new LatLngBounds(
-					new LatLng(nearLeft.latitude-1,nearLeft.longitude-1),
-					new LatLng(farRight.latitude+1,farRight.longitude +1));
+					new LatLng(nearLeft.latitude,nearLeft.longitude),
+					new LatLng(farRight.latitude,farRight.longitude));
 			
-			LoadMarkersAsyncTask lmtat = new LoadMarkersAsyncTask(myMap,context.getResources(),database);
-			lmtat.execute();
-	
+			markerhandler.addMarkersToScreen(myMap,context.getResources(),database);
+
 		}}
 		
 		
-	/*setandget bounds, first time it sets your location + some area around it. 
-	 * The rest of the times it sets it around the location were you have the camera.
-	*/
-		public LatLngBounds setandgetBounds(){
-			
-			if(i == 0){
-				database = new LatLngBounds(new LatLng(mylocation.latitude - 1, mylocation.longitude-1),new LatLng(
-						 mylocation.latitude+1,mylocation.longitude+1));
-				i++;
-				return database;
-			}
-			
-			else{
-				Projection p = myMap.getProjection();
-				LatLng nearLeft = p.getVisibleRegion().nearLeft;
-				LatLng farRight = p.getVisibleRegion().farRight;
-				database = new LatLngBounds(new LatLng(nearLeft.latitude - 1, nearLeft.longitude-1),new LatLng(
-					 farRight.latitude+1,farRight.longitude+1));
-				return database;}
-		
-		}
 		
 	}
 

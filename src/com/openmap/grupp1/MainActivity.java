@@ -1,42 +1,36 @@
 package com.openmap.grupp1;
 
-
+/*
+ * The main activity is started after splashscreen.
+ * Creates myMapFragment that handels the mapfragment. 
+ */
 
 import java.util.concurrent.ExecutionException;
 
 
-import com.google.android.gms.maps.model.LatLng;
 import com.openmap.grupp1.database.UserLoginAndRegistrationTask;
 import com.openmap.grupp1.helpfunctions.SearchTagActivity;
 import com.openmap.grupp1.helpfunctions.SettingsActivity;
-import com.openmap.grupp1.maphandler.LoadMarkersAsyncTask;
-import com.openmap.grupp1.mapview.MyMap;
+import com.openmap.grupp1.mapview.MyMapFragment;
 import com.openmap.grupp1.temp.notfinished.LoadMarkersAsyncTaskTemp;
 
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.ServiceConnection;
-import android.location.Location;
-import android.location.LocationListener;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 
 
 public class MainActivity extends Activity 
 {
 
-	private MyMap myMap;
+	private MyMapFragment myMap;
 	public static final String PREFS_NAME = "MySharedPrefs";
 	private  boolean mBound = false;
 	private SharedPreferences settings;
@@ -54,12 +48,12 @@ public class MainActivity extends Activity
 		//Creating content view
 		setContentView(R.layout.activity_main);
 	
-		myMap = new MyMap(this);
-		
-		myMap.setMap("Hybrid");
+		//Creates the MyMapFragment which handle the map part of this activity
+		myMap = new MyMapFragment(this);
 	
 		/*Gets the previous login values if the user have logged in before
 		If the user havent logged in before the login activity starts
+		Starts an TutorialDialog also if the user have to log in or register
 		*/
 		settings= getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
 
@@ -72,7 +66,7 @@ public class MainActivity extends Activity
 		try {
 			if(!ular.get()){
 				startActivity(new Intent(this,LoginRegisterActivity.class));
-				TutorialPopupDialog TPD = new TutorialPopupDialog(this);
+				PopupandDialogHandler TPD = new PopupandDialogHandler(this);
 				TPD.dialogHandler();
 			}
 		} catch (InterruptedException e) {
@@ -90,12 +84,7 @@ public class MainActivity extends Activity
 	@Override
 	public void onResume(){
 
-		//overridePendingTransition(R.anim.map_in,R.anim.other_out);
-		//Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker2");
-		myMap.getMap().clear();
-		myMap.refreshMarkers();
-	
-		
+		// Checks and modifies the maptype if its been changed
 		String mapSetting = settings.getString("map", "Error");
 		myMap.setMap(mapSetting);
 		super.onResume();
@@ -145,38 +134,5 @@ public class MainActivity extends Activity
 	
 
 
-	}
+	}}
 	
-	/*public boolean onQueryTextChange(String newText) {
-	 if (!cSearchPopup.isShowingPopup())
-		 cSearchPopup.createPopup();
-	 else;
-	 cSearchPopup.showResults(newText + "*");
-	//kanske bra searchView.clearFocus();
-    return true;
- }
-
- public boolean onQueryTextSubmit(String query) {
-	 if (!cSearchPopup.isShowingPopup())
-		 cSearchPopup.createPopup();
-	 else;
-	 Log.d("testar", "före showresults");
-	 cSearchPopup.showResults(query + "*");
-    return true;
-=======
->>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
-=======
->>>>>>> f7da9a88e45b3a0049c847cde09be7359c02faab
- }
-
- public boolean onClose() {
-	cSearchPopup.dismissPopup();
-    return false;
- }*/
-
-}
-
-
-/*BRA för framtiden , krävs för att starta aktivitet på annat ställe , dock måste den göras som en aktivitet med denna som hierarisk
- * Intent intent =new Intent(this, SharedPrefs.class);
-	startActivity(intent);*/

@@ -3,11 +3,12 @@ package com.openmap.grupp1.helpfunctions;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 import com.openmap.grupp1.R;
-import com.openmap.grupp1.TutorialPopupDialog;
+import com.openmap.grupp1.PopupandDialogHandler;
 import com.openmap.grupp1.R.anim;
 import com.openmap.grupp1.R.id;
 import com.openmap.grupp1.R.layout;
@@ -176,7 +177,7 @@ SearchView.OnCloseListener{
 			public void onClick(View arg0) {
 				//Creates a dialog if there are no added tags and tells you no tags have been added
 				if (addedTags.isEmpty()) {
-					TutorialPopupDialog TPD = new TutorialPopupDialog(context);
+					PopupandDialogHandler TPD = new PopupandDialogHandler(context);
 					TPD.standardDialog(R.string.noAddedTags,"Ok",false);
 				}
 
@@ -204,13 +205,15 @@ SearchView.OnCloseListener{
 								settings.getString("markerEndDate","System Failure endDate"),
 								settings.getString("markerStartTime","System Failure startTime"),
 								settings.getString("markerEndTime","System Failure endTime"));
+						
+				
+							
 					}
 
 					else {
 						//
 					}
-
-
+					
 					//Sends the new marker to the database
 					try {
 						AddLocationTask addLocationTask = new AddLocationTask();
@@ -269,7 +272,7 @@ SearchView.OnCloseListener{
 			}
 			//Show a dialog if the newTag is null, empty, starts with a blank character or is already in the added tags listview
 			else {
-				TutorialPopupDialog TPD = new TutorialPopupDialog(this);
+				PopupandDialogHandler TPD = new PopupandDialogHandler(this);
 				TPD.standardDialog(R.string.wrongAddedTag,"Ok",false);
 			}
 			return true;

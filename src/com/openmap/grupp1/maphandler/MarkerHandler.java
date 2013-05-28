@@ -1,10 +1,20 @@
 package com.openmap.grupp1.maphandler;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.concurrent.ExecutionException;
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.Projection;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.openmap.grupp1.R;
-import com.openmap.grupp1.TutorialPopupDialog;
+import com.openmap.grupp1.PopupandDialogHandler;
+import com.openmap.grupp1.database.GetLocationTask;
+import com.openmap.grupp1.database.LocationMarker;
 import com.openmap.grupp1.mapview.AddUserToLocation;
 import com.openmap.grupp1.mapview.GetMarkerInfo;
 
@@ -33,9 +43,14 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 public class MarkerHandler {
-
+	ArrayList<LocationMarker> createdLatLng;
+	ArrayList<Marker> createdMarkers = new ArrayList<Marker>();
+	ArrayList<Marker> createdMarkersRemove = new ArrayList<Marker>();
+	HashSet<LatLng> hs;
+	HashSet<LatLng> k = new HashSet<LatLng>();
 	public MarkerHandler(){
-		
+		createdLatLng = new ArrayList<LocationMarker>();
+	
 	}
 	
 
@@ -75,7 +90,8 @@ color = Color.BLACK;
         float width = tPaint.measureText(stringTitle);
         float x_coord = (src.getWidth() - width)/2;
         cs.drawText(stringTitle, x_coord, height-3f, tPaint); 
-        return dest;}
+        return dest;
+        }
 	
 
 public void showInfo(final Context context,final LatLng point,
@@ -95,8 +111,10 @@ LinearLayout viewGroup = (LinearLayout) ((Activity) context).findViewById(R.layo
 
 View layout = layoutInflater.inflate(R.layout.showinfopopup, viewGroup);
 
-TextView titleView = (TextView) layout.findViewById(R.id.titleView1);
-TextView descriptionView = (TextView) layout.findViewById(R.id.descriptionView1);
+TextView titleView = (TextView) layout.findViewById(R.id.txtTitle);
+TextView descriptionView = (TextView) layout.findViewById(R.id.txtDescription);
+TextView starttime = (TextView) layout.findViewById(R.id.startDate);
+TextView endtime = (TextView) layout.findViewById(R.id.endDate);
 
 GetMarkerInfo gmi = new GetMarkerInfo();
 gmi.setMarker(point);
@@ -125,7 +143,7 @@ descriptionView.setText(gmi.getMarkerDescription());
 					@Override
 					public void onClick(View arg0) {
 						if(!nen.isCloseEnough(point)){
-							TutorialPopupDialog tpd = new TutorialPopupDialog(context);
+							PopupandDialogHandler tpd = new PopupandDialogHandler(context);
 							tpd.standardDialog(R.string.toofaraway, "Ok", false);
 						}
 						else{
@@ -152,6 +170,77 @@ descriptionView.setText(gmi.getMarkerDescription());
 		   projection.toScreenLocation(point).x -popupWidth/2, 
 		   projection.toScreenLocation(point).y - popupHeight/2);
 }
+
+
+
+public void addMarkersToScreen(GoogleMap myMap, Resources res, LatLngBounds bounds) {
+	ArrayList<LocationMarker> databaselocationpair = null;
+	
+	GetLocationTask glt;
+	glt = new GetLocationTask();
+	glt.setMinMaxLatLng(bounds.southwest.latitude, bounds.southwest.longitude,
+			bounds.northeast.latitude, bounds.northeast.longitude);
+	glt.execute();
+	
+	try {
+		databaselocationpair = glt.get();
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (ExecutionException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+
+	/*
+	 * Tried to remove marker thats not in screen but only made the application
+	 * slower with this amount of markers. 
+	 
+	if(createdMarkers.size()>50){
+		for(Marker m : createdMarkers){
+			if(!bounds.contains(m.getPosition())){
+				k.remove(m.getPosition());
+				m.remove();
+				createdMarkersRemove.add(m);
+			}
+			
+		}
+		createdMarkers.removeAll(createdMarkersRemove);
+		createdMarkersRemove.clear();
+	}*/
+
+
+	//Adds marker to the screen
+		for(LocationMarker ll : databaselocationpair){
+			Log.d("Sistagrejen", "Testa size" + createdMarkers.size());
+			
+			/*if(createdMarkers.size()> 50){
+				break;}*/
+
+			if(!k.contains(ll.getLatLng())){
+				Marker m = myMap.addMarker(new MarkerOptions()
+				.position(ll.getLatLng())
+				.icon(BitmapDescriptorFactory
+						.fromBitmap(createPic(ll.getTitle(), res, "Location"))));
+				createdMarkers.add(m);
+
+				k.add(ll.getLatLng());
+		
+			}}
+		
+
+}
+
+
+public boolean IfFull() {
+	
+	return createdMarkers.size() > 10;
+}
+
+
+
+
 }
 
 
