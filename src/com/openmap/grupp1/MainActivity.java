@@ -10,8 +10,8 @@ import com.openmap.grupp1.database.UserLoginAndRegistrationTask;
 import com.openmap.grupp1.helpfunctions.SearchTagActivity;
 import com.openmap.grupp1.helpfunctions.SettingsActivity;
 import com.openmap.grupp1.maphandler.LoadMarkersAsyncTask;
-import com.openmap.grupp1.maphandler.LoadMarkersTempAsyncTask;
 import com.openmap.grupp1.mapview.MyMap;
+import com.openmap.grupp1.temp.notfinished.LoadMarkersAsyncTaskTemp;
 
 
 import android.app.ActionBar;
@@ -38,10 +38,9 @@ public class MainActivity extends Activity
 
 	private MyMap myMap;
 	public static final String PREFS_NAME = "MySharedPrefs";
-	private CreateDialogs createDialog; 
 	private  boolean mBound = false;
 	private SharedPreferences settings;
-	private LoadMarkersAsyncTask lmat;
+	private LoadMarkersAsyncTaskTemp lmat;
 
 
 	@Override
@@ -49,22 +48,20 @@ public class MainActivity extends Activity
 		//create lite osäkert men alltid här
 
 		super.onCreate(savedInstanceState);
-		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker-5");
+	
 		//The Action Bar replaces the title bar and provides an alternate location for an on-screen menu button on some devices. 
 		getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 		//Creating content view
 		setContentView(R.layout.activity_main);
-		createDialog = new CreateDialogs();
+	
 		myMap = new MyMap(this);
-		this.myMap = myMap;
-		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker-3");
-
+		
 		myMap.setMap("Hybrid");
 	
-		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker-1");
-		SharedPreferences settings= getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
-		this.settings = settings;
-	//	Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker-2");
+		/*Gets the previous login values if the user have logged in before
+		If the user havent logged in before the login activity starts
+		*/
+		settings= getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
 
 		UserLoginAndRegistrationTask ular = 
 				new UserLoginAndRegistrationTask(
@@ -74,8 +71,7 @@ public class MainActivity extends Activity
 
 		try {
 			if(!ular.get()){
-				Intent login = new Intent(this,LoginRegisterActivity.class);
-				startActivity(login);
+				startActivity(new Intent(this,LoginRegisterActivity.class));
 				TutorialPopupDialog TPD = new TutorialPopupDialog(this);
 				TPD.dialogHandler();
 			}
@@ -86,9 +82,6 @@ public class MainActivity extends Activity
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		super.onStart();
-		 	
 	}	 
 
 
@@ -100,8 +93,8 @@ public class MainActivity extends Activity
 		//overridePendingTransition(R.anim.map_in,R.anim.other_out);
 		//Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker2");
 		myMap.getMap().clear();
-		LoadMarkersTempAsyncTask lmtat = new LoadMarkersTempAsyncTask(myMap.getMap(),getResources(),myMap.setandgetBounds());
-		lmtat.execute();
+		myMap.refreshMarkers();
+	
 		
 		String mapSetting = settings.getString("map", "Error");
 		myMap.setMap(mapSetting);

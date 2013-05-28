@@ -5,7 +5,6 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
-import com.openmap.grupp1.CreateDialogs;
 
 import android.content.Context;
 import android.location.Criteria;
@@ -18,23 +17,22 @@ public class LocationHandler implements LocationListener {
 	private GoogleMap myMap;
 	private Criteria criteria;
 	private String provider;
-	private Context context;
 	private LocationManager locmanager;
-	private CreateDialogs insertinfo = new CreateDialogs();
-	private NearEventNotifier nen;
-	private Boolean notifications = true;
-	private OnCameraChanges occ;
-	
+	private NearEventHandler nen;
 	public LocationHandler(GoogleMap myMap,Context context){
 		this.myMap = myMap;
-		this.context = context;
 		this.locmanager =  (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 		LocationManager lm = (LocationManager) locmanager;
 
 		criteria = new Criteria();
 		provider = lm.getBestProvider(criteria, false);
-		lm.requestLocationUpdates(provider, 5000, 1, this);		
-		startNearEventNotifier();
+		Location ss = new Location("nein");
+		 ss.setLatitude(0);
+		 ss.setLongitude(0);
+		 
+		 nen= new NearEventHandler(ss,myMap,context );
+		lm.requestLocationUpdates(provider, 50000, 1, this);		
+		
 	}
 
 	public LatLng getMylocation(){
@@ -43,15 +41,7 @@ public class LocationHandler implements LocationListener {
 						locmanager).getLastKnownLocation(provider).getLongitude());
 	}
 	
-	public void startNearEventNotifier(){
-		
-		Location ss = new Location("nein");
-		 ss.setLatitude(0);
-		 ss.setLongitude(0);
-		 nen= new NearEventNotifier(ss,myMap,context );
-	}
-	
-	public void updateLocation(){
+	public void updateToMyLocation(){
 		CameraUpdate update = CameraUpdateFactory.newLatLngZoom(
 				new LatLng(((LocationManager) locmanager).getLastKnownLocation(
 						provider).getLatitude(),((LocationManager) 
@@ -59,10 +49,10 @@ public class LocationHandler implements LocationListener {
 		
 		myMap.animateCamera(update);
 	}
+	
 	@Override
 	public void onLocationChanged(Location arg0) {
 		// TODO Auto-generated method stub
-		
 		nen.checklocationandevent(arg0);
 		
 	}

@@ -8,14 +8,14 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
-public class OnCameraChanges implements  OnCameraChangeListener{
+public class CameraChangeHandler implements  OnCameraChangeListener{
 private GoogleMap myMap;
 private Context context;
 private LatLng mylocation;
 private LatLngBounds database;
 private int i = 0;
 
-	public OnCameraChanges(GoogleMap myMap,Context context,LatLng mylocation){
+	public CameraChangeHandler(GoogleMap myMap,Context context,LatLng mylocation){
 		myMap.setOnCameraChangeListener(this);
 		this.context = context;
 		this.myMap = myMap;
@@ -40,7 +40,7 @@ private int i = 0;
 					new LatLng(nearLeft.latitude-1,nearLeft.longitude-1),
 					new LatLng(farRight.latitude+1,farRight.longitude +1));
 			
-			LoadMarkersTempAsyncTask lmtat = new LoadMarkersTempAsyncTask(myMap,context.getResources(),database);
+			LoadMarkersAsyncTask lmtat = new LoadMarkersAsyncTask(myMap,context.getResources(),database);
 			lmtat.execute();
 	
 		}}

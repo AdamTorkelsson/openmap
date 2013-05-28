@@ -22,9 +22,17 @@ import android.util.Log;
  * check in. 
  * 
  * Add so the user don't have to choose no two times
+ * You have to be within 50 meters from an event to 
+ * get an notification or to be able to checkin.
+ * To get a notification you have to stay within 200 meters  
+ * from the last location.
+ * 
+ * 
+ * 
+ * 
  * 
  */
-public class NearEventNotifier {
+public class NearEventHandler {
 	private Location lastKnownLocation; // Holds last known location
 	private Location presentevent = new Location("test"); // Holds the event that you are at
 	private Location presentlocation = new Location("test");  // Holds the location that you are at
@@ -39,20 +47,22 @@ public class NearEventNotifier {
 	//easy way to see if it works
 	private LatLng	checkedIn = new LatLng(0, 0);
 	private LatLng atlocation = new LatLng(0, 0);
+	private GoogleMap myMap;
 
 	private final String A = "NearEventNotifier";
-	private double area =  0.00015;
+	private double area =  0.015;
 	private ArrayList<LocationMarker> databasearray;
 	
-	public NearEventNotifier(Location lastKnownLocation,GoogleMap myMap,Context context ){
+	public NearEventHandler(Location lastKnownLocation,GoogleMap myMap,Context context ){
 		Log.d(A, "NearEventstep0");
+		this.myMap = myMap;
 		this.lastKnownLocation = lastKnownLocation;
 		this.context = context;
 	}	
 
 	public void checklocationandevent(Location myloc){	
 		checkEvent(myloc);
-		//Add this later on, fix event first
+		//Add this later on
 		//checkLocation(myloc);
 		lastKnownLocation = myloc;	
 	}
@@ -60,29 +70,18 @@ public class NearEventNotifier {
 	private void checkEvent(Location loc){
 		//EVENT PART
 		//Lägg till checka ut om du gått därifrån
-		Log.d(A, "NearEventstep2");
 		if(loc.distanceTo(lastKnownLocation) > 200
-				&& loc.distanceTo(presentevent) > 200
 				&& checkedIn.latitude != 0 
 				&& checkedIn.longitude != 0){
 			checkedIn = new LatLng(0,0);
 		}
-		Log.d(A, "NearEventstep3");
 		
-
-		//	for(LatLng ll : Arraylist<LatLng> database)
 		if(loc.distanceTo(lastKnownLocation) < 200
-				//maybe not working due to that the checkedIn.latitude shows in longer numbers
 				&& checkedIn.latitude == 0 
 				&& checkedIn.longitude == 0
 				){
-			Log.d(A, "NearEventstep6");
-
-
-
-			shortest = 400;
 			
-			
+			shortest = 50;			
 			GetLocationTask glt = new GetLocationTask();
 			glt = new GetLocationTask();
 			glt.setMinMaxLatLng(loc.getLatitude() - area,loc.getLongitude() - area,
@@ -98,47 +97,23 @@ public class NearEventNotifier {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-		
 
 			//Finds the closest event
-			for(LocationMarker ll : databasearray){
-			
+			for(LocationMarker ll : databasearray){	
 				event.setLatitude(ll.getLatitute());
 				event.setLongitude(ll.getLongitude());
 				lengthtoevent = loc.distanceTo(event);
-				
 				if(lengthtoevent < shortest){
-					Log.d(A, "NearEventstep7");
 					closestevent = ll;
+					checkedIn = ll.getLatLng();
 					shortest = lengthtoevent;
 				}}
+			
 			//checks so this event is closer than 15 meters 
-			if(shortest < 400){
-				Log.d(A, "NearEventstep8");
-				/*
-				 * Lägg till en Shared som gör så att onResume 
-				 * fixar en popup med fråga om man är där 
-				 * så man kan checka in. 
-				 */
-				/*editor.putBoolean("CheckInPopup", true);
-				editor.commit();*/
-				//
-				Log.d(A, "NearEventstep4");
-				/*	if(wantsNotifications){*/
-				Log.d(A, "NearEventstep9");
-
-				//Skicka med title och describe( kanske förkorta describe)
-				//editor.putDouble("CheckInPopup", 5);
-				Log.d(A, "NearEventstep9.5");
-				
+			if(shortest < 50){			
 				createNotification();
-				/*Move This to main? 
-				 * CreateDialogs checkinDialog = new CreateDialogs();
-							checkinDialog.checkInDialog(context, myMap);*/
-
+		
 			}}
-
 	}
 
 	private void createNotification(){
@@ -159,49 +134,19 @@ public class NearEventNotifier {
 
 	}
 
-
-
-	private void checkLocation(Location myloc) {
-		if(	myloc.distanceTo(lastKnownLocation) > 50 
-				&& myloc.distanceTo(presentlocation) > 30
-				&& atlocation.latitude != 0 
-				&& atlocation.longitude != 0){
-			atlocation = new LatLng(0,0);	
-		}
-
-		/*
-		Database get LatLng
-		for(all events near ? how near how to value this?
-		LatLng latlngevent = getdatabaseLatlng();
-		latitude = latlngevent.getLatitude();
-		longitude = latlngevent.getLongitude();
-		 */
-
-		Location location = new Location("test");
-		/*	event.setLatitude(latitude);
-			event.setLongitude(longitude);*/
-
-		/*
-		 * get all markers within LatLng 0.00015 + lastKnownLocation
-		 * https://code.google.com/p/ense/wiki/LatitudOchLongitudIDecimalgrader
-		 * this will be good enough , can doublecheck with a locationlength
-		 */
-
-
-		if(myloc.distanceTo(lastKnownLocation) < 50
-				&& myloc.distanceTo(location) < 30 
-				&& atlocation.latitude == 0 
-				&& atlocation.longitude == 0){
-			this.presentlocation = location;
-			//add to database;		
-		}
-	}
-
-	public boolean checkin(LatLng point) {
+	// A method to check if close enough to check in
+	public boolean checkIfInDistanceTo(LatLng point) {
+		Log.d(A, "NearEventstep13" + point);
 		Location eventlocation = new Location("temp");
 		eventlocation.setLatitude(point.latitude);
 		eventlocation.setLongitude(point.longitude);
-		if(eventlocation.distanceTo(lastKnownLocation) < 100){
+		Log.d(A, "NearEventstep13" + eventlocation.distanceTo(lastKnownLocation));
+		Log.d(A, "NearEventstep13" + lastKnownLocation.toString());
+		LocationHandler lochandler = new LocationHandler(myMap, context);
+		Location mylocation = new Location("temp");
+		mylocation.setLatitude(lochandler.getMylocation().latitude);
+		mylocation.setLongitude(lochandler.getMylocation().longitude);
+		if(eventlocation.distanceTo(mylocation) < 50){
 			return true;}
 		else{
 			return false;}
