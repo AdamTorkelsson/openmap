@@ -8,8 +8,6 @@ import java.util.concurrent.ExecutionException;
 import com.google.android.gms.maps.GoogleMap;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.openmap.grupp1.R;
-import com.openmap.grupp1.TutorialPopupDialog;
 import com.openmap.grupp1.database.GetLocationTask;
 import com.openmap.grupp1.database.LocationMarker;
 
@@ -30,7 +28,6 @@ public class NearEventNotifier {
 	private Location lastKnownLocation; // Holds last known location
 	private Location presentevent = new Location("test"); // Holds the event that you are at
 	private Location presentlocation = new Location("test");  // Holds the location that you are at
-	private GoogleMap myMap; 
 	private Context context;
 	private final String PREFS_NAME = "MySharedPrefs";
 
@@ -39,20 +36,17 @@ public class NearEventNotifier {
 	private LocationMarker closestevent; // Temporary holds the closest event
 	private ArrayList<LatLng> databaselatlng = new ArrayList<LatLng>(); // the latlng from the database
 	private Location event = new Location("Temporary holds events to check which closest");
-	private LocationMarker questionlocation;
 	//easy way to see if it works
 	private LatLng	checkedIn = new LatLng(0, 0);
 	private LatLng atlocation = new LatLng(0, 0);
 
 	private final String A = "NearEventNotifier";
 	private double area =  0.00015;
-	private LocationMarker locationpair;
 	private ArrayList<LocationMarker> databasearray;
 	
 	public NearEventNotifier(Location lastKnownLocation,GoogleMap myMap,Context context ){
 		Log.d(A, "NearEventstep0");
 		this.lastKnownLocation = lastKnownLocation;
-		this.myMap = myMap;
 		this.context = context;
 	}	
 
@@ -122,9 +116,6 @@ public class NearEventNotifier {
 			//checks so this event is closer than 15 meters 
 			if(shortest < 400){
 				Log.d(A, "NearEventstep8");
-				questionlocation = closestevent;
-			
-				
 				/*
 				 * Lägg till en Shared som gör så att onResume 
 				 * fixar en popup med fråga om man är där 

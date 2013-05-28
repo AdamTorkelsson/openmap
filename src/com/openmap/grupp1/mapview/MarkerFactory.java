@@ -1,8 +1,6 @@
-package com.openmap.grupp1.maphandler;
+package com.openmap.grupp1.mapview;
 
 import com.openmap.grupp1.R;
-import com.openmap.grupp1.R.drawable;
-
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,7 +8,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.renderscript.Type;
 import android.util.Log;
 
 public class MarkerFactory {

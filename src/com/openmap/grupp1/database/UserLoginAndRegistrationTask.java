@@ -16,7 +16,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 public class UserLoginAndRegistrationTask extends AsyncTask<Void, Void, Boolean>{
-	private final String url = "http://129.16.237.71/php_mysql/test.php";
+	private final String url = "http://129.16.234.200/php_mysql/test.php";
 	private List<NameValuePair> parameters;
 
 	public UserLoginAndRegistrationTask(String username, String password){

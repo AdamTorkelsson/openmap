@@ -4,13 +4,14 @@ package com.openmap.grupp1;
 
 import java.util.concurrent.ExecutionException;
 
+
 import com.google.android.gms.maps.model.LatLng;
 import com.openmap.grupp1.database.UserLoginAndRegistrationTask;
 import com.openmap.grupp1.helpfunctions.SearchTagActivity;
 import com.openmap.grupp1.helpfunctions.SettingsActivity;
 import com.openmap.grupp1.maphandler.LoadMarkersAsyncTask;
 import com.openmap.grupp1.maphandler.LoadMarkersTempAsyncTask;
-import com.openmap.grupp1.maphandler.MyMap;
+import com.openmap.grupp1.mapview.MyMap;
 
 
 import android.app.ActionBar;

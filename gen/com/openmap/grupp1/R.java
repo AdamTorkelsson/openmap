@@ -416,7 +416,7 @@ containing a value of this type.
         public static final int tag=0x7f080026;
         public static final int title=0x7f080018;
         public static final int title_activity_camera=0x7f080019;
-        public static final int tofaraway=0x7f080053;
+        public static final int toofaraway=0x7f080053;
         public static final int toolongdescription=0x7f08003f;
         public static final int toolongtitle=0x7f08003d;
         public static final int tooshorttitle=0x7f08003e;

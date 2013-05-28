@@ -130,7 +130,7 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 						editor.commit();
 						
 						//Start the next step, AddTagActivity
-						startActivity(new Intent(context, AddEventActivity.class));
+						startActivity(new Intent(context, com.openmap.grupp1.helpfunctions.AddEventActivity.class));
 						finish();
 					}
 					else {
@@ -171,7 +171,7 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 					editor.commit();
 					
 					//Start the next step, AddTagActivity
-					startActivity(new Intent(context, AddEventActivity.class));
+					startActivity(new Intent(context, com.openmap.grupp1.helpfunctions.AddEventActivity.class));
 					finish();
 					}
 			}});
