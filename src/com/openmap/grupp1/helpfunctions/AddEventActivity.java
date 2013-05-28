@@ -72,15 +72,18 @@ SearchView.OnCloseListener{
 		//Sets the animation for changing to this activity
 		overridePendingTransition(R.anim.map_out,R.anim.other_in);
 
-		//Declares the listviews for the view 
+		//Sets the listeners for the listviews
+		setSearchedListListener();
+		setAddedListListener();
+
+		//Sets the listeners for the buttons
+		setCancelListener();
+		setTagListener();
+	}
+	
+	//Sets the listener to the searched tags listview to the left
+	public void setSearchedListListener() {
 		listViewSearched = (ListView) findViewById(R.id.addtag_list_searched);
-		listViewAdded = (ListView) findViewById(R.id.addtag_list_added);
-
-		//Sets the adapter between the arraylist and the listview to be able to load content from the list
-		addedTagsAdapter =      
-				new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, addedTags);
-		listViewAdded.setAdapter(addedTagsAdapter);
-
 		// Define the on-click listener for listViewSearched
 		listViewSearched.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -97,7 +100,16 @@ SearchView.OnCloseListener{
 				}
 			}
 		});
-
+	}
+	
+	//Sets the listener to the added tags listview to the right
+	public void setAddedListListener() {
+		listViewAdded = (ListView) findViewById(R.id.addtag_list_added);
+		//Sets the adapter between the arraylist and the listview to be able to load content from the list
+		addedTagsAdapter =      
+				new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, addedTags);
+		listViewAdded.setAdapter(addedTagsAdapter);
+		
 		// Define the on-click listener for listViewAdded
 		listViewAdded.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -130,15 +142,35 @@ SearchView.OnCloseListener{
 			}
 		}
 				);
-
-		//Declares the buttons in the bottom and sets them clickable
-		Button buttonTag	  = (Button) findViewById(R.id.buttonTag);
+		
+		
+	}
+	
+	//Sets the listener for the cancel button
+	public void setCancelListener() {
 		Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
-		buttonTag.setClickable(true);
 		buttonCancel.setClickable(true);
+		//Sets the clicklistener for the cancel button which exits this activity and goes to the map
+		buttonCancel.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
 
+				//Hides the keyboard to get a smoother transition from this activity to the map
+				InputMethodManager imm = (InputMethodManager)context.getSystemService( Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(((Activity) context).getCurrentFocus().getWindowToken(),      
+						InputMethodManager.HIDE_NOT_ALWAYS);
 
-		//Define the onClickListener
+				//Closes this activity
+				finish();
+			}
+		});
+	}
+
+	//Sets the listener for the tag button
+	public void setTagListener() {
+		Button buttonTag	  = (Button) findViewById(R.id.buttonTag);
+		buttonTag.setClickable(true);
+		//Define the onClickListener for the tag button
 		buttonTag.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
@@ -200,20 +232,6 @@ SearchView.OnCloseListener{
 
 		});
 
-		//Sets the clicklistener for the cancel button which exits this activity and goes to the map
-		buttonCancel.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View arg0) {
-
-				//Hides the keyboard to get a smoother transition from this activity to the map
-				InputMethodManager imm = (InputMethodManager)context.getSystemService( Context.INPUT_METHOD_SERVICE);
-				imm.hideSoftInputFromWindow(((Activity) context).getCurrentFocus().getWindowToken(),      
-						InputMethodManager.HIDE_NOT_ALWAYS);
-
-				//Closes this activity
-				finish();
-			}
-		});
 	}
 
 	//Creates the option menu
@@ -236,11 +254,11 @@ SearchView.OnCloseListener{
 		return true;
 
 	}
-	
+
 	//Adds the functionality for when clicking the buttons in the options menu
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		
+
 		//Adds the new tag to the added tags listview to the right in the view
 		case R.id.addtagmenu_add:
 			String newTag = searchView.getQuery().toString();
@@ -309,7 +327,7 @@ SearchView.OnCloseListener{
 					new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, searchedTags);
 			listViewSearched.setAdapter(searchedTagsAdapter);
 		} 
-		
+
 		//If it doesnt go into the if statement it will set the searched tags listview to an empty list
 		else {
 			searchedTags = new ArrayList<String>();

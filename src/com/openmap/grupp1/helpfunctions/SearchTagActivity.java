@@ -54,15 +54,16 @@ SearchView.OnCloseListener {
 		//Sets the animation when opening this activity
 		overridePendingTransition(R.anim.map_out,R.anim.other_in);
 
+		//Sets the listener for the listviews
+		setSearchedListListener();
+		setAddedListListener();
+
+	}
+	
+	//Sets the searched tag listview listener
+	public void setSearchedListListener() {
 		//Declares the listviews for the view 
 		listViewSearched = (ListView) findViewById(R.id.list_searched);
-		listViewAdded = (ListView) findViewById(R.id.list_added);
-
-		//Sets the adapter between the arraylist and the listview to be able to load content from the list
-		addedTagsAdapter =      
-				new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, addedTags);
-		listViewAdded.setAdapter(addedTagsAdapter);
-
 		// Define the on-click listener for listViewSearched
 		listViewSearched.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -80,6 +81,17 @@ SearchView.OnCloseListener {
 			}
 		});
 
+	}
+	
+	//Sets the listener for the added tags listview to the right
+	public void setAddedListListener() {
+		listViewAdded = (ListView) findViewById(R.id.list_added);
+		
+		//Sets the adapter between the arraylist and the listview to be able to load content from the list
+		addedTagsAdapter =      
+				new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, addedTags);
+		listViewAdded.setAdapter(addedTagsAdapter);
+
 		// Define the on-click listener for listViewAdded
 		listViewAdded.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -96,6 +108,7 @@ SearchView.OnCloseListener {
 				}
 			}
 		});
+
 	}
 
 	//Creates the options menu

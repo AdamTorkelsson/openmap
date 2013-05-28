@@ -20,16 +20,16 @@
     <string name="cancel">Cancel</string>
     <string name="tag">Tag</string>
     <string name="maps_prompt">Choose type of map</string>
-	<string name="action_settings">Settings</string>
-	<string name="url_string">http://129.16.186.166/php_mysql/test.php</string>
-	<string name="url_contains">your URL contains</string>
-	<string name="info_fetch">Fetch information!</string>
-	<string name="login_string">Login</string>
-	<string name="username_string">Username</string>
-	<string name="password_string">Password</string>
-	<string name="not_user_string">Don\'t have an account? Get one now!</string>
-	<string name="already_user_string">Already a user? Sign in now!</string>
-	<string name="register_string">Register</string>
+    <string name="action_settings">Settings</string>
+    <string name="url_string">http://129.16.186.166/php_mysql/test.php</string>
+    <string name="url_contains">your URL contains</string>
+    <string name="info_fetch">Fetch information!</string>
+    <string name="login_string">Login</string>
+    <string name="username_string">Username</string>
+    <string name="password_string">Password</string>
+    <string name="not_user_string">Don\'t have an account? Get one now!</string>
+    <string name="already_user_string">Already a user? Sign in now!</string>
+    <string name="register_string">Register</string>
 
     <string-array name="maps_array">
         <item>Hybrid</item>
@@ -69,11 +69,13 @@
     <string name="set_start_date">Set start date</string>
     <string name="add_photo">Add photo</string>
     <string name="added_photo">Added photo</string>
-
     <string name="registerfailed">You have failed to register, please try again</string>
     <string name="loginfailed">You have failed to login, please try again</string>
     <string name="youhavetologin">You have to login or register to continue!</string>
     <string name="toofaraway">You are too far away from this event to check in</string>
     <string name="wrongAddedTag">You may not add this tag!</string>
-
+    <string name="imHere">I am here!</string>
+    <string name="starts">Starts at:</string>
+    <string name="ends">Ends at:</string>
+    
 </resources>
