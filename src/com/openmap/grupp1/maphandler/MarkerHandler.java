@@ -12,7 +12,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.openmap.grupp1.R;
-import com.openmap.grupp1.TutorialPopupDialog;
+import com.openmap.grupp1.PopupandDialogHandler;
 import com.openmap.grupp1.database.GetLocationTask;
 import com.openmap.grupp1.database.LocationMarker;
 import com.openmap.grupp1.mapview.AddUserToLocation;
@@ -142,7 +142,7 @@ descriptionView.setText(gmi.getMarkerDescription());
 					@Override
 					public void onClick(View arg0) {
 						if(!nen.checkIfInDistanceTo(point)){
-							TutorialPopupDialog tpd = new TutorialPopupDialog(context);
+							PopupandDialogHandler tpd = new PopupandDialogHandler(context);
 							tpd.standardDialog(R.string.toofaraway, "Ok", false);
 						}
 						else{
@@ -192,14 +192,10 @@ public void addMarkersToScreen(GoogleMap myMap, Resources res, LatLngBounds boun
 	}
 	
 
-	//Removes markers out of bounds if there are more than 100 markers on screen
-	/*if(createdMarkers.size() > 30){
-		
-		myMap.clear();
-		createdMarkers.clear();
-		k.clear();
-		}
-	
+	/*
+	 * Tried to remove marker thats not in screen but only made the application
+	 * slower with this amount of markers. 
+	 
 	if(createdMarkers.size()>50){
 		for(Marker m : createdMarkers){
 			if(!bounds.contains(m.getPosition())){
@@ -212,17 +208,14 @@ public void addMarkersToScreen(GoogleMap myMap, Resources res, LatLngBounds boun
 		createdMarkers.removeAll(createdMarkersRemove);
 		createdMarkersRemove.clear();
 	}*/
-	/*
-	 * Tried to remove marker thats not in screen but only made the application
-	 * slower with this amount of markers. 
-	 */
+
 
 	//Adds marker to the screen
 		for(LocationMarker ll : databaselocationpair){
 			Log.d("Sistagrejen", "Testa size" + createdMarkers.size());
+			
 			/*if(createdMarkers.size()> 50){
 				break;}*/
-			
 
 			if(!k.contains(ll.getLatLng())){
 				Marker m = myMap.addMarker(new MarkerOptions()

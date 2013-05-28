@@ -8,18 +8,14 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.openmap.grupp1.R;
-import com.openmap.grupp1.TutorialPopupDialog;
-import com.openmap.grupp1.maphandler.LoadMarkersAsyncTask;
+import com.openmap.grupp1.PopupandDialogHandler;
 import com.openmap.grupp1.maphandler.LocationHandler;
 import com.openmap.grupp1.maphandler.CameraChangeHandler;
 import com.openmap.grupp1.maphandler.MarkerHandler;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -30,7 +26,7 @@ import android.content.SharedPreferences;
  * 
  */
 
-public class MyMap 
+public class MyMapFragment 
 implements  OnMapLongClickListener,OnMarkerClickListener{
 
 	private GoogleMap myMap;
@@ -38,7 +34,7 @@ implements  OnMapLongClickListener,OnMarkerClickListener{
 	private CameraChangeHandler occ;
 	private final String PREFS_NAME ="MySharedPrefs";
 
-	public MyMap(Context context) {
+	public MyMapFragment(Context context) {
 		//Map creator
 
 		
@@ -90,7 +86,7 @@ implements  OnMapLongClickListener,OnMarkerClickListener{
 		Marker marker = myMap.addMarker(new MarkerOptions().position(point).title("This location?"));
 		marker.showInfoWindow();
 		// create interactive dialog window
-		TutorialPopupDialog insertinfo = new TutorialPopupDialog(context);
+		PopupandDialogHandler insertinfo = new PopupandDialogHandler(context);
 		insertinfo.confirmLocationPopup(marker, myMap); 
 		
 	}
@@ -100,12 +96,6 @@ implements  OnMapLongClickListener,OnMarkerClickListener{
 		MarkerHandler infowindow = new MarkerHandler();
 		infowindow.showInfo(context, marker.getPosition(), context.getResources(), myMap);
 		return true; 
-	}
-
-
-	public void refreshMarkers() {
-		occ.refreshMarkers();
-		
 	}
 
 

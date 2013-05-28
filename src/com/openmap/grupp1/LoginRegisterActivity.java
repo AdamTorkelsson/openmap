@@ -25,7 +25,7 @@ public class LoginRegisterActivity extends Activity implements OnClickListener{
 	private EditText passwordText;
 	private Button loginOrRegisterButton;
 	private TextView notOrAlreadyUserString;
-	private TutorialPopupDialog tpd = new TutorialPopupDialog(this);
+	private PopupandDialogHandler tpd = new PopupandDialogHandler(this);
 	private final String PREFS_NAME = "MySharedPrefs";
 	private SharedPreferences.Editor editor;
 	private String username;

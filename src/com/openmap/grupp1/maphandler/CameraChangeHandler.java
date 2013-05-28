@@ -1,7 +1,5 @@
 package com.openmap.grupp1.maphandler;
 
-import java.util.Random;
-
 import android.content.Context;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.Projection;
@@ -47,36 +45,6 @@ private MarkerHandler markerhandler;
 			markerhandler.addMarkersToScreen(myMap,context.getResources(),database);
 
 		}}
-		
-		
-	/*setandget bounds, first time it sets your location + some area around it. 
-	 * The rest of the times it sets it around the location were you have the camera.
-	*/
-		
-	public LatLngBounds setandgetBounds(){
-			
-			if(i == 0){
-				database = new LatLngBounds(new LatLng(mylocation.latitude, mylocation.longitude),new LatLng(
-						 mylocation.latitude,mylocation.longitude));
-				i++;
-				return database;
-			}
-			
-			else{
-				Projection p = myMap.getProjection();
-				LatLng nearLeft = p.getVisibleRegion().nearLeft;
-				LatLng farRight = p.getVisibleRegion().farRight;
-				database = new LatLngBounds(new LatLng(nearLeft.latitude, nearLeft.longitude),new LatLng(
-					 farRight.latitude,farRight.longitude));
-				return database;}
-		
-		}
-
-	public void refreshMarkers() {
-		markerhandler.addMarkersToScreen(myMap,context.getResources()
-				,setandgetBounds());
-		
-	}
 		
 		
 		

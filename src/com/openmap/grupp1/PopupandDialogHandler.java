@@ -17,16 +17,23 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-
-public class TutorialPopupDialog {
+/*
+ * Contains popup and dialogs thats been moved here for convenience
+ * 
+ * 
+ */
+public class PopupandDialogHandler {
 	private Context context;
 	int i = 1;
 	
-	public TutorialPopupDialog(Context context){
+	//sets the context which it shall appear on
+	public PopupandDialogHandler(Context context){
 		this.context = context;
 		
 	}
-	
+	/*DialogHandler , contains the tutorial and moves this forward
+	 * until the user have finished it or pressed cancel
+	 */
 	public void dialogHandler() {
 		if(i==1){
 			standardDialog(R.string.tutorialdialogview1,"Yes",true);
@@ -51,7 +58,10 @@ public class TutorialPopupDialog {
 			i++;}
 
 	}
-	
+	/*
+	 * A standard dialog for all classes to use. Usually used when the user
+	 * need to do something or be informed. 
+	 */
 public void standardDialog(int dialog, String rightButton,final Boolean createloop){
 	LayoutInflater li = LayoutInflater.from(context);
 	View tutorialView= li.inflate(R.layout.tutorialdialogview, null);
@@ -88,6 +98,11 @@ public void standardDialog(int dialog, String rightButton,final Boolean createlo
 		alertDialog.setCancelable(true);
 		alertDialog.show();
 }
+
+/*
+ * Lets the user confirm that the chosen location is the correct one
+ * 
+ */
 
 public void confirmLocationPopup(final Marker m, final GoogleMap myMap){
 	//POPUP som fungerar

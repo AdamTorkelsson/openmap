@@ -11,7 +11,7 @@ import java.io.File;
 import java.util.Calendar;
 
 import com.openmap.grupp1.R;
-import com.openmap.grupp1.TutorialPopupDialog;
+import com.openmap.grupp1.PopupandDialogHandler;
 import com.openmap.grupp1.R.id;
 import com.openmap.grupp1.R.layout;
 import com.openmap.grupp1.R.string;
@@ -235,7 +235,7 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 	}
 
 	private void createHelpPopup(int text) {
-		TutorialPopupDialog TPD = new TutorialPopupDialog(this);
+		PopupandDialogHandler TPD = new PopupandDialogHandler(this);
 		TPD.standardDialog(text,"Ok",false);
 	}
 
