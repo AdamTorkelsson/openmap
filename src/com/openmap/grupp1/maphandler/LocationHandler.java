@@ -53,7 +53,7 @@ public class LocationHandler implements LocationListener {
 	@Override
 	public void onLocationChanged(Location arg0) {
 		// TODO Auto-generated method stub
-		nen.checklocationandevent(arg0);
+		nen.checkEvent(arg0);
 		
 	}
 

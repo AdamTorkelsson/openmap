@@ -124,7 +124,7 @@ descriptionView.setText(gmi.getMarkerDescription());
 
 					@Override
 					public void onClick(View arg0) {
-						if(!nen.checkIfInDistanceTo(point)){
+						if(!nen.isCloseEnough(point)){
 							TutorialPopupDialog tpd = new TutorialPopupDialog(context);
 							tpd.standardDialog(R.string.toofaraway, "Ok", false);
 						}
