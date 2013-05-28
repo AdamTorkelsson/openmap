@@ -1,10 +1,19 @@
 package com.openmap.grupp1.maphandler;
 
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.Projection;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.openmap.grupp1.R;
 import com.openmap.grupp1.TutorialPopupDialog;
+import com.openmap.grupp1.database.GetLocationTask;
+import com.openmap.grupp1.database.LocationMarker;
 import com.openmap.grupp1.mapview.AddUserToLocation;
 import com.openmap.grupp1.mapview.GetMarkerInfo;
 
@@ -33,9 +42,10 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 public class MarkerHandler {
-
+	ArrayList<LocationMarker> createdLatLng;
+	ArrayList<Marker> createdMarkers = new ArrayList<Marker>();
 	public MarkerHandler(){
-		
+		createdLatLng = new ArrayList<LocationMarker>();
 	}
 	
 
@@ -95,8 +105,10 @@ LinearLayout viewGroup = (LinearLayout) ((Activity) context).findViewById(R.layo
 
 View layout = layoutInflater.inflate(R.layout.showinfopopup, viewGroup);
 
-TextView titleView = (TextView) layout.findViewById(R.id.titleView1);
-TextView descriptionView = (TextView) layout.findViewById(R.id.descriptionView1);
+TextView titleView = (TextView) layout.findViewById(R.id.txtTitle);
+TextView descriptionView = (TextView) layout.findViewById(R.id.txtDescription);
+TextView starttime = (TextView) layout.findViewById(R.id.startDate);
+TextView endtime = (TextView) layout.findViewById(R.id.endDate);
 
 GetMarkerInfo gmi = new GetMarkerInfo();
 gmi.setMarker(point);
@@ -152,6 +164,58 @@ descriptionView.setText(gmi.getMarkerDescription());
 		   projection.toScreenLocation(point).x -popupWidth/2, 
 		   projection.toScreenLocation(point).y - popupHeight/2);
 }
+
+
+
+public void addMarkersToScreen(GoogleMap myMap, Resources res, LatLngBounds bounds) {
+	ArrayList<LocationMarker> databaselocationpair = null;
+	
+	GetLocationTask glt;
+	glt = new GetLocationTask();
+	glt.setMinMaxLatLng(bounds.southwest.latitude, bounds.southwest.longitude,
+			bounds.northeast.latitude, bounds.northeast.longitude);
+	glt.execute();
+	
+	try {
+		databaselocationpair = glt.get();
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (ExecutionException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	
+	//Removes markers out of bounds if there are more than 100 markers on screen
+	if(createdMarkers.size() > 100){
+		myMap.clear();
+		createdMarkers.clear();
+		createdLatLng.clear();
+		}
+
+	//Adds marker to the screen
+		for(LocationMarker ll : databaselocationpair){
+			Log.d("Sistagrejen", "Testa size" + createdMarkers.size());
+			if(createdMarkers.size()> 100){
+				break;}
+			if(!createdLatLng.contains(ll)){
+	
+				Marker m = myMap.addMarker(new MarkerOptions()
+				.position(ll.getLatLng())
+				.icon(BitmapDescriptorFactory
+						.fromBitmap(createPic(ll.getTitle(), res, "Location"))));
+				createdMarkers.add(m);
+				createdLatLng.add(ll);	
+		
+			}}
+		
+
+}
+
+
+
+
 }
 
 

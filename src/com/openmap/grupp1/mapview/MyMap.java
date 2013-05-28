@@ -104,8 +104,7 @@ implements  OnMapLongClickListener,OnMarkerClickListener{
 
 
 	public void refreshMarkers() {
-		new LoadMarkersAsyncTask(myMap,context.getResources()
-				,occ.setandgetBounds()).execute();
+		occ.refreshMarkers();
 		
 	}
 

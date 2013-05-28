@@ -3,6 +3,7 @@ package com.openmap.grupp1.helpfunctions;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
@@ -204,13 +205,15 @@ SearchView.OnCloseListener{
 								settings.getString("markerEndDate","System Failure endDate"),
 								settings.getString("markerStartTime","System Failure startTime"),
 								settings.getString("markerEndTime","System Failure endTime"));
+						
+				
+							
 					}
 
 					else {
 						//
 					}
-
-
+					
 					//Sends the new marker to the database
 					try {
 						AddLocationTask addLocationTask = new AddLocationTask();
