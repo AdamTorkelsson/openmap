@@ -2,35 +2,41 @@ package com.openmap.grupp1.mapview;
 
 
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.openmap.grupp1.CreateDialogs;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.openmap.grupp1.R;
+import com.openmap.grupp1.TutorialPopupDialog;
+import com.openmap.grupp1.maphandler.LoadMarkersAsyncTask;
 import com.openmap.grupp1.maphandler.LocationHandler;
-import com.openmap.grupp1.maphandler.OnCameraChanges;
+import com.openmap.grupp1.maphandler.CameraChangeHandler;
+import com.openmap.grupp1.maphandler.MarkerHandler;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
+import android.content.SharedPreferences;
 
 /*
- * This class is the heart of this application
  * It creates the map, 
  * handles the fragment manager,
  * 
  */
 
-public class MyMap extends Activity 
-implements OnMapClickListener{
+public class MyMap 
+implements  OnMapLongClickListener,OnMarkerClickListener{
 
 	private GoogleMap myMap;
 	private Context context;
-	private CreateDialogs insertinfo = new CreateDialogs();
-	private OnCameraChanges occ;
-
+	private CameraChangeHandler occ;
+	private final String PREFS_NAME ="MySharedPrefs";
 
 	public MyMap(Context context) {
 		//Map creator
@@ -39,36 +45,22 @@ implements OnMapClickListener{
 		this.context = context;
 
 		myMap = ((MapFragment) ((Activity) context).getFragmentManager().findFragmentById(R.id.map)).getMap();
-		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "duärhär");
+
 		//enables all click
-		myMap.setOnMapClickListener(this);
+	
 		myMap.setMyLocationEnabled(true);
-
+		myMap.setOnMapLongClickListener(this);
+		myMap.setOnMarkerClickListener(this); 
+		
 		LocationHandler lh = new LocationHandler(myMap, context);
-		lh.updateLocation();
-		
-		new OnMapLongClickLis(myMap,context);
-		new OnMarkerClickLis(myMap,context);
-		occ = new OnCameraChanges(myMap,context,lh.getMylocation());
-
-	}
-	
-
-	public LatLngBounds setandgetBounds(){
-		return occ.setandgetBounds();
-			}
-	
-
-	@Override
-	public void onMapClick(LatLng point) {
-		
-
-	}
-	public void checkIn(LatLng point){
-		insertinfo.checkInDialog(context, myMap);
+		//Makes the camera move to your location
+		lh.updateToMyLocation();
+		//Creates The CameraChangeHandler
+		occ = new CameraChangeHandler(myMap,context,lh.getMylocation());
 	}
 
 	
+
 	public void setMap(String map){
 		if (map.equals("Hybrid"))
 			myMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
@@ -80,11 +72,42 @@ implements OnMapClickListener{
 			myMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 	}	
 
-
 	public GoogleMap getMap() {
 		return myMap;
 	}
+	
+	@Override
+	public void onMapLongClick(LatLng point) {	
+		//Saves the latitude and longitude in the shared preferences to use in AddTagActivity
+		SharedPreferences settings = context.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putString("markerLat", String.valueOf(point.latitude));
+		editor.putString("markerLng", String.valueOf(point.longitude));
+		editor.commit();
+		
+		CameraUpdate update = CameraUpdateFactory.newLatLngZoom(point,myMap.getMaxZoomLevel()-4); 
+		myMap.animateCamera(update);
+		Marker marker = myMap.addMarker(new MarkerOptions().position(point).title("This location?"));
+		marker.showInfoWindow();
+		// create interactive dialog window
+		TutorialPopupDialog insertinfo = new TutorialPopupDialog(context);
+		insertinfo.confirmLocationPopup(marker, myMap); 
+		
+	}
 
+	@Override
+	public boolean onMarkerClick(Marker marker) {
+		MarkerHandler infowindow = new MarkerHandler();
+		infowindow.showInfo(context, marker.getPosition(), context.getResources(), myMap);
+		return true; 
+	}
+
+
+	public void refreshMarkers() {
+		new LoadMarkersAsyncTask(myMap,context.getResources()
+				,occ.setandgetBounds()).execute();
+		
+	}
 
 
 

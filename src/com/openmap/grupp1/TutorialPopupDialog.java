@@ -1,10 +1,21 @@
 package com.openmap.grupp1;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.Marker;
+import com.openmap.grupp1.helpfunctions.CreateEventActivity;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 public class TutorialPopupDialog {
@@ -13,8 +24,6 @@ public class TutorialPopupDialog {
 	
 	public TutorialPopupDialog(Context context){
 		this.context = context;
-		
-		
 		
 	}
 	
@@ -78,4 +87,55 @@ public void standardDialog(int dialog, String rightButton,final Boolean createlo
 		AlertDialog alertDialog = alertDialogBuilder.create();
 		alertDialog.setCancelable(true);
 		alertDialog.show();
-}}
+}
+
+public void confirmLocationPopup(final Marker m, final GoogleMap myMap){
+	//POPUP som fungerar
+	   int popupWidth = 600;
+	   int popupHeight = 100;
+	  
+	   // Inflate the popup_layout.xml
+	LinearLayout viewGroup = (LinearLayout) ((Activity) context).findViewById(R.layout.activity_main);
+	   LayoutInflater layoutInflater = (LayoutInflater) context
+	     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	  
+	   View layout = layoutInflater.inflate(R.layout.confirmview, viewGroup);
+	   // Creating the PopupWindow
+	   final PopupWindow popup = new PopupWindow(context);
+	   popup.setContentView(layout);
+	   popup.setWidth(popupWidth);
+	   popup.setHeight(popupHeight);
+	   
+	   Button buttonYES = (Button) layout.findViewById(R.id.buttonYes);
+	   Button buttonNO = (Button) layout.findViewById(R.id.buttonNo);
+		  
+		  buttonYES.setClickable(true);
+		  buttonNO.setClickable(true);
+			 
+			buttonYES.setOnClickListener(
+					new OnClickListener(){
+
+						@Override
+						public void onClick(View arg0) {
+							popup.dismiss();
+							context.startActivity(new Intent(context, CreateEventActivity.class));		
+							 m.remove();
+						}
+						
+					});
+			
+			buttonNO.setOnClickListener(new OnClickListener(){
+				@Override
+				public void onClick(View arg0) {
+					popup.dismiss();
+					 m.remove();
+					
+				}});
+	   popup.showAtLocation(layout, Gravity.BOTTOM, 0,  0);
+	   
+}
+
+
+
+
+}
