@@ -281,14 +281,10 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 		newTimeFragment.show(getFragmentManager(), "timePicker");
 	}
 
-<<<<<<< HEAD
-	private void createHelpPopup(int text) {
-		PopupandDialogHandler TPD = new PopupandDialogHandler(this);
-=======
+
 	//Create a  dialog containing the desired text with an okay and a cancel button
 	private void createHelpDialog(int text) {
-		TutorialPopupDialog TPD = new TutorialPopupDialog(this);
->>>>>>> 17ccec3fdbcbdde19c13bc66714cd940d4e721a7
+		PopupandDialogHandler TPD = new PopupandDialogHandler(this);
 		TPD.standardDialog(text,"Ok",false);
 	}
 
