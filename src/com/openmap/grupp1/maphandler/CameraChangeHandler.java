@@ -36,8 +36,9 @@ private MarkerHandler markerhandler;
 		Projection p = myMap.getProjection();
 		LatLng nearLeft = p.getVisibleRegion().nearLeft;
 		LatLng farRight = p.getVisibleRegion().farRight;
-		if(arg0.zoom > 6 && !database.contains(farRight) &&
-				!database.contains(nearLeft)){
+		if(arg0.zoom > 6 /*&& (!database.contains(farRight) &&
+				!database.contains(nearLeft)) || 
+				markerhandler.IfFull()*/){
 			
 			database = new LatLngBounds(
 					new LatLng(nearLeft.latitude,nearLeft.longitude),

@@ -1,6 +1,7 @@
 package com.openmap.grupp1.maphandler;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.concurrent.ExecutionException;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -44,8 +45,12 @@ import android.widget.TextView;
 public class MarkerHandler {
 	ArrayList<LocationMarker> createdLatLng;
 	ArrayList<Marker> createdMarkers = new ArrayList<Marker>();
+	ArrayList<Marker> createdMarkersRemove = new ArrayList<Marker>();
+	HashSet<LatLng> hs;
+	HashSet<LatLng> k = new HashSet<LatLng>();
 	public MarkerHandler(){
 		createdLatLng = new ArrayList<LocationMarker>();
+	
 	}
 	
 
@@ -186,31 +191,57 @@ public void addMarkersToScreen(GoogleMap myMap, Resources res, LatLngBounds boun
 		e.printStackTrace();
 	}
 	
-	
+
 	//Removes markers out of bounds if there are more than 100 markers on screen
-	if(createdMarkers.size() > 100){
+	/*if(createdMarkers.size() > 30){
+		
 		myMap.clear();
 		createdMarkers.clear();
-		createdLatLng.clear();
+		k.clear();
 		}
+	
+	if(createdMarkers.size()>50){
+		for(Marker m : createdMarkers){
+			if(!bounds.contains(m.getPosition())){
+				k.remove(m.getPosition());
+				m.remove();
+				createdMarkersRemove.add(m);
+			}
+			
+		}
+		createdMarkers.removeAll(createdMarkersRemove);
+		createdMarkersRemove.clear();
+	}*/
+	/*
+	 * Tried to remove marker thats not in screen but only made the application
+	 * slower with this amount of markers. 
+	 */
 
 	//Adds marker to the screen
 		for(LocationMarker ll : databaselocationpair){
 			Log.d("Sistagrejen", "Testa size" + createdMarkers.size());
-			if(createdMarkers.size()> 100){
-				break;}
-			if(!createdLatLng.contains(ll)){
-	
+			/*if(createdMarkers.size()> 50){
+				break;}*/
+			
+
+			if(!k.contains(ll.getLatLng())){
 				Marker m = myMap.addMarker(new MarkerOptions()
 				.position(ll.getLatLng())
 				.icon(BitmapDescriptorFactory
 						.fromBitmap(createPic(ll.getTitle(), res, "Location"))));
 				createdMarkers.add(m);
-				createdLatLng.add(ll);	
+
+				k.add(ll.getLatLng());
 		
 			}}
 		
 
+}
+
+
+public boolean IfFull() {
+	
+	return createdMarkers.size() > 10;
 }
 
 

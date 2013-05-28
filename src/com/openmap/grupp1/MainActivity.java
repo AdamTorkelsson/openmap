@@ -92,7 +92,7 @@ public class MainActivity extends Activity
 
 		//overridePendingTransition(R.anim.map_in,R.anim.other_out);
 		//Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker2");
-		myMap.getMap().clear();
+		
 		myMap.refreshMarkers();
 	
 		
