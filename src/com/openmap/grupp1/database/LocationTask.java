@@ -11,6 +11,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+import android.util.Log;
+
 import com.google.android.gms.maps.model.LatLng;
 
 public class LocationTask extends DataBaseTask<ArrayList<NameValuePair>, Object, String>{
@@ -51,13 +53,19 @@ public class LocationTask extends DataBaseTask<ArrayList<NameValuePair>, Object,
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMinimumFractionDigits(0);
 		
-		params.add(new BasicNameValuePair("lat", ""+nf.format(ll.latitude)));
-		params.add(new BasicNameValuePair("lng", ""+nf.format(ll.longitude)));
+		
+		Log.d("PAER1",""+ll.latitude);
+		Log.d("PAER2",""+ll.latitude);
+		Log.d("PAER1",""+nf.format(ll.latitude));
+		Log.d("PAER2",""+nf.format(ll.latitude));
+		
+		params.add(new BasicNameValuePair("lat",""+ll.latitude));
+		params.add(new BasicNameValuePair("lng",""+ll.longitude));
 		
 		this.execute(params);
 
 		try {
-
+			Log.d("Database:",this.get());
 			JSONArray jArray = new JSONArray(this.get());
 			JSONObject json_data = new JSONObject();	
 			json_data = jArray.getJSONObject(0);

@@ -55,6 +55,8 @@ public class MarkerHandler {
 	private HashSet<LatLng> k = new HashSet<LatLng>();
 	private final String PREFS_NAME = "MySharedPrefs";
 	private Set<String> lastset;
+	private Context context;
+	private LocationMarker lm;
 	
 	
 	public MarkerHandler(){
@@ -126,7 +128,7 @@ color = Color.BLACK;
 public void showInfo(final Context context,final LatLng point,
 		final Resources res, 
 		final GoogleMap myMap){
-	
+	this.context = context;
 	//Creates a NearEventHandler to be able to check distance to an event
 	final NearEventHandler nen = new NearEventHandler(new Location("test"), myMap, context);
    //POPUP som fungerar
@@ -148,13 +150,15 @@ TextView descriptionView = (TextView) layout.findViewById(R.id.txtDescription);
 TextView starttime = (TextView) layout.findViewById(R.id.startDate);
 TextView endtime = (TextView) layout.findViewById(R.id.endDate);
 TextView attenders = (TextView) layout.findViewById(R.id.txtAttenders);
-LocationMarker lm = new LocationTask().getLocation(point);
+lm = new LocationTask().getLocation(point);
 
 //Here the info are putted into the different textview
 titleView.setText(lm.getTitle());
 descriptionView.setText(lm.getDescription());
 int i = new LocationTask().getAttenders(lm.getLatLng());
+Log.d("Hej","ADAMÄRHÄR" + i);
 attenders.setText(" " + i);
+Log.d("här2", "ADAMÄRHÄR" + lm.getLatLng());
 if(lm.getClass() == EventMarker.class){
 	EventMarker em = (EventMarker) lm;
 	starttime.setText(em.getStartDay() + " " + em.getStartTime());
@@ -196,7 +200,7 @@ if(lm.getClass() == EventMarker.class){
 						}
 						else{
 							SharedPreferences settings= context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE); 
-							new LocationTask().addAttender(settings.getString("LoginUsername", "Adam"), point);
+							new LocationTask().addAttender(settings.getString("LoginUsername", "Adam"), lm.getLatLng());
 							popup.dismiss();}
 						//*Connect to database and add the person to the event
 					}
