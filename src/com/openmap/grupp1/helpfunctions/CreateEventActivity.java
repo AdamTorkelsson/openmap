@@ -7,50 +7,29 @@ package com.openmap.grupp1.helpfunctions;
  */
 
 
-import java.io.File;
 import java.util.Calendar;
 
 import com.openmap.grupp1.R;
 import com.openmap.grupp1.PopupandDialogHandler;
-import com.openmap.grupp1.R.id;
-import com.openmap.grupp1.R.layout;
-import com.openmap.grupp1.R.string;
 import com.openmap.grupp1.helpfunctions.DatePickerFragment.DatePickerDialogListener;
 import com.openmap.grupp1.helpfunctions.TimePickerFragment.TimePickerDialogListener;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 public class CreateEventActivity extends FragmentActivity 
 implements DatePickerDialogListener, TimePickerDialogListener{
 	final static int TAKE_PICTURE_REQUEST_CODE = 1;

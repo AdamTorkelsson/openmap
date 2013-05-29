@@ -10,10 +10,12 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
 import com.openmap.grupp1.database.UserLoginAndRegistrationTask;
 import com.openmap.grupp1.helpfunctions.SearchTagActivity;
 import com.openmap.grupp1.helpfunctions.SettingsActivity;
-import com.openmap.grupp1.mapview.MyMap;
+import com.openmap.grupp1.maphandler.MyMap;
 
 
 import android.app.ActionBar;
@@ -47,6 +49,7 @@ public class MainActivity extends Activity
 		//Creating content view
 		setContentView(R.layout.activity_main);
 	
+		
 		//Creates the MyMapFragment which handle the map part of this activity
 		myMap = new MyMap(this);
 	
@@ -77,12 +80,11 @@ public class MainActivity extends Activity
 		}
 	}	 
 
-
-	
 	
 	@Override
 	public void onResume(){
 		// Checks and modifies the maptype if its been changed in the settings
+		myMap.onCameraChange(new CameraPosition(new LatLng(0,0),7,0,0));
 		String mapSetting = settings.getString("map", "Error");
 		myMap.setMap(mapSetting);
 		super.onResume();
@@ -115,6 +117,7 @@ public class MainActivity extends Activity
 			Set<String> set = new HashSet<String>();
 			editor.putStringSet("tagSet", set);
 			editor.commit();
+			myMap.onCameraChange(new CameraPosition(new LatLng(0,0),7,0,0));
 			return true;
 		//Starts the settings activity and pauses the current activity if the user clicks the settings button
 		case R.id.btn_settings:

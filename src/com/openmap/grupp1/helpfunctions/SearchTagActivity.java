@@ -6,10 +6,6 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 import com.openmap.grupp1.R;
-import com.openmap.grupp1.R.anim;
-import com.openmap.grupp1.R.id;
-import com.openmap.grupp1.R.layout;
-import com.openmap.grupp1.R.menu;
 import com.openmap.grupp1.database.RequestTagDbTask;
 
 import android.app.ActionBar;
@@ -17,7 +13,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
