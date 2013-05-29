@@ -36,11 +36,11 @@
             android:value="AIzaSyBHtHCGcTISESR99ticVtVxgU25uwWeVkc" />
 
         <activity
-            android:name="com.openmap.grupp1.MainActivity"
+            android:name="com.openmap.tests.MainActivity"
             android:label="@string/app_name" >
         </activity>
         <activity android:name="SettingsActivity"></activity>
-        <activity android:name=".SearchTagActivity"
+        <activity android:name="com.openmap.tests.SearchTagActivity"
             android:windowSoftInputMode="stateVisible">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -50,7 +50,7 @@
         </activity>
 
         <activity android:name="PhotoTaker"></activity>
-        <service android:name=".NotifyService"/>
+        <service android:name="com.openmap.tests.NotifyService"/>
         <activity android:name="CreateEventActivity"
             android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name="AddTagActivity"
@@ -59,7 +59,7 @@
                 android:resource="@xml/searchable" />
         </activity> 
 	<activity
-            android:name=".SplashScreenActivity"
+            android:name="com.openmap.tests.SplashScreenActivity"
             android:noHistory="true"
             >
             <intent-filter>

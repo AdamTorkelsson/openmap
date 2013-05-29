@@ -10,12 +10,18 @@ import android.widget.TextView;
 public class TutorialPopupDialog {
 	private Context context;
 	int i = 1;
+	String s;
 	
 	public TutorialPopupDialog(Context context){
 		this.context = context;
+		s = "Funkar";
 		
 		
 		
+	}
+	
+	public String getMessage(){
+		return s;
 	}
 	
 	public void dialogHandler() {

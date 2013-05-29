@@ -15,9 +15,11 @@ public class LocationPair {
 	LatLng loc;
 	String desc = "No description";
 	String[] tags;
+	
 	public LocationPair(){
 		
 	}
+	
 	public LocationPair(String title, double lat, double lng, String desc, String[] tags){
 		this.title	=	title;
 		this.lat	=	lat;
@@ -27,6 +29,8 @@ public class LocationPair {
 		this.tags	=	tags;
 		
 	}
+	
+	
 
 	public LocationPair(String title, LatLng loc, String desc, String[] tags){
 		this.title	=	title;
