@@ -76,5 +76,9 @@
     <string name="imHere">I am here!</string>
     <string name="starts">Starts at:</string>
     <string name="ends">Ends at:</string>
+    <string name="retry">Retry!</string>
+    <string name="noConnection">No connection to the database!</string>
+    
+    
     
 </resources>

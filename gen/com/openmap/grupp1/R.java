@@ -407,12 +407,14 @@ containing a value of this type.
         public static final int menu_settings=0x7f08001c;
         public static final int next=0x7f08003a;
         public static final int noAddedTags=0x7f080046;
+        public static final int noConnection=0x7f080059;
         public static final int noDuration=0x7f080045;
         public static final int not_user_string=0x7f08002e;
         public static final int ok=0x7f08003c;
         public static final int password_string=0x7f08002d;
         public static final int register_string=0x7f080030;
         public static final int registerfailed=0x7f080050;
+        public static final int retry=0x7f080058;
         public static final int search_label=0x7f080022;
         public static final int search_tags=0x7f080021;
         public static final int searched_tags=0x7f080047;
