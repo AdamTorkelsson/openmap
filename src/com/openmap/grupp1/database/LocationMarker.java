@@ -1,4 +1,4 @@
-package com.openmap.grupp1;
+package com.openmap.grupp1.database;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import org.apache.http.message.BasicNameValuePair;
 
 import com.google.android.gms.maps.model.LatLng;
 
-public class LocationPair {
+public class LocationMarker {
 	
 	String title;
 	double lat;
@@ -15,12 +15,19 @@ public class LocationPair {
 	LatLng loc;
 	String desc = "No description";
 	String[] tags;
+<<<<<<< HEAD:src/com/openmap/grupp1/LocationPair.java
 	
 	public LocationPair(){
 		
 	}
 	
 	public LocationPair(String title, double lat, double lng, String desc, String[] tags){
+=======
+	public LocationMarker(){
+		
+	}
+	public LocationMarker(String title, double lat, double lng, String desc, String[] tags){
+>>>>>>> e4d91407096508bcf9ecc20e11485c9580fc3541:src/com/openmap/grupp1/database/LocationMarker.java
 		this.title	=	title;
 		this.lat	=	lat;
 		this.lng	=	lng;
@@ -32,7 +39,7 @@ public class LocationPair {
 	
 	
 
-	public LocationPair(String title, LatLng loc, String desc, String[] tags){
+	public LocationMarker(String title, LatLng loc, String desc, String[] tags){
 		this.title	=	title;
 		this.loc	=	loc;
 		this.lat	=	loc.latitude;
@@ -41,7 +48,7 @@ public class LocationPair {
 		this.tags	=	tags;
 	}
 	
-	public LocationPair(String title, double lat, double lng, String[] tags){
+	public LocationMarker(String title, double lat, double lng, String[] tags){
 		this.title	=	title;
 		this.lat	=	lat;
 		this.lng	=	lng;
@@ -49,7 +56,7 @@ public class LocationPair {
 		this.tags	=	tags;
 	}
 
-	public LocationPair(String title, LatLng loc, String[] tags){
+	public LocationMarker(String title, LatLng loc, String[] tags){
 		this.title	=	title;
 		this.loc	=	loc;
 		this.lat	=	loc.latitude;

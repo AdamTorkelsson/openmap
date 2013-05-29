@@ -19,8 +19,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
      <uses-permission android:name="android.permission.CAMERA" />
- <uses-feature android:name="android.hardware.camera" />
- <uses-feature android:name="android.hardware.camera.autofocus" />
+	 <uses-feature android:name="android.hardware.camera" />
+	 <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -39,8 +39,13 @@
             android:name="com.openmap.tests.MainActivity"
             android:label="@string/app_name" >
         </activity>
+<<<<<<< HEAD
         <activity android:name="SettingsActivity"></activity>
         <activity android:name="com.openmap.tests.SearchTagActivity"
+=======
+        <activity android:name="com.openmap.grupp1.helpfunctions.SettingsActivity"></activity>
+        <activity android:name="com.openmap.grupp1.helpfunctions.SearchTagActivity"
+>>>>>>> e4d91407096508bcf9ecc20e11485c9580fc3541
             android:windowSoftInputMode="stateVisible">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -49,17 +54,27 @@
                 android:resource="@xml/searchable" />
         </activity>
 
+<<<<<<< HEAD
         <activity android:name="PhotoTaker"></activity>
         <service android:name="com.openmap.tests.NotifyService"/>
         <activity android:name="CreateEventActivity"
+=======
+
+        <service android:name="com.openmap.grupp1.maphandler.NotifyService"/>
+        <activity android:name="com.openmap.grupp1.helpfunctions.CreateEventActivity"
+>>>>>>> e4d91407096508bcf9ecc20e11485c9580fc3541
             android:windowSoftInputMode="adjustResize"></activity>
-        <activity android:name="AddTagActivity"
+        <activity android:name="com.openmap.grupp1.helpfunctions.AddEventActivity"
             android:windowSoftInputMode="adjustResize">
             <meta-data android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity> 
 	<activity
+<<<<<<< HEAD
             android:name="com.openmap.tests.SplashScreenActivity"
+=======
+            android:name="com.openmap.grupp1.SplashScreenActivity"
+>>>>>>> e4d91407096508bcf9ecc20e11485c9580fc3541
             android:noHistory="true"
             >
             <intent-filter>
@@ -68,6 +83,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+	<activity android:name="com.openmap.grupp1.LoginRegisterActivity"></activity>
         
         
     </application>
