@@ -209,13 +209,21 @@ public class LocationTask extends DataBaseTask<ArrayList<NameValuePair>, Object,
 			for (int i=0; i<jArray.length(); i++){
 				
 				json_data = jArray.getJSONObject(i);
-				
-				LocationMarker lp = new LocationMarker();
-				lp.setTitle(json_data.getString("title"));
-				lp.setLatitude(Double.parseDouble(json_data.getString("latitude")));
-				lp.setLongitude(Double.parseDouble(json_data.getString("longitude")));
-				lp.setDescription(json_data.getString("description"));
-				lp.setLatLng();
+				LocationMarker lp;
+				String title = json_data.getString("title");
+				Double lat = Double.parseDouble(json_data.getString("latitude"));
+				Double lng = Double.parseDouble(json_data.getString("longitude"));
+				String desc = json_data.getString("description");
+				if (json_data.getString("startDay").equals("0")){
+					lp = new LocationMarker(title, lat, lng, desc, null);
+				}else{
+				String startDay = json_data.getString("startDay");
+				String stopDay = json_data.getString("stopDay");
+				String startTime = json_data.getString("startTime");
+				String stopTime = json_data.getString("stopTime");
+					lp = new EventMarker(title, lat, lng, desc, null, startDay, stopDay, startTime, stopTime);;
+				}
+			
 				lpArray.add(lp);
 			}
 			
