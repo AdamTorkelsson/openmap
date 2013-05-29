@@ -1,18 +1,19 @@
 package com.openmap.grupp1;
 
 /*
- * The main activity is started after splashscreen.
- * Creates myMapFragment that handels the mapfragment. 
+ * The main activity is started after splash screen.
+ * Creates myMapFragment that handles the mapfragment. 
  */
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 
 import com.openmap.grupp1.database.UserLoginAndRegistrationTask;
 import com.openmap.grupp1.helpfunctions.SearchTagActivity;
 import com.openmap.grupp1.helpfunctions.SettingsActivity;
-import com.openmap.grupp1.mapview.MyMapFragment;
-
+import com.openmap.grupp1.mapview.MyMap;
 
 
 import android.app.ActionBar;
@@ -30,7 +31,7 @@ import android.view.Window;
 public class MainActivity extends Activity 
 {
 
-	private MyMapFragment myMap;
+	private MyMap myMap;
 	public static final String PREFS_NAME = "MySharedPrefs";
 	private  boolean mBound = false;
 	private SharedPreferences settings;
@@ -39,8 +40,6 @@ public class MainActivity extends Activity
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		//create lite osäkert men alltid här
-
 		super.onCreate(savedInstanceState);
 	
 		//The Action Bar replaces the title bar and provides an alternate location for an on-screen menu button on some devices. 
@@ -49,7 +48,7 @@ public class MainActivity extends Activity
 		setContentView(R.layout.activity_main);
 	
 		//Creates the MyMapFragment which handle the map part of this activity
-		myMap = new MyMapFragment(this);
+		myMap = new MyMap(this);
 	
 		/*Gets the previous login values if the user have logged in before
 		If the user havent logged in before the login activity starts
@@ -83,8 +82,7 @@ public class MainActivity extends Activity
 	
 	@Override
 	public void onResume(){
-
-		// Checks and modifies the maptype if its been changed
+		// Checks and modifies the maptype if its been changed in the settings
 		String mapSetting = settings.getString("map", "Error");
 		myMap.setMap(mapSetting);
 		super.onResume();
@@ -92,47 +90,47 @@ public class MainActivity extends Activity
 	}
 
 	@Override
+	//Defines the attributes of the options menu
 	public boolean onCreateOptionsMenu(Menu menu) {
-		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker3");
 		super.onCreateOptionsMenu(menu);
+		//Inflate the startmenu into the bar
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.startmenu, menu);
+		// Sets the title and logo to be hidden
 		ActionBar ab = getActionBar();
 		ab.setDisplayShowTitleEnabled(false);
 		ab.setDisplayShowHomeEnabled(false);
-		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "OnResumeAddMarker4");
 		return true;
 
 	}
 
-
+	//Defines the action to be taken when clicking the menu buttons
 	@Override
-	//lägg in denna i searchtagactivity när den är korrekt
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.btn_select:
+		//Clears the tag filter if the user clicks the clear button
+		case R.id.btn_clear:
+			SharedPreferences settings = this.getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
+			SharedPreferences.Editor editor = settings.edit();
+			Set<String> set = new HashSet<String>();
+			editor.putStringSet("tagSet", set);
+			editor.commit();
 			return true;
+		//Starts the settings activity and pauses the current activity if the user clicks the settings button
 		case R.id.btn_settings:
-			Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step3");
 			Intent settingsIntent =new Intent(this, SettingsActivity.class);
-			Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step4");
 			startActivity(settingsIntent);
-			Log.d(TEXT_SERVICES_MANAGER_SERVICE, "step5");
 			this.onPause();
 			return true;
+		//Starts the search tag activity and pauses the current activity if the user clicks the search button
 		case R.id.btn_search:
 			Intent searchIntent =new Intent(this, SearchTagActivity.class);
 			startActivity(searchIntent);
-
 			return true;
-
-
+		//Default
 		default:
 			return super.onOptionsItemSelected(item);
 		}
-		
-	
-
-
-	}}
+	}
+}
 	

@@ -15,7 +15,7 @@ public class LocationMarker {
 	LatLng loc;
 	String desc = "No description";
 	String[] tags;
-	
+
 
 	public LocationMarker(){
 		
