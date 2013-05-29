@@ -1,91 +1,66 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.openmap.grupp1"
-    android:versionCode="1"
-    android:versionName="1.0" >
+package="com.openmap.grupp1"
+android:versionCode="1"
+android:versionName="1.0" >
+<uses-sdk
+android:minSdkVersion="11"
+android:targetSdkVersion="17" />
+<permission
+android:name="com.openmap.grupp1.permission.MAPS_RECEIVE"
+android:protectionLevel="signature" />
+<uses-permission android:name="com.openmap.grupp1.permission.MAPS_RECEIVE" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-feature android:name="android.hardware.camera" />
+<uses-feature android:name="android.hardware.camera.autofocus" />
+<uses-feature
+android:glEsVersion="0x00020000"
+android:required="true" />
+<application
+android:allowBackup="true"
+android:icon="@drawable/ic_launcher"
+android:label="@string/app_name"
+android:theme="@style/AppTheme" android:allowTaskReparenting="false">
+<meta-data
+android:name="com.google.android.maps.v2.API_KEY"
+android:value="AIzaSyBHtHCGcTISESR99ticVtVxgU25uwWeVkc" />
+<activity
+android:name="com.openmap.grupp1.MainActivity"
+android:label="@string/app_name" >
+</activity>
+<activity android:name="com.openmap.grupp1.helpfunctions.SettingsActivity"></activity>
+<activity android:name="com.openmap.grupp1.helpfunctions.SearchTagActivity"
+android:windowSoftInputMode="stateVisible">
+<intent-filter>
+<action android:name="android.intent.action.SEARCH" />
+</intent-filter>
+<meta-data android:name="android.app.searchable"
+android:resource="@xml/searchable" />
+</activity>
+<service android:name="com.openmap.grupp1.maphandler.NotifyService"/>
+<activity android:name="com.openmap.grupp1.helpfunctions.CreateEventActivity"
+android:windowSoftInputMode="adjustResize"></activity>
+<activity android:name="com.openmap.grupp1.helpfunctions.AddEventActivity"
+android:windowSoftInputMode="adjustResize">
+<meta-data android:name="android.app.searchable"
+android:resource="@xml/searchable" />
+</activity> 
+<activity
+android:name="com.openmap.grupp1.SplashScreenActivity"
+android:noHistory="true"
+>
+<intent-filter>
+<action android:name="android.intent.action.MAIN" />
+<category android:name="android.intent.category.LAUNCHER" />
+</intent-filter>
+</activity>
+<activity android:name="com.openmap.grupp1.LoginRegisterActivity"></activity>
 
-    <uses-sdk
-        android:minSdkVersion="11"
-        android:targetSdkVersion="17" />
 
-    <permission
-        android:name="com.openmap.grupp1.permission.MAPS_RECEIVE"
-        android:protectionLevel="signature" />
-
-    <uses-permission android:name="com.openmap.grupp1.permission.MAPS_RECEIVE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-     <uses-permission android:name="android.permission.CAMERA" />
-	 <uses-feature android:name="android.hardware.camera" />
-	 <uses-feature android:name="android.hardware.camera.autofocus" />
-
-    <uses-feature
-        android:glEsVersion="0x00020000"
-        android:required="true" />
-
-    <application
-        android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" android:allowTaskReparenting="false">
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBHtHCGcTISESR99ticVtVxgU25uwWeVkc" />
-
-        <activity
-            android:name="com.openmap.tests.MainActivity"
-            android:label="@string/app_name" >
-        </activity>
-<<<<<<< HEAD
-        <activity android:name="SettingsActivity"></activity>
-        <activity android:name="com.openmap.tests.SearchTagActivity"
-=======
-        <activity android:name="com.openmap.grupp1.helpfunctions.SettingsActivity"></activity>
-        <activity android:name="com.openmap.grupp1.helpfunctions.SearchTagActivity"
->>>>>>> e4d91407096508bcf9ecc20e11485c9580fc3541
-            android:windowSoftInputMode="stateVisible">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
-        </activity>
-
-<<<<<<< HEAD
-        <activity android:name="PhotoTaker"></activity>
-        <service android:name="com.openmap.tests.NotifyService"/>
-        <activity android:name="CreateEventActivity"
-=======
-
-        <service android:name="com.openmap.grupp1.maphandler.NotifyService"/>
-        <activity android:name="com.openmap.grupp1.helpfunctions.CreateEventActivity"
->>>>>>> e4d91407096508bcf9ecc20e11485c9580fc3541
-            android:windowSoftInputMode="adjustResize"></activity>
-        <activity android:name="com.openmap.grupp1.helpfunctions.AddEventActivity"
-            android:windowSoftInputMode="adjustResize">
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
-        </activity> 
-	<activity
-<<<<<<< HEAD
-            android:name="com.openmap.tests.SplashScreenActivity"
-=======
-            android:name="com.openmap.grupp1.SplashScreenActivity"
->>>>>>> e4d91407096508bcf9ecc20e11485c9580fc3541
-            android:noHistory="true"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-	<activity android:name="com.openmap.grupp1.LoginRegisterActivity"></activity>
-        
-        
-    </application>
-
+</application>
 </manifest>
