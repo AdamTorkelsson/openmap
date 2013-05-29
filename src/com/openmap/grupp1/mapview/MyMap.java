@@ -31,30 +31,32 @@ import android.util.Log;
  * 
  */
 
-public class MyMapFragment 
+
+public class MyMap
 implements  OnMapLongClickListener,OnMarkerClickListener,OnCameraChangeListener{
 
 	private GoogleMap myMap;
-	private Context context;
+	private Context mCtx;
 	//private CameraChangeHandler occ;
 	private final String PREFS_NAME ="MySharedPrefs";
 	private MarkerHandler markerhandler;
 
-	public MyMapFragment(Context context) {
+	public MyMap(Context context) {
 		//Map creator
+		
+		this.mCtx = context;
 
-		this.context = context;
 		//Connects the mapfragment to myMap
-		myMap = ((MapFragment) ((Activity) context).getFragmentManager().findFragmentById(R.id.map)).getMap();
+		myMap = ((MapFragment) ((Activity) mCtx).getFragmentManager().findFragmentById(R.id.map)).getMap();
 
 		//enables all click
 		myMap.setMyLocationEnabled(true);
 		myMap.setOnMapLongClickListener(this);
 		myMap.setOnMarkerClickListener(this); 
 		myMap.setOnCameraChangeListener(this);
-		
-		// Creates locationhandler that keep track and handles your position
-		LocationHandler lh = new LocationHandler(myMap, context);
+
+		// Creates locationhandler that keep track and handles your position		
+		LocationHandler lh = new LocationHandler(myMap, mCtx);
 		//Makes the camera move to your location
 		lh.updateToMyLocation();
 		//Creates The CameraChangeHandler
@@ -62,6 +64,8 @@ implements  OnMapLongClickListener,OnMarkerClickListener,OnCameraChangeListener{
 		
 		markerhandler = new MarkerHandler();
 	}
+	
+	
 
 	
 //changes maptype if the user have changed type in settings
@@ -94,7 +98,7 @@ implements  OnMapLongClickListener,OnMarkerClickListener,OnCameraChangeListener{
 	@Override
 	public void onMapLongClick(LatLng point) {	
 		//Saves the latitude and longitude in the shared preferences to use in AddTagActivity
-		SharedPreferences settings = context.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
+		SharedPreferences settings = mCtx.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putString("markerLat", String.valueOf(point.latitude));
 		editor.putString("markerLng", String.valueOf(point.longitude));
@@ -105,7 +109,7 @@ implements  OnMapLongClickListener,OnMarkerClickListener,OnCameraChangeListener{
 		Marker marker = myMap.addMarker(new MarkerOptions().position(point).title("This location?"));
 		marker.showInfoWindow();
 		// create interactive dialog window
-		PopupandDialogHandler insertinfo = new PopupandDialogHandler(context);
+		PopupandDialogHandler insertinfo = new PopupandDialogHandler(mCtx);
 		insertinfo.confirmLocationPopup(marker, myMap); 
 		
 	}
@@ -118,7 +122,7 @@ implements  OnMapLongClickListener,OnMarkerClickListener,OnCameraChangeListener{
 	@Override
 	public boolean onMarkerClick(Marker marker) {
 		MarkerHandler infowindow = new MarkerHandler();
-		infowindow.showInfo(context, marker.getPosition(), context.getResources(), myMap);
+		infowindow.showInfo(mCtx, marker.getPosition(), mCtx.getResources(), myMap);
 		return true; 
 	}
 	/*
@@ -141,9 +145,9 @@ implements  OnMapLongClickListener,OnMarkerClickListener,OnCameraChangeListener{
 			
 			LatLngBounds database = new LatLngBounds(
 					new LatLng(nearLeft.latitude,nearLeft.longitude),
-					new LatLng(farRight.latitude,farRight.longitude));
-			Log.d("Hej", "onCameraChange2");
-			markerhandler.addMarkersToScreen(myMap,context.getResources(),database,context);}
+					new LatLng(farRight.latitude,farRight.longitude));		
+					markerhandler.addMarkersToScreen(myMap,mCtx.getResources(),database,mCtx);}
+
 
 		}
 

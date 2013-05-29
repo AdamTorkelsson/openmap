@@ -56,7 +56,12 @@ public class MarkerHandler {
 	}
 	
 /*
- * This method creates the 
+ * This method creates the pictures for all the markers.
+ * It can be modified to create different colors for different types of markers but
+ * this is not used right now. Instead black is used all the time. It takes the bitmap and
+ * add paint at string onto it. It decides the size of the bitmap(that is taken from 
+ * drawable). If the string is longer than 7 letters it shortens it to six letters and 
+ * add three dots to mark for the users that the title is longer than it stands on the marker.
  */
 private Bitmap createPic(String stringTitle, Resources res, String type){
 	int color;
@@ -97,6 +102,11 @@ color = Color.BLACK;
         return dest;
         }
 	
+
+/*
+ * If 
+ * 
+ */
 
 public void showInfo(final Context context,final LatLng point,
 		final Resources res, 
