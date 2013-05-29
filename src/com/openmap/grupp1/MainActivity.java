@@ -14,7 +14,6 @@ import com.openmap.grupp1.database.UserLoginAndRegistrationTask;
 import com.openmap.grupp1.helpfunctions.SearchTagActivity;
 import com.openmap.grupp1.helpfunctions.SettingsActivity;
 import com.openmap.grupp1.mapview.MyMap;
-import com.openmap.grupp1.temp.notfinished.LoadMarkersAsyncTaskTemp;
 
 
 import android.app.ActionBar;
@@ -36,7 +35,7 @@ public class MainActivity extends Activity
 	public static final String PREFS_NAME = "MySharedPrefs";
 	private  boolean mBound = false;
 	private SharedPreferences settings;
-	private LoadMarkersAsyncTaskTemp lmat;
+
 
 
 	@Override

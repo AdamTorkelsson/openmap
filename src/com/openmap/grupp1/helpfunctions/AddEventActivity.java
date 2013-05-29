@@ -1,34 +1,20 @@
 package com.openmap.grupp1.helpfunctions;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 import com.openmap.grupp1.R;
 import com.openmap.grupp1.PopupandDialogHandler;
-import com.openmap.grupp1.R.anim;
-import com.openmap.grupp1.R.id;
-import com.openmap.grupp1.R.layout;
-import com.openmap.grupp1.R.menu;
-import com.openmap.grupp1.R.string;
-import com.openmap.grupp1.database.AddLocationTask;
 import com.openmap.grupp1.database.LocationMarker;
 import com.openmap.grupp1.database.EventMarker;
+import com.openmap.grupp1.database.LocationTask;
 import com.openmap.grupp1.database.RequestTagDbTask;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -38,13 +24,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.AdapterView.OnItemClickListener;
-import android.content.Intent;
-import android.database.Cursor;
 
 public class AddEventActivity extends Activity implements SearchView.OnQueryTextListener,
 SearchView.OnCloseListener{
@@ -215,13 +197,15 @@ SearchView.OnCloseListener{
 					}
 					
 					//Sends the new marker to the database
-					try {
+					new LocationTask().addLocation(newMarker);
+					
+					/*try {
 						AddLocationTask addLocationTask = new AddLocationTask();
 						addLocationTask.execute(newMarker.getPairsList());
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
+					}*/
 
 					//Hides the keyboard to get a smoother transition from this activity to the map
 					InputMethodManager imm = (InputMethodManager)context.getSystemService( Context.INPUT_METHOD_SERVICE);

@@ -8,8 +8,8 @@ import java.util.concurrent.ExecutionException;
 import com.google.android.gms.maps.GoogleMap;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.openmap.grupp1.database.GetLocationTask;
 import com.openmap.grupp1.database.LocationMarker;
+import com.openmap.grupp1.database.LocationTask;
 
 import android.content.Context;
 import android.content.Intent;
@@ -76,21 +76,10 @@ public class NearEventHandler {
 
 			shortest = 50;			
 			//Sets the minimum/maximum latitude/longitude to search within, which equals an area
-			GetLocationTask glt = new GetLocationTask();
-			glt.setMinMaxLatLng(loc.getLatitude() - area,loc.getLongitude() - area,
-					loc.getLatitude()+area, loc.getLongitude() + area);
-			glt.execute();
-
-			//Gets the events within the above specified area
-			try {
-				dataBaseArray = glt.get();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ExecutionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			dataBaseArray = new LocationTask().getLocation(
+					new LatLng(loc.getLatitude() - area,loc.getLongitude() - area),
+					new LatLng(loc.getLatitude()+area, loc.getLongitude() + area));
+			
 
 			//Finds the closest event in the dataBaseArray
 			for(LocationMarker ll : dataBaseArray){	
