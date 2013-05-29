@@ -160,7 +160,6 @@ public class LoginRegisterActivity extends Activity implements OnClickListener{
 	@Override
 	public void onBackPressed() {
 		tpd.standardDialog(R.string.youhavetologin, "Ok", false);
-	    // Do Here what ever you want do on back press;
 	}
 	
 }

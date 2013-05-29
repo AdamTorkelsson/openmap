@@ -9,9 +9,9 @@ import com.openmap.grupp1.database.LocationTask;
 
 public class AddUserToLocation {
 	public static final String PREFS_NAME = "MySharedPrefs";
-	
+
 	public AddUserToLocation(){
-		
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -21,7 +21,4 @@ public class AddUserToLocation {
 		new LocationTask().addAttender(settings.getString("LoginUsername", "Adam"), point);
 		
 	}
-	
-
-
 }
