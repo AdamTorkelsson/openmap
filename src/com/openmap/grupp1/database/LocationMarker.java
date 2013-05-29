@@ -15,19 +15,11 @@ public class LocationMarker {
 	LatLng loc;
 	String desc = "No description";
 	String[] tags;
-<<<<<<< HEAD:src/com/openmap/grupp1/LocationPair.java
-	
-	public LocationPair(){
-		
-	}
-	
-	public LocationPair(String title, double lat, double lng, String desc, String[] tags){
-=======
+
 	public LocationMarker(){
 		
 	}
 	public LocationMarker(String title, double lat, double lng, String desc, String[] tags){
->>>>>>> e4d91407096508bcf9ecc20e11485c9580fc3541:src/com/openmap/grupp1/database/LocationMarker.java
 		this.title	=	title;
 		this.lat	=	lat;
 		this.lng	=	lng;
