@@ -55,8 +55,10 @@ public class MarkerHandler {
 	
 	}
 	
-
-public Bitmap createPic(String stringTitle, Resources res, String type){
+/*
+ * This method creates the 
+ */
+private Bitmap createPic(String stringTitle, Resources res, String type){
 	int color;
 	if(type == "Event"){
 		color = Color.BLACK;
@@ -184,18 +186,26 @@ public void addMarkersToScreen(GoogleMap myMap, Resources res, LatLngBounds boun
 	//Move down
 	ArrayList<LocationMarker> databaselocationpair = null;
 
+	Log.d("Hej", "onCameraChange3");
 	SharedPreferences settings = context.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
 	Set<String> set = settings.getStringSet("tagSet", new HashSet<String>());
 
 	if(set.isEmpty()){
+		Log.d("Hej", "onCameraChange4");
+		Log.d("Hej", "onCameraChange4" + bounds.southwest);
+		Log.d("Hej", "onCameraChange4" + bounds.northeast);
 		databaselocationpair = 
 			new LocationTask().getLocation(new LatLng(bounds.southwest.latitude, bounds.southwest.longitude), 
 			new LatLng(bounds.northeast.latitude, bounds.northeast.longitude));
 		
 	}
 	else{
+		Log.d("Hej", "onCameraChange4" + bounds.southwest);
+		Log.d("Hej", "onCameraChange4" + bounds.northeast);
+		Log.d("Hej", "onCameraChange5");
 		ArrayList<String> tags = new ArrayList<String>();
 		tags.addAll(set);
+		Log.d("Hej", "onCameraChange6");
 		databaselocationpair = 
 			new LocationTask().getLocation(new LatLng(bounds.southwest.latitude, bounds.southwest.longitude), 
 			new LatLng(bounds.northeast.latitude, bounds.northeast.longitude),tags);}
@@ -219,12 +229,12 @@ public void addMarkersToScreen(GoogleMap myMap, Resources res, LatLngBounds boun
 	}*/
 
 
-	//Adds marker to the screen
+	//Adds marker to the screen 
 		for(LocationMarker ll : databaselocationpair){
 			Log.d("Sistagrejen", "Testa size" + createdMarkers.size());
 			
-			/*if(createdMarkers.size()> 50){
-				break;}*/
+			if(createdMarkers.size()> 30){
+				break;}
 
 			if(!k.contains(ll.getLatLng())){
 				Marker m = myMap.addMarker(new MarkerOptions()
@@ -235,8 +245,12 @@ public void addMarkersToScreen(GoogleMap myMap, Resources res, LatLngBounds boun
 
 				k.add(ll.getLatLng());
 		
-			}}
-		
+			}
+			
+	
+		}
+		//can only add at maximum 30 markers per screen to minimize lag
+		createdMarkers.clear();	
 
 }
 
