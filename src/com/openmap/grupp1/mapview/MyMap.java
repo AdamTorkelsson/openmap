@@ -22,6 +22,7 @@ import com.openmap.grupp1.maphandler.MarkerHandler;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 /*
  *This is the class that creates the GoogleMap
@@ -134,6 +135,7 @@ implements  OnMapLongClickListener,OnMarkerClickListener,OnCameraChangeListener{
 	 */
 	@Override
 	public void onCameraChange(CameraPosition arg0) {
+		Log.d("Hej", "onCameraChange1");
 		Projection p = myMap.getProjection();
 		LatLng nearLeft = p.getVisibleRegion().nearLeft;
 		LatLng farRight = p.getVisibleRegion().farRight;
@@ -143,9 +145,9 @@ implements  OnMapLongClickListener,OnMarkerClickListener,OnCameraChangeListener{
 			
 			LatLngBounds database = new LatLngBounds(
 					new LatLng(nearLeft.latitude,nearLeft.longitude),
-					new LatLng(farRight.latitude,farRight.longitude));
-			
-			markerhandler.addMarkersToScreen(myMap,mCtx.getResources(),database,mCtx);}
+					new LatLng(farRight.latitude,farRight.longitude));		
+					markerhandler.addMarkersToScreen(myMap,mCtx.getResources(),database,mCtx);}
+
 
 		}
 
