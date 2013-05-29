@@ -10,8 +10,12 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 
+
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+
+import com.openmap.grupp1.database.CheckDBUrlTask;
+
 import com.openmap.grupp1.database.UserLoginAndRegistrationTask;
 import com.openmap.grupp1.helpfunctions.SearchTagActivity;
 import com.openmap.grupp1.helpfunctions.SettingsActivity;
@@ -49,7 +53,7 @@ public class MainActivity extends Activity
 		//Creating content view
 		setContentView(R.layout.activity_main);
 	
-		
+
 		//Creates the MyMapFragment which handle the map part of this activity
 		myMap = new MyMap(this);
 	
