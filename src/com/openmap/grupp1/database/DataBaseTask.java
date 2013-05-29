@@ -16,7 +16,7 @@ import android.os.AsyncTask;
 
 
 public abstract class DataBaseTask<T1,T2,T3> extends AsyncTask<T1, T2, T3> implements DatabaseInterface<NameValuePair>{
-	final String url = "http://46.239.97.219/php_mysql/index.php";
+	final String url = "http://129.16.234.200/php_mysql/index.php";
 	BasicNameValuePair action;
 	String outparams;
 
