@@ -1,4 +1,4 @@
-package com.openmap.grupp1.maphandler;
+/*package com.openmap.grupp1.maphandler;
 
 import android.content.Context;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,7 +28,7 @@ private MarkerHandler markerhandler;
  * new area if the zoom level is higher than 6( this is because we want to prevent
  *  to much markers on the screen. 
  * */
-	
+	/*
 	@Override
 	public void onCameraChange(CameraPosition arg0) {
 		Projection p = myMap.getProjection();
@@ -36,17 +36,17 @@ private MarkerHandler markerhandler;
 		LatLng farRight = p.getVisibleRegion().farRight;
 		if(arg0.zoom > 6 /*&& (!database.contains(farRight) &&
 				!database.contains(nearLeft)) || 
-				markerhandler.IfFull()*/){
+				markerhandler.IfFull()){
 			
 			database = new LatLngBounds(
 					new LatLng(nearLeft.latitude,nearLeft.longitude),
 					new LatLng(farRight.latitude,farRight.longitude));
 			
-			markerhandler.addMarkersToScreen(myMap,context.getResources(),database);
+			markerhandler.addMarkersToScreen(myMap,context.getResources(),database,context);
 
 		}}
 		
 		
 		
-	}
+	}*/
 

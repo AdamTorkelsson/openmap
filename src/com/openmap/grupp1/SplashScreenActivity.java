@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Window;
 /*
  * A splashscreen for when the user starts the program. 
+ * Is active for 3 seconds
  */
 public class SplashScreenActivity extends Activity {
     private long ms=0;

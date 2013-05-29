@@ -66,8 +66,8 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 	private Context context = this;
 	private final String PREFS_NAME = "MySharedPrefs";
 	final Calendar c = Calendar.getInstance();
-	private EditText txtTitle = (EditText) findViewById(R.id.txtTitle);
-	private EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
+	//private EditText txtTitle = (EditText) findViewById(R.id.txtTitle);
+//	private EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
 
 
 	public void onCreate(Bundle savedInstanceState){
@@ -164,6 +164,8 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 		buttonTag.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
+				EditText txtTitle = (EditText) findViewById(R.id.txtTitle);
+				EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
 				String temp1 = txtTitle.getText().toString();
 				String temp2 = txtDescription.getText().toString();
 

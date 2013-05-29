@@ -2,6 +2,7 @@ package com.openmap.grupp1.maphandler;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -13,13 +14,13 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.openmap.grupp1.R;
 import com.openmap.grupp1.PopupandDialogHandler;
-import com.openmap.grupp1.database.GetLocationTask;
 import com.openmap.grupp1.database.LocationMarker;
+import com.openmap.grupp1.database.LocationTask;
 import com.openmap.grupp1.mapview.AddUserToLocation;
-import com.openmap.grupp1.mapview.GetMarkerInfo;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -48,6 +49,7 @@ public class MarkerHandler {
 	ArrayList<Marker> createdMarkersRemove = new ArrayList<Marker>();
 	HashSet<LatLng> hs;
 	HashSet<LatLng> k = new HashSet<LatLng>();
+	private final String PREFS_NAME = "MySharedPrefs";
 	public MarkerHandler(){
 		createdLatLng = new ArrayList<LocationMarker>();
 	
@@ -115,12 +117,14 @@ TextView titleView = (TextView) layout.findViewById(R.id.txtTitle);
 TextView descriptionView = (TextView) layout.findViewById(R.id.txtDescription);
 TextView starttime = (TextView) layout.findViewById(R.id.startDate);
 TextView endtime = (TextView) layout.findViewById(R.id.endDate);
+TextView attenders = (TextView) layout.findViewById(R.id.txtAttenders);
+LocationMarker lm = new LocationTask().getLocation(point);
 
-GetMarkerInfo gmi = new GetMarkerInfo();
-gmi.setMarker(point);
 
-titleView.setText(gmi.getMarkerTitle());
-descriptionView.setText(gmi.getMarkerDescription());
+titleView.setText(lm.getTitle());
+descriptionView.setText(lm.getDescription());
+int i = new LocationTask().getAttenders(lm.getLatLng());
+attenders.setText(" " + i);
 
 
    // Creating the PopupWindow
@@ -147,6 +151,9 @@ descriptionView.setText(gmi.getMarkerDescription());
 							tpd.standardDialog(R.string.toofaraway, "Ok", false);
 						}
 						else{
+							SharedPreferences settings= context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE); 
+							new LocationTask().addAttender(settings.getString("LoginUsername", "Adam"), point);
+							
 							AddUserToLocation autl = new AddUserToLocation();
 							autl.addUser(point,context);
 							popup.dismiss();}
@@ -173,24 +180,25 @@ descriptionView.setText(gmi.getMarkerDescription());
 
 
 
-public void addMarkersToScreen(GoogleMap myMap, Resources res, LatLngBounds bounds) {
+public void addMarkersToScreen(GoogleMap myMap, Resources res, LatLngBounds bounds,Context context) {
+	//Move down
 	ArrayList<LocationMarker> databaselocationpair = null;
-	
-	GetLocationTask glt;
-	glt = new GetLocationTask();
-	glt.setMinMaxLatLng(bounds.southwest.latitude, bounds.southwest.longitude,
-			bounds.northeast.latitude, bounds.northeast.longitude);
-	glt.execute();
-	
-	try {
-		databaselocationpair = glt.get();
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (ExecutionException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+
+	SharedPreferences settings = context.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
+	Set<String> set = settings.getStringSet("tagSet", new HashSet<String>());
+
+	if(set.isEmpty()){
+		databaselocationpair = 
+			new LocationTask().getLocation(new LatLng(bounds.southwest.latitude, bounds.southwest.longitude), 
+			new LatLng(bounds.northeast.latitude, bounds.northeast.longitude));
+		
 	}
+	else{
+		ArrayList<String> tags = new ArrayList<String>();
+		tags.addAll(set);
+		databaselocationpair = 
+			new LocationTask().getLocation(new LatLng(bounds.southwest.latitude, bounds.southwest.longitude), 
+			new LatLng(bounds.northeast.latitude, bounds.northeast.longitude),tags);}
 	
 
 	/*
@@ -220,9 +228,9 @@ public void addMarkersToScreen(GoogleMap myMap, Resources res, LatLngBounds boun
 
 			if(!k.contains(ll.getLatLng())){
 				Marker m = myMap.addMarker(new MarkerOptions()
-				.position(ll.getLatLng())
-				.icon(BitmapDescriptorFactory
-						.fromBitmap(createPic(ll.getTitle(), res, "Location"))));
+					.position(ll.getLatLng())
+					.icon(BitmapDescriptorFactory
+					.fromBitmap(createPic(ll.getTitle(), res, "Location"))));
 				createdMarkers.add(m);
 
 				k.add(ll.getLatLng());
@@ -233,10 +241,6 @@ public void addMarkersToScreen(GoogleMap myMap, Resources res, LatLngBounds boun
 }
 
 
-public boolean IfFull() {
-	
-	return createdMarkers.size() > 10;
-}
 
 
 

@@ -5,20 +5,35 @@
     android:alpha="0.5"
     android:background="#FFFFFF" >
 
-    <TextView
-        android:id="@+id/txtTitle"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:id="@+id/linearlayout1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="#FFFFFF"
-        android:text="@string/title"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:orientation="horizontal"
+        android:paddingTop="5dp" >
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:text="@string/title"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/txtAttenders"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearlayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtTitle"
+        android:layout_below="@+id/linearlayout1"
         android:orientation="vertical"
         android:paddingTop="5dp" >
 
@@ -83,8 +98,8 @@
         android:layout_below="@+id/linearlayout2"
         android:ems="10"
         android:gravity="top"
-        android:text="@string/description"
-        android:paddingTop="10dp" />
+        android:paddingTop="10dp"
+        android:text="@string/description" />
 
     <LinearLayout
         android:id="@+id/buttons"

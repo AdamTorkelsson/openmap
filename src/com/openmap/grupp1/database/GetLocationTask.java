@@ -1,4 +1,4 @@
-package com.openmap.grupp1.database;
+/*package com.openmap.grupp1.database;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -69,7 +69,7 @@ public class GetLocationTask extends AsyncTask<Void, Void, ArrayList<LocationMar
 				Log.d("HALLÅ",""+tags_data.getString("tag"));
 				tagArray[j] = tags_data.getString("tag");
 			}
-			lp.setTags(tagArray);*/
+			lp.setTags(tagArray);*//*
 			lp.setLatLng();
 			lpArray.add(lp);
 			//Log.i("tag"+i,"tag: " + tagName);
@@ -115,5 +115,6 @@ public class GetLocationTask extends AsyncTask<Void, Void, ArrayList<LocationMar
 		al.add(new BasicNameValuePair("lng",""+ll.longitude));
 
 		}
-}
+}*/
+
 
