@@ -66,14 +66,14 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 	private Context context = this;
 	private final String PREFS_NAME = "MySharedPrefs";
 	final Calendar c = Calendar.getInstance();
-	private EditText txtTitle = (EditText) findViewById(R.id.txtTitle);
-	private EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
 
 
 	public void onCreate(Bundle savedInstanceState){
 		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "INCREATEEVENT");
 		super.onCreate(savedInstanceState);
+
 		setContentView(R.layout.createeventview);
+
 		this.image = (ImageView) findViewById(R.id.imageView);
 
 		//Creates the listeners for the start time, end time, start date, end date, camera button, cancel button and tag button
@@ -84,7 +84,6 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 		setCameraListener();
 		setCancelListener();
 		setTagListener();
-
 
 	}
 
@@ -164,6 +163,9 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 		buttonTag.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
+				EditText txtTitle = (EditText) findViewById(R.id.txtTitle);
+				EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
+
 				String temp1 = txtTitle.getText().toString();
 				String temp2 = txtDescription.getText().toString();
 

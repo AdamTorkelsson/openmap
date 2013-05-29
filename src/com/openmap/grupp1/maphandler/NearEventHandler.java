@@ -17,13 +17,13 @@ import android.content.SharedPreferences;
 import android.location.Location;
 import android.util.Log;
 /*
- * Checks if there is any locations or events near. 
- * If an event is near it asks the user if they want to 
+ * Checks if there are any locations or events near. 
+ * If an event is near, ask the user if they want to 
  * check in. 
  * 
  * Add so the user don't have to choose no two times
  * You have to be within 50 meters from an event to 
- * get an notification or to be able to checkin.
+ * get an notification or to be able to check in.
  * To get a notification you have to stay within 200 meters  
  * from the last location.
  */

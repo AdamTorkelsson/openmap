@@ -218,9 +218,9 @@ containing a value of this type.
         public static final int btn_add_search=0x7f07003e;
         public static final int btn_back=0x7f070041;
         public static final int btn_back_search=0x7f07003f;
+        public static final int btn_clear=0x7f070042;
         public static final int btn_filter_search=0x7f070040;
         public static final int btn_search=0x7f070044;
-        public static final int btn_select=0x7f070042;
         public static final int btn_settings=0x7f070043;
         public static final int buttonCamera=0x7f070018;
         public static final int buttonCancel=0x7f070009;
