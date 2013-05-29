@@ -4,7 +4,7 @@
 <item android:id="@+id/btn_clear"
 android:icon="@android:drawable/ic_menu_close_clear_cancel"
 android:showAsAction="ifRoom|withText"
-android:title="@string/menu_select"/>
+android:title="@string/menu_clear"/>
 
 <item android:id="@+id/btn_settings"
 android:icon="@android:drawable/ic_menu_preferences"

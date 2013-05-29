@@ -1,24 +1,14 @@
 package com.openmap.grupp1.helpfunctions;
 
 import com.openmap.grupp1.R;
-import com.openmap.grupp1.R.anim;
-import com.openmap.grupp1.R.array;
-import com.openmap.grupp1.R.id;
-import com.openmap.grupp1.R.layout;
-
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class SettingsActivity extends Activity{

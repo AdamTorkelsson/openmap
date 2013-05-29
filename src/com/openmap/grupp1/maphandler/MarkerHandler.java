@@ -3,8 +3,6 @@ package com.openmap.grupp1.maphandler;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
-
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -14,9 +12,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.openmap.grupp1.R;
 import com.openmap.grupp1.PopupandDialogHandler;
+import com.openmap.grupp1.database.EventMarker;
 import com.openmap.grupp1.database.LocationMarker;
 import com.openmap.grupp1.database.LocationTask;
-import com.openmap.grupp1.mapview.AddUserToLocation;
 
 import android.app.Activity;
 import android.content.Context;
@@ -43,15 +41,27 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+/*
+ * 
+ * Handles the marker. 
+ * Have methods to create markers and the marker picture, show info for markers.
+ * 
+ */
 public class MarkerHandler {
-	ArrayList<LocationMarker> createdLatLng;
-	ArrayList<Marker> createdMarkers = new ArrayList<Marker>();
-	ArrayList<Marker> createdMarkersRemove = new ArrayList<Marker>();
-	HashSet<LatLng> hs;
-	HashSet<LatLng> k = new HashSet<LatLng>();
+//	ArrayList<LocationMarker> createdLatLng;
+	private ArrayList<Marker> createdMarkers = new ArrayList<Marker>();
+	//ArrayList<Marker> createdMarkersRemove = new ArrayList<Marker>();
+	//HashSet<LatLng> hs;
+	private HashSet<LatLng> k = new HashSet<LatLng>();
 	private final String PREFS_NAME = "MySharedPrefs";
+	private Set<String> lastset;
+	private Context context;
+	private LocationMarker lm;
+	
+	
 	public MarkerHandler(){
-		createdLatLng = new ArrayList<LocationMarker>();
+		//createdLatLng = new ArrayList<LocationMarker>();
+	
 	
 	}
 	
@@ -78,17 +88,23 @@ private Bitmap createPic(String stringTitle, Resources res, String type){
 	}
 color = Color.BLACK;
 	
+// creates a bitmap from the drawable markerpick
 	Bitmap srv = BitmapFactory.decodeResource(res, R.drawable.markerpick); 
+	//scale the bitmap
 	Bitmap src = Bitmap.createScaledBitmap(srv, srv.getWidth()+ srv.getWidth(), 
 								srv.getHeight() + srv.getHeight(), false);
 	Bitmap dest = Bitmap.createBitmap(src.getWidth(), src.getHeight(), Bitmap.Config.ARGB_8888);
 
-	
+	/*
+	 * If the string is longer than 7 there are no room on the marker
+	 * so shorten it and add three dots so the user understand that 
+	 * the title is longer in reality
+	 */
 	if(stringTitle.length() > 7){
 		stringTitle = (String) stringTitle.subSequence(0, 6);
 		stringTitle = stringTitle + "...";
 	}
-	
+	//decides how the string should be added and which style/color/size
 		Canvas cs = new Canvas(dest);
         Paint tPaint = new Paint();
         tPaint.setTextSize(35);
@@ -104,17 +120,20 @@ color = Color.BLACK;
 	
 
 /*
- * If 
+ * When the user presses a marker this popup is called upon. 
+ * It shows all the info available for the marker.
  * 
  */
 
 public void showInfo(final Context context,final LatLng point,
 		final Resources res, 
 		final GoogleMap myMap){
-	
+	this.context = context;
+	//Creates a NearEventHandler to be able to check distance to an event
 	final NearEventHandler nen = new NearEventHandler(new Location("test"), myMap, context);
    //POPUP som fungerar
   
+	//Decides the width and height of the marker
 	int popupWidth = 300;
 	int popupHeight = 300;
 
@@ -125,21 +144,29 @@ LinearLayout viewGroup = (LinearLayout) ((Activity) context).findViewById(R.layo
 
 View layout = layoutInflater.inflate(R.layout.showinfopopup, viewGroup);
 
+//All the textviews were info are going to be putted in
 TextView titleView = (TextView) layout.findViewById(R.id.txtTitle);
 TextView descriptionView = (TextView) layout.findViewById(R.id.txtDescription);
 TextView starttime = (TextView) layout.findViewById(R.id.startDate);
 TextView endtime = (TextView) layout.findViewById(R.id.endDate);
 TextView attenders = (TextView) layout.findViewById(R.id.txtAttenders);
-LocationMarker lm = new LocationTask().getLocation(point);
+lm = new LocationTask().getLocation(point);
 
-
+//Here the info are putted into the different textview
 titleView.setText(lm.getTitle());
 descriptionView.setText(lm.getDescription());
 int i = new LocationTask().getAttenders(lm.getLatLng());
+Log.d("Hej","ADAMÄRHÄR" + i);
 attenders.setText(" " + i);
+Log.d("här2", "ADAMÄRHÄR" + lm.getLatLng());
+if(lm.getClass() == EventMarker.class){
+	EventMarker em = (EventMarker) lm;
+	starttime.setText(em.getStartDay() + " " + em.getStartTime());
+	endtime.setText(em.getStopDay() + " " + em.getStopTime());
+}
 
 
-   // Creating the PopupWindow
+   // Creating the PopupWindow with the developers decided settings 
    final PopupWindow popup = new PopupWindow(context);
    popup.setContentView(layout);
    popup.setWidth(popupWidth);
@@ -147,12 +174,21 @@ attenders.setText(" " + i);
    popup.setFocusable(true);
    popup.setTouchable(true);
    
+   //The two buttons on the popup
    Button buttonOK = (Button) layout.findViewById(R.id.OkB);
    Button buttonNO = (Button) layout.findViewById(R.id.CancelB);
 	  
+   //Make them clickable
 	  buttonOK.setClickable(true);
 	  buttonNO.setClickable(true);
 		 
+	  /*
+	   * Adds an listener to buttonOK
+	   * When pressed checked if the user is near enough to checkin
+	   * If not create an popup to inform the user about this.
+	   * If the user is near enough, add him to the event and then 
+	   * dismiss the popup
+	   */
 		buttonOK.setOnClickListener(
 				new OnClickListener(){
 
@@ -164,23 +200,26 @@ attenders.setText(" " + i);
 						}
 						else{
 							SharedPreferences settings= context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE); 
-							new LocationTask().addAttender(settings.getString("LoginUsername", "Adam"), point);
-							
-							AddUserToLocation autl = new AddUserToLocation();
-							autl.addUser(point,context);
+							new LocationTask().addAttender(settings.getString("LoginUsername", "Adam"), lm.getLatLng());
 							popup.dismiss();}
 						//*Connect to database and add the person to the event
 					}
 					
 				});
-		
+		/*
+		 * if no dismiss the popup and let the user continue to view the map
+		 * 
+		 */
 		buttonNO.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
 				popup.dismiss();	
 			}});
-  
-   // Some offset to align the popup a bit to the right, and a bit down, relative to button's position.
+  /*
+   * Gets the projection of the map so the popup can be added at the 
+   * correct position on the screen. Some offset to align the popup 
+   * a bit to the right, and a bit down, relative to button's position.
+   */
 
    Projection projection =	myMap.getProjection();
  
@@ -190,17 +229,30 @@ attenders.setText(" " + i);
 		   projection.toScreenLocation(point).y - popupHeight/2);
 }
 
-
+/*
+ * Addmarkerstoscreen
+ * Is the method to add markers to the current screen and filter which markers
+ * are added onto screen if the user have choosen to filter the tags.
+ * 
+ */
 
 public void addMarkersToScreen(GoogleMap myMap, Resources res, LatLngBounds bounds,Context context) {
 	//Move down
+	//The array for the markers from the database
 	ArrayList<LocationMarker> databaselocationpair = null;
 
-	Log.d("Hej", "onCameraChange3");
+	//Gets the sets of tags from the filter
 	SharedPreferences settings = context.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
 	Set<String> set = settings.getStringSet("tagSet", new HashSet<String>());
-
+	
+	//If the filter is empty only get events/locations with specific boundarys
 	if(set.isEmpty()){
+		//if the user have removed the filter , clear the map and clear 
+		//k(contains all added locations). Then download the new database
+		if(lastset != set){
+			myMap.clear();
+			k.clear();
+		}
 		Log.d("Hej", "onCameraChange4");
 		Log.d("Hej", "onCameraChange4" + bounds.southwest);
 		Log.d("Hej", "onCameraChange4" + bounds.northeast);
@@ -210,16 +262,23 @@ public void addMarkersToScreen(GoogleMap myMap, Resources res, LatLngBounds boun
 		
 	}
 	else{
-		Log.d("Hej", "onCameraChange4" + bounds.southwest);
-		Log.d("Hej", "onCameraChange4" + bounds.northeast);
-		Log.d("Hej", "onCameraChange5");
+		/*
+		 * If the user have choosen to filter tags
+		 * Check if the user have changed the filter clear the map and k(contains the locations)
+		 * Then download the new database with the new properties
+		 */
+		if(lastset != set){
+			myMap.clear();
+			k.clear();
+		}
 		ArrayList<String> tags = new ArrayList<String>();
 		tags.addAll(set);
 		Log.d("Hej", "onCameraChange6");
 		databaselocationpair = 
 			new LocationTask().getLocation(new LatLng(bounds.southwest.latitude, bounds.southwest.longitude), 
 			new LatLng(bounds.northeast.latitude, bounds.northeast.longitude),tags);}
-	
+	//sets the lastset as the current one to be able to check correct in the next call of this method
+	lastset = set;
 
 	/*
 	 * Tried to remove marker thats not in screen but only made the application
@@ -238,7 +297,17 @@ public void addMarkersToScreen(GoogleMap myMap, Resources res, LatLngBounds boun
 		createdMarkersRemove.clear();
 	}*/
 
-
+	/*
+	 * For every LocationMarker in the downloaded database:
+	 * create the picture with the string in it and add it to the map.
+	 * If it have added 30 markers , stop and let the user change the camera
+	 * to see add another 30. This rule is invoked because the developer wanted
+	 * to minimize the lag when the user moved the screen.  If the user want to see
+	 * more tags in a specific area one choice is to zoom in. 
+	 * 
+	 * We add the latlng to k to be able to check so the marker havent been added before
+	 * 
+	 */
 	//Adds marker to the screen 
 		for(LocationMarker ll : databaselocationpair){
 			Log.d("Sistagrejen", "Testa size" + createdMarkers.size());
