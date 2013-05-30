@@ -2,7 +2,6 @@ package com.openmap.grupp1.maphandler;
 
 import com.openmap.grupp1.MainActivity;
 
-import android.R;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;

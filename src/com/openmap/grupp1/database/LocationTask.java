@@ -1,7 +1,6 @@
 package com.openmap.grupp1.database;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.concurrent.ExecutionException;
 
 import org.apache.http.NameValuePair;
@@ -9,9 +8,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-
-import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -183,6 +179,7 @@ public class LocationTask extends DataBaseTask<ArrayList<NameValuePair>, Object,
 	 * @param llmax the up right corner limit
 	 * @return ArrayList with LocationMarkers.
 	 */
+	@SuppressWarnings("unchecked")
 	public ArrayList<LocationMarker> getLocation(LatLng llmin, LatLng llmax, ArrayList<String> tags){
 		params	=	new ArrayList<NameValuePair>();
 		action	= new BasicNameValuePair("action","getSquareTagLocations");

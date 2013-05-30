@@ -1,26 +1,29 @@
 package com.openmap.grupp1.database;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import android.os.AsyncTask;
-import android.util.Log;
-
-
+/**
+ * 
+ * This class is used for user login and registration.
+ * Since it communicates to the database it extends
+ * DataBaseTask.
+ *
+ */
 public class UserLoginAndRegistrationTask extends DataBaseTask<ArrayList<NameValuePair>, Void, Boolean>{
 	ArrayList<NameValuePair> params;
 	BasicNameValuePair action;
-
+	/**
+	 * Userlogin. Takes a username and a password and returns true if
+	 * the user is found in the database.
+	 * @param username the username.
+	 * @param password the password.
+	 * @return true if login is successful, else false.
+	 */
+	@SuppressWarnings("unchecked")
 	public boolean loginUser(String username, String password){
 		params = new ArrayList<NameValuePair>();
 		action = new BasicNameValuePair("action","loginUser");
@@ -40,7 +43,14 @@ public class UserLoginAndRegistrationTask extends DataBaseTask<ArrayList<NameVal
 			return false;
 		}
 	}
-
+	/**
+	 * Takes a username and a password and register in the database.
+	 * returns true if the registration is successful.
+	 * @param username the username.
+	 * @param password the password.
+	 * @return true if register is successful, else false.
+	 */
+	@SuppressWarnings("unchecked")
 	public boolean registerUser(String username, String password){
 		params = new ArrayList<NameValuePair>();
 		action = new BasicNameValuePair("action","registerUser");
@@ -74,9 +84,4 @@ public class UserLoginAndRegistrationTask extends DataBaseTask<ArrayList<NameVal
 	protected void onPostExecute(Boolean result) {
 		
 	}
-
-
-
-
-
 }

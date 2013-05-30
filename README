@@ -1,17 +1,16 @@
 README
 
-This application is made by Oscar Rydén, Adam Torkelsson, Erik Gidlund and Pär Linder.
-
+Freedomapp for Android
+=========
+This application was made by Oscar RydÃ©n, Adam Torkelsson, Erik Gidlund and PÃ¤r Linder at Chalmers in the spring of 2013.
 The idea behind this application is to create a map where you make the 
 user responsible to make it interesting. We wanted to make it easy 
-for users to share different locations and events with other people. 
-
-The requirements to use this application is:
+for users to share different locations and events with other people.
+## Requirements to use this application
 SDK 11; (Target SDK 17)
 Internet Connection 
 GPS
-
-The application uses these permissions:
+## Permissions this application uses
 permission.MAPS_RECEIVE
 permission.INTERNET
 permission.ACCESS_NETWORK_STATE
@@ -20,3 +19,19 @@ permission.READ_GSERVICES
 permission.ACCESS_COARSE_LOCATION
 permission.ACCESS_FINE_LOCATION
 permission.CAMERA
+## External dependencies used by this application
+Google play services - Google Map
+## Motivation and explanation for some programming choices
+We have chosen to use Google Maps as an external dependency since we wanted 
+our application to revolve around locations and events and their position on the map.
+Googles API and map is highly developed and made it possible to create the application we wanted.
+We have chosen SDK 11 because the Google Maps v2 requires this.
+
+We diden't choose to apply the new NotifyService since this required 
+a higher level of SDK and reduced the amount of possible number of users.
+The design focuses on the map as the heart activity to make it easy for the users to see events and locations near them directly when they start the application. A tutorial is made for users who are not familiar with the application. The colors and design patterns were chosen both to give a nice esthetically look and make it easy for users to understand how to interact.
+
+TESTING:
+========
+Robotium:
+https://github.com/paer/Freedomapptest.git

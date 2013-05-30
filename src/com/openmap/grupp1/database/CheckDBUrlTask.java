@@ -4,23 +4,22 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
-import android.util.Log;
-
+/**
+ * This class is used to check the database connection.
+ */
 public class CheckDBUrlTask extends DataBaseTask<Void,Boolean,Boolean> {
-	
+	/**
+	 * Try the database connection.
+	 * @return boolean true if connection succesful, else false.
+	 */
 	public Boolean tryDBConnection(){
 		this.execute();
 		try {
-			Log.d("Database:", "check1");
 			return this.get();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			Log.d("Database:", "check2");
 			e.printStackTrace();
 			return false;
 		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			Log.d("Database:", "check3");
 			e.printStackTrace();
 			return false;
 		}
@@ -32,23 +31,27 @@ public class CheckDBUrlTask extends DataBaseTask<Void,Boolean,Boolean> {
 		try {
 			HttpURLConnection urlConnection;
 			URL u;
-			u = new URL(url);
-			Log.d("Database:", "check4");
+			u = new URL(url); //Create an URL from the url specified in DataBaseTask.
 			urlConnection = (HttpURLConnection) u.openConnection();
-			urlConnection.setConnectTimeout(5000);
+			urlConnection.setConnectTimeout(5000);//If connection is not successful in 5 seconds, connection fails.
 			urlConnection.connect();
-			Log.d("Database","JAA!");
-
+			
+			/*
+			 * If the connection is successful, disconnect.
+			 */
 			if(HttpURLConnection.HTTP_OK == urlConnection.getResponseCode()); {
 				urlConnection.disconnect();
-			Log.d("Database","JAA!");
+
 			}
 		}catch(Exception e){
-			Log.d("Database:", "check5");
-			Log.e("Connection Error!","Database connection failed!");
-			return success;
+			/*
+			 * If an exception is thrown, the connection does not work, 
+			 * and success' default value false is returned.
+			 */
+			return success; 
 		}
-		success = true;
+		
+		success = true; //Nothing went 
 		return success;
 	}
 	

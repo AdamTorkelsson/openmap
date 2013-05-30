@@ -7,7 +7,6 @@ package com.openmap.grupp1;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 
 
 
@@ -68,7 +67,7 @@ public class MainActivity extends Activity
 		settings= getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
 
 
-		boolean loginWorks = new UserLoginAndRegistrationTask().loginUser(settings.getString("LoginUsername", "Adam"), settings.getString("LoginPassword", "1234"));
+		boolean loginWorks = new UserLoginAndRegistrationTask().loginUser(settings.getString("LoginUsername1", "Pask"), settings.getString("LoginPassword", "1234"));
 		Log.d("Loginworks?",""+loginWorks);
 		if(!loginWorks){
 			startActivity(new Intent(this,LoginRegisterActivity.class));

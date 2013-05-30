@@ -9,11 +9,7 @@ package com.openmap.grupp1.helpfunctions;
 
 import java.io.File;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
 
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
 import com.openmap.grupp1.R;
 import com.openmap.grupp1.PopupandDialogHandler;
 import com.openmap.grupp1.helpfunctions.DatePickerFragment.DatePickerDialogListener;
@@ -314,6 +310,7 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 	/**
 	 * Start the camera activity
 	 */
+	@SuppressWarnings("unused")
 	private void startCameraActivity(){
 		Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		File image=new File(Environment.getExternalStorageDirectory(),"test.jpg");

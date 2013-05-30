@@ -27,7 +27,7 @@
     <string name="login_string">Login</string>
     <string name="username_string">Username</string>
     <string name="password_string">Password</string>
-    <string name="not_user_string">Don\'t have an account? Get one now!</string>
+    <string name="not_user_string">Missing account?</string>
     <string name="already_user_string">Already a user? Sign in now!</string>
     <string name="register_string">Register</string>
 

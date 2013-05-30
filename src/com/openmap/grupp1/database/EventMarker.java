@@ -7,6 +7,12 @@ import org.apache.http.message.BasicNameValuePair;
 
 import com.google.android.gms.maps.model.LatLng;
 
+/**
+ * EventMarker is used to describe an event. It shares attributes with the
+ * LocationMarkers, but has also start- and stop day and time.
+ * 
+ *
+ */
 public class EventMarker extends LocationMarker {
 	String startDay;
 	String stopDay;
@@ -73,6 +79,7 @@ public class EventMarker extends LocationMarker {
 
 		return nvpl;
 	}
+	
 	
 	public String getStartDay() {
 		return startDay;

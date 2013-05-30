@@ -27,7 +27,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.location.Location;
-import android.util.Log;
+
 /*
  * MarkerFactory contains a method to create the markers with different strings,
  * Those are created to make it easy for the user too see what kind of events are near them
@@ -49,19 +49,18 @@ import android.widget.TextView;
  * 
  */
 public class MarkerHandler {
-//	ArrayList<LocationMarker> createdLatLng;
+
 	private ArrayList<Marker> createdMarkers = new ArrayList<Marker>();
-	//ArrayList<Marker> createdMarkersRemove = new ArrayList<Marker>();
-	//HashSet<LatLng> hs;
+	private HashSet<String> hashSet = new HashSet<String>();
 	private HashSet<LatLng> k = new HashSet<LatLng>();
 	private final String PREFS_NAME = "MySharedPrefs";
 	private Set<String> lastset;
-	private Context context;
+	//private Context context;
 	private LocationMarker lm;
 	
 	
 	public MarkerHandler(){
-		//createdLatLng = new ArrayList<LocationMarker>();
+	
 	
 	
 	}
@@ -84,7 +83,7 @@ private Bitmap createPic(String stringTitle, Resources res, String type){
 	else if(type == "Owners"){
 		color = Color.BLUE;}
 	else{
-		Log.d("TEST", "wrong type");
+	
 		color = Color.RED;
 	}
 color = Color.BLACK;
@@ -129,14 +128,9 @@ color = Color.BLACK;
 public void showInfo(final Context context,final LatLng point,
 		final Resources res, 
 		final GoogleMap myMap){
-	this.context = context;
+	//this.context = context;
 	//Creates a NearEventHandler to be able to check distance to an event
 	final NearEventHandler nen = new NearEventHandler(new Location("test"), myMap, context);
-   //POPUP som fungerar
-  
-	/*//Decides the width and height of the marker
-	int popupWidth = 300;
-	int popupHeight = 300;*/
 
    // Inflate the popup_layout.xml
 LinearLayout viewGroup = (LinearLayout) ((Activity) context).findViewById(R.layout.activity_main);
@@ -157,9 +151,9 @@ lm = new LocationTask().getLocation(point);
 titleView.setText(lm.getTitle());
 descriptionView.setText(lm.getDescription());
 int i = new LocationTask().getAttenders(lm.getLatLng());
-Log.d("Hej","ADAMÄRHÄR" + i);
+
 attenders.setText(" " + i);
-Log.d("här2", "ADAMÄRHÄR" + lm.getLatLng());
+
 if(lm.getClass() == EventMarker.class){
 	EventMarker em = (EventMarker) lm;
 	starttime.setText(em.getStartDay() + " " + em.getStartTime());
@@ -170,8 +164,6 @@ if(lm.getClass() == EventMarker.class){
    // Creating the PopupWindow with the developers decided settings 
    final PopupWindow popup = new PopupWindow(context);
    popup.setContentView(layout);
-   //popup.setWidth(popupWidth);
-   //popup.setHeight(popupHeight);
    popup.setWindowLayoutMode(0, ViewGroup.LayoutParams.WRAP_CONTENT);
    popup.setWidth(450);
    popup.setFocusable(true);
@@ -246,7 +238,7 @@ public void addMarkersToScreen(GoogleMap myMap, Resources res, LatLngBounds boun
 
 	//Gets the sets of tags from the filter
 	SharedPreferences settings = context.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
-	Set<String> set = settings.getStringSet("tagSet", new HashSet<String>());
+	Set<String> set = settings.getStringSet("tagSet", hashSet);
 	
 	//If the filter is empty only get events/locations with specific boundarys
 	if(set.isEmpty()){
@@ -256,9 +248,7 @@ public void addMarkersToScreen(GoogleMap myMap, Resources res, LatLngBounds boun
 			myMap.clear();
 			k.clear();
 		}
-		Log.d("Hej", "onCameraChange4");
-		Log.d("Hej", "onCameraChange4" + bounds.southwest);
-		Log.d("Hej", "onCameraChange4" + bounds.northeast);
+
 		databaselocationpair = 
 			new LocationTask().getLocation(new LatLng(bounds.southwest.latitude, bounds.southwest.longitude), 
 			new LatLng(bounds.northeast.latitude, bounds.northeast.longitude));
@@ -276,7 +266,7 @@ public void addMarkersToScreen(GoogleMap myMap, Resources res, LatLngBounds boun
 		}
 		ArrayList<String> tags = new ArrayList<String>();
 		tags.addAll(set);
-		Log.d("Hej", "onCameraChange6");
+		
 		databaselocationpair = 
 			new LocationTask().getLocation(new LatLng(bounds.southwest.latitude, bounds.southwest.longitude), 
 			new LatLng(bounds.northeast.latitude, bounds.northeast.longitude),tags);}
@@ -298,7 +288,7 @@ public void addMarkersToScreen(GoogleMap myMap, Resources res, LatLngBounds boun
 	 */
 	//Adds marker to the screen 
 		for(LocationMarker ll : databaselocationpair){
-			Log.d("Sistagrejen", "Testa size" + createdMarkers.size());
+			
 			
 			if(createdMarkers.size()> 30){
 				break;}
