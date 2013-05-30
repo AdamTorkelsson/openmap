@@ -14,8 +14,6 @@ import java.util.concurrent.ExecutionException;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 
-import com.openmap.grupp1.database.CheckDBUrlTask;
-
 import com.openmap.grupp1.database.UserLoginAndRegistrationTask;
 import com.openmap.grupp1.helpfunctions.SearchTagActivity;
 import com.openmap.grupp1.helpfunctions.SettingsActivity;
@@ -27,7 +25,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -39,7 +36,6 @@ public class MainActivity extends Activity
 
 	private MyMap myMap;
 	public static final String PREFS_NAME = "MySharedPrefs";
-	private  boolean mBound = false;
 	private SharedPreferences settings;
 
 
@@ -48,17 +44,20 @@ public class MainActivity extends Activity
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	
+		
+		//Sets the animation when opening this activity
+		overridePendingTransition(R.anim.map_in,R.anim.other_out);
+
 		//The Action Bar replaces the title bar and provides an alternate location for an on-screen menu button on some devices. 
 		getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 		//Creating content view
 		setContentView(R.layout.activity_main);
 	
-
 		//Creates the MyMapFragment which handle the map part of this activity
 		myMap = new MyMap(this);
 	
 		/*Gets the previous login values if the user have logged in before
-		If the user havent logged in before the login activity starts
+		If the user haven't logged in before the login activity starts
 		Starts an TutorialDialog also if the user have to log in or register
 		*/
 		settings= getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
@@ -87,6 +86,10 @@ public class MainActivity extends Activity
 	
 	@Override
 	public void onResume(){
+		
+		//Sets the animation when resuming this activity
+		overridePendingTransition(R.anim.map_in,R.anim.other_out);
+
 		// Checks and modifies the maptype if its been changed in the settings
 		myMap.onCameraChange(new CameraPosition(new LatLng(0,0),7,0,0));
 		String mapSetting = settings.getString("map", "Error");

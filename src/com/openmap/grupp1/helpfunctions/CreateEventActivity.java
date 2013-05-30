@@ -8,12 +8,17 @@ package com.openmap.grupp1.helpfunctions;
 
 
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
 import com.openmap.grupp1.R;
 import com.openmap.grupp1.PopupandDialogHandler;
 import com.openmap.grupp1.helpfunctions.DatePickerFragment.DatePickerDialogListener;
 import com.openmap.grupp1.helpfunctions.TimePickerFragment.TimePickerDialogListener;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +27,9 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
@@ -48,10 +56,13 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 
 
 	public void onCreate(Bundle savedInstanceState){
-		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "INCREATEEVENT");
 		super.onCreate(savedInstanceState);
+		
 
 		setContentView(R.layout.createeventview);
+
+		//Sets the animation when opening this activity
+		overridePendingTransition(R.anim.map_out,R.anim.other_in);
 
 		this.image = (ImageView) findViewById(R.id.imageView);
 
@@ -65,6 +76,8 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 		setTagListener();
 
 	}
+	
+	
 
 	//Sets the listener to the start time view
 	public void setStartTimeListener() {
@@ -316,6 +329,26 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 		}
 		else {
 			//
+		}
+	}
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.standardmenu, menu);
+		ActionBar ab = getActionBar();
+		ab.setDisplayShowTitleEnabled(false);
+		ab.setDisplayShowHomeEnabled(false);
+		return true;
+	}
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		//Clears the tag filter if the user clicks the clear button
+		case R.id.btn_logo:
+			finish();
+			return true;
+		//Default
+		default:
+			return super.onOptionsItemSelected(item);
 		}
 	}
 }

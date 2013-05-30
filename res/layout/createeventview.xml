@@ -2,8 +2,7 @@
     android:id="@+id/markerTitle"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:alpha="0.5"
-    android:background="#FFFFFF" >
+    android:background="#F1C40F" >
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -16,24 +15,28 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:background="@layout/customborder"
             android:orientation="vertical" >
 
             <EditText
                 android:id="@+id/txtTitle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#FFFFFF"
                 android:hint="@string/title"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
         <Button
             android:id="@+id/buttonCamera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="buttonCamera"
-            android:text="@string/add_photo" />
+            android:text="@string/add_photo"
+            android:background="#F39C12" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -107,10 +110,10 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:contentDescription="@string/added_photo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.2"
+            android:contentDescription="@string/added_photo"
             android:src="@drawable/arrow" />
     </LinearLayout>
 
@@ -130,13 +133,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:padding="5dp" >
 
         <Button
             android:id="@+id/buttonCancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="#F39C12"
             android:text="@string/cancel" />
 
         <Button
@@ -144,6 +149,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="#F39C12"
             android:text="@string/tag" />
     </LinearLayout>
 

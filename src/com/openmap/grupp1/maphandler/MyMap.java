@@ -25,8 +25,6 @@ import android.util.Log;
 /*
  *This is the class that creates the GoogleMap
  *It listens on different clicks and movement of the map
- *
- * 
  */
 
 
@@ -35,7 +33,6 @@ implements  OnMapLongClickListener,OnMarkerClickListener,OnCameraChangeListener{
 
 	private GoogleMap myMap;
 	private Context mCtx;
-	//private CameraChangeHandler occ;
 	private final String PREFS_NAME ="MySharedPrefs";
 	private MarkerHandler markerhandler;
 

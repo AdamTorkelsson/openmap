@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#9999CC">
 
 <item android:id="@+id/btn_clear"
 android:icon="@android:drawable/ic_menu_close_clear_cancel"
@@ -15,5 +16,6 @@ android:title="@string/menu_settings"/>
 android:icon="@android:drawable/ic_menu_search"
 android:showAsAction="ifRoom|withText"
 android:title="@string/menu_search"/>
+
 
 </menu>

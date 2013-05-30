@@ -46,7 +46,7 @@ public class NotifyService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		//Gets the title and description of the event which the user gets notified about
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
-		String notificationTitle = " " + settings.getString("Notification", "Error when receiving title");
+		String notificationTitle = settings.getString("Notification", "Error when receiving title");
 		String notificationText = settings.getString("Notificationdetails", "Error when receiving description");
 
 		//Creates a new IntentFilter and adds the NotifyServiceAction to it

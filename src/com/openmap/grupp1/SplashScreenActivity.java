@@ -4,12 +4,10 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.Window;
 
 import com.openmap.grupp1.database.CheckDBUrlTask;
 import com.openmap.grupp1.helpfunctions.RetryConnectionFragment;
-import com.openmap.grupp1.helpfunctions.SettingsActivity;
 
 
 /*
@@ -27,6 +25,7 @@ public class SplashScreenActivity extends FragmentActivity implements RetryConne
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+	
 		//Hides the titlebar
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.splashscreen);
@@ -54,13 +53,11 @@ public class SplashScreenActivity extends FragmentActivity implements RetryConne
 		boolean conn = new CheckDBUrlTask().tryDBConnection();
 		
 		if (!conn) {
-			Log.d("Database:","connection not available!");
 			showRetryConnectionDialog();
 		//Intent intent = new Intent(SplashScreenActivity.this, SettingsActivity.class);
 		//startActivity(intent);
 	}
 		else{
-			Log.d("Database:","connection available!");
 			Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
 			startActivity(intent);
 		}

@@ -36,6 +36,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -133,9 +134,9 @@ public void showInfo(final Context context,final LatLng point,
 	final NearEventHandler nen = new NearEventHandler(new Location("test"), myMap, context);
    //POPUP som fungerar
   
-	//Decides the width and height of the marker
+	/*//Decides the width and height of the marker
 	int popupWidth = 300;
-	int popupHeight = 300;
+	int popupHeight = 300;*/
 
    // Inflate the popup_layout.xml
 LinearLayout viewGroup = (LinearLayout) ((Activity) context).findViewById(R.layout.activity_main);
@@ -169,8 +170,10 @@ if(lm.getClass() == EventMarker.class){
    // Creating the PopupWindow with the developers decided settings 
    final PopupWindow popup = new PopupWindow(context);
    popup.setContentView(layout);
-   popup.setWidth(popupWidth);
-   popup.setHeight(popupHeight);
+   //popup.setWidth(popupWidth);
+   //popup.setHeight(popupHeight);
+   popup.setWindowLayoutMode(0, ViewGroup.LayoutParams.WRAP_CONTENT);
+   popup.setWidth(450);
    popup.setFocusable(true);
    popup.setTouchable(true);
    
@@ -225,8 +228,8 @@ if(lm.getClass() == EventMarker.class){
  
    //Displaying the popup at the specified location, + offsets.
    popup.showAtLocation(layout, Gravity.NO_GRAVITY, 
-		   projection.toScreenLocation(point).x -popupWidth/2, 
-		   projection.toScreenLocation(point).y - popupHeight/2);
+		   projection.toScreenLocation(point).x -popup.getWidth()/2, 
+		   projection.toScreenLocation(point).y - popup.getHeight()/2);
 }
 
 /*

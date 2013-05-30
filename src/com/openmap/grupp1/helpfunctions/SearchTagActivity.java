@@ -93,11 +93,11 @@ SearchView.OnCloseListener {
 
 				//Get the tag at the clicked position
 				String removeItem = (String) listViewAdded.getItemAtPosition(position);
+				addedTags.remove(removeItem);
+				addedTagsAdapter.notifyDataSetChanged();
 
 				//Adds the tag to listViewSearched to the left if it doesn't exist in it and removes it from listViewAdded
 				if(!searchedTags.contains(removeItem)) {
-					addedTags.remove(removeItem);
-					addedTagsAdapter.notifyDataSetChanged();
 					searchedTags.add(removeItem);
 					searchedTagsAdapter.notifyDataSetChanged();
 				}

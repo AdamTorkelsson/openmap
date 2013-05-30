@@ -1,9 +1,14 @@
 package com.openmap.grupp1.helpfunctions;
 
 import com.openmap.grupp1.R;
+
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -25,11 +30,6 @@ public class SettingsActivity extends Activity{
 		//Sets the animation when starting this activity
 		overridePendingTransition(R.anim.map_out,R.anim.other_in);
 
-
-		//create lite osäkert men alltid här
-
-		//The Action Bar replaces the title bar and provides an alternate location for an on-screen menu button on some devices. 
-
 		//Sets the the view for the activity
 		setContentView(R.layout.settingsview);
 		
@@ -40,6 +40,28 @@ public class SettingsActivity extends Activity{
 		addListenerOnCancelButton();
 	}
 
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.standardmenu, menu);
+		ActionBar ab = getActionBar();
+		ab.setDisplayShowTitleEnabled(false);
+		ab.setDisplayShowHomeEnabled(false);
+		return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		//Clears the tag filter if the user clicks the clear button
+		case R.id.btn_logo:
+			finish();
+			return true;
+		//Default
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+	
 	@Override
 	public void onResume(){
 		super.onResume();
