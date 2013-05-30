@@ -47,10 +47,10 @@ implements  OnMapLongClickListener,OnMarkerClickListener,OnCameraChangeListener{
 		//enables all click
 		myMap.setMyLocationEnabled(true);
 		myMap.setOnMapLongClickListener(this);
-		myMap.setOnMarkerClickListener(this); 
+		myMap.setOnMarkerClickListener(this);
 		myMap.setOnCameraChangeListener(this);
 
-		// Creates locationhandler that keep track and handles your position		
+		// Creates locationhandler that keep track and handles your position
 		LocationHandler lh = new LocationHandler(myMap, mCtx);
 		//Makes the camera move to your location
 		lh.updateToMyLocation();
