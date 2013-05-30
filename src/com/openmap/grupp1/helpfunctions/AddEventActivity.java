@@ -198,14 +198,6 @@ SearchView.OnCloseListener{
 					
 					//Sends the new marker to the database
 					new LocationTask().addLocation(newMarker);
-					
-					/*try {
-						AddLocationTask addLocationTask = new AddLocationTask();
-						addLocationTask.execute(newMarker.getPairsList());
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}*/
 
 					//Hides the keyboard to get a smoother transition from this activity to the map
 					InputMethodManager imm = (InputMethodManager)context.getSystemService( Context.INPUT_METHOD_SERVICE);

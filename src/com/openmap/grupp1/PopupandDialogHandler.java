@@ -51,11 +51,9 @@ public class PopupandDialogHandler {
 			standardDialog(R.string.tutorialdialogview5,"Next",true);
 			i++;}
 		else if(i==6){
-			standardDialog(R.string.tutorialdialogview6,"Next",true);
+			standardDialog(R.string.tutorialdialogview6,"Finish",false);
 			i++;}
-		else if(i==7){
-			standardDialog(R.string.tutorialdialogview7,"Finish",false);
-			i++;}
+
 
 	}
 	/*

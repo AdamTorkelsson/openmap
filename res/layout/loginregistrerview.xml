@@ -3,7 +3,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal" 
+    android:background="#F1C40F">
 
     <EditText
         android:id="@+id/usernameField"
@@ -39,6 +40,7 @@
         android:layout_marginTop="30dp"
         android:maxWidth="200dp"
         android:minWidth="200dp"
+        android:background="#F39C12"
         android:text="@string/login_string" />
 
     <TextView

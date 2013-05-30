@@ -20,6 +20,7 @@ public abstract class DataBaseTask<T1,T2,T3> extends AsyncTask<T1, T2, T3> imple
 	BasicNameValuePair action;
 	String outparams;
 
+
 	public void sendToDB(ArrayList<NameValuePair> inparams){
 
 		HttpClient httpClient = new DefaultHttpClient();//used to execute post

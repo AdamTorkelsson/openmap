@@ -7,50 +7,37 @@ package com.openmap.grupp1.helpfunctions;
  */
 
 
-import java.io.File;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
 import com.openmap.grupp1.R;
 import com.openmap.grupp1.PopupandDialogHandler;
-import com.openmap.grupp1.R.id;
-import com.openmap.grupp1.R.layout;
-import com.openmap.grupp1.R.string;
 import com.openmap.grupp1.helpfunctions.DatePickerFragment.DatePickerDialogListener;
 import com.openmap.grupp1.helpfunctions.TimePickerFragment.TimePickerDialogListener;
 
+import android.app.ActionBar;
 import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 public class CreateEventActivity extends FragmentActivity 
 implements DatePickerDialogListener, TimePickerDialogListener{
 	final static int TAKE_PICTURE_REQUEST_CODE = 1;
@@ -69,10 +56,13 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 
 
 	public void onCreate(Bundle savedInstanceState){
-		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "INCREATEEVENT");
 		super.onCreate(savedInstanceState);
+		
 
 		setContentView(R.layout.createeventview);
+
+		//Sets the animation when opening this activity
+		overridePendingTransition(R.anim.map_out,R.anim.other_in);
 
 		this.image = (ImageView) findViewById(R.id.imageView);
 
@@ -86,6 +76,8 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 		setTagListener();
 
 	}
+	
+	
 
 	//Sets the listener to the start time view
 	public void setStartTimeListener() {
@@ -337,6 +329,26 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 		}
 		else {
 			//
+		}
+	}
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.standardmenu, menu);
+		ActionBar ab = getActionBar();
+		ab.setDisplayShowTitleEnabled(false);
+		ab.setDisplayShowHomeEnabled(false);
+		return true;
+	}
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		//Clears the tag filter if the user clicks the clear button
+		case R.id.btn_logo:
+			finish();
+			return true;
+		//Default
+		default:
+			return super.onOptionsItemSelected(item);
 		}
 	}
 }

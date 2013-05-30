@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#FFFF7E" >
+    android:background="#F1C40F" >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
+    
         <Button
             android:id="@+id/buttonNo"
             style="?android:attr/buttonStyleSmall"
@@ -16,6 +12,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
+            android:background="#F39C12" 
             android:text="No" />
 
         <Button
@@ -25,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/buttonNo"
+            android:background="#F39C12" 
             android:text="Yes" />
 
         <TextView
@@ -34,10 +32,10 @@
             android:layout_alignBaseline="@+id/buttonYes"
             android:layout_alignBottom="@+id/buttonYes"
             android:layout_alignParentLeft="true"
+            android:paddingLeft="5dp"
             android:text="Correct position?"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="22dp" />
+            android:textSize="22sp" />
 
     </RelativeLayout>
 
-</LinearLayout>

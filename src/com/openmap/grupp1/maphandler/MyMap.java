@@ -1,4 +1,4 @@
-package com.openmap.grupp1.mapview;
+package com.openmap.grupp1.maphandler;
 
 
 
@@ -17,8 +17,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.openmap.grupp1.R;
 import com.openmap.grupp1.PopupandDialogHandler;
-import com.openmap.grupp1.maphandler.LocationHandler;
-import com.openmap.grupp1.maphandler.MarkerHandler;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -27,8 +25,6 @@ import android.util.Log;
 /*
  *This is the class that creates the GoogleMap
  *It listens on different clicks and movement of the map
- *
- * 
  */
 
 
@@ -37,7 +33,6 @@ implements  OnMapLongClickListener,OnMarkerClickListener,OnCameraChangeListener{
 
 	private GoogleMap myMap;
 	private Context mCtx;
-	//private CameraChangeHandler occ;
 	private final String PREFS_NAME ="MySharedPrefs";
 	private MarkerHandler markerhandler;
 
