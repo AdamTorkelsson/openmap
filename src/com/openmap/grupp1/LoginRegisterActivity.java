@@ -3,6 +3,7 @@ package com.openmap.grupp1;
 
 import java.util.concurrent.ExecutionException;
 
+
 import com.openmap.grupp1.database.UserLoginAndRegistrationTask;
 
 import android.app.ActionBar;
@@ -104,41 +105,24 @@ public class LoginRegisterActivity extends Activity implements OnClickListener{
 
 				username = userText.getText().toString();
 				password = passwordText.getText().toString();
-				UserLoginAndRegistrationTask ular = new UserLoginAndRegistrationTask(username, password);
-
+				
 				switch(mode){
 
-				case LOGIN: ular.loginUser();
-				try {
-					if (ular.get()){
+				case LOGIN:
+				
+					if (new UserLoginAndRegistrationTask().loginUser(username, password))
 						loginSuccess();
-					}else{
+					else
 						loginFail();
-					}
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ExecutionException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				break;
+					break;
 
-				case REGISTER: ular.registerUser();
-				try {
-					if (ular.get()){
+				case REGISTER: 
+					
+					if (new UserLoginAndRegistrationTask().registerUser(username, password))
 						registerSuccess();
-					}else{
+					else
 						registerFail();
-					}
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ExecutionException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				break;
+					break;
 				}
 
 			}else if (v == notOrAlreadyUserString){

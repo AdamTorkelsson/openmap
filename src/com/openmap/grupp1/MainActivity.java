@@ -14,6 +14,7 @@ import java.util.concurrent.ExecutionException;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 
+
 import com.openmap.grupp1.database.UserLoginAndRegistrationTask;
 import com.openmap.grupp1.helpfunctions.SearchTagActivity;
 import com.openmap.grupp1.helpfunctions.SettingsActivity;
@@ -27,6 +28,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -47,7 +49,7 @@ public class MainActivity extends Activity
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		//Sets the animation when opening this activity
 		overridePendingTransition(R.anim.map_in,R.anim.other_out);
 
@@ -55,39 +57,30 @@ public class MainActivity extends Activity
 		getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 		//Creating content view
 		setContentView(R.layout.activity_main);
-	
+
 		//Creates the MyMapFragment which handle the map part of this activity
 		myMap = new MyMap(this);
-	
+
 		/*Gets the previous login values if the user have logged in before
 		If the user haven't logged in before the login activity starts
-		Starts an TutorialDialog also if the user have to log in or register
-		*/
+		Starts an TutorialDialog also if the user has to log in or register
+		 */
 		settings= getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
 
-		UserLoginAndRegistrationTask ular = 
-				new UserLoginAndRegistrationTask(
-						settings.getString("LoginUsername", "Adam"),
-						settings.getString("LoginPassword", "1234"));
-		ular.loginUser();
 
-		try {
-			if(!ular.get()){
-				startActivity(new Intent(this,LoginRegisterActivity.class));
-				PopupandDialogHandler TPD = new PopupandDialogHandler(this);
-				TPD.tutorialDialog();
-			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
+		boolean loginWorks = new UserLoginAndRegistrationTask().loginUser(settings.getString("LoginUsername", "Adam"), settings.getString("LoginPassword", "1234"));
+		Log.d("Loginworks?",""+loginWorks);
+		if(!loginWorks){
+			startActivity(new Intent(this,LoginRegisterActivity.class));
+			PopupandDialogHandler TPD = new PopupandDialogHandler(this);
+			TPD.tutorialDialog();
 		}
 	}	 
 
-	
+
 	@Override
 	public void onResume(){
-		
+
 		//Sets the animation when resuming this activity
 		overridePendingTransition(R.anim.map_in,R.anim.other_out);
 
@@ -128,21 +121,23 @@ public class MainActivity extends Activity
 			editor.commit();
 			myMap.onCameraChange(new CameraPosition(new LatLng(0,0),7,0,0));
 			return true;
-		//Starts the settings activity and pauses the current activity if the user clicks the settings item
+
+			//Starts the settings activity and pauses the current activity if the user clicks the settings button
 		case R.id.btn_settings:
 			Intent settingsIntent =new Intent(this, SettingsActivity.class);
 			startActivity(settingsIntent);
 			this.onPause();
 			return true;
-		//Starts the search tag activity and pauses the current activity if the user clicks the search item
+
+			//Starts the search tag activity and pauses the current activity if the user clicks the search button
 		case R.id.btn_search:
 			Intent searchIntent =new Intent(this, SearchTagActivity.class);
 			startActivity(searchIntent);
 			return true;
-		//Default
+			//Default
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
 }
-	
+

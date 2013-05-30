@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 import com.openmap.grupp1.R;
+//import com.openmap.grupp1.database.RequestTagDbTask;
 import com.openmap.grupp1.database.RequestTagDbTask;
 
 import android.app.ActionBar;
@@ -35,7 +36,7 @@ SearchView.OnCloseListener {
 	private ListView listViewSearched;
 	private ListView listViewAdded;
 	private SearchView searchView;
-	private RequestTagDbTask mDbHelper;
+	//private RequestTagDbTask mDbHelper;
 	private ArrayList<String> addedTags = new ArrayList<String>();
 	private ArrayAdapter<String> addedTagsAdapter;
 	private ArrayList<String> searchedTags = new ArrayList<String>();
@@ -199,10 +200,9 @@ SearchView.OnCloseListener {
 		try {
 			
 			//Creates the object which talks to the database and sends the query to the database
-			mDbHelper = new RequestTagDbTask();
 
-			searchedTags = mDbHelper.getTagArray(query);
-
+			searchedTags = new RequestTagDbTask().getTagArray(query);
+			
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
