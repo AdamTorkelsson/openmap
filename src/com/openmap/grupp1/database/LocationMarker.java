@@ -1,7 +1,6 @@
 package com.openmap.grupp1.database;
 
 import java.util.ArrayList;
-import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -15,6 +14,8 @@ public class LocationMarker {
 	LatLng loc;
 	String desc = "No description";
 	String[] tags;
+
+
 	public LocationMarker(){
 		
 	}
@@ -27,6 +28,8 @@ public class LocationMarker {
 		this.tags	=	tags;
 		
 	}
+	
+	
 
 	public LocationMarker(String title, LatLng loc, String desc, String[] tags){
 		this.title	=	title;

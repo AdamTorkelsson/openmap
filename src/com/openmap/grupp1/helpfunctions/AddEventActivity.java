@@ -8,12 +8,15 @@ import com.openmap.grupp1.PopupandDialogHandler;
 import com.openmap.grupp1.database.LocationMarker;
 import com.openmap.grupp1.database.EventMarker;
 import com.openmap.grupp1.database.LocationTask;
+//import com.openmap.grupp1.database.RequestTagDbTask;
 import com.openmap.grupp1.database.RequestTagDbTask;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,14 +30,17 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.AdapterView.OnItemClickListener;
-
+/**
+ * Activity to be initiated after the create event activity when creating an event.
+ */
 public class AddEventActivity extends Activity implements SearchView.OnQueryTextListener,
 SearchView.OnCloseListener{
 
+	
 	private ListView listViewSearched;
 	private ListView listViewAdded;
 	private SearchView searchView;
-	private RequestTagDbTask mDbHelper;
+	//private RequestTagDbTask mDbHelper;
 	private ArrayList<String> addedTags = new ArrayList<String>();
 	private ArrayAdapter<String> addedTagsAdapter;
 	private ArrayList<String> newTags = new ArrayList<String>();
@@ -64,7 +70,9 @@ SearchView.OnCloseListener{
 		setTagListener();
 	}
 	
-	//Sets the listener to the searched tags listview to the left
+	/**
+	 * Sets the listener to the searched tags listview to the left
+	 */
 	public void setSearchedListListener() {
 		listViewSearched = (ListView) findViewById(R.id.addtag_list_searched);
 		// Define the on-click listener for listViewSearched
@@ -85,7 +93,9 @@ SearchView.OnCloseListener{
 		});
 	}
 	
-	//Sets the listener to the added tags listview to the right
+	/**
+	 * Sets the listener to the added tags listview to the right
+	 */
 	public void setAddedListListener() {
 		listViewAdded = (ListView) findViewById(R.id.addtag_list_added);
 		//Sets the adapter between the arraylist and the listview to be able to load content from the list
@@ -129,7 +139,9 @@ SearchView.OnCloseListener{
 		
 	}
 	
-	//Sets the listener for the cancel button
+	/**
+	 * Sets the listener for the cancel button
+	 */
 	public void setCancelListener() {
 		Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
 		buttonCancel.setClickable(true);
@@ -149,7 +161,9 @@ SearchView.OnCloseListener{
 		});
 	}
 
-	//Sets the listener for the tag button
+	/**
+	 * Sets the listener for the tag button
+	 */
 	public void setTagListener() {
 		Button buttonTag	  = (Button) findViewById(R.id.buttonTag);
 		buttonTag.setClickable(true);
@@ -198,14 +212,6 @@ SearchView.OnCloseListener{
 					
 					//Sends the new marker to the database
 					new LocationTask().addLocation(newMarker);
-					
-					/*try {
-						AddLocationTask addLocationTask = new AddLocationTask();
-						addLocationTask.execute(newMarker.getPairsList());
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}*/
 
 					//Hides the keyboard to get a smoother transition from this activity to the map
 					InputMethodManager imm = (InputMethodManager)context.getSystemService( Context.INPUT_METHOD_SERVICE);
@@ -230,6 +236,8 @@ SearchView.OnCloseListener{
 		ActionBar ab = getActionBar();
 		ab.setDisplayShowTitleEnabled(false);
 		ab.setDisplayShowHomeEnabled(false);
+		ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F39C12")));
+
 
 		//Defines the searchview and its properties
 		searchView = (SearchView) menu.findItem(R.id.addtagmenu_search).getActionView();
@@ -292,13 +300,18 @@ SearchView.OnCloseListener{
 
 
 
-	//Shows the results in the searched tags listview to the left
+	/**
+	 * Shows the results in the searched tags listview to the left
+	 * @param query The query to be sent to the database
+	 */
 	private void showResults(String query) {
 
 		try {
 			//Creates the object which talks to the database and sends the query to the database
-			mDbHelper = new RequestTagDbTask();
-			searchedTags = mDbHelper.getTagArray(query);
+			searchedTags = new RequestTagDbTask().getTagArray(query);
+			//TODO Pärka
+			//mDbHelper = new RequestTagDbTask();
+			//searchedTags = mDbHelper.getTagArray(query);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

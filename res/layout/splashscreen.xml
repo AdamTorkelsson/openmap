@@ -1,35 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#008B8B"
-    android:columnCount="1"
-    android:orientation="vertical" >
+    android:background="#F1C40F" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="264dp"
+        android:layout_height="66dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="30dp"
+        android:text="@string/slogan" />
 
     <ProgressBar
         android:id="@+id/progressBar1"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="173dp"
         android:layout_height="173dp"
-        android:layout_column="0"
-        android:layout_gravity="center"
-        android:layout_row="0" />
+        android:layout_below="@+id/textView2"
+        android:layout_centerInParent="true" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_column="0"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_row="0"
-        android:text="Freedomap"
-        android:textSize="40dp" 
-        android:layout_marginTop="40dp"/>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_column="0"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_row="0"
-        android:text="A map made by you"
-        android:layout_marginTop="90dp" />
-
-</GridLayout>
+</RelativeLayout>

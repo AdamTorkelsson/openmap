@@ -9,48 +9,43 @@ package com.openmap.grupp1.helpfunctions;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
 import com.openmap.grupp1.R;
 import com.openmap.grupp1.PopupandDialogHandler;
-import com.openmap.grupp1.R.id;
-import com.openmap.grupp1.R.layout;
-import com.openmap.grupp1.R.string;
 import com.openmap.grupp1.helpfunctions.DatePickerFragment.DatePickerDialogListener;
 import com.openmap.grupp1.helpfunctions.TimePickerFragment.TimePickerDialogListener;
 
+import android.app.ActionBar;
 import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+/**
+ * Activity to be initiated when the user wants to create an event.
+ */
 public class CreateEventActivity extends FragmentActivity 
 implements DatePickerDialogListener, TimePickerDialogListener{
 	final static int TAKE_PICTURE_REQUEST_CODE = 1;
@@ -66,14 +61,17 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 	private Context context = this;
 	private final String PREFS_NAME = "MySharedPrefs";
 	final Calendar c = Calendar.getInstance();
-	//private EditText txtTitle = (EditText) findViewById(R.id.txtTitle);
-//	private EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
 
 
 	public void onCreate(Bundle savedInstanceState){
-		Log.d(TEXT_SERVICES_MANAGER_SERVICE, "INCREATEEVENT");
 		super.onCreate(savedInstanceState);
+		
+
 		setContentView(R.layout.createeventview);
+
+		//Sets the animation when opening this activity
+		overridePendingTransition(R.anim.map_out,R.anim.other_in);
+
 		this.image = (ImageView) findViewById(R.id.imageView);
 
 		//Creates the listeners for the start time, end time, start date, end date, camera button, cancel button and tag button
@@ -85,10 +83,13 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 		setCancelListener();
 		setTagListener();
 
-
 	}
+	
+	
 
-	//Sets the listener to the start time view
+	/**
+	 * Sets the listener to the start time view
+	 */
 	public void setStartTimeListener() {
 		setStartTime = (TextView)findViewById(R.id.setStartTime);
 		setStartTime.setClickable(true);
@@ -102,7 +103,9 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 		});
 	}
 
-	//Sets the listener to the end time view
+	/**
+	 * Sets the listener to the end time view
+	 */
 	public void setEndTimeListener() {
 		setEndTime = (TextView)findViewById(R.id.setEndTime);
 		setEndTime.setClickable(true);
@@ -116,7 +119,9 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 		});
 	}
 
-	//Sets the listener to the start date view
+	/**
+	 * Sets the listener to the start date view
+	 */
 	public void setStartDateListener() {
 		setStartDate = (TextView)findViewById(R.id.setStartDate);
 		setStartDate.setClickable(true);
@@ -130,7 +135,9 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 		});
 	}
 
-	//Sets the listener to the end date view
+	/**
+	 * Sets the listener to the end date view
+	 */
 	public void setEndDateListener(){
 		setEndDate = (TextView)findViewById(R.id.setEndDate);
 		setEndDate.setClickable(true);
@@ -144,7 +151,9 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 		});
 	}
 
-	//Sets the listener to the camera button
+	/**
+	 * Sets the listener to the camera button
+	 */
 	public void setCameraListener() {
 		Button buttonCamera = (Button) findViewById(R.id.buttonCamera);
 		buttonCamera.setClickable(true);
@@ -157,7 +166,9 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 		});
 	}
 
-	//Sets the listener to the tag button
+	/**
+	 * Sets the listener to the tag button
+	 */
 	public void setTagListener() {
 		Button buttonTag	  = (Button) findViewById(R.id.buttonTag);
 		buttonTag.setClickable(true);
@@ -166,6 +177,7 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 			public void onClick(View arg0) {
 				EditText txtTitle = (EditText) findViewById(R.id.txtTitle);
 				EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
+
 				String temp1 = txtTitle.getText().toString();
 				String temp2 = txtDescription.getText().toString();
 
@@ -217,7 +229,7 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 						c.get(Calendar.HOUR_OF_DAY)*100 + c.get(Calendar.MINUTE) > Integer.valueOf(setStartTime.getText().toString().replaceAll(":", ""))) {
 					createHelpDialog(R.string.wrongStartTime);
 				}
-				//If the end date is set earlier than the start date, create a diaog telling the user that the dates need to be changed
+				//If the end date is set earlier than the start date, create a dialog telling the user that the dates need to be changed
 				else if(Integer.valueOf(setStartDate.getText().toString().replaceAll("-", "")) > Integer.valueOf(setEndDate.getText().toString().replaceAll("-", ""))) {
 					createHelpDialog(R.string.invalidDate);
 				}
@@ -254,7 +266,9 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 		});
 	}
 
-	//Sets the listener to the cancel button
+	/**
+	 * Sets the listener to the cancel button
+	 */
 	public void setCancelListener() {
 		Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
 		buttonCancel.setClickable(true);
@@ -271,35 +285,44 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 		});
 	}
 
-	//Create a dialog with the date picker
+	/**
+	 * Create a dialog with the date picker
+	 */
 	private void showDatePickerDialog() {
 		newDateFragment = new DatePickerFragment();
 		newDateFragment.show(getFragmentManager(), "datePicker");
 	}
 
-	//Create a dialog with the time picker
+	/**
+	 * Create a dialog with the time picker
+	 */
 	private void showTimePickerDialog() {
 		newTimeFragment = new TimePickerFragment();
 		newTimeFragment.show(getFragmentManager(), "timePicker");
 	}
 
 
-	//Create a  dialog containing the desired text with an okay and a cancel button
+	/**
+	 * Create a  dialog containing the desired text with an okay and a cancel button
+	 * @param text The text to be shown in the dialog
+	 */
 	private void createHelpDialog(int text) {
 		PopupandDialogHandler TPD = new PopupandDialogHandler(this);
 		TPD.standardDialog(text,"Ok",false);
 	}
 
-	//Start the camera activity
+	/**
+	 * Start the camera activity
+	 */
 	private void startCameraActivity(){
 		Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		/*File image=new File(Environment.getExternalStorageDirectory(),"test.jpg");
+		File image=new File(Environment.getExternalStorageDirectory(),"test.jpg");
          intentCamera.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(image));
-         Uri photoUri=Uri.fromFile(image);*/
+         Uri photoUri=Uri.fromFile(image);
 		startActivityForResult(intentCamera,TAKE_PICTURE_REQUEST_CODE);
 	}
 
-	//If the 
+	//Gets the photo from the camera and adds it to the thumbnail
 	protected void onActivityResult(int requestCode, int resultCode, Intent intent){
 		if (requestCode == TAKE_PICTURE_REQUEST_CODE && resultCode == RESULT_OK){
 			Log.d(TEXT_SERVICES_MANAGER_SERVICE, "Step2camera");
@@ -309,8 +332,8 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 		}
 	}
 
-	//Sets the selected date in the correct TextView when closing the dialog
 	@Override
+	//Sets the selected date in the correct TextView when closing the dialog
 	public void onFinishDatePickerDialog(String newDate) {
 		//If typeOfDate is true (being set when you press the startDate TextView), set the content to the start date TextView
 		if(typeOfDate) {
@@ -326,6 +349,7 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 	}
 
 	@Override
+	//Sets the selected time in the correct TextView when closing the dialog
 	public void onFinishTimePickerDialog(String newTime) {
 		//If typeOfTime is true (being set when you press the startTime TextView), set the content to the start time TextView
 		if(typeOfTime) {
@@ -337,6 +361,28 @@ implements DatePickerDialogListener, TimePickerDialogListener{
 		}
 		else {
 			//
+		}
+	}
+	//Specifies the options menu, disabling the title and home button
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.standardmenu, menu);
+		ActionBar ab = getActionBar();
+		ab.setDisplayShowTitleEnabled(false);
+		ab.setDisplayShowHomeEnabled(false);
+		ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F39C12")));
+		return true;
+	}
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		//Closes the current application, returning to the map 
+		case R.id.btn_logo:
+			finish();
+			return true;
+		//Default
+		default:
+			return super.onOptionsItemSelected(item);
 		}
 	}
 }
