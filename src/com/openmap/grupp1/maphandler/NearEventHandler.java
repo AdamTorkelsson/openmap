@@ -11,12 +11,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
-/*
+/**
  * Checks if there are any locations or events near. 
  * If an event is near, ask the user if they want to 
  * check in. 
  * 
- * Add so the user don't have to choose no two times
+ * Add so the user don't have to choose no two times.
  * You have to be within 50 meters from an event to 
  * get an notification or to be able to check in.
  * To get a notification you have to stay within 200 meters  
@@ -36,16 +36,24 @@ public class NearEventHandler {
 
 	private double area =  0.015;
 	private ArrayList<LocationMarker> dataBaseArray;
-
+	
+	/**
+	 * Constructor
+	 * @param lastKnownLocation The last known location of the user
+	 * @param myMap The google map object
+	 * @param context The current context
+	 */
 	public NearEventHandler(Location lastKnownLocation,GoogleMap myMap,Context context ){
 		this.myMap = myMap;
 		this.lastKnownLocation = lastKnownLocation;
 		this.context = context;
 	}	
 
+	/**
+	 * Checks if the user has fulfilled all the criteria for for sending a notification
+	 * @param loc The current location of the user
+	 */
 	public void checkEvent(Location loc){	
-		//Lägg till checka ut om du gått därifrån
-
 		//If distance to the last known location is more than 200 and the checkedIn location isn't set to the artificial point (0,0), set the checkedIn location to (0,0)
 		if(loc.distanceTo(lastKnownLocation) > 200
 				&& checkedIn.latitude != 0 
@@ -90,7 +98,9 @@ public class NearEventHandler {
 		lastKnownLocation = loc;	
 	}
 
-	//Creates a notification
+	/**
+	 * Creates a notification
+	 */
 	private void createNotification(){
 		//Create reference to SharePreferences to be able to get data from it
 		SharedPreferences notificationmessenger = context.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
@@ -109,7 +119,11 @@ public class NearEventHandler {
 		}
 	}
 
-	//Returns true if close enough to the specified point to be able to check in to it
+	/**
+	 * Returns true if close enough to the specified point to be able to check in to it
+	 * @param eventPoint
+	 * @return True if close enough, otherwise false
+	 */
 	public boolean isCloseEnough(LatLng eventPoint) {
 		//Creates a new location at the given point
 		Location eventlocation = new Location("temp");

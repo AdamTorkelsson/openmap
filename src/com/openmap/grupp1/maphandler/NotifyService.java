@@ -1,10 +1,4 @@
 package com.openmap.grupp1.maphandler;
-/*
- * Notifycenter
- * Used the old version due to the need of high level of api for the new one
- * Is called on from NearEventNotifier, 
- */
-
 
 import com.openmap.grupp1.MainActivity;
 
@@ -19,6 +13,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.IBinder;
+
+/**
+ * Used the old version due to the need of high level of api for the new one
+ * Is called on from NearEventNotifier, 
+ */
 
 public class NotifyService extends Service {
 
@@ -59,7 +58,7 @@ public class NotifyService extends Service {
 		notificationManager =
 				(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
 		//CHANGE THIS PICTURE
-		myNotification = new Notification(R.drawable.alert_dark_frame,
+		myNotification = new Notification(com.openmap.grupp1.R.drawable.logo,
 				"You are near " + notificationTitle,
 				System.currentTimeMillis());
 		Context context = getApplicationContext();
@@ -105,7 +104,9 @@ public class NotifyService extends Service {
 		return null;
 	}
 
-	//Defines the receiver for the notification
+	/**
+	 * Defines the receiver for the notification
+	 */
 	public class NotifyServiceReceiver extends BroadcastReceiver{
 
 		@Override

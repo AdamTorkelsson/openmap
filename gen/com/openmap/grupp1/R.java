@@ -233,7 +233,7 @@ containing a value of this type.
         public static final int endText=0x7f07002f;
         public static final int hybrid=0x7f070004;
         public static final int imageView=0x7f07001c;
-        public static final int imageView1=0x7f070035;
+        public static final int imageView1=0x7f070033;
         public static final int linearLayout1=0x7f070008;
         public static final int linearLayout2=0x7f07000b;
         public static final int linearlayout1=0x7f07002b;
@@ -249,7 +249,7 @@ containing a value of this type.
         public static final int normal=0x7f070001;
         public static final int notUserString=0x7f070022;
         public static final int passwordField=0x7f070020;
-        public static final int progressBar1=0x7f070033;
+        public static final int progressBar1=0x7f070035;
         public static final int relativeLayout1=0x7f070007;
         public static final int satellite=0x7f070002;
         public static final int setEndDate=0x7f07001a;
@@ -280,8 +280,9 @@ containing a value of this type.
         public static final int searchtagview=0x7f030005;
         public static final int settingsview=0x7f030006;
         public static final int showinfopopup=0x7f030007;
-        public static final int splashscreen=0x7f030008;
-        public static final int tutorialdialogview=0x7f030009;
+        public static final int spinner_textview=0x7f030008;
+        public static final int splashscreen=0x7f030009;
+        public static final int tutorialdialogview=0x7f03000a;
     }
     public static final class menu {
         public static final int addtagmenu=0x7f0c0000;
@@ -292,10 +293,10 @@ containing a value of this type.
     }
     public static final class string {
         public static final int action_settings=0x7f080016;
-        public static final int add_photo=0x7f08004d;
-        public static final int added_photo=0x7f08004e;
-        public static final int added_tags=0x7f080047;
-        public static final int already_user_string=0x7f08002f;
+        public static final int add_photo=0x7f08004e;
+        public static final int added_photo=0x7f08004f;
+        public static final int added_tags=0x7f080048;
+        public static final int already_user_string=0x7f080030;
         public static final int app_name=0x7f080015;
         /**   Title for notification shown when GooglePlayServices is unavailable [CHAR LIMIT=70] 
          */
@@ -306,7 +307,7 @@ containing a value of this type.
         /**   Requested by string saying which app requested the notification. [CHAR LIMIT=42] 
          */
         public static final int auth_client_requested_by_msg=0x7f080011;
-        public static final int cancel=0x7f080025;
+        public static final int cancel=0x7f080026;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -362,18 +363,18 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f08000e;
-        public static final int dateTimeWrong=0x7f080041;
-        public static final int description=0x7f080048;
-        public static final int dummy_button=0x7f08001a;
-        public static final int dummy_content=0x7f08001b;
-        public static final int ends=0x7f080056;
-        public static final int finish=0x7f08003a;
+        public static final int dateTimeWrong=0x7f080042;
+        public static final int description=0x7f080049;
+        public static final int dummy_button=0x7f08001b;
+        public static final int dummy_content=0x7f08001c;
+        public static final int ends=0x7f080057;
+        public static final int finish=0x7f08003b;
         public static final int hello_world=0x7f080017;
-        public static final int home=0x7f080059;
-        public static final int imHere=0x7f080054;
-        public static final int info_fetch=0x7f08002a;
-        public static final int invalidDate=0x7f08003f;
-        public static final int invalidTime=0x7f080040;
+        public static final int home=0x7f08005a;
+        public static final int imHere=0x7f080055;
+        public static final int info_fetch=0x7f08002b;
+        public static final int invalidDate=0x7f080040;
+        public static final int invalidTime=0x7f080041;
         /**  Location client code resources (prefix with location_client) 
 
         Begin strings for location.reporting
@@ -385,56 +386,57 @@ containing a value of this type.
         public static final int location_client_ulr_inactive_age_under_13=0x7f080012;
         public static final int location_client_ulr_inactive_age_unknown=0x7f080013;
         public static final int location_client_ulr_inactive_unknown_restriction=0x7f080014;
-        public static final int login_string=0x7f08002b;
-        public static final int loginfailed=0x7f080050;
-        public static final int maps_prompt=0x7f080027;
-        public static final int menu=0x7f080020;
-        public static final int menu_add=0x7f080023;
-        public static final int menu_back=0x7f08001f;
-        public static final int menu_clear=0x7f08001e;
-        public static final int menu_filter=0x7f080024;
-        public static final int menu_search=0x7f08001d;
-        public static final int menu_settings=0x7f08001c;
-        public static final int next=0x7f080039;
-        public static final int noAddedTags=0x7f080045;
-        public static final int noConnection=0x7f080058;
-        public static final int noDuration=0x7f080044;
-        public static final int not_user_string=0x7f08002e;
-        public static final int ok=0x7f08003b;
-        public static final int password_string=0x7f08002d;
-        public static final int register_string=0x7f080030;
-        public static final int registerfailed=0x7f08004f;
-        public static final int retry=0x7f080057;
-        public static final int search_label=0x7f080022;
-        public static final int search_tags=0x7f080021;
-        public static final int searched_tags=0x7f080046;
-        public static final int set_end_date=0x7f08004a;
-        public static final int set_end_time=0x7f080049;
-        public static final int set_start_date=0x7f08004c;
-        public static final int set_start_time=0x7f08004b;
-        public static final int setintitle=0x7f080037;
-        public static final int starts=0x7f080055;
-        public static final int tag=0x7f080026;
+        public static final int login_string=0x7f08002c;
+        public static final int loginfailed=0x7f080051;
+        public static final int maps_prompt=0x7f080028;
+        public static final int menu=0x7f080021;
+        public static final int menu_add=0x7f080024;
+        public static final int menu_back=0x7f080020;
+        public static final int menu_clear=0x7f08001f;
+        public static final int menu_filter=0x7f080025;
+        public static final int menu_search=0x7f08001e;
+        public static final int menu_settings=0x7f08001d;
+        public static final int next=0x7f08003a;
+        public static final int noAddedTags=0x7f080046;
+        public static final int noConnection=0x7f080059;
+        public static final int noDuration=0x7f080045;
+        public static final int not_user_string=0x7f08002f;
+        public static final int ok=0x7f08003c;
+        public static final int password_string=0x7f08002e;
+        public static final int register_string=0x7f080031;
+        public static final int registerfailed=0x7f080050;
+        public static final int retry=0x7f080058;
+        public static final int search_label=0x7f080023;
+        public static final int search_tags=0x7f080022;
+        public static final int searched_tags=0x7f080047;
+        public static final int set_end_date=0x7f08004b;
+        public static final int set_end_time=0x7f08004a;
+        public static final int set_start_date=0x7f08004d;
+        public static final int set_start_time=0x7f08004c;
+        public static final int setintitle=0x7f080038;
+        public static final int slogan=0x7f080019;
+        public static final int starts=0x7f080056;
+        public static final int tag=0x7f080027;
         public static final int title=0x7f080018;
-        public static final int title_activity_camera=0x7f080019;
-        public static final int toofaraway=0x7f080052;
-        public static final int toolongdescription=0x7f08003e;
-        public static final int toolongtitle=0x7f08003c;
-        public static final int tooshorttitle=0x7f08003d;
-        public static final int tutorialdialogview1=0x7f080031;
-        public static final int tutorialdialogview2=0x7f080032;
-        public static final int tutorialdialogview3=0x7f080033;
-        public static final int tutorialdialogview4=0x7f080034;
-        public static final int tutorialdialogview5=0x7f080035;
-        public static final int tutorialdialogview6=0x7f080036;
-        public static final int url_contains=0x7f080029;
-        public static final int url_string=0x7f080028;
-        public static final int username_string=0x7f08002c;
-        public static final int wrongAddedTag=0x7f080053;
-        public static final int wrongStartDate=0x7f080042;
-        public static final int wrongStartTime=0x7f080043;
-        public static final int yes=0x7f080038;
-        public static final int youhavetologin=0x7f080051;
+        public static final int title_activity_camera=0x7f08001a;
+        public static final int toofaraway=0x7f080053;
+        public static final int toolongdescription=0x7f08003f;
+        public static final int toolongtitle=0x7f08003d;
+        public static final int tooshorttitle=0x7f08003e;
+        public static final int tutorialdialogview1=0x7f080032;
+        public static final int tutorialdialogview2=0x7f080033;
+        public static final int tutorialdialogview3=0x7f080034;
+        public static final int tutorialdialogview4=0x7f080035;
+        public static final int tutorialdialogview5=0x7f080036;
+        public static final int tutorialdialogview6=0x7f080037;
+        public static final int url_contains=0x7f08002a;
+        public static final int url_string=0x7f080029;
+        public static final int username_string=0x7f08002d;
+        public static final int wrongAddedTag=0x7f080054;
+        public static final int wrongStartDate=0x7f080043;
+        public static final int wrongStartTime=0x7f080044;
+        public static final int yes=0x7f080039;
+        public static final int youhavetologin=0x7f080052;
     }
     public static final class style {
         /** 

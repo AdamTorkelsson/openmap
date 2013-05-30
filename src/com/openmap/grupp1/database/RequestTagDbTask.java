@@ -18,7 +18,7 @@ import org.json.JSONObject;
 import android.os.AsyncTask;
 
 public class RequestTagDbTask extends AsyncTask<Void, Void, ArrayList<String>>{
-	private final String url = "http://129.16.237.134/php_mysql/tagRequest.php";
+	private final String url = "http://129.16.234.200/php_mysql/tagRequest.php";
 	private List<NameValuePair> parameters;
 
 	public RequestTagDbTask(){

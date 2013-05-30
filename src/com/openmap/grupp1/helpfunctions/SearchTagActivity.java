@@ -12,6 +12,8 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +26,9 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.AdapterView.OnItemClickListener;
 
+/**
+ * Activity called when the user wants to filter the markers displayed based on his preferred tags
+ */
 public class SearchTagActivity extends Activity implements SearchView.OnQueryTextListener,
 SearchView.OnCloseListener {
 
@@ -55,7 +60,9 @@ SearchView.OnCloseListener {
 
 	}
 	
-	//Sets the searched tag listview listener
+	/**
+	 * Sets the searched tag listview listener
+	 */
 	public void setSearchedListListener() {
 		//Declares the listviews for the view 
 		listViewSearched = (ListView) findViewById(R.id.list_searched);
@@ -78,7 +85,9 @@ SearchView.OnCloseListener {
 
 	}
 	
-	//Sets the listener for the added tags listview to the right
+	/**
+	 * Sets the listener for the added tags listview to the right
+	 */
 	public void setAddedListListener() {
 		listViewAdded = (ListView) findViewById(R.id.list_added);
 		
@@ -115,6 +124,7 @@ SearchView.OnCloseListener {
 		ActionBar ab = getActionBar();
 		ab.setDisplayShowTitleEnabled(false);
 		ab.setDisplayShowHomeEnabled(false);
+		ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F39C12")));
 
 		//Defines the searchview and its properties
 		searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
@@ -160,6 +170,7 @@ SearchView.OnCloseListener {
 
 	//Calls the showResults method which shows the results when text is inserted into the searchview in the menu
 	public boolean onQueryTextChange(String newText) {
+
 		showResults(newText);
 		return false;
 	}
@@ -179,20 +190,27 @@ SearchView.OnCloseListener {
 
 
 
-	//Shows the results in the searched tags listview to the left
+	/**
+	 * Shows the results in the searched tags listview to the left
+	 * @param query
+	 */
 	private void showResults(String query) {
 
 		try {
 			
 			//Creates the object which talks to the database and sends the query to the database
 			mDbHelper = new RequestTagDbTask();
+
 			searchedTags = mDbHelper.getTagArray(query);
+
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+
 		} catch (ExecutionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+
 		}
 		
 		/*If the searchedTags array is non-null, non-empty and doesnt start with a null object 
@@ -201,6 +219,7 @@ SearchView.OnCloseListener {
 			searchedTagsAdapter =      
 					new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, searchedTags);
 			listViewSearched.setAdapter(searchedTagsAdapter);
+
 		} 
 		
 		//If it doesnt go into the if statement it will set the searched tags listview to an empty list
@@ -208,7 +227,8 @@ SearchView.OnCloseListener {
 			searchedTags = new ArrayList<String>();
 			searchedTagsAdapter =      
 					new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, searchedTags);
-			listViewSearched.setAdapter(searchedTagsAdapter);		
+			listViewSearched.setAdapter(searchedTagsAdapter);	
+
 		}
 	}
 

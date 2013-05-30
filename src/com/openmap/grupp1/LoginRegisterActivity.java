@@ -9,6 +9,8 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -61,6 +63,8 @@ public class LoginRegisterActivity extends Activity implements OnClickListener{
 
 
 	}
+	
+	//Specifies the options menu, disabling the title and home button
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		MenuInflater inflater = getMenuInflater();
@@ -68,6 +72,7 @@ public class LoginRegisterActivity extends Activity implements OnClickListener{
 		ActionBar ab = getActionBar();
 		ab.setDisplayShowTitleEnabled(false);
 		ab.setDisplayShowHomeEnabled(false);
+		ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F39C12")));
 		return true;
 	}
 

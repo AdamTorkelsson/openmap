@@ -3,14 +3,13 @@
     android:id="@+id/tutorialdialog"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9999CC"
+    android:background="#F1C40F"
     android:orientation="vertical" >
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.16"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

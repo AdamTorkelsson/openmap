@@ -14,6 +14,8 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,10 +29,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.AdapterView.OnItemClickListener;
-
+/**
+ * Activity to be initiated after the create event activity when creating an event.
+ */
 public class AddEventActivity extends Activity implements SearchView.OnQueryTextListener,
 SearchView.OnCloseListener{
 
+	
 	private ListView listViewSearched;
 	private ListView listViewAdded;
 	private SearchView searchView;
@@ -64,7 +69,9 @@ SearchView.OnCloseListener{
 		setTagListener();
 	}
 	
-	//Sets the listener to the searched tags listview to the left
+	/**
+	 * Sets the listener to the searched tags listview to the left
+	 */
 	public void setSearchedListListener() {
 		listViewSearched = (ListView) findViewById(R.id.addtag_list_searched);
 		// Define the on-click listener for listViewSearched
@@ -85,7 +92,9 @@ SearchView.OnCloseListener{
 		});
 	}
 	
-	//Sets the listener to the added tags listview to the right
+	/**
+	 * Sets the listener to the added tags listview to the right
+	 */
 	public void setAddedListListener() {
 		listViewAdded = (ListView) findViewById(R.id.addtag_list_added);
 		//Sets the adapter between the arraylist and the listview to be able to load content from the list
@@ -129,7 +138,9 @@ SearchView.OnCloseListener{
 		
 	}
 	
-	//Sets the listener for the cancel button
+	/**
+	 * Sets the listener for the cancel button
+	 */
 	public void setCancelListener() {
 		Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
 		buttonCancel.setClickable(true);
@@ -149,7 +160,9 @@ SearchView.OnCloseListener{
 		});
 	}
 
-	//Sets the listener for the tag button
+	/**
+	 * Sets the listener for the tag button
+	 */
 	public void setTagListener() {
 		Button buttonTag	  = (Button) findViewById(R.id.buttonTag);
 		buttonTag.setClickable(true);
@@ -222,6 +235,8 @@ SearchView.OnCloseListener{
 		ActionBar ab = getActionBar();
 		ab.setDisplayShowTitleEnabled(false);
 		ab.setDisplayShowHomeEnabled(false);
+		ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F39C12")));
+
 
 		//Defines the searchview and its properties
 		searchView = (SearchView) menu.findItem(R.id.addtagmenu_search).getActionView();
@@ -284,7 +299,10 @@ SearchView.OnCloseListener{
 
 
 
-	//Shows the results in the searched tags listview to the left
+	/**
+	 * Shows the results in the searched tags listview to the left
+	 * @param query The query to be sent to the database
+	 */
 	private void showResults(String query) {
 
 		try {

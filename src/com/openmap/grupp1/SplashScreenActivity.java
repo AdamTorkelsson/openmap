@@ -10,9 +10,8 @@ import com.openmap.grupp1.database.CheckDBUrlTask;
 import com.openmap.grupp1.helpfunctions.RetryConnectionFragment;
 
 
-/*
- * A splashscreen for when the user starts the program. 
- * Is active for 3 seconds
+/**
+ * A splash screen for when the user starts the program. Active for 3 seconds.
  */
 public class SplashScreenActivity extends FragmentActivity implements RetryConnectionFragment.RetryConnectionListener{
 	private long ms=0;
@@ -25,11 +24,13 @@ public class SplashScreenActivity extends FragmentActivity implements RetryConne
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-	
+
 		//Hides the titlebar
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		//Defines the content of the activity
 		setContentView(R.layout.splashscreen);
 
+		//Runs for three seconds, then checks the connection
 		Thread mythread = new Thread() {
 			public void run() {
 				try {
@@ -47,31 +48,33 @@ public class SplashScreenActivity extends FragmentActivity implements RetryConne
 		};
 		mythread.start();
 	}
-	
-	//Check if database is available
+
+	/**
+	 * Checks if the connection to the database is available
+	 */
 	public void checkConnection() {
-		boolean conn = new CheckDBUrlTask().tryDBConnection();
-		
-		if (!conn) {
-			showRetryConnectionDialog();
-		//Intent intent = new Intent(SplashScreenActivity.this, SettingsActivity.class);
-		//startActivity(intent);
-	}
+		//If the connection isn't available, show the RetryConnectionFragment
+		if (!new CheckDBUrlTask().tryDBConnection()) {
+			showRetryConnectionFragment();
+		}
 		else{
 			Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
 			startActivity(intent);
 		}
 	}
-	
-    public void showRetryConnectionDialog() {
-        // Create an instance of the dialog fragment and show it
-         dialog = new RetryConnectionFragment();
- 		 dialog.show(getFragmentManager(), "RetryConnectionFragment");
-    }
 
-    // The dialog fragment receives a reference to this Activity through the
-    // Fragment.onAttach() callback, which it uses to call the following methods
-    // defined by the NoticeDialogFragment.NoticeDialogListener interface
+	/**
+	 * Shows the RetryConnectionFragment 
+	 */
+	public void showRetryConnectionFragment() {
+		// Create an instance of the dialog fragment and show it
+		dialog = new RetryConnectionFragment();
+		dialog.show(getFragmentManager(), "RetryConnectionFragment");
+	}
+
+	// The dialog fragment receives a reference to this Activity through the
+	// Fragment.onAttach() callback, which it uses to call the following methods
+	// defined by the RetryConnectionFragment.RetryConnectionListener interface
 
 	@Override
 	public void onDialogPositiveClick(android.app.DialogFragment dialog) {
@@ -79,8 +82,7 @@ public class SplashScreenActivity extends FragmentActivity implements RetryConne
 	}
 	@Override
 	public void onDialogNegativeClick(android.app.DialogFragment dialog) {
-		// TODO Auto-generated method stub
 		checkConnection();
 	}
-    
-    }
+
+}

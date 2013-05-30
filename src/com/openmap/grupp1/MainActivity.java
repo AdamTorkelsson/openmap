@@ -24,13 +24,17 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
 
-
+/**
+ * The home screen, showing the map fragment together with the options menu. 
+ */
 public class MainActivity extends Activity 
 {
 
@@ -43,7 +47,6 @@ public class MainActivity extends Activity
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-	
 		
 		//Sets the animation when opening this activity
 		overridePendingTransition(R.anim.map_in,R.anim.other_out);
@@ -72,13 +75,11 @@ public class MainActivity extends Activity
 			if(!ular.get()){
 				startActivity(new Intent(this,LoginRegisterActivity.class));
 				PopupandDialogHandler TPD = new PopupandDialogHandler(this);
-				TPD.dialogHandler();
+				TPD.tutorialDialog();
 			}
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}	 
@@ -109,15 +110,16 @@ public class MainActivity extends Activity
 		ActionBar ab = getActionBar();
 		ab.setDisplayShowTitleEnabled(false);
 		ab.setDisplayShowHomeEnabled(false);
+		ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F39C12")));
 		return true;
 
 	}
 
-	//Defines the action to be taken when clicking the menu buttons
+	//Defines the action to be taken when clicking the menu items
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		//Clears the tag filter if the user clicks the clear button
+		//Clears the tag filter if the user clicks the clear item
 		case R.id.btn_clear:
 			SharedPreferences settings = this.getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
 			SharedPreferences.Editor editor = settings.edit();
@@ -126,13 +128,13 @@ public class MainActivity extends Activity
 			editor.commit();
 			myMap.onCameraChange(new CameraPosition(new LatLng(0,0),7,0,0));
 			return true;
-		//Starts the settings activity and pauses the current activity if the user clicks the settings button
+		//Starts the settings activity and pauses the current activity if the user clicks the settings item
 		case R.id.btn_settings:
 			Intent settingsIntent =new Intent(this, SettingsActivity.class);
 			startActivity(settingsIntent);
 			this.onPause();
 			return true;
-		//Starts the search tag activity and pauses the current activity if the user clicks the search button
+		//Starts the search tag activity and pauses the current activity if the user clicks the search item
 		case R.id.btn_search:
 			Intent searchIntent =new Intent(this, SearchTagActivity.class);
 			startActivity(searchIntent);

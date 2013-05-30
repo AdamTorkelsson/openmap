@@ -22,9 +22,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-/*
- *This is the class that creates the GoogleMap
- *It listens on different clicks and movement of the map
+/**
+ *Creates the GoogleMap.
+ *Listens to different clicks and movement of the map
  */
 
 
@@ -38,7 +38,7 @@ implements  OnMapLongClickListener,OnMarkerClickListener,OnCameraChangeListener{
 
 	public MyMap(Context context) {
 		//Map creator
-		
+
 		this.mCtx = context;
 
 		//Connects the mapfragment to myMap
@@ -56,14 +56,17 @@ implements  OnMapLongClickListener,OnMarkerClickListener,OnCameraChangeListener{
 		lh.updateToMyLocation();
 		//Creates The CameraChangeHandler
 		//occ = new CameraChangeHandler(myMap,context,lh.getMylocation());
-		
+
 		markerhandler = new MarkerHandler();
 	}
-	
-	
 
-	
-//changes maptype if the user have changed type in settings
+
+
+
+	/**
+	 * Changes maptype if the user has changed type in settings
+	 * @param The map to be changed
+	 */
 	public void setMap(String map){
 		if (map.equals("Hybrid"))
 			myMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
@@ -75,12 +78,15 @@ implements  OnMapLongClickListener,OnMarkerClickListener,OnCameraChangeListener{
 			myMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 	}	
 
-
+	/**
+	 * Gets the current map
+	 * @return The map
+	 */
 	public GoogleMap getMap() {
 		return myMap;
 	}
-	
-	
+
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.google.android.gms.maps.GoogleMap.OnMapLongClickListener#onMapLongClick(com.google.android.gms.maps.model.LatLng)
@@ -98,7 +104,7 @@ implements  OnMapLongClickListener,OnMarkerClickListener,OnCameraChangeListener{
 		editor.putString("markerLat", String.valueOf(point.latitude));
 		editor.putString("markerLng", String.valueOf(point.longitude));
 		editor.commit();
-		
+
 		CameraUpdate update = CameraUpdateFactory.newLatLngZoom(point,myMap.getMaxZoomLevel()-4); 
 		myMap.animateCamera(update);
 		Marker marker = myMap.addMarker(new MarkerOptions().position(point).title("This location?"));
@@ -106,7 +112,7 @@ implements  OnMapLongClickListener,OnMarkerClickListener,OnCameraChangeListener{
 		// create interactive dialog window
 		PopupandDialogHandler insertinfo = new PopupandDialogHandler(mCtx);
 		insertinfo.confirmLocationPopup(marker, myMap); 
-		
+
 	}
 
 	/*
@@ -137,14 +143,14 @@ implements  OnMapLongClickListener,OnMarkerClickListener,OnCameraChangeListener{
 		if(arg0.zoom > 6 /*&& (!database.contains(farRight) &&
 				!database.contains(nearLeft)) || 
 				markerhandler.IfFull()*/){
-			
+
 			LatLngBounds database = new LatLngBounds(
 					new LatLng(nearLeft.latitude,nearLeft.longitude),
 					new LatLng(farRight.latitude,farRight.longitude));		
-					markerhandler.addMarkersToScreen(myMap,mCtx.getResources(),database,mCtx);}
+			markerhandler.addMarkersToScreen(myMap,mCtx.getResources(),database,mCtx);}
 
 
-		}
+	}
 
 
 

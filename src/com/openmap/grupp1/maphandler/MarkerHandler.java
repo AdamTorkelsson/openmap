@@ -42,10 +42,10 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-/*
+/**
  * 
  * Handles the marker. 
- * Have methods to create markers and the marker picture, show info for markers.
+ * Has methods to create markers and the marker picture, show info for markers.
  * 
  */
 public class MarkerHandler {
@@ -232,10 +232,10 @@ if(lm.getClass() == EventMarker.class){
 		   projection.toScreenLocation(point).y - popup.getHeight()/2);
 }
 
-/*
- * Addmarkerstoscreen
- * Is the method to add markers to the current screen and filter which markers
- * are added onto screen if the user have choosen to filter the tags.
+/**
+ * 
+ * Adds markers to the current screen and filters which markers
+ * are added onto screen if the user has chosen to filter the tags.
  * 
  */
 
@@ -283,22 +283,7 @@ public void addMarkersToScreen(GoogleMap myMap, Resources res, LatLngBounds boun
 	//sets the lastset as the current one to be able to check correct in the next call of this method
 	lastset = set;
 
-	/*
-	 * Tried to remove marker thats not in screen but only made the application
-	 * slower with this amount of markers. 
-	 
-	if(createdMarkers.size()>50){
-		for(Marker m : createdMarkers){
-			if(!bounds.contains(m.getPosition())){
-				k.remove(m.getPosition());
-				m.remove();
-				createdMarkersRemove.add(m);
-			}
-			
-		}
-		createdMarkers.removeAll(createdMarkersRemove);
-		createdMarkersRemove.clear();
-	}*/
+
 
 	/*
 	 * For every LocationMarker in the downloaded database:

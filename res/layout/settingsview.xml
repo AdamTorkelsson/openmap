@@ -16,7 +16,7 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="0.5"
-            android:text="Map type  "
+            android:text="Map type:  "
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <Spinner
@@ -26,8 +26,8 @@
             android:layout_height="40dp"
             android:layout_weight="0.5"
             android:background="#F39C12"
+            android:gravity="center"
             android:popupBackground="#F39C12"
-            android:entries="@array/maps_array"
             android:prompt="@string/maps_prompt" />
     </LinearLayout>
 
@@ -42,15 +42,15 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="0.5"
-            android:text="Notifications  "
+            android:text="Notifications:  "
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <ToggleButton
             android:id="@+id/btnNotifications"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="#F39C12"
-            android:layout_weight="0.5" />
+            android:layout_weight="0.5"
+            android:background="#F39C12" />
     </LinearLayout>
 
     <LinearLayout
@@ -64,15 +64,15 @@
             android:id="@+id/btnCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:background="#F39C12" />
+            android:background="#F39C12"
+            android:text="Cancel" />
 
         <Button
             android:id="@+id/btnApply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Apply"
-            android:background="#F39C12" />
+            android:background="#F39C12"
+            android:text="Apply" />
     </LinearLayout>
 
 </LinearLayout>
