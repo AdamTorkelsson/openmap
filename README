@@ -35,3 +35,28 @@ TESTING:
 ========
 Robotium:
 https://github.com/paer/Freedomapptest.git
+
+JUnit:
+https://github.com/oscarryden/MainActivityJUnitTest
+
+Developer setupguide:
+========
+Import the project into your development program.
+Download the Android SDK and install it. 
+Download the Google Play services and install them.
+Import the Google Maps services from your Google Play services folder.
+Get a developer key to use the Google Maps services from Google. 
+Link this key to your keyhandler in your .android map.
+Link the project to the imported Google Map Services in your development program.
+To be able to run the program you have to set up a database and this you can do by 
+following the database setupguide. 
+
+If you want you can change the Login and Password in the 
+MainActivity in SharedPreferenses. This way you wont have 
+to log in each time you reinstall the application.
+
+To test the application you can easily download and 
+import our Robotium and JUnit testservices from the links 
+provided under "Testing" in this document.
+
+
