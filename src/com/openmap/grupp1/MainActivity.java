@@ -67,8 +67,7 @@ public class MainActivity extends Activity
 		settings= getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
 
 
-		boolean loginWorks = new UserLoginAndRegistrationTask().loginUser(settings.getString("LoginUsername1", "Pask"), settings.getString("LoginPassword", "1234"));
-		Log.d("Loginworks?",""+loginWorks);
+		boolean loginWorks = new UserLoginAndRegistrationTask().loginUser(settings.getString("LoginUsername", "Error"), settings.getString("LoginPassword", "Error"));
 		if(!loginWorks){
 			startActivity(new Intent(this,LoginRegisterActivity.class));
 			PopupandDialogHandler TPD = new PopupandDialogHandler(this);

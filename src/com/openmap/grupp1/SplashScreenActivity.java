@@ -19,6 +19,7 @@ public class SplashScreenActivity extends FragmentActivity implements RetryConne
 	private boolean splashActive = true;
 	private boolean paused=false;
 	private DialogFragment dialog; 
+	private boolean connection;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,10 @@ public class SplashScreenActivity extends FragmentActivity implements RetryConne
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		//Defines the content of the activity
 		setContentView(R.layout.splashscreen);
-
+		
+		//Check if database is available
+		checkConnection();
+		
 		//Runs for three seconds, then checks the connection
 		Thread mythread = new Thread() {
 			public void run() {
@@ -41,12 +45,17 @@ public class SplashScreenActivity extends FragmentActivity implements RetryConne
 					}
 				} catch(Exception e) {}
 				finally {
-					//Check if database is available
-					checkConnection();
+					if (connection) {
+						Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
+						startActivity(intent);
+						}
 				}
 			}
 		};
 		mythread.start();
+		
+
+		
 	}
 
 	/**
@@ -56,10 +65,10 @@ public class SplashScreenActivity extends FragmentActivity implements RetryConne
 		//If the connection isn't available, show the RetryConnectionFragment
 		if (!new CheckDBUrlTask().tryDBConnection()) {
 			showRetryConnectionFragment();
+			connection = false;
 		}
 		else{
-			Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
-			startActivity(intent);
+			connection = true;
 		}
 	}
 

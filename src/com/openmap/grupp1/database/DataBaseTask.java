@@ -32,7 +32,7 @@ public abstract class DataBaseTask<T1,T2,T3> extends AsyncTask<T1, T2, T3> imple
 	*outparams: the string that is returned by the database.
 	*/
 
-	final String url = "http://129.16.234.200/php_mysql/index.php";
+	final String url = "http://129.16.236.130/php_mysql/index.php";
 	String outparams;
 	
 	/**{@inheritDoc}

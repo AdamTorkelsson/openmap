@@ -164,8 +164,7 @@ if(lm.getClass() == EventMarker.class){
    // Creating the PopupWindow with the developers decided settings 
    final PopupWindow popup = new PopupWindow(context);
    popup.setContentView(layout);
-   popup.setWindowLayoutMode(0, ViewGroup.LayoutParams.WRAP_CONTENT);
-   popup.setWidth(450);
+   popup.setWindowLayoutMode(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
    popup.setFocusable(true);
    popup.setTouchable(true);
    

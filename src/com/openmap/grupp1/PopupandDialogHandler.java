@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -124,9 +125,6 @@ public class PopupandDialogHandler {
 	 * @param myMap The GoogleMap object where the marker is placed
 	 */
 	public void confirmLocationPopup(final Marker m, final GoogleMap myMap){
-		//POPUP som fungerar
-		int popupWidth = 600;
-		int popupHeight = 100;
 
 		// Inflate the popup_layout.xml
 		LinearLayout viewGroup = (LinearLayout) ((Activity) context).findViewById(R.layout.activity_main);
@@ -138,8 +136,8 @@ public class PopupandDialogHandler {
 		final PopupWindow popup = new PopupWindow(context);
 		//Sets the content, width and height
 		popup.setContentView(layout);
-		popup.setWidth(popupWidth);
-		popup.setHeight(popupHeight);
+		   popup.setWindowLayoutMode(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
 
 		//Defines the buttons and sets them clickable
 		Button buttonYES = (Button) layout.findViewById(R.id.buttonYes);

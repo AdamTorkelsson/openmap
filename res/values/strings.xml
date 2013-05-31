@@ -38,12 +38,12 @@
         <item>Terrain</item>
     </string-array>
 
-  <string name="tutorialdialogview1">Hello! Is this the first time you\'re using Freedomap? Let us walk you through a tutorial on the basic functions in this app.</string>
-    <string name="tutorialdialogview2">Freedomap is a map that is created and made interesting by contributions from you and other users. You can pinpoint interesting spots, funny spots, good deals, events, hangouts, good mushroom areas. Basically whatever you want. Your imagination is the limit!</string>
-    <string name="tutorialdialogview3">You pinpoint a location by pressing your finger at it for 3 seconds. A dialog is shown where you can enter information such as title, description, photo and hashtags to describe your location. If you want it to be an event, you can set a time interval for it.</string>
-    <string name="tutorialdialogview4">If you want to filter shown locations you can search and add hashtags in the top menu. The map will thereafter only show those locations that are connected to these hashtags.</string>
+  <string name="tutorialdialogview1">Hello! Is this the first time you\'re using Freedomapp? Let us walk you through a tutorial on the basic functions in this app.</string>
+    <string name="tutorialdialogview2">Freedomapp is a map that is created and made interesting by contributions from you and other users. You can pinpoint interesting spots, funny spots, good deals, events, hangouts, good mushroom areas. Basically whatever you want. Your imagination is the limit!</string>
+    <string name="tutorialdialogview3">You pinpoint a location by pressing your finger at it for 3 seconds. A dialog is shown where you can enter information such as title, description, photo and tags to describe your location. If you want it to be an event, you can set a time interval for it.</string>
+    <string name="tutorialdialogview4">If you want to filter shown locations you can search and add tags in the top menu. The map will thereafter only show those locations that are connected to these tags.</string>
     <string name="tutorialdialogview5">If you want to see more information about a location you can press it and a popup will appear with all available information.</string>
-    <string name="tutorialdialogview6">Now you are ready to start using Freedomap! Remember that this app is made great by you and your contribution!</string> <string name="setintitle">You have to set a title to continue</string>
+    <string name="tutorialdialogview6">Now you are ready to start using Freedomapp! Remember that this app is made great by you and your contribution!</string> <string name="setintitle">You have to set a title to continue</string>
     <string name="yes">Yes</string>
     <string name="next">Next</string>
     <string name="finish">Finish</string>
